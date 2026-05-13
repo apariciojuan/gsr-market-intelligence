@@ -1,0 +1,58 @@
+[project]
+name = "gsr-project"
+version = "0.1.0"
+description = "Prototype for a project GSR"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.18.4",
+    "asyncpg>=0.31.0",
+    "dotenv>=0.9.9",
+    "fastapi>=0.136.1",
+    "httpx>=0.28.1",
+    "jupyterlab>=4.5.7",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.14.1",
+    "web3>=7.16.0",
+    "websockets>=15.0.1",
+    "ruff>=0.15.12",
+    "uvicorn>=0.46.0",
+]
+
+[tool.ruff]
+line-length = 98
+target-version = "py312"
+extend-exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "S",      # flake8-bandit (security)
+    "UP",     # pyupgrade
+    "C4",     # flake8-comprehensions
+    "SIM",    # flake8-simplify
+    "RET",    # flake8-return
+    "T20",    # flake8-print (no print() in production code)
+    "DTZ",    # flake8-datetimez (timezone-aware datetimes)
+    "PIE",    # misc. linting
+]
+ignore = [
+    "E203",   # whitespace before ':'
+    "S101",   # assert used (needed in tests)
+    "S106",   # hardcoded password (false positives)
+    "RET504", # unnecessary assignment before return
+]
+per-file-ignores = {"__init__.py" = ["F401"], "tests/**" = ["S", "DTZ"], "*/tests/**" = ["S", "DTZ"]}
+
+[tool.ruff.lint.isort]
+known-first-party = ["backend/app"]
+combine-as-imports = true
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+[tool.ruff.format]
+quote-style = "single"
+line-ending = "auto"

@@ -1,0 +1,50 @@
+services:
+  backend:
+    build:
+      context: backend/
+      target: dev
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/home/src
+    networks:
+      - backend
+    depends_on:
+      - db
+  
+  frontend:
+    build:
+      context: frontend/
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env
+    volumes:
+      - ./frontend/app:/home/app
+    networks:
+      - backend
+  
+  db:
+    build:
+      context: postgresql/
+    command: postgres -c shared_preload_libraries=timescaledb
+    environment:
+      POSTGRES_USER: userdb
+      POSTGRES_PASSWORD: passworddb
+      POSTGRES_DB: postgresdb
+    volumes:
+      - postgres_data_gsr:/var/lib/postgresql/data/
+      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
+volumes:
+  postgres_data_gsr:
+
+networks:
+  backend:
+    driver: bridge

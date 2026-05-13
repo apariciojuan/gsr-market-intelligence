@@ -1,0 +1,14 @@
+.git
+.env
+.env.*
+__pycache__
+*.pyc
+.ruff_cache
+.venv
+.venv/
+docs/
+k8s/
+buildspec.yml
+docker-compose.yml
+*.md
+.vscode/
