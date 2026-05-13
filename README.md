@@ -187,7 +187,7 @@ Si te acabas de incorporar al proyecto:
 ## Team
 
 - **Juan Aparicio**
-- **Pablo**
+- **Pablo Gámez Guerrero**
 - **Artur**
 
 ## Licencia
