@@ -1,5 +1,8 @@
-
-from app.api.v1 import markets_route
+from app.api.v1 import (
+    markets_route,
+    contracts_route,
+    dashboard_route
+)
 from app.config import settings
 from app.config.log import get_logger
 from fastapi import FastAPI
@@ -16,7 +19,8 @@ app = FastAPI(
 )
 
 app.include_router(markets_route, prefix='/api/v1/markets')
-
+app.include_router(contracts_route, prefix='/api/v1/contracts')
+app.include_router(dashboard_route, prefix='/api/v1/dashboard')
 
 
 @app.get('/health', tags=['health'])
