@@ -76,11 +76,19 @@ class RequestClient:
         response = None
         try:
             async with AsyncClient(timeout=timeout) as client:
+                args = {}
+                
+                # Los métodos GET y DELETE usan query params en la URL, no JSON en el body
+                if method.upper() in ['GET', 'DELETE']:
+                    args["params"] = data
+                else:
+                    args["json"] = data
+
                 response = await client.request(
                     method,
                     url,
-                    json=data,
                     headers=headers,
+                    **args,
                 )
             return response
         except Exception as err:
