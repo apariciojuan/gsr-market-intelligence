@@ -13,4 +13,7 @@ print('Hola')
 EOF
 
 
+echo "Syncing dependencies from uv.lock..."
+uv sync --frozen
+
 exec "$@"

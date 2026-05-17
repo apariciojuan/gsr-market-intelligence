@@ -24,9 +24,10 @@ class Settings(BaseSettings):
     POLYMARKET_CLOB_API: str = ''
     POLYMARKET_CLOB_WS: str = ''
 
-    POLYGON_CHAIN_ID: int = 0
+    POLYGON_CHAIN_ID: str = '137'
     POLYGON_RPC_URL: str = ''
-    
+    ETHERSCAN_API_KEY: str = ''
+    ETHERSCAN_API_URL: str = ''
     ALCHEMY_API_KEY: str = ''
 
     model_config = {'env_file': '.env'}

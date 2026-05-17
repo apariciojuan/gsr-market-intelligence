@@ -1,11 +1,12 @@
+from fastapi import FastAPI
+
 from app.api.v1 import (
-    markets_route,
     contracts_route,
-    dashboard_route
+    dashboard_route,
+    markets_route,
 )
 from app.config import settings
 from app.config.log import get_logger
-from fastapi import FastAPI
 
 # Initialize logger
 logger = get_logger('api')

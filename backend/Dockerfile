@@ -6,23 +6,23 @@ WORKDIR /home/src
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=/home/src
+ENV UV_PROJECT_ENVIRONMENT=/opt/venv
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
     netcat-traditional curl \
     && rm -rf /var/lib/apt/lists/*
 
-COPY pyproject.toml uv.lock /home/
+COPY pyproject.toml uv.lock /home/src/
+RUN uv sync --frozen
+
 COPY . /home/src/
 
-RUN uv venv --clear
-
-# entrypoint.sh
 RUN chmod 777 /home/src/scripts/entrypoint.sh
 RUN sed -i 's/\r$//g' /home/src/scripts/entrypoint.sh
 
 RUN groupadd -r app && useradd -g app app \
-    && chown -R app:app /home/
+    && chown -R app:app /home/ /opt/venv
 
 # ---- Development ----
 FROM base AS dev
