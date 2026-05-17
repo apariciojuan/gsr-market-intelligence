@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# phase 0 reset leftovers (root-owned, undeletable without sudo)
+/.trash-phase0/
+
 # production
 /build
 

@@ -1,0 +1,1290 @@
+{
+  "12345": [
+    {
+      "news": {
+        "id": 9000,
+        "source": "the-block",
+        "url": "https://news.example.com/will-trump-win-2028/0",
+        "title": "Headline 1 relevant to \"Will Donald Trump win the 2028 Presidential Election?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.61,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9001,
+        "source": "bloomberg",
+        "url": "https://news.example.com/will-trump-win-2028/1",
+        "title": "Headline 2 relevant to \"Will Donald Trump win the 2028 Presidential Election?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.86,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9002,
+        "source": "ap",
+        "url": "https://news.example.com/will-trump-win-2028/2",
+        "title": "Headline 3 relevant to \"Will Donald Trump win the 2028 Presidential Election?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.59,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9003,
+        "source": "bloomberg",
+        "url": "https://news.example.com/will-trump-win-2028/3",
+        "title": "Headline 4 relevant to \"Will Donald Trump win the 2028 Presidential Election?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.98,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9004,
+        "source": "reuters",
+        "url": "https://news.example.com/will-trump-win-2028/4",
+        "title": "Headline 5 relevant to \"Will Donald Trump win the 2028 Presidential Election?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.98,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9005,
+        "source": "bloomberg",
+        "url": "https://news.example.com/will-trump-win-2028/5",
+        "title": "Headline 6 relevant to \"Will Donald Trump win the 2028 Presidential Election?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.76,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12346": [
+    {
+      "news": {
+        "id": 9010,
+        "source": "coindesk",
+        "url": "https://news.example.com/btc-200k-eoy-2026/0",
+        "title": "Headline 1 relevant to \"Will Bitcoin reach $200K by EOY 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.87,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9011,
+        "source": "coindesk",
+        "url": "https://news.example.com/btc-200k-eoy-2026/1",
+        "title": "Headline 2 relevant to \"Will Bitcoin reach $200K by EOY 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.55,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9012,
+        "source": "coindesk",
+        "url": "https://news.example.com/btc-200k-eoy-2026/2",
+        "title": "Headline 3 relevant to \"Will Bitcoin reach $200K by EOY 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.97,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9013,
+        "source": "coindesk",
+        "url": "https://news.example.com/btc-200k-eoy-2026/3",
+        "title": "Headline 4 relevant to \"Will Bitcoin reach $200K by EOY 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.75,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9014,
+        "source": "the-block",
+        "url": "https://news.example.com/btc-200k-eoy-2026/4",
+        "title": "Headline 5 relevant to \"Will Bitcoin reach $200K by EOY 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.99,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9015,
+        "source": "the-block",
+        "url": "https://news.example.com/btc-200k-eoy-2026/5",
+        "title": "Headline 6 relevant to \"Will Bitcoin reach $200K by EOY 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.59,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12347": [
+    {
+      "news": {
+        "id": 9020,
+        "source": "bloomberg",
+        "url": "https://news.example.com/fed-cut-jan-2026/0",
+        "title": "Headline 1 relevant to \"Will the Fed cut rates in January 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.92,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9021,
+        "source": "reuters",
+        "url": "https://news.example.com/fed-cut-jan-2026/1",
+        "title": "Headline 2 relevant to \"Will the Fed cut rates in January 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.58,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9022,
+        "source": "bloomberg",
+        "url": "https://news.example.com/fed-cut-jan-2026/2",
+        "title": "Headline 3 relevant to \"Will the Fed cut rates in January 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.54,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9023,
+        "source": "coindesk",
+        "url": "https://news.example.com/fed-cut-jan-2026/3",
+        "title": "Headline 4 relevant to \"Will the Fed cut rates in January 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.76,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9024,
+        "source": "coindesk",
+        "url": "https://news.example.com/fed-cut-jan-2026/4",
+        "title": "Headline 5 relevant to \"Will the Fed cut rates in January 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.56,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9025,
+        "source": "reuters",
+        "url": "https://news.example.com/fed-cut-jan-2026/5",
+        "title": "Headline 6 relevant to \"Will the Fed cut rates in January 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.68,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12348": [
+    {
+      "news": {
+        "id": 9030,
+        "source": "the-block",
+        "url": "https://news.example.com/lakers-2026-championship/0",
+        "title": "Headline 1 relevant to \"Will the Lakers win the 2026 NBA Championship?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.78,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9031,
+        "source": "bloomberg",
+        "url": "https://news.example.com/lakers-2026-championship/1",
+        "title": "Headline 2 relevant to \"Will the Lakers win the 2026 NBA Championship?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.94,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9032,
+        "source": "bloomberg",
+        "url": "https://news.example.com/lakers-2026-championship/2",
+        "title": "Headline 3 relevant to \"Will the Lakers win the 2026 NBA Championship?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.68,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9033,
+        "source": "the-block",
+        "url": "https://news.example.com/lakers-2026-championship/3",
+        "title": "Headline 4 relevant to \"Will the Lakers win the 2026 NBA Championship?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.92,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9034,
+        "source": "the-block",
+        "url": "https://news.example.com/lakers-2026-championship/4",
+        "title": "Headline 5 relevant to \"Will the Lakers win the 2026 NBA Championship?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.89,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9035,
+        "source": "coindesk",
+        "url": "https://news.example.com/lakers-2026-championship/5",
+        "title": "Headline 6 relevant to \"Will the Lakers win the 2026 NBA Championship?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.54,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12349": [
+    {
+      "news": {
+        "id": 9040,
+        "source": "ap",
+        "url": "https://news.example.com/eth-10k-2026/0",
+        "title": "Headline 1 relevant to \"Will ETH close above $10,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.78,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9041,
+        "source": "ap",
+        "url": "https://news.example.com/eth-10k-2026/1",
+        "title": "Headline 2 relevant to \"Will ETH close above $10,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.56,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9042,
+        "source": "ap",
+        "url": "https://news.example.com/eth-10k-2026/2",
+        "title": "Headline 3 relevant to \"Will ETH close above $10,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.91,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9043,
+        "source": "bloomberg",
+        "url": "https://news.example.com/eth-10k-2026/3",
+        "title": "Headline 4 relevant to \"Will ETH close above $10,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.68,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9044,
+        "source": "ap",
+        "url": "https://news.example.com/eth-10k-2026/4",
+        "title": "Headline 5 relevant to \"Will ETH close above $10,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.51,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9045,
+        "source": "reuters",
+        "url": "https://news.example.com/eth-10k-2026/5",
+        "title": "Headline 6 relevant to \"Will ETH close above $10,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.95,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12350": [
+    {
+      "news": {
+        "id": 9050,
+        "source": "reuters",
+        "url": "https://news.example.com/spx-7000-2026/0",
+        "title": "Headline 1 relevant to \"Will the S&P 500 close above 7,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.51,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9051,
+        "source": "ap",
+        "url": "https://news.example.com/spx-7000-2026/1",
+        "title": "Headline 2 relevant to \"Will the S&P 500 close above 7,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.64,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9052,
+        "source": "the-block",
+        "url": "https://news.example.com/spx-7000-2026/2",
+        "title": "Headline 3 relevant to \"Will the S&P 500 close above 7,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.81,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9053,
+        "source": "bloomberg",
+        "url": "https://news.example.com/spx-7000-2026/3",
+        "title": "Headline 4 relevant to \"Will the S&P 500 close above 7,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.58,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9054,
+        "source": "coindesk",
+        "url": "https://news.example.com/spx-7000-2026/4",
+        "title": "Headline 5 relevant to \"Will the S&P 500 close above 7,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.79,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9055,
+        "source": "the-block",
+        "url": "https://news.example.com/spx-7000-2026/5",
+        "title": "Headline 6 relevant to \"Will the S&P 500 close above 7,000 in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.94,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12351": [
+    {
+      "news": {
+        "id": 9060,
+        "source": "bloomberg",
+        "url": "https://news.example.com/openai-ipo-before-2027/0",
+        "title": "Headline 1 relevant to \"Will OpenAI IPO before 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.6,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9061,
+        "source": "the-block",
+        "url": "https://news.example.com/openai-ipo-before-2027/1",
+        "title": "Headline 2 relevant to \"Will OpenAI IPO before 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.74,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9062,
+        "source": "ap",
+        "url": "https://news.example.com/openai-ipo-before-2027/2",
+        "title": "Headline 3 relevant to \"Will OpenAI IPO before 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.94,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9063,
+        "source": "ap",
+        "url": "https://news.example.com/openai-ipo-before-2027/3",
+        "title": "Headline 4 relevant to \"Will OpenAI IPO before 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.8,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9064,
+        "source": "bloomberg",
+        "url": "https://news.example.com/openai-ipo-before-2027/4",
+        "title": "Headline 5 relevant to \"Will OpenAI IPO before 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.9,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9065,
+        "source": "reuters",
+        "url": "https://news.example.com/openai-ipo-before-2027/5",
+        "title": "Headline 6 relevant to \"Will OpenAI IPO before 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.56,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12352": [
+    {
+      "news": {
+        "id": 9070,
+        "source": "bloomberg",
+        "url": "https://news.example.com/gpt5-before-july-2026/0",
+        "title": "Headline 1 relevant to \"Will GPT-5 be released before July 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.59,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9071,
+        "source": "the-block",
+        "url": "https://news.example.com/gpt5-before-july-2026/1",
+        "title": "Headline 2 relevant to \"Will GPT-5 be released before July 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.9,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9072,
+        "source": "ap",
+        "url": "https://news.example.com/gpt5-before-july-2026/2",
+        "title": "Headline 3 relevant to \"Will GPT-5 be released before July 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.75,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9073,
+        "source": "ap",
+        "url": "https://news.example.com/gpt5-before-july-2026/3",
+        "title": "Headline 4 relevant to \"Will GPT-5 be released before July 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.65,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9074,
+        "source": "ap",
+        "url": "https://news.example.com/gpt5-before-july-2026/4",
+        "title": "Headline 5 relevant to \"Will GPT-5 be released before July 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.88,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9075,
+        "source": "coindesk",
+        "url": "https://news.example.com/gpt5-before-july-2026/5",
+        "title": "Headline 6 relevant to \"Will GPT-5 be released before July 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.83,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12353": [
+    {
+      "news": {
+        "id": 9080,
+        "source": "ap",
+        "url": "https://news.example.com/real-madrid-cwc-2026/0",
+        "title": "Headline 1 relevant to \"Will Real Madrid win the 2026 Club World Cup?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.94,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9081,
+        "source": "bloomberg",
+        "url": "https://news.example.com/real-madrid-cwc-2026/1",
+        "title": "Headline 2 relevant to \"Will Real Madrid win the 2026 Club World Cup?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.77,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9082,
+        "source": "the-block",
+        "url": "https://news.example.com/real-madrid-cwc-2026/2",
+        "title": "Headline 3 relevant to \"Will Real Madrid win the 2026 Club World Cup?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.82,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9083,
+        "source": "coindesk",
+        "url": "https://news.example.com/real-madrid-cwc-2026/3",
+        "title": "Headline 4 relevant to \"Will Real Madrid win the 2026 Club World Cup?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.54,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9084,
+        "source": "bloomberg",
+        "url": "https://news.example.com/real-madrid-cwc-2026/4",
+        "title": "Headline 5 relevant to \"Will Real Madrid win the 2026 Club World Cup?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.8,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9085,
+        "source": "coindesk",
+        "url": "https://news.example.com/real-madrid-cwc-2026/5",
+        "title": "Headline 6 relevant to \"Will Real Madrid win the 2026 Club World Cup?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.61,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12354": [
+    {
+      "news": {
+        "id": 9090,
+        "source": "coindesk",
+        "url": "https://news.example.com/spacex-mars-before-2030/0",
+        "title": "Headline 1 relevant to \"Will SpaceX land humans on Mars before 2030?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.52,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9091,
+        "source": "the-block",
+        "url": "https://news.example.com/spacex-mars-before-2030/1",
+        "title": "Headline 2 relevant to \"Will SpaceX land humans on Mars before 2030?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.68,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9092,
+        "source": "reuters",
+        "url": "https://news.example.com/spacex-mars-before-2030/2",
+        "title": "Headline 3 relevant to \"Will SpaceX land humans on Mars before 2030?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.65,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9093,
+        "source": "coindesk",
+        "url": "https://news.example.com/spacex-mars-before-2030/3",
+        "title": "Headline 4 relevant to \"Will SpaceX land humans on Mars before 2030?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.63,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9094,
+        "source": "the-block",
+        "url": "https://news.example.com/spacex-mars-before-2030/4",
+        "title": "Headline 5 relevant to \"Will SpaceX land humans on Mars before 2030?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.97,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9095,
+        "source": "ap",
+        "url": "https://news.example.com/spacex-mars-before-2030/5",
+        "title": "Headline 6 relevant to \"Will SpaceX land humans on Mars before 2030?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.76,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12355": [
+    {
+      "news": {
+        "id": 9100,
+        "source": "bloomberg",
+        "url": "https://news.example.com/taylor-swift-2027-tour/0",
+        "title": "Headline 1 relevant to \"Will Taylor Swift announce a 2027 tour by Q2 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.77,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9101,
+        "source": "reuters",
+        "url": "https://news.example.com/taylor-swift-2027-tour/1",
+        "title": "Headline 2 relevant to \"Will Taylor Swift announce a 2027 tour by Q2 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.91,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9102,
+        "source": "the-block",
+        "url": "https://news.example.com/taylor-swift-2027-tour/2",
+        "title": "Headline 3 relevant to \"Will Taylor Swift announce a 2027 tour by Q2 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.61,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9103,
+        "source": "ap",
+        "url": "https://news.example.com/taylor-swift-2027-tour/3",
+        "title": "Headline 4 relevant to \"Will Taylor Swift announce a 2027 tour by Q2 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.54,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9104,
+        "source": "ap",
+        "url": "https://news.example.com/taylor-swift-2027-tour/4",
+        "title": "Headline 5 relevant to \"Will Taylor Swift announce a 2027 tour by Q2 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.71,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9105,
+        "source": "coindesk",
+        "url": "https://news.example.com/taylor-swift-2027-tour/5",
+        "title": "Headline 6 relevant to \"Will Taylor Swift announce a 2027 tour by Q2 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.76,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12356": [
+    {
+      "news": {
+        "id": 9110,
+        "source": "bloomberg",
+        "url": "https://news.example.com/starmer-uk-pm-2027/0",
+        "title": "Headline 1 relevant to \"Will Keir Starmer be UK PM on Jan 1, 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.56,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9111,
+        "source": "reuters",
+        "url": "https://news.example.com/starmer-uk-pm-2027/1",
+        "title": "Headline 2 relevant to \"Will Keir Starmer be UK PM on Jan 1, 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.75,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9112,
+        "source": "coindesk",
+        "url": "https://news.example.com/starmer-uk-pm-2027/2",
+        "title": "Headline 3 relevant to \"Will Keir Starmer be UK PM on Jan 1, 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.55,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9113,
+        "source": "coindesk",
+        "url": "https://news.example.com/starmer-uk-pm-2027/3",
+        "title": "Headline 4 relevant to \"Will Keir Starmer be UK PM on Jan 1, 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.85,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9114,
+        "source": "ap",
+        "url": "https://news.example.com/starmer-uk-pm-2027/4",
+        "title": "Headline 5 relevant to \"Will Keir Starmer be UK PM on Jan 1, 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.9,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9115,
+        "source": "the-block",
+        "url": "https://news.example.com/starmer-uk-pm-2027/5",
+        "title": "Headline 6 relevant to \"Will Keir Starmer be UK PM on Jan 1, 2027?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.84,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12357": [
+    {
+      "news": {
+        "id": 9120,
+        "source": "the-block",
+        "url": "https://news.example.com/us-recession-2026/0",
+        "title": "Headline 1 relevant to \"Will the US enter a recession in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.67,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9121,
+        "source": "bloomberg",
+        "url": "https://news.example.com/us-recession-2026/1",
+        "title": "Headline 2 relevant to \"Will the US enter a recession in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.94,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9122,
+        "source": "coindesk",
+        "url": "https://news.example.com/us-recession-2026/2",
+        "title": "Headline 3 relevant to \"Will the US enter a recession in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.56,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9123,
+        "source": "reuters",
+        "url": "https://news.example.com/us-recession-2026/3",
+        "title": "Headline 4 relevant to \"Will the US enter a recession in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.55,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9124,
+        "source": "bloomberg",
+        "url": "https://news.example.com/us-recession-2026/4",
+        "title": "Headline 5 relevant to \"Will the US enter a recession in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.7,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9125,
+        "source": "reuters",
+        "url": "https://news.example.com/us-recession-2026/5",
+        "title": "Headline 6 relevant to \"Will the US enter a recession in 2026?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.67,
+        "method": "cosine_similarity"
+      }
+    }
+  ],
+  "12358": [
+    {
+      "news": {
+        "id": 9130,
+        "source": "coindesk",
+        "url": "https://news.example.com/world-cup-2026-usa/0",
+        "title": "Headline 1 relevant to \"Will the USA reach the 2026 World Cup semifinals?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T12:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.87,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9131,
+        "source": "reuters",
+        "url": "https://news.example.com/world-cup-2026-usa/1",
+        "title": "Headline 2 relevant to \"Will the USA reach the 2026 World Cup semifinals?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T07:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.93,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9132,
+        "source": "coindesk",
+        "url": "https://news.example.com/world-cup-2026-usa/2",
+        "title": "Headline 3 relevant to \"Will the USA reach the 2026 World Cup semifinals?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-11T02:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.57,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9133,
+        "source": "reuters",
+        "url": "https://news.example.com/world-cup-2026-usa/3",
+        "title": "Headline 4 relevant to \"Will the USA reach the 2026 World Cup semifinals?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T21:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.84,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9134,
+        "source": "reuters",
+        "url": "https://news.example.com/world-cup-2026-usa/4",
+        "title": "Headline 5 relevant to \"Will the USA reach the 2026 World Cup semifinals?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T16:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.74,
+        "method": "cosine_similarity"
+      }
+    },
+    {
+      "news": {
+        "id": 9135,
+        "source": "ap",
+        "url": "https://news.example.com/world-cup-2026-usa/5",
+        "title": "Headline 6 relevant to \"Will the USA reach the 2026 World Cup semifinals?\"",
+        "summary": "Summary of the article and why it is relevant to this prediction market.",
+        "published_at": "2026-05-10T11:00:00Z",
+        "language": "en"
+      },
+      "signal": {
+        "relevance_score": 0.57,
+        "method": "cosine_similarity"
+      }
+    }
+  ]
+}

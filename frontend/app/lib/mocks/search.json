@@ -1,0 +1,183 @@
+{
+  "markets": [
+    {
+      "id": 12345,
+      "slug": "will-trump-win-2028",
+      "question": "Will Donald Trump win the 2028 Presidential Election?",
+      "category": "Politics"
+    },
+    {
+      "id": 12346,
+      "slug": "btc-200k-eoy-2026",
+      "question": "Will Bitcoin reach $200K by EOY 2026?",
+      "category": "Crypto"
+    },
+    {
+      "id": 12347,
+      "slug": "fed-cut-jan-2026",
+      "question": "Will the Fed cut rates in January 2026?",
+      "category": "Economics"
+    },
+    {
+      "id": 12348,
+      "slug": "lakers-2026-championship",
+      "question": "Will the Lakers win the 2026 NBA Championship?",
+      "category": "Sports"
+    },
+    {
+      "id": 12349,
+      "slug": "eth-10k-2026",
+      "question": "Will ETH close above $10,000 in 2026?",
+      "category": "Crypto"
+    },
+    {
+      "id": 12350,
+      "slug": "spx-7000-2026",
+      "question": "Will the S&P 500 close above 7,000 in 2026?",
+      "category": "Economics"
+    },
+    {
+      "id": 12351,
+      "slug": "openai-ipo-before-2027",
+      "question": "Will OpenAI IPO before 2027?",
+      "category": "Economics"
+    },
+    {
+      "id": 12352,
+      "slug": "gpt5-before-july-2026",
+      "question": "Will GPT-5 be released before July 2026?",
+      "category": "Science"
+    },
+    {
+      "id": 12353,
+      "slug": "real-madrid-cwc-2026",
+      "question": "Will Real Madrid win the 2026 Club World Cup?",
+      "category": "Sports"
+    },
+    {
+      "id": 12354,
+      "slug": "spacex-mars-before-2030",
+      "question": "Will SpaceX land humans on Mars before 2030?",
+      "category": "Science"
+    },
+    {
+      "id": 12355,
+      "slug": "taylor-swift-2027-tour",
+      "question": "Will Taylor Swift announce a 2027 tour by Q2 2026?",
+      "category": "Pop Culture"
+    },
+    {
+      "id": 12356,
+      "slug": "starmer-uk-pm-2027",
+      "question": "Will Keir Starmer be UK PM on Jan 1, 2027?",
+      "category": "Politics"
+    },
+    {
+      "id": 12357,
+      "slug": "us-recession-2026",
+      "question": "Will the US enter a recession in 2026?",
+      "category": "Economics"
+    },
+    {
+      "id": 12358,
+      "slug": "world-cup-2026-usa",
+      "question": "Will the USA reach the 2026 World Cup semifinals?",
+      "category": "Sports"
+    }
+  ],
+  "wallets": [
+    {
+      "address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "label": "Polymarket Whale #1",
+      "total_volume_usd": 800000
+    },
+    {
+      "address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "label": null,
+      "total_volume_usd": 920000
+    },
+    {
+      "address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "label": "Smart Trader",
+      "total_volume_usd": 1040000
+    },
+    {
+      "address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "label": null,
+      "total_volume_usd": 1160000
+    },
+    {
+      "address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "label": "Polymarket Treasury",
+      "total_volume_usd": 1280000
+    },
+    {
+      "address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "label": null,
+      "total_volume_usd": 1400000
+    },
+    {
+      "address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "label": null,
+      "total_volume_usd": 1520000
+    },
+    {
+      "address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "label": "Quant Fund",
+      "total_volume_usd": 1640000
+    },
+    {
+      "address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "label": null,
+      "total_volume_usd": 1760000
+    },
+    {
+      "address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "label": null,
+      "total_volume_usd": 1880000
+    }
+  ],
+  "contracts": [
+    {
+      "address": "0xe111180000d2663c0091e4f400237545b87b996b",
+      "type": "polymarket_ctf_exchange",
+      "name": "CTF Exchange"
+    },
+    {
+      "address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+      "type": "erc20",
+      "name": "USD Coin"
+    },
+    {
+      "address": "0xee3afe347d5c74317041e2618c49534daf887c24",
+      "type": "uma_optimistic_oracle_v2",
+      "name": "UMA Optimistic Oracle V2"
+    }
+  ],
+  "tags": [
+    {
+      "name": "politics",
+      "market_count": 23
+    },
+    {
+      "name": "crypto",
+      "market_count": 41
+    },
+    {
+      "name": "economics",
+      "market_count": 34
+    },
+    {
+      "name": "sports",
+      "market_count": 28
+    },
+    {
+      "name": "science",
+      "market_count": 12
+    },
+    {
+      "name": "pop-culture",
+      "market_count": 9
+    }
+  ]
+}

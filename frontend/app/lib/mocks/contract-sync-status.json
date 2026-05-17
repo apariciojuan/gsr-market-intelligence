@@ -1,0 +1,38 @@
+{
+  "0xe111180000d2663c0091e4f400237545b87b996b": {
+    "address": "0xe111180000d2663c0091e4f400237545b87b996b",
+    "sync_status": "completed",
+    "progress_pct": 100,
+    "last_block_processed": 52002000,
+    "current_polygon_block": 52002000,
+    "blocks_remaining": 0,
+    "events_found": 4832109,
+    "started_at": "2026-05-11T12:00:00Z",
+    "estimated_completion_at": "2026-05-11T12:30:00Z",
+    "error_message": null
+  },
+  "0x2791bca1f2de4661ed88a30c99a7a9449aa84174": {
+    "address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "sync_status": "syncing",
+    "progress_pct": 67.5,
+    "last_block_processed": 52001350,
+    "current_polygon_block": 52002000,
+    "blocks_remaining": 650,
+    "events_found": 4832,
+    "started_at": "2026-05-11T13:59:15Z",
+    "estimated_completion_at": "2026-05-11T14:00:15Z",
+    "error_message": null
+  },
+  "0xee3afe347d5c74317041e2618c49534daf887c24": {
+    "address": "0xee3afe347d5c74317041e2618c49534daf887c24",
+    "sync_status": "completed",
+    "progress_pct": 100,
+    "last_block_processed": 52002000,
+    "current_polygon_block": 52002000,
+    "blocks_remaining": 0,
+    "events_found": 482109,
+    "started_at": "2026-05-11T11:00:00Z",
+    "estimated_completion_at": "2026-05-11T12:00:00Z",
+    "error_message": null
+  }
+}

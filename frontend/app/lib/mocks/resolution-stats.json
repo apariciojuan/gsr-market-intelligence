@@ -1,0 +1,29 @@
+{
+  "window": "30d",
+  "total_resolutions": 234,
+  "disputed_count": 12,
+  "dispute_rate_pct": 5.1,
+  "avg_resolution_seconds": 8400,
+  "bond_histogram": [
+    {
+      "bucket": "0-100",
+      "count": 4
+    },
+    {
+      "bucket": "100-500",
+      "count": 89
+    },
+    {
+      "bucket": "500-1000",
+      "count": 134
+    },
+    {
+      "bucket": "1000-5000",
+      "count": 6
+    },
+    {
+      "bucket": "5000+",
+      "count": 1
+    }
+  ]
+}

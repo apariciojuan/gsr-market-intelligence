@@ -1,0 +1,104 @@
+{
+  "items": [
+    {
+      "address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "address_label": "Polymarket Whale #1",
+      "total_volume_usd": 800000,
+      "trade_count": 423,
+      "market_count": 87,
+      "realized_pnl_usd": -12300,
+      "success_rate_pct": 67.4,
+      "first_seen_at": "2025-07-15T14:00:00Z"
+    },
+    {
+      "address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "address_label": null,
+      "total_volume_usd": 920000,
+      "trade_count": 404,
+      "market_count": 83,
+      "realized_pnl_usd": 13100,
+      "success_rate_pct": 65.3,
+      "first_seen_at": "2025-06-15T14:00:00Z"
+    },
+    {
+      "address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "address_label": "Smart Trader",
+      "total_volume_usd": 1040000,
+      "trade_count": 385,
+      "market_count": 79,
+      "realized_pnl_usd": -13900,
+      "success_rate_pct": 63.2,
+      "first_seen_at": "2025-05-16T14:00:00Z"
+    },
+    {
+      "address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "address_label": null,
+      "total_volume_usd": 1160000,
+      "trade_count": 366,
+      "market_count": 75,
+      "realized_pnl_usd": 14700,
+      "success_rate_pct": 61.1,
+      "first_seen_at": "2025-04-16T14:00:00Z"
+    },
+    {
+      "address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "address_label": "Polymarket Treasury",
+      "total_volume_usd": 1280000,
+      "trade_count": 347,
+      "market_count": 71,
+      "realized_pnl_usd": -15500,
+      "success_rate_pct": 59,
+      "first_seen_at": "2025-03-17T14:00:00Z"
+    },
+    {
+      "address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "address_label": null,
+      "total_volume_usd": 1400000,
+      "trade_count": 328,
+      "market_count": 67,
+      "realized_pnl_usd": 16300,
+      "success_rate_pct": 56.9,
+      "first_seen_at": "2025-02-15T14:00:00Z"
+    },
+    {
+      "address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "address_label": null,
+      "total_volume_usd": 1520000,
+      "trade_count": 309,
+      "market_count": 63,
+      "realized_pnl_usd": -17100,
+      "success_rate_pct": 54.8,
+      "first_seen_at": "2025-01-16T14:00:00Z"
+    },
+    {
+      "address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "address_label": "Quant Fund",
+      "total_volume_usd": 1640000,
+      "trade_count": 290,
+      "market_count": 59,
+      "realized_pnl_usd": 17900,
+      "success_rate_pct": 52.7,
+      "first_seen_at": "2024-12-17T14:00:00Z"
+    },
+    {
+      "address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "address_label": null,
+      "total_volume_usd": 1760000,
+      "trade_count": 271,
+      "market_count": 55,
+      "realized_pnl_usd": -18700,
+      "success_rate_pct": 50.6,
+      "first_seen_at": "2024-11-17T14:00:00Z"
+    },
+    {
+      "address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "address_label": null,
+      "total_volume_usd": 1880000,
+      "trade_count": 252,
+      "market_count": 51,
+      "realized_pnl_usd": 19500,
+      "success_rate_pct": 48.5,
+      "first_seen_at": "2024-10-18T14:00:00Z"
+    }
+  ]
+}

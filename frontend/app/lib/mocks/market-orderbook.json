@@ -1,0 +1,2970 @@
+{
+  "12345": {
+    "market_id": 12345,
+    "outcome": "yes",
+    "token_id": "100000001",
+    "midpoint": 0.42,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.41,
+        "size": 1428,
+        "cumulative_size": 1428
+      },
+      {
+        "price": 0.4,
+        "size": 611,
+        "cumulative_size": 2039
+      },
+      {
+        "price": 0.39,
+        "size": 1776,
+        "cumulative_size": 3815
+      },
+      {
+        "price": 0.38,
+        "size": 1940,
+        "cumulative_size": 5755
+      },
+      {
+        "price": 0.37,
+        "size": 1892,
+        "cumulative_size": 7647
+      },
+      {
+        "price": 0.36,
+        "size": 1810,
+        "cumulative_size": 9457
+      },
+      {
+        "price": 0.35,
+        "size": 697,
+        "cumulative_size": 10154
+      },
+      {
+        "price": 0.34,
+        "size": 1543,
+        "cumulative_size": 11697
+      },
+      {
+        "price": 0.33,
+        "size": 1340,
+        "cumulative_size": 13037
+      },
+      {
+        "price": 0.32,
+        "size": 1180,
+        "cumulative_size": 14217
+      },
+      {
+        "price": 0.31,
+        "size": 793,
+        "cumulative_size": 15010
+      },
+      {
+        "price": 0.3,
+        "size": 1840,
+        "cumulative_size": 16850
+      },
+      {
+        "price": 0.29,
+        "size": 1897,
+        "cumulative_size": 18747
+      },
+      {
+        "price": 0.28,
+        "size": 1473,
+        "cumulative_size": 20220
+      },
+      {
+        "price": 0.27,
+        "size": 624,
+        "cumulative_size": 20844
+      },
+      {
+        "price": 0.26,
+        "size": 1719,
+        "cumulative_size": 22563
+      },
+      {
+        "price": 0.25,
+        "size": 759,
+        "cumulative_size": 23322
+      },
+      {
+        "price": 0.24,
+        "size": 1193,
+        "cumulative_size": 24515
+      },
+      {
+        "price": 0.23,
+        "size": 847,
+        "cumulative_size": 25362
+      },
+      {
+        "price": 0.22,
+        "size": 1211,
+        "cumulative_size": 26573
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.43,
+        "size": 1245,
+        "cumulative_size": 1245
+      },
+      {
+        "price": 0.44,
+        "size": 1305,
+        "cumulative_size": 2550
+      },
+      {
+        "price": 0.45,
+        "size": 1673,
+        "cumulative_size": 4223
+      },
+      {
+        "price": 0.46,
+        "size": 1569,
+        "cumulative_size": 5792
+      },
+      {
+        "price": 0.47,
+        "size": 1269,
+        "cumulative_size": 7061
+      },
+      {
+        "price": 0.48,
+        "size": 744,
+        "cumulative_size": 7805
+      },
+      {
+        "price": 0.49,
+        "size": 1120,
+        "cumulative_size": 8925
+      },
+      {
+        "price": 0.5,
+        "size": 905,
+        "cumulative_size": 9830
+      },
+      {
+        "price": 0.51,
+        "size": 1626,
+        "cumulative_size": 11456
+      },
+      {
+        "price": 0.52,
+        "size": 1101,
+        "cumulative_size": 12557
+      },
+      {
+        "price": 0.53,
+        "size": 733,
+        "cumulative_size": 13290
+      },
+      {
+        "price": 0.54,
+        "size": 1213,
+        "cumulative_size": 14503
+      },
+      {
+        "price": 0.55,
+        "size": 1711,
+        "cumulative_size": 16214
+      },
+      {
+        "price": 0.56,
+        "size": 1192,
+        "cumulative_size": 17406
+      },
+      {
+        "price": 0.57,
+        "size": 1979,
+        "cumulative_size": 19385
+      },
+      {
+        "price": 0.58,
+        "size": 1891,
+        "cumulative_size": 21276
+      },
+      {
+        "price": 0.59,
+        "size": 1119,
+        "cumulative_size": 22395
+      },
+      {
+        "price": 0.6,
+        "size": 931,
+        "cumulative_size": 23326
+      },
+      {
+        "price": 0.61,
+        "size": 511,
+        "cumulative_size": 23837
+      },
+      {
+        "price": 0.62,
+        "size": 951,
+        "cumulative_size": 24788
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12346": {
+    "market_id": 12346,
+    "outcome": "yes",
+    "token_id": "100007778",
+    "midpoint": 0.32,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.31,
+        "size": 1016,
+        "cumulative_size": 1016
+      },
+      {
+        "price": 0.3,
+        "size": 1163,
+        "cumulative_size": 2179
+      },
+      {
+        "price": 0.29,
+        "size": 684,
+        "cumulative_size": 2863
+      },
+      {
+        "price": 0.28,
+        "size": 573,
+        "cumulative_size": 3436
+      },
+      {
+        "price": 0.27,
+        "size": 638,
+        "cumulative_size": 4074
+      },
+      {
+        "price": 0.26,
+        "size": 1829,
+        "cumulative_size": 5903
+      },
+      {
+        "price": 0.25,
+        "size": 1149,
+        "cumulative_size": 7052
+      },
+      {
+        "price": 0.24,
+        "size": 1791,
+        "cumulative_size": 8843
+      },
+      {
+        "price": 0.23,
+        "size": 1853,
+        "cumulative_size": 10696
+      },
+      {
+        "price": 0.22,
+        "size": 866,
+        "cumulative_size": 11562
+      },
+      {
+        "price": 0.21,
+        "size": 1034,
+        "cumulative_size": 12596
+      },
+      {
+        "price": 0.2,
+        "size": 977,
+        "cumulative_size": 13573
+      },
+      {
+        "price": 0.19,
+        "size": 805,
+        "cumulative_size": 14378
+      },
+      {
+        "price": 0.18,
+        "size": 601,
+        "cumulative_size": 14979
+      },
+      {
+        "price": 0.17,
+        "size": 695,
+        "cumulative_size": 15674
+      },
+      {
+        "price": 0.16,
+        "size": 766,
+        "cumulative_size": 16440
+      },
+      {
+        "price": 0.15,
+        "size": 1761,
+        "cumulative_size": 18201
+      },
+      {
+        "price": 0.14,
+        "size": 1379,
+        "cumulative_size": 19580
+      },
+      {
+        "price": 0.13,
+        "size": 1567,
+        "cumulative_size": 21147
+      },
+      {
+        "price": 0.12,
+        "size": 1028,
+        "cumulative_size": 22175
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.33,
+        "size": 1638,
+        "cumulative_size": 1638
+      },
+      {
+        "price": 0.34,
+        "size": 1842,
+        "cumulative_size": 3480
+      },
+      {
+        "price": 0.35,
+        "size": 1530,
+        "cumulative_size": 5010
+      },
+      {
+        "price": 0.36,
+        "size": 1844,
+        "cumulative_size": 6854
+      },
+      {
+        "price": 0.37,
+        "size": 851,
+        "cumulative_size": 7705
+      },
+      {
+        "price": 0.38,
+        "size": 708,
+        "cumulative_size": 8413
+      },
+      {
+        "price": 0.39,
+        "size": 1280,
+        "cumulative_size": 9693
+      },
+      {
+        "price": 0.4,
+        "size": 501,
+        "cumulative_size": 10194
+      },
+      {
+        "price": 0.41,
+        "size": 1374,
+        "cumulative_size": 11568
+      },
+      {
+        "price": 0.42,
+        "size": 1492,
+        "cumulative_size": 13060
+      },
+      {
+        "price": 0.43,
+        "size": 940,
+        "cumulative_size": 14000
+      },
+      {
+        "price": 0.44,
+        "size": 1545,
+        "cumulative_size": 15545
+      },
+      {
+        "price": 0.45,
+        "size": 1837,
+        "cumulative_size": 17382
+      },
+      {
+        "price": 0.46,
+        "size": 1385,
+        "cumulative_size": 18767
+      },
+      {
+        "price": 0.47,
+        "size": 1548,
+        "cumulative_size": 20315
+      },
+      {
+        "price": 0.48,
+        "size": 1715,
+        "cumulative_size": 22030
+      },
+      {
+        "price": 0.49,
+        "size": 1953,
+        "cumulative_size": 23983
+      },
+      {
+        "price": 0.5,
+        "size": 920,
+        "cumulative_size": 24903
+      },
+      {
+        "price": 0.51,
+        "size": 1580,
+        "cumulative_size": 26483
+      },
+      {
+        "price": 0.52,
+        "size": 1654,
+        "cumulative_size": 28137
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12347": {
+    "market_id": 12347,
+    "outcome": "yes",
+    "token_id": "100015555",
+    "midpoint": 0.68,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.67,
+        "size": 1123,
+        "cumulative_size": 1123
+      },
+      {
+        "price": 0.66,
+        "size": 1039,
+        "cumulative_size": 2162
+      },
+      {
+        "price": 0.65,
+        "size": 1947,
+        "cumulative_size": 4109
+      },
+      {
+        "price": 0.64,
+        "size": 1765,
+        "cumulative_size": 5874
+      },
+      {
+        "price": 0.63,
+        "size": 1936,
+        "cumulative_size": 7810
+      },
+      {
+        "price": 0.62,
+        "size": 1221,
+        "cumulative_size": 9031
+      },
+      {
+        "price": 0.61,
+        "size": 727,
+        "cumulative_size": 9758
+      },
+      {
+        "price": 0.6,
+        "size": 1541,
+        "cumulative_size": 11299
+      },
+      {
+        "price": 0.59,
+        "size": 655,
+        "cumulative_size": 11954
+      },
+      {
+        "price": 0.58,
+        "size": 915,
+        "cumulative_size": 12869
+      },
+      {
+        "price": 0.57,
+        "size": 1289,
+        "cumulative_size": 14158
+      },
+      {
+        "price": 0.56,
+        "size": 1672,
+        "cumulative_size": 15830
+      },
+      {
+        "price": 0.55,
+        "size": 1781,
+        "cumulative_size": 17611
+      },
+      {
+        "price": 0.54,
+        "size": 1337,
+        "cumulative_size": 18948
+      },
+      {
+        "price": 0.53,
+        "size": 778,
+        "cumulative_size": 19726
+      },
+      {
+        "price": 0.52,
+        "size": 1335,
+        "cumulative_size": 21061
+      },
+      {
+        "price": 0.51,
+        "size": 1708,
+        "cumulative_size": 22769
+      },
+      {
+        "price": 0.5,
+        "size": 1670,
+        "cumulative_size": 24439
+      },
+      {
+        "price": 0.49,
+        "size": 1379,
+        "cumulative_size": 25818
+      },
+      {
+        "price": 0.48,
+        "size": 1017,
+        "cumulative_size": 26835
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.69,
+        "size": 1713,
+        "cumulative_size": 1713
+      },
+      {
+        "price": 0.7,
+        "size": 1978,
+        "cumulative_size": 3691
+      },
+      {
+        "price": 0.71,
+        "size": 701,
+        "cumulative_size": 4392
+      },
+      {
+        "price": 0.72,
+        "size": 1643,
+        "cumulative_size": 6035
+      },
+      {
+        "price": 0.73,
+        "size": 1105,
+        "cumulative_size": 7140
+      },
+      {
+        "price": 0.74,
+        "size": 1241,
+        "cumulative_size": 8381
+      },
+      {
+        "price": 0.75,
+        "size": 1671,
+        "cumulative_size": 10052
+      },
+      {
+        "price": 0.76,
+        "size": 1776,
+        "cumulative_size": 11828
+      },
+      {
+        "price": 0.77,
+        "size": 1820,
+        "cumulative_size": 13648
+      },
+      {
+        "price": 0.78,
+        "size": 831,
+        "cumulative_size": 14479
+      },
+      {
+        "price": 0.79,
+        "size": 925,
+        "cumulative_size": 15404
+      },
+      {
+        "price": 0.8,
+        "size": 1025,
+        "cumulative_size": 16429
+      },
+      {
+        "price": 0.81,
+        "size": 980,
+        "cumulative_size": 17409
+      },
+      {
+        "price": 0.82,
+        "size": 1292,
+        "cumulative_size": 18701
+      },
+      {
+        "price": 0.83,
+        "size": 676,
+        "cumulative_size": 19377
+      },
+      {
+        "price": 0.84,
+        "size": 894,
+        "cumulative_size": 20271
+      },
+      {
+        "price": 0.85,
+        "size": 648,
+        "cumulative_size": 20919
+      },
+      {
+        "price": 0.86,
+        "size": 561,
+        "cumulative_size": 21480
+      },
+      {
+        "price": 0.87,
+        "size": 1706,
+        "cumulative_size": 23186
+      },
+      {
+        "price": 0.88,
+        "size": 1120,
+        "cumulative_size": 24306
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12348": {
+    "market_id": 12348,
+    "outcome": "yes",
+    "token_id": "100023332",
+    "midpoint": 0.12,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.11,
+        "size": 971,
+        "cumulative_size": 971
+      },
+      {
+        "price": 0.1,
+        "size": 915,
+        "cumulative_size": 1886
+      },
+      {
+        "price": 0.09,
+        "size": 1428,
+        "cumulative_size": 3314
+      },
+      {
+        "price": 0.08,
+        "size": 528,
+        "cumulative_size": 3842
+      },
+      {
+        "price": 0.07,
+        "size": 1812,
+        "cumulative_size": 5654
+      },
+      {
+        "price": 0.06,
+        "size": 1193,
+        "cumulative_size": 6847
+      },
+      {
+        "price": 0.05,
+        "size": 768,
+        "cumulative_size": 7615
+      },
+      {
+        "price": 0.04,
+        "size": 1172,
+        "cumulative_size": 8787
+      },
+      {
+        "price": 0.03,
+        "size": 1791,
+        "cumulative_size": 10578
+      },
+      {
+        "price": 0.02,
+        "size": 1497,
+        "cumulative_size": 12075
+      },
+      {
+        "price": 0.01,
+        "size": 1193,
+        "cumulative_size": 13268
+      },
+      {
+        "price": 0,
+        "size": 1278,
+        "cumulative_size": 14546
+      },
+      {
+        "price": -0.01,
+        "size": 958,
+        "cumulative_size": 15504
+      },
+      {
+        "price": -0.02,
+        "size": 1438,
+        "cumulative_size": 16942
+      },
+      {
+        "price": -0.03,
+        "size": 1896,
+        "cumulative_size": 18838
+      },
+      {
+        "price": -0.04,
+        "size": 1749,
+        "cumulative_size": 20587
+      },
+      {
+        "price": -0.05,
+        "size": 1218,
+        "cumulative_size": 21805
+      },
+      {
+        "price": -0.06,
+        "size": 1714,
+        "cumulative_size": 23519
+      },
+      {
+        "price": -0.07,
+        "size": 1510,
+        "cumulative_size": 25029
+      },
+      {
+        "price": -0.08,
+        "size": 1709,
+        "cumulative_size": 26738
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.13,
+        "size": 760,
+        "cumulative_size": 760
+      },
+      {
+        "price": 0.14,
+        "size": 757,
+        "cumulative_size": 1517
+      },
+      {
+        "price": 0.15,
+        "size": 1248,
+        "cumulative_size": 2765
+      },
+      {
+        "price": 0.16,
+        "size": 1006,
+        "cumulative_size": 3771
+      },
+      {
+        "price": 0.17,
+        "size": 549,
+        "cumulative_size": 4320
+      },
+      {
+        "price": 0.18,
+        "size": 785,
+        "cumulative_size": 5105
+      },
+      {
+        "price": 0.19,
+        "size": 1881,
+        "cumulative_size": 6986
+      },
+      {
+        "price": 0.2,
+        "size": 1597,
+        "cumulative_size": 8583
+      },
+      {
+        "price": 0.21,
+        "size": 1459,
+        "cumulative_size": 10042
+      },
+      {
+        "price": 0.22,
+        "size": 1008,
+        "cumulative_size": 11050
+      },
+      {
+        "price": 0.23,
+        "size": 1903,
+        "cumulative_size": 12953
+      },
+      {
+        "price": 0.24,
+        "size": 1897,
+        "cumulative_size": 14850
+      },
+      {
+        "price": 0.25,
+        "size": 1366,
+        "cumulative_size": 16216
+      },
+      {
+        "price": 0.26,
+        "size": 880,
+        "cumulative_size": 17096
+      },
+      {
+        "price": 0.27,
+        "size": 1841,
+        "cumulative_size": 18937
+      },
+      {
+        "price": 0.28,
+        "size": 922,
+        "cumulative_size": 19859
+      },
+      {
+        "price": 0.29,
+        "size": 1258,
+        "cumulative_size": 21117
+      },
+      {
+        "price": 0.3,
+        "size": 1542,
+        "cumulative_size": 22659
+      },
+      {
+        "price": 0.31,
+        "size": 670,
+        "cumulative_size": 23329
+      },
+      {
+        "price": 0.32,
+        "size": 802,
+        "cumulative_size": 24131
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12349": {
+    "market_id": 12349,
+    "outcome": "yes",
+    "token_id": "100031109",
+    "midpoint": 0.27,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.26,
+        "size": 1030,
+        "cumulative_size": 1030
+      },
+      {
+        "price": 0.25,
+        "size": 720,
+        "cumulative_size": 1750
+      },
+      {
+        "price": 0.24,
+        "size": 1238,
+        "cumulative_size": 2988
+      },
+      {
+        "price": 0.23,
+        "size": 1587,
+        "cumulative_size": 4575
+      },
+      {
+        "price": 0.22,
+        "size": 890,
+        "cumulative_size": 5465
+      },
+      {
+        "price": 0.21,
+        "size": 1942,
+        "cumulative_size": 7407
+      },
+      {
+        "price": 0.2,
+        "size": 1725,
+        "cumulative_size": 9132
+      },
+      {
+        "price": 0.19,
+        "size": 1166,
+        "cumulative_size": 10298
+      },
+      {
+        "price": 0.18,
+        "size": 1602,
+        "cumulative_size": 11900
+      },
+      {
+        "price": 0.17,
+        "size": 1470,
+        "cumulative_size": 13370
+      },
+      {
+        "price": 0.16,
+        "size": 1063,
+        "cumulative_size": 14433
+      },
+      {
+        "price": 0.15,
+        "size": 1369,
+        "cumulative_size": 15802
+      },
+      {
+        "price": 0.14,
+        "size": 921,
+        "cumulative_size": 16723
+      },
+      {
+        "price": 0.13,
+        "size": 1848,
+        "cumulative_size": 18571
+      },
+      {
+        "price": 0.12,
+        "size": 666,
+        "cumulative_size": 19237
+      },
+      {
+        "price": 0.11,
+        "size": 878,
+        "cumulative_size": 20115
+      },
+      {
+        "price": 0.1,
+        "size": 1466,
+        "cumulative_size": 21581
+      },
+      {
+        "price": 0.09,
+        "size": 1561,
+        "cumulative_size": 23142
+      },
+      {
+        "price": 0.08,
+        "size": 1000,
+        "cumulative_size": 24142
+      },
+      {
+        "price": 0.07,
+        "size": 1552,
+        "cumulative_size": 25694
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.28,
+        "size": 1846,
+        "cumulative_size": 1846
+      },
+      {
+        "price": 0.29,
+        "size": 728,
+        "cumulative_size": 2574
+      },
+      {
+        "price": 0.3,
+        "size": 1431,
+        "cumulative_size": 4005
+      },
+      {
+        "price": 0.31,
+        "size": 1022,
+        "cumulative_size": 5027
+      },
+      {
+        "price": 0.32,
+        "size": 928,
+        "cumulative_size": 5955
+      },
+      {
+        "price": 0.33,
+        "size": 528,
+        "cumulative_size": 6483
+      },
+      {
+        "price": 0.34,
+        "size": 929,
+        "cumulative_size": 7412
+      },
+      {
+        "price": 0.35,
+        "size": 1656,
+        "cumulative_size": 9068
+      },
+      {
+        "price": 0.36,
+        "size": 1294,
+        "cumulative_size": 10362
+      },
+      {
+        "price": 0.37,
+        "size": 1612,
+        "cumulative_size": 11974
+      },
+      {
+        "price": 0.38,
+        "size": 1187,
+        "cumulative_size": 13161
+      },
+      {
+        "price": 0.39,
+        "size": 963,
+        "cumulative_size": 14124
+      },
+      {
+        "price": 0.4,
+        "size": 1211,
+        "cumulative_size": 15335
+      },
+      {
+        "price": 0.41,
+        "size": 1628,
+        "cumulative_size": 16963
+      },
+      {
+        "price": 0.42,
+        "size": 1709,
+        "cumulative_size": 18672
+      },
+      {
+        "price": 0.43,
+        "size": 1098,
+        "cumulative_size": 19770
+      },
+      {
+        "price": 0.44,
+        "size": 706,
+        "cumulative_size": 20476
+      },
+      {
+        "price": 0.45,
+        "size": 1761,
+        "cumulative_size": 22237
+      },
+      {
+        "price": 0.46,
+        "size": 1967,
+        "cumulative_size": 24204
+      },
+      {
+        "price": 0.47,
+        "size": 1131,
+        "cumulative_size": 25335
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12350": {
+    "market_id": 12350,
+    "outcome": "yes",
+    "token_id": "100038886",
+    "midpoint": 0.54,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.53,
+        "size": 1859,
+        "cumulative_size": 1859
+      },
+      {
+        "price": 0.52,
+        "size": 1713,
+        "cumulative_size": 3572
+      },
+      {
+        "price": 0.51,
+        "size": 541,
+        "cumulative_size": 4113
+      },
+      {
+        "price": 0.5,
+        "size": 1866,
+        "cumulative_size": 5979
+      },
+      {
+        "price": 0.49,
+        "size": 1133,
+        "cumulative_size": 7112
+      },
+      {
+        "price": 0.48,
+        "size": 530,
+        "cumulative_size": 7642
+      },
+      {
+        "price": 0.47,
+        "size": 1255,
+        "cumulative_size": 8897
+      },
+      {
+        "price": 0.46,
+        "size": 977,
+        "cumulative_size": 9874
+      },
+      {
+        "price": 0.45,
+        "size": 1101,
+        "cumulative_size": 10975
+      },
+      {
+        "price": 0.44,
+        "size": 1418,
+        "cumulative_size": 12393
+      },
+      {
+        "price": 0.43,
+        "size": 1206,
+        "cumulative_size": 13599
+      },
+      {
+        "price": 0.42,
+        "size": 780,
+        "cumulative_size": 14379
+      },
+      {
+        "price": 0.41,
+        "size": 1059,
+        "cumulative_size": 15438
+      },
+      {
+        "price": 0.4,
+        "size": 715,
+        "cumulative_size": 16153
+      },
+      {
+        "price": 0.39,
+        "size": 1262,
+        "cumulative_size": 17415
+      },
+      {
+        "price": 0.38,
+        "size": 1557,
+        "cumulative_size": 18972
+      },
+      {
+        "price": 0.37,
+        "size": 1425,
+        "cumulative_size": 20397
+      },
+      {
+        "price": 0.36,
+        "size": 1314,
+        "cumulative_size": 21711
+      },
+      {
+        "price": 0.35,
+        "size": 1286,
+        "cumulative_size": 22997
+      },
+      {
+        "price": 0.34,
+        "size": 1485,
+        "cumulative_size": 24482
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.55,
+        "size": 865,
+        "cumulative_size": 865
+      },
+      {
+        "price": 0.56,
+        "size": 1116,
+        "cumulative_size": 1981
+      },
+      {
+        "price": 0.57,
+        "size": 1529,
+        "cumulative_size": 3510
+      },
+      {
+        "price": 0.58,
+        "size": 889,
+        "cumulative_size": 4399
+      },
+      {
+        "price": 0.59,
+        "size": 1072,
+        "cumulative_size": 5471
+      },
+      {
+        "price": 0.6,
+        "size": 1338,
+        "cumulative_size": 6809
+      },
+      {
+        "price": 0.61,
+        "size": 973,
+        "cumulative_size": 7782
+      },
+      {
+        "price": 0.62,
+        "size": 1057,
+        "cumulative_size": 8839
+      },
+      {
+        "price": 0.63,
+        "size": 823,
+        "cumulative_size": 9662
+      },
+      {
+        "price": 0.64,
+        "size": 879,
+        "cumulative_size": 10541
+      },
+      {
+        "price": 0.65,
+        "size": 1942,
+        "cumulative_size": 12483
+      },
+      {
+        "price": 0.66,
+        "size": 906,
+        "cumulative_size": 13389
+      },
+      {
+        "price": 0.67,
+        "size": 774,
+        "cumulative_size": 14163
+      },
+      {
+        "price": 0.68,
+        "size": 1506,
+        "cumulative_size": 15669
+      },
+      {
+        "price": 0.69,
+        "size": 1694,
+        "cumulative_size": 17363
+      },
+      {
+        "price": 0.7,
+        "size": 1913,
+        "cumulative_size": 19276
+      },
+      {
+        "price": 0.71,
+        "size": 1340,
+        "cumulative_size": 20616
+      },
+      {
+        "price": 0.72,
+        "size": 931,
+        "cumulative_size": 21547
+      },
+      {
+        "price": 0.73,
+        "size": 1838,
+        "cumulative_size": 23385
+      },
+      {
+        "price": 0.74,
+        "size": 1357,
+        "cumulative_size": 24742
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12351": {
+    "market_id": 12351,
+    "outcome": "yes",
+    "token_id": "100046663",
+    "midpoint": 0.19,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.18,
+        "size": 809,
+        "cumulative_size": 809
+      },
+      {
+        "price": 0.17,
+        "size": 1354,
+        "cumulative_size": 2163
+      },
+      {
+        "price": 0.16,
+        "size": 901,
+        "cumulative_size": 3064
+      },
+      {
+        "price": 0.15,
+        "size": 1560,
+        "cumulative_size": 4624
+      },
+      {
+        "price": 0.14,
+        "size": 1633,
+        "cumulative_size": 6257
+      },
+      {
+        "price": 0.13,
+        "size": 899,
+        "cumulative_size": 7156
+      },
+      {
+        "price": 0.12,
+        "size": 1111,
+        "cumulative_size": 8267
+      },
+      {
+        "price": 0.11,
+        "size": 1685,
+        "cumulative_size": 9952
+      },
+      {
+        "price": 0.1,
+        "size": 1192,
+        "cumulative_size": 11144
+      },
+      {
+        "price": 0.09,
+        "size": 1725,
+        "cumulative_size": 12869
+      },
+      {
+        "price": 0.08,
+        "size": 1388,
+        "cumulative_size": 14257
+      },
+      {
+        "price": 0.07,
+        "size": 1895,
+        "cumulative_size": 16152
+      },
+      {
+        "price": 0.06,
+        "size": 857,
+        "cumulative_size": 17009
+      },
+      {
+        "price": 0.05,
+        "size": 874,
+        "cumulative_size": 17883
+      },
+      {
+        "price": 0.04,
+        "size": 1875,
+        "cumulative_size": 19758
+      },
+      {
+        "price": 0.03,
+        "size": 972,
+        "cumulative_size": 20730
+      },
+      {
+        "price": 0.02,
+        "size": 1144,
+        "cumulative_size": 21874
+      },
+      {
+        "price": 0.01,
+        "size": 1948,
+        "cumulative_size": 23822
+      },
+      {
+        "price": 0,
+        "size": 1051,
+        "cumulative_size": 24873
+      },
+      {
+        "price": -0.01,
+        "size": 1401,
+        "cumulative_size": 26274
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.2,
+        "size": 761,
+        "cumulative_size": 761
+      },
+      {
+        "price": 0.21,
+        "size": 1648,
+        "cumulative_size": 2409
+      },
+      {
+        "price": 0.22,
+        "size": 1633,
+        "cumulative_size": 4042
+      },
+      {
+        "price": 0.23,
+        "size": 865,
+        "cumulative_size": 4907
+      },
+      {
+        "price": 0.24,
+        "size": 1215,
+        "cumulative_size": 6122
+      },
+      {
+        "price": 0.25,
+        "size": 974,
+        "cumulative_size": 7096
+      },
+      {
+        "price": 0.26,
+        "size": 1326,
+        "cumulative_size": 8422
+      },
+      {
+        "price": 0.27,
+        "size": 1231,
+        "cumulative_size": 9653
+      },
+      {
+        "price": 0.28,
+        "size": 625,
+        "cumulative_size": 10278
+      },
+      {
+        "price": 0.29,
+        "size": 1831,
+        "cumulative_size": 12109
+      },
+      {
+        "price": 0.3,
+        "size": 1670,
+        "cumulative_size": 13779
+      },
+      {
+        "price": 0.31,
+        "size": 507,
+        "cumulative_size": 14286
+      },
+      {
+        "price": 0.32,
+        "size": 962,
+        "cumulative_size": 15248
+      },
+      {
+        "price": 0.33,
+        "size": 1443,
+        "cumulative_size": 16691
+      },
+      {
+        "price": 0.34,
+        "size": 1788,
+        "cumulative_size": 18479
+      },
+      {
+        "price": 0.35,
+        "size": 1768,
+        "cumulative_size": 20247
+      },
+      {
+        "price": 0.36,
+        "size": 1674,
+        "cumulative_size": 21921
+      },
+      {
+        "price": 0.37,
+        "size": 587,
+        "cumulative_size": 22508
+      },
+      {
+        "price": 0.38,
+        "size": 619,
+        "cumulative_size": 23127
+      },
+      {
+        "price": 0.39,
+        "size": 1663,
+        "cumulative_size": 24790
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12352": {
+    "market_id": 12352,
+    "outcome": "yes",
+    "token_id": "100054440",
+    "midpoint": 0.71,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.7,
+        "size": 1950,
+        "cumulative_size": 1950
+      },
+      {
+        "price": 0.69,
+        "size": 669,
+        "cumulative_size": 2619
+      },
+      {
+        "price": 0.68,
+        "size": 1003,
+        "cumulative_size": 3622
+      },
+      {
+        "price": 0.67,
+        "size": 639,
+        "cumulative_size": 4261
+      },
+      {
+        "price": 0.66,
+        "size": 1705,
+        "cumulative_size": 5966
+      },
+      {
+        "price": 0.65,
+        "size": 801,
+        "cumulative_size": 6767
+      },
+      {
+        "price": 0.64,
+        "size": 939,
+        "cumulative_size": 7706
+      },
+      {
+        "price": 0.63,
+        "size": 980,
+        "cumulative_size": 8686
+      },
+      {
+        "price": 0.62,
+        "size": 710,
+        "cumulative_size": 9396
+      },
+      {
+        "price": 0.61,
+        "size": 685,
+        "cumulative_size": 10081
+      },
+      {
+        "price": 0.6,
+        "size": 1237,
+        "cumulative_size": 11318
+      },
+      {
+        "price": 0.59,
+        "size": 1457,
+        "cumulative_size": 12775
+      },
+      {
+        "price": 0.58,
+        "size": 821,
+        "cumulative_size": 13596
+      },
+      {
+        "price": 0.57,
+        "size": 1028,
+        "cumulative_size": 14624
+      },
+      {
+        "price": 0.56,
+        "size": 924,
+        "cumulative_size": 15548
+      },
+      {
+        "price": 0.55,
+        "size": 1377,
+        "cumulative_size": 16925
+      },
+      {
+        "price": 0.54,
+        "size": 1272,
+        "cumulative_size": 18197
+      },
+      {
+        "price": 0.53,
+        "size": 912,
+        "cumulative_size": 19109
+      },
+      {
+        "price": 0.52,
+        "size": 894,
+        "cumulative_size": 20003
+      },
+      {
+        "price": 0.51,
+        "size": 1203,
+        "cumulative_size": 21206
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.72,
+        "size": 1006,
+        "cumulative_size": 1006
+      },
+      {
+        "price": 0.73,
+        "size": 869,
+        "cumulative_size": 1875
+      },
+      {
+        "price": 0.74,
+        "size": 1881,
+        "cumulative_size": 3756
+      },
+      {
+        "price": 0.75,
+        "size": 1008,
+        "cumulative_size": 4764
+      },
+      {
+        "price": 0.76,
+        "size": 1187,
+        "cumulative_size": 5951
+      },
+      {
+        "price": 0.77,
+        "size": 1954,
+        "cumulative_size": 7905
+      },
+      {
+        "price": 0.78,
+        "size": 1101,
+        "cumulative_size": 9006
+      },
+      {
+        "price": 0.79,
+        "size": 1304,
+        "cumulative_size": 10310
+      },
+      {
+        "price": 0.8,
+        "size": 911,
+        "cumulative_size": 11221
+      },
+      {
+        "price": 0.81,
+        "size": 1021,
+        "cumulative_size": 12242
+      },
+      {
+        "price": 0.82,
+        "size": 1082,
+        "cumulative_size": 13324
+      },
+      {
+        "price": 0.83,
+        "size": 1187,
+        "cumulative_size": 14511
+      },
+      {
+        "price": 0.84,
+        "size": 754,
+        "cumulative_size": 15265
+      },
+      {
+        "price": 0.85,
+        "size": 731,
+        "cumulative_size": 15996
+      },
+      {
+        "price": 0.86,
+        "size": 1733,
+        "cumulative_size": 17729
+      },
+      {
+        "price": 0.87,
+        "size": 1376,
+        "cumulative_size": 19105
+      },
+      {
+        "price": 0.88,
+        "size": 837,
+        "cumulative_size": 19942
+      },
+      {
+        "price": 0.89,
+        "size": 898,
+        "cumulative_size": 20840
+      },
+      {
+        "price": 0.9,
+        "size": 817,
+        "cumulative_size": 21657
+      },
+      {
+        "price": 0.91,
+        "size": 1358,
+        "cumulative_size": 23015
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12353": {
+    "market_id": 12353,
+    "outcome": "yes",
+    "token_id": "100062217",
+    "midpoint": 0.33,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.32,
+        "size": 1305,
+        "cumulative_size": 1305
+      },
+      {
+        "price": 0.31,
+        "size": 573,
+        "cumulative_size": 1878
+      },
+      {
+        "price": 0.3,
+        "size": 975,
+        "cumulative_size": 2853
+      },
+      {
+        "price": 0.29,
+        "size": 1661,
+        "cumulative_size": 4514
+      },
+      {
+        "price": 0.28,
+        "size": 1247,
+        "cumulative_size": 5761
+      },
+      {
+        "price": 0.27,
+        "size": 1442,
+        "cumulative_size": 7203
+      },
+      {
+        "price": 0.26,
+        "size": 1220,
+        "cumulative_size": 8423
+      },
+      {
+        "price": 0.25,
+        "size": 686,
+        "cumulative_size": 9109
+      },
+      {
+        "price": 0.24,
+        "size": 1929,
+        "cumulative_size": 11038
+      },
+      {
+        "price": 0.23,
+        "size": 1404,
+        "cumulative_size": 12442
+      },
+      {
+        "price": 0.22,
+        "size": 1302,
+        "cumulative_size": 13744
+      },
+      {
+        "price": 0.21,
+        "size": 1539,
+        "cumulative_size": 15283
+      },
+      {
+        "price": 0.2,
+        "size": 901,
+        "cumulative_size": 16184
+      },
+      {
+        "price": 0.19,
+        "size": 1819,
+        "cumulative_size": 18003
+      },
+      {
+        "price": 0.18,
+        "size": 985,
+        "cumulative_size": 18988
+      },
+      {
+        "price": 0.17,
+        "size": 1159,
+        "cumulative_size": 20147
+      },
+      {
+        "price": 0.16,
+        "size": 939,
+        "cumulative_size": 21086
+      },
+      {
+        "price": 0.15,
+        "size": 1473,
+        "cumulative_size": 22559
+      },
+      {
+        "price": 0.14,
+        "size": 510,
+        "cumulative_size": 23069
+      },
+      {
+        "price": 0.13,
+        "size": 1088,
+        "cumulative_size": 24157
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.34,
+        "size": 599,
+        "cumulative_size": 599
+      },
+      {
+        "price": 0.35,
+        "size": 1254,
+        "cumulative_size": 1853
+      },
+      {
+        "price": 0.36,
+        "size": 1173,
+        "cumulative_size": 3026
+      },
+      {
+        "price": 0.37,
+        "size": 1681,
+        "cumulative_size": 4707
+      },
+      {
+        "price": 0.38,
+        "size": 1841,
+        "cumulative_size": 6548
+      },
+      {
+        "price": 0.39,
+        "size": 1673,
+        "cumulative_size": 8221
+      },
+      {
+        "price": 0.4,
+        "size": 565,
+        "cumulative_size": 8786
+      },
+      {
+        "price": 0.41,
+        "size": 1045,
+        "cumulative_size": 9831
+      },
+      {
+        "price": 0.42,
+        "size": 1177,
+        "cumulative_size": 11008
+      },
+      {
+        "price": 0.43,
+        "size": 795,
+        "cumulative_size": 11803
+      },
+      {
+        "price": 0.44,
+        "size": 556,
+        "cumulative_size": 12359
+      },
+      {
+        "price": 0.45,
+        "size": 1567,
+        "cumulative_size": 13926
+      },
+      {
+        "price": 0.46,
+        "size": 1344,
+        "cumulative_size": 15270
+      },
+      {
+        "price": 0.47,
+        "size": 909,
+        "cumulative_size": 16179
+      },
+      {
+        "price": 0.48,
+        "size": 1645,
+        "cumulative_size": 17824
+      },
+      {
+        "price": 0.49,
+        "size": 1041,
+        "cumulative_size": 18865
+      },
+      {
+        "price": 0.5,
+        "size": 1472,
+        "cumulative_size": 20337
+      },
+      {
+        "price": 0.51,
+        "size": 1603,
+        "cumulative_size": 21940
+      },
+      {
+        "price": 0.52,
+        "size": 709,
+        "cumulative_size": 22649
+      },
+      {
+        "price": 0.53,
+        "size": 1668,
+        "cumulative_size": 24317
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12354": {
+    "market_id": 12354,
+    "outcome": "yes",
+    "token_id": "100069994",
+    "midpoint": 0.08,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.07,
+        "size": 1255,
+        "cumulative_size": 1255
+      },
+      {
+        "price": 0.06,
+        "size": 1430,
+        "cumulative_size": 2685
+      },
+      {
+        "price": 0.05,
+        "size": 1751,
+        "cumulative_size": 4436
+      },
+      {
+        "price": 0.04,
+        "size": 1580,
+        "cumulative_size": 6016
+      },
+      {
+        "price": 0.03,
+        "size": 773,
+        "cumulative_size": 6789
+      },
+      {
+        "price": 0.02,
+        "size": 1997,
+        "cumulative_size": 8786
+      },
+      {
+        "price": 0.01,
+        "size": 1956,
+        "cumulative_size": 10742
+      },
+      {
+        "price": 0,
+        "size": 518,
+        "cumulative_size": 11260
+      },
+      {
+        "price": -0.01,
+        "size": 1969,
+        "cumulative_size": 13229
+      },
+      {
+        "price": -0.02,
+        "size": 1992,
+        "cumulative_size": 15221
+      },
+      {
+        "price": -0.03,
+        "size": 1191,
+        "cumulative_size": 16412
+      },
+      {
+        "price": -0.04,
+        "size": 1433,
+        "cumulative_size": 17845
+      },
+      {
+        "price": -0.05,
+        "size": 1917,
+        "cumulative_size": 19762
+      },
+      {
+        "price": -0.06,
+        "size": 1201,
+        "cumulative_size": 20963
+      },
+      {
+        "price": -0.07,
+        "size": 510,
+        "cumulative_size": 21473
+      },
+      {
+        "price": -0.08,
+        "size": 1239,
+        "cumulative_size": 22712
+      },
+      {
+        "price": -0.09,
+        "size": 1723,
+        "cumulative_size": 24435
+      },
+      {
+        "price": -0.1,
+        "size": 1977,
+        "cumulative_size": 26412
+      },
+      {
+        "price": -0.11,
+        "size": 1962,
+        "cumulative_size": 28374
+      },
+      {
+        "price": -0.12,
+        "size": 1450,
+        "cumulative_size": 29824
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.09,
+        "size": 1316,
+        "cumulative_size": 1316
+      },
+      {
+        "price": 0.1,
+        "size": 1366,
+        "cumulative_size": 2682
+      },
+      {
+        "price": 0.11,
+        "size": 1616,
+        "cumulative_size": 4298
+      },
+      {
+        "price": 0.12,
+        "size": 1175,
+        "cumulative_size": 5473
+      },
+      {
+        "price": 0.13,
+        "size": 1202,
+        "cumulative_size": 6675
+      },
+      {
+        "price": 0.14,
+        "size": 1346,
+        "cumulative_size": 8021
+      },
+      {
+        "price": 0.15,
+        "size": 917,
+        "cumulative_size": 8938
+      },
+      {
+        "price": 0.16,
+        "size": 1646,
+        "cumulative_size": 10584
+      },
+      {
+        "price": 0.17,
+        "size": 1484,
+        "cumulative_size": 12068
+      },
+      {
+        "price": 0.18,
+        "size": 1094,
+        "cumulative_size": 13162
+      },
+      {
+        "price": 0.19,
+        "size": 643,
+        "cumulative_size": 13805
+      },
+      {
+        "price": 0.2,
+        "size": 1664,
+        "cumulative_size": 15469
+      },
+      {
+        "price": 0.21,
+        "size": 939,
+        "cumulative_size": 16408
+      },
+      {
+        "price": 0.22,
+        "size": 1262,
+        "cumulative_size": 17670
+      },
+      {
+        "price": 0.23,
+        "size": 1909,
+        "cumulative_size": 19579
+      },
+      {
+        "price": 0.24,
+        "size": 1671,
+        "cumulative_size": 21250
+      },
+      {
+        "price": 0.25,
+        "size": 857,
+        "cumulative_size": 22107
+      },
+      {
+        "price": 0.26,
+        "size": 1514,
+        "cumulative_size": 23621
+      },
+      {
+        "price": 0.27,
+        "size": 1846,
+        "cumulative_size": 25467
+      },
+      {
+        "price": 0.28,
+        "size": 1025,
+        "cumulative_size": 26492
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12355": {
+    "market_id": 12355,
+    "outcome": "yes",
+    "token_id": "100077771",
+    "midpoint": 0.46,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.45,
+        "size": 1671,
+        "cumulative_size": 1671
+      },
+      {
+        "price": 0.44,
+        "size": 636,
+        "cumulative_size": 2307
+      },
+      {
+        "price": 0.43,
+        "size": 580,
+        "cumulative_size": 2887
+      },
+      {
+        "price": 0.42,
+        "size": 1522,
+        "cumulative_size": 4409
+      },
+      {
+        "price": 0.41,
+        "size": 1535,
+        "cumulative_size": 5944
+      },
+      {
+        "price": 0.4,
+        "size": 1245,
+        "cumulative_size": 7189
+      },
+      {
+        "price": 0.39,
+        "size": 1188,
+        "cumulative_size": 8377
+      },
+      {
+        "price": 0.38,
+        "size": 1989,
+        "cumulative_size": 10366
+      },
+      {
+        "price": 0.37,
+        "size": 1260,
+        "cumulative_size": 11626
+      },
+      {
+        "price": 0.36,
+        "size": 1429,
+        "cumulative_size": 13055
+      },
+      {
+        "price": 0.35,
+        "size": 937,
+        "cumulative_size": 13992
+      },
+      {
+        "price": 0.34,
+        "size": 1973,
+        "cumulative_size": 15965
+      },
+      {
+        "price": 0.33,
+        "size": 1019,
+        "cumulative_size": 16984
+      },
+      {
+        "price": 0.32,
+        "size": 1769,
+        "cumulative_size": 18753
+      },
+      {
+        "price": 0.31,
+        "size": 1669,
+        "cumulative_size": 20422
+      },
+      {
+        "price": 0.3,
+        "size": 1215,
+        "cumulative_size": 21637
+      },
+      {
+        "price": 0.29,
+        "size": 1742,
+        "cumulative_size": 23379
+      },
+      {
+        "price": 0.28,
+        "size": 1908,
+        "cumulative_size": 25287
+      },
+      {
+        "price": 0.27,
+        "size": 1921,
+        "cumulative_size": 27208
+      },
+      {
+        "price": 0.26,
+        "size": 1651,
+        "cumulative_size": 28859
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.47,
+        "size": 874,
+        "cumulative_size": 874
+      },
+      {
+        "price": 0.48,
+        "size": 1084,
+        "cumulative_size": 1958
+      },
+      {
+        "price": 0.49,
+        "size": 949,
+        "cumulative_size": 2907
+      },
+      {
+        "price": 0.5,
+        "size": 1255,
+        "cumulative_size": 4162
+      },
+      {
+        "price": 0.51,
+        "size": 1685,
+        "cumulative_size": 5847
+      },
+      {
+        "price": 0.52,
+        "size": 767,
+        "cumulative_size": 6614
+      },
+      {
+        "price": 0.53,
+        "size": 1342,
+        "cumulative_size": 7956
+      },
+      {
+        "price": 0.54,
+        "size": 1140,
+        "cumulative_size": 9096
+      },
+      {
+        "price": 0.55,
+        "size": 1977,
+        "cumulative_size": 11073
+      },
+      {
+        "price": 0.56,
+        "size": 1238,
+        "cumulative_size": 12311
+      },
+      {
+        "price": 0.57,
+        "size": 1435,
+        "cumulative_size": 13746
+      },
+      {
+        "price": 0.58,
+        "size": 1612,
+        "cumulative_size": 15358
+      },
+      {
+        "price": 0.59,
+        "size": 1821,
+        "cumulative_size": 17179
+      },
+      {
+        "price": 0.6,
+        "size": 1562,
+        "cumulative_size": 18741
+      },
+      {
+        "price": 0.61,
+        "size": 1110,
+        "cumulative_size": 19851
+      },
+      {
+        "price": 0.62,
+        "size": 998,
+        "cumulative_size": 20849
+      },
+      {
+        "price": 0.63,
+        "size": 582,
+        "cumulative_size": 21431
+      },
+      {
+        "price": 0.64,
+        "size": 1555,
+        "cumulative_size": 22986
+      },
+      {
+        "price": 0.65,
+        "size": 1797,
+        "cumulative_size": 24783
+      },
+      {
+        "price": 0.66,
+        "size": 597,
+        "cumulative_size": 25380
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12356": {
+    "market_id": 12356,
+    "outcome": "yes",
+    "token_id": "100085548",
+    "midpoint": 0.61,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.6,
+        "size": 1820,
+        "cumulative_size": 1820
+      },
+      {
+        "price": 0.59,
+        "size": 699,
+        "cumulative_size": 2519
+      },
+      {
+        "price": 0.58,
+        "size": 1371,
+        "cumulative_size": 3890
+      },
+      {
+        "price": 0.57,
+        "size": 535,
+        "cumulative_size": 4425
+      },
+      {
+        "price": 0.56,
+        "size": 1893,
+        "cumulative_size": 6318
+      },
+      {
+        "price": 0.55,
+        "size": 1416,
+        "cumulative_size": 7734
+      },
+      {
+        "price": 0.54,
+        "size": 703,
+        "cumulative_size": 8437
+      },
+      {
+        "price": 0.53,
+        "size": 1896,
+        "cumulative_size": 10333
+      },
+      {
+        "price": 0.52,
+        "size": 1347,
+        "cumulative_size": 11680
+      },
+      {
+        "price": 0.51,
+        "size": 1171,
+        "cumulative_size": 12851
+      },
+      {
+        "price": 0.5,
+        "size": 527,
+        "cumulative_size": 13378
+      },
+      {
+        "price": 0.49,
+        "size": 1102,
+        "cumulative_size": 14480
+      },
+      {
+        "price": 0.48,
+        "size": 649,
+        "cumulative_size": 15129
+      },
+      {
+        "price": 0.47,
+        "size": 1694,
+        "cumulative_size": 16823
+      },
+      {
+        "price": 0.46,
+        "size": 1052,
+        "cumulative_size": 17875
+      },
+      {
+        "price": 0.45,
+        "size": 970,
+        "cumulative_size": 18845
+      },
+      {
+        "price": 0.44,
+        "size": 1441,
+        "cumulative_size": 20286
+      },
+      {
+        "price": 0.43,
+        "size": 1551,
+        "cumulative_size": 21837
+      },
+      {
+        "price": 0.42,
+        "size": 1138,
+        "cumulative_size": 22975
+      },
+      {
+        "price": 0.41,
+        "size": 1939,
+        "cumulative_size": 24914
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.62,
+        "size": 1863,
+        "cumulative_size": 1863
+      },
+      {
+        "price": 0.63,
+        "size": 1697,
+        "cumulative_size": 3560
+      },
+      {
+        "price": 0.64,
+        "size": 1534,
+        "cumulative_size": 5094
+      },
+      {
+        "price": 0.65,
+        "size": 1758,
+        "cumulative_size": 6852
+      },
+      {
+        "price": 0.66,
+        "size": 1757,
+        "cumulative_size": 8609
+      },
+      {
+        "price": 0.67,
+        "size": 599,
+        "cumulative_size": 9208
+      },
+      {
+        "price": 0.68,
+        "size": 1452,
+        "cumulative_size": 10660
+      },
+      {
+        "price": 0.69,
+        "size": 530,
+        "cumulative_size": 11190
+      },
+      {
+        "price": 0.7,
+        "size": 1427,
+        "cumulative_size": 12617
+      },
+      {
+        "price": 0.71,
+        "size": 1893,
+        "cumulative_size": 14510
+      },
+      {
+        "price": 0.72,
+        "size": 1249,
+        "cumulative_size": 15759
+      },
+      {
+        "price": 0.73,
+        "size": 1642,
+        "cumulative_size": 17401
+      },
+      {
+        "price": 0.74,
+        "size": 1192,
+        "cumulative_size": 18593
+      },
+      {
+        "price": 0.75,
+        "size": 550,
+        "cumulative_size": 19143
+      },
+      {
+        "price": 0.76,
+        "size": 1348,
+        "cumulative_size": 20491
+      },
+      {
+        "price": 0.77,
+        "size": 1165,
+        "cumulative_size": 21656
+      },
+      {
+        "price": 0.78,
+        "size": 1555,
+        "cumulative_size": 23211
+      },
+      {
+        "price": 0.79,
+        "size": 733,
+        "cumulative_size": 23944
+      },
+      {
+        "price": 0.8,
+        "size": 1325,
+        "cumulative_size": 25269
+      },
+      {
+        "price": 0.81,
+        "size": 1842,
+        "cumulative_size": 27111
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12357": {
+    "market_id": 12357,
+    "outcome": "yes",
+    "token_id": "100093325",
+    "midpoint": 0.38,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.37,
+        "size": 598,
+        "cumulative_size": 598
+      },
+      {
+        "price": 0.36,
+        "size": 1682,
+        "cumulative_size": 2280
+      },
+      {
+        "price": 0.35,
+        "size": 1303,
+        "cumulative_size": 3583
+      },
+      {
+        "price": 0.34,
+        "size": 899,
+        "cumulative_size": 4482
+      },
+      {
+        "price": 0.33,
+        "size": 537,
+        "cumulative_size": 5019
+      },
+      {
+        "price": 0.32,
+        "size": 1510,
+        "cumulative_size": 6529
+      },
+      {
+        "price": 0.31,
+        "size": 1080,
+        "cumulative_size": 7609
+      },
+      {
+        "price": 0.3,
+        "size": 784,
+        "cumulative_size": 8393
+      },
+      {
+        "price": 0.29,
+        "size": 682,
+        "cumulative_size": 9075
+      },
+      {
+        "price": 0.28,
+        "size": 926,
+        "cumulative_size": 10001
+      },
+      {
+        "price": 0.27,
+        "size": 1141,
+        "cumulative_size": 11142
+      },
+      {
+        "price": 0.26,
+        "size": 1847,
+        "cumulative_size": 12989
+      },
+      {
+        "price": 0.25,
+        "size": 1022,
+        "cumulative_size": 14011
+      },
+      {
+        "price": 0.24,
+        "size": 914,
+        "cumulative_size": 14925
+      },
+      {
+        "price": 0.23,
+        "size": 533,
+        "cumulative_size": 15458
+      },
+      {
+        "price": 0.22,
+        "size": 983,
+        "cumulative_size": 16441
+      },
+      {
+        "price": 0.21,
+        "size": 1014,
+        "cumulative_size": 17455
+      },
+      {
+        "price": 0.2,
+        "size": 1930,
+        "cumulative_size": 19385
+      },
+      {
+        "price": 0.19,
+        "size": 1909,
+        "cumulative_size": 21294
+      },
+      {
+        "price": 0.18,
+        "size": 1049,
+        "cumulative_size": 22343
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.39,
+        "size": 1083,
+        "cumulative_size": 1083
+      },
+      {
+        "price": 0.4,
+        "size": 1485,
+        "cumulative_size": 2568
+      },
+      {
+        "price": 0.41,
+        "size": 1599,
+        "cumulative_size": 4167
+      },
+      {
+        "price": 0.42,
+        "size": 635,
+        "cumulative_size": 4802
+      },
+      {
+        "price": 0.43,
+        "size": 1660,
+        "cumulative_size": 6462
+      },
+      {
+        "price": 0.44,
+        "size": 580,
+        "cumulative_size": 7042
+      },
+      {
+        "price": 0.45,
+        "size": 724,
+        "cumulative_size": 7766
+      },
+      {
+        "price": 0.46,
+        "size": 931,
+        "cumulative_size": 8697
+      },
+      {
+        "price": 0.47,
+        "size": 1113,
+        "cumulative_size": 9810
+      },
+      {
+        "price": 0.48,
+        "size": 1023,
+        "cumulative_size": 10833
+      },
+      {
+        "price": 0.49,
+        "size": 1344,
+        "cumulative_size": 12177
+      },
+      {
+        "price": 0.5,
+        "size": 1761,
+        "cumulative_size": 13938
+      },
+      {
+        "price": 0.51,
+        "size": 1897,
+        "cumulative_size": 15835
+      },
+      {
+        "price": 0.52,
+        "size": 1656,
+        "cumulative_size": 17491
+      },
+      {
+        "price": 0.53,
+        "size": 1478,
+        "cumulative_size": 18969
+      },
+      {
+        "price": 0.54,
+        "size": 1940,
+        "cumulative_size": 20909
+      },
+      {
+        "price": 0.55,
+        "size": 1776,
+        "cumulative_size": 22685
+      },
+      {
+        "price": 0.56,
+        "size": 1436,
+        "cumulative_size": 24121
+      },
+      {
+        "price": 0.57,
+        "size": 1988,
+        "cumulative_size": 26109
+      },
+      {
+        "price": 0.58,
+        "size": 901,
+        "cumulative_size": 27010
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  },
+  "12358": {
+    "market_id": 12358,
+    "outcome": "yes",
+    "token_id": "100101102",
+    "midpoint": 0.22,
+    "spread": 0.02,
+    "bids": [
+      {
+        "price": 0.21,
+        "size": 1297,
+        "cumulative_size": 1297
+      },
+      {
+        "price": 0.2,
+        "size": 1158,
+        "cumulative_size": 2455
+      },
+      {
+        "price": 0.19,
+        "size": 589,
+        "cumulative_size": 3044
+      },
+      {
+        "price": 0.18,
+        "size": 1046,
+        "cumulative_size": 4090
+      },
+      {
+        "price": 0.17,
+        "size": 826,
+        "cumulative_size": 4916
+      },
+      {
+        "price": 0.16,
+        "size": 896,
+        "cumulative_size": 5812
+      },
+      {
+        "price": 0.15,
+        "size": 1780,
+        "cumulative_size": 7592
+      },
+      {
+        "price": 0.14,
+        "size": 540,
+        "cumulative_size": 8132
+      },
+      {
+        "price": 0.13,
+        "size": 1566,
+        "cumulative_size": 9698
+      },
+      {
+        "price": 0.12,
+        "size": 587,
+        "cumulative_size": 10285
+      },
+      {
+        "price": 0.11,
+        "size": 1357,
+        "cumulative_size": 11642
+      },
+      {
+        "price": 0.1,
+        "size": 1681,
+        "cumulative_size": 13323
+      },
+      {
+        "price": 0.09,
+        "size": 849,
+        "cumulative_size": 14172
+      },
+      {
+        "price": 0.08,
+        "size": 868,
+        "cumulative_size": 15040
+      },
+      {
+        "price": 0.07,
+        "size": 1939,
+        "cumulative_size": 16979
+      },
+      {
+        "price": 0.06,
+        "size": 599,
+        "cumulative_size": 17578
+      },
+      {
+        "price": 0.05,
+        "size": 1476,
+        "cumulative_size": 19054
+      },
+      {
+        "price": 0.04,
+        "size": 1264,
+        "cumulative_size": 20318
+      },
+      {
+        "price": 0.03,
+        "size": 1298,
+        "cumulative_size": 21616
+      },
+      {
+        "price": 0.02,
+        "size": 663,
+        "cumulative_size": 22279
+      }
+    ],
+    "asks": [
+      {
+        "price": 0.23,
+        "size": 671,
+        "cumulative_size": 671
+      },
+      {
+        "price": 0.24,
+        "size": 1903,
+        "cumulative_size": 2574
+      },
+      {
+        "price": 0.25,
+        "size": 533,
+        "cumulative_size": 3107
+      },
+      {
+        "price": 0.26,
+        "size": 1644,
+        "cumulative_size": 4751
+      },
+      {
+        "price": 0.27,
+        "size": 1021,
+        "cumulative_size": 5772
+      },
+      {
+        "price": 0.28,
+        "size": 1415,
+        "cumulative_size": 7187
+      },
+      {
+        "price": 0.29,
+        "size": 1450,
+        "cumulative_size": 8637
+      },
+      {
+        "price": 0.3,
+        "size": 511,
+        "cumulative_size": 9148
+      },
+      {
+        "price": 0.31,
+        "size": 1012,
+        "cumulative_size": 10160
+      },
+      {
+        "price": 0.32,
+        "size": 1457,
+        "cumulative_size": 11617
+      },
+      {
+        "price": 0.33,
+        "size": 1709,
+        "cumulative_size": 13326
+      },
+      {
+        "price": 0.34,
+        "size": 723,
+        "cumulative_size": 14049
+      },
+      {
+        "price": 0.35,
+        "size": 1391,
+        "cumulative_size": 15440
+      },
+      {
+        "price": 0.36,
+        "size": 1420,
+        "cumulative_size": 16860
+      },
+      {
+        "price": 0.37,
+        "size": 1646,
+        "cumulative_size": 18506
+      },
+      {
+        "price": 0.38,
+        "size": 1728,
+        "cumulative_size": 20234
+      },
+      {
+        "price": 0.39,
+        "size": 881,
+        "cumulative_size": 21115
+      },
+      {
+        "price": 0.4,
+        "size": 1282,
+        "cumulative_size": 22397
+      },
+      {
+        "price": 0.41,
+        "size": 602,
+        "cumulative_size": 22999
+      },
+      {
+        "price": 0.42,
+        "size": 1239,
+        "cumulative_size": 24238
+      }
+    ],
+    "last_updated_at": "2026-05-11T13:59:30Z"
+  }
+}

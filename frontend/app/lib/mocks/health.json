@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "database": "ok",
+  "redis": "ok",
+  "polygon_rpc": "ok",
+  "version": "0.1.0",
+  "uptime_seconds": 1234567
+}

@@ -1,0 +1,15 @@
+# Keep the Docker build context small and reproducible.
+# The image runs `npm install` itself, so host-built artifacts must not leak in.
+app/node_modules
+app/.next
+app/npm-debug.log*
+app/.trash-phase0
+
+# Repo-level noise that has nothing to do with the image.
+.git
+.gitignore
+node_modules
+web-example
+tasks
+*.md
+*.zip

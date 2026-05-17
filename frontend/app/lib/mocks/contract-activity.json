@@ -1,0 +1,566 @@
+{
+  "0xe111180000d2663c0091e4f400237545b87b996b": {
+    "address": "0xe111180000d2663c0091e4f400237545b87b996b",
+    "interval": "1d",
+    "from_time": "2026-04-11T14:00:00Z",
+    "to_time": "2026-05-11T14:00:00Z",
+    "buckets": [
+      {
+        "t": "2026-04-11T14:00:00Z",
+        "tx_count": 2689,
+        "unique_senders": 493,
+        "volume_usd": 20350497
+      },
+      {
+        "t": "2026-04-12T14:00:00Z",
+        "tx_count": 3284,
+        "unique_senders": 621,
+        "volume_usd": 28271514
+      },
+      {
+        "t": "2026-04-13T14:00:00Z",
+        "tx_count": 4964,
+        "unique_senders": 1204,
+        "volume_usd": 12150530
+      },
+      {
+        "t": "2026-04-14T14:00:00Z",
+        "tx_count": 2630,
+        "unique_senders": 664,
+        "volume_usd": 17545642
+      },
+      {
+        "t": "2026-04-15T14:00:00Z",
+        "tx_count": 3663,
+        "unique_senders": 861,
+        "volume_usd": 19695536
+      },
+      {
+        "t": "2026-04-16T14:00:00Z",
+        "tx_count": 1866,
+        "unique_senders": 355,
+        "volume_usd": 4849095
+      },
+      {
+        "t": "2026-04-17T14:00:00Z",
+        "tx_count": 2770,
+        "unique_senders": 610,
+        "volume_usd": 27180310
+      },
+      {
+        "t": "2026-04-18T14:00:00Z",
+        "tx_count": 1120,
+        "unique_senders": 227,
+        "volume_usd": 4475287
+      },
+      {
+        "t": "2026-04-19T14:00:00Z",
+        "tx_count": 1070,
+        "unique_senders": 210,
+        "volume_usd": 4006135
+      },
+      {
+        "t": "2026-04-20T14:00:00Z",
+        "tx_count": 446,
+        "unique_senders": 109,
+        "volume_usd": 2751192
+      },
+      {
+        "t": "2026-04-21T14:00:00Z",
+        "tx_count": 2098,
+        "unique_senders": 479,
+        "volume_usd": 9294626
+      },
+      {
+        "t": "2026-04-22T14:00:00Z",
+        "tx_count": 1542,
+        "unique_senders": 351,
+        "volume_usd": 6486298
+      },
+      {
+        "t": "2026-04-23T14:00:00Z",
+        "tx_count": 3460,
+        "unique_senders": 745,
+        "volume_usd": 24225517
+      },
+      {
+        "t": "2026-04-24T14:00:00Z",
+        "tx_count": 3431,
+        "unique_senders": 727,
+        "volume_usd": 10057721
+      },
+      {
+        "t": "2026-04-25T14:00:00Z",
+        "tx_count": 2795,
+        "unique_senders": 628,
+        "volume_usd": 5743453
+      },
+      {
+        "t": "2026-04-26T14:00:00Z",
+        "tx_count": 5207,
+        "unique_senders": 989,
+        "volume_usd": 48183834
+      },
+      {
+        "t": "2026-04-27T14:00:00Z",
+        "tx_count": 3702,
+        "unique_senders": 908,
+        "volume_usd": 16811304
+      },
+      {
+        "t": "2026-04-28T14:00:00Z",
+        "tx_count": 3157,
+        "unique_senders": 637,
+        "volume_usd": 22740774
+      },
+      {
+        "t": "2026-04-29T14:00:00Z",
+        "tx_count": 4495,
+        "unique_senders": 957,
+        "volume_usd": 22984011
+      },
+      {
+        "t": "2026-04-30T14:00:00Z",
+        "tx_count": 3124,
+        "unique_senders": 636,
+        "volume_usd": 25285294
+      },
+      {
+        "t": "2026-05-01T14:00:00Z",
+        "tx_count": 2075,
+        "unique_senders": 441,
+        "volume_usd": 9764014
+      },
+      {
+        "t": "2026-05-02T14:00:00Z",
+        "tx_count": 2157,
+        "unique_senders": 497,
+        "volume_usd": 13725106
+      },
+      {
+        "t": "2026-05-03T14:00:00Z",
+        "tx_count": 3228,
+        "unique_senders": 712,
+        "volume_usd": 19914190
+      },
+      {
+        "t": "2026-05-04T14:00:00Z",
+        "tx_count": 2314,
+        "unique_senders": 482,
+        "volume_usd": 13336619
+      },
+      {
+        "t": "2026-05-05T14:00:00Z",
+        "tx_count": 2902,
+        "unique_senders": 662,
+        "volume_usd": 13943187
+      },
+      {
+        "t": "2026-05-06T14:00:00Z",
+        "tx_count": 2740,
+        "unique_senders": 509,
+        "volume_usd": 8037827
+      },
+      {
+        "t": "2026-05-07T14:00:00Z",
+        "tx_count": 1659,
+        "unique_senders": 352,
+        "volume_usd": 7427334
+      },
+      {
+        "t": "2026-05-08T14:00:00Z",
+        "tx_count": 3369,
+        "unique_senders": 672,
+        "volume_usd": 15133211
+      },
+      {
+        "t": "2026-05-09T14:00:00Z",
+        "tx_count": 4160,
+        "unique_senders": 767,
+        "volume_usd": 23354600
+      },
+      {
+        "t": "2026-05-10T14:00:00Z",
+        "tx_count": 4800,
+        "unique_senders": 1123,
+        "volume_usd": 30524768
+      }
+    ]
+  },
+  "0x2791bca1f2de4661ed88a30c99a7a9449aa84174": {
+    "address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "interval": "1d",
+    "from_time": "2026-04-11T14:00:00Z",
+    "to_time": "2026-05-11T14:00:00Z",
+    "buckets": [
+      {
+        "t": "2026-04-11T14:00:00Z",
+        "tx_count": 3076,
+        "unique_senders": 627,
+        "volume_usd": 15796969
+      },
+      {
+        "t": "2026-04-12T14:00:00Z",
+        "tx_count": 3748,
+        "unique_senders": 969,
+        "volume_usd": 36579683
+      },
+      {
+        "t": "2026-04-13T14:00:00Z",
+        "tx_count": 2846,
+        "unique_senders": 621,
+        "volume_usd": 16738665
+      },
+      {
+        "t": "2026-04-14T14:00:00Z",
+        "tx_count": 4968,
+        "unique_senders": 1032,
+        "volume_usd": 12160806
+      },
+      {
+        "t": "2026-04-15T14:00:00Z",
+        "tx_count": 3392,
+        "unique_senders": 823,
+        "volume_usd": 26063629
+      },
+      {
+        "t": "2026-04-16T14:00:00Z",
+        "tx_count": 2722,
+        "unique_senders": 627,
+        "volume_usd": 11295748
+      },
+      {
+        "t": "2026-04-17T14:00:00Z",
+        "tx_count": 2809,
+        "unique_senders": 673,
+        "volume_usd": 16650110
+      },
+      {
+        "t": "2026-04-18T14:00:00Z",
+        "tx_count": 3430,
+        "unique_senders": 787,
+        "volume_usd": 12254314
+      },
+      {
+        "t": "2026-04-19T14:00:00Z",
+        "tx_count": 3127,
+        "unique_senders": 643,
+        "volume_usd": 16894102
+      },
+      {
+        "t": "2026-04-20T14:00:00Z",
+        "tx_count": 3876,
+        "unique_senders": 841,
+        "volume_usd": 26663731
+      },
+      {
+        "t": "2026-04-21T14:00:00Z",
+        "tx_count": 3104,
+        "unique_senders": 778,
+        "volume_usd": 14141805
+      },
+      {
+        "t": "2026-04-22T14:00:00Z",
+        "tx_count": 3165,
+        "unique_senders": 781,
+        "volume_usd": 19861057
+      },
+      {
+        "t": "2026-04-23T14:00:00Z",
+        "tx_count": 1748,
+        "unique_senders": 380,
+        "volume_usd": 10885762
+      },
+      {
+        "t": "2026-04-24T14:00:00Z",
+        "tx_count": 2249,
+        "unique_senders": 439,
+        "volume_usd": 10339140
+      },
+      {
+        "t": "2026-04-25T14:00:00Z",
+        "tx_count": 3134,
+        "unique_senders": 604,
+        "volume_usd": 21251679
+      },
+      {
+        "t": "2026-04-26T14:00:00Z",
+        "tx_count": 2848,
+        "unique_senders": 613,
+        "volume_usd": 19457623
+      },
+      {
+        "t": "2026-04-27T14:00:00Z",
+        "tx_count": 2162,
+        "unique_senders": 445,
+        "volume_usd": 20501935
+      },
+      {
+        "t": "2026-04-28T14:00:00Z",
+        "tx_count": 3416,
+        "unique_senders": 756,
+        "volume_usd": 14916055
+      },
+      {
+        "t": "2026-04-29T14:00:00Z",
+        "tx_count": 4160,
+        "unique_senders": 1067,
+        "volume_usd": 13193068
+      },
+      {
+        "t": "2026-04-30T14:00:00Z",
+        "tx_count": 3084,
+        "unique_senders": 597,
+        "volume_usd": 28003227
+      },
+      {
+        "t": "2026-05-01T14:00:00Z",
+        "tx_count": 3333,
+        "unique_senders": 744,
+        "volume_usd": 31197510
+      },
+      {
+        "t": "2026-05-02T14:00:00Z",
+        "tx_count": 1932,
+        "unique_senders": 417,
+        "volume_usd": 4415274
+      },
+      {
+        "t": "2026-05-03T14:00:00Z",
+        "tx_count": 2735,
+        "unique_senders": 507,
+        "volume_usd": 27161370
+      },
+      {
+        "t": "2026-05-04T14:00:00Z",
+        "tx_count": 1465,
+        "unique_senders": 270,
+        "volume_usd": 4267676
+      },
+      {
+        "t": "2026-05-05T14:00:00Z",
+        "tx_count": 3937,
+        "unique_senders": 826,
+        "volume_usd": 36658400
+      },
+      {
+        "t": "2026-05-06T14:00:00Z",
+        "tx_count": 3372,
+        "unique_senders": 876,
+        "volume_usd": 18348777
+      },
+      {
+        "t": "2026-05-07T14:00:00Z",
+        "tx_count": 3329,
+        "unique_senders": 858,
+        "volume_usd": 13186568
+      },
+      {
+        "t": "2026-05-08T14:00:00Z",
+        "tx_count": 1975,
+        "unique_senders": 467,
+        "volume_usd": 8706066
+      },
+      {
+        "t": "2026-05-09T14:00:00Z",
+        "tx_count": 2093,
+        "unique_senders": 525,
+        "volume_usd": 20352702
+      },
+      {
+        "t": "2026-05-10T14:00:00Z",
+        "tx_count": 2224,
+        "unique_senders": 415,
+        "volume_usd": 15690934
+      }
+    ]
+  },
+  "0xee3afe347d5c74317041e2618c49534daf887c24": {
+    "address": "0xee3afe347d5c74317041e2618c49534daf887c24",
+    "interval": "1d",
+    "from_time": "2026-04-11T14:00:00Z",
+    "to_time": "2026-05-11T14:00:00Z",
+    "buckets": [
+      {
+        "t": "2026-04-11T14:00:00Z",
+        "tx_count": 1311,
+        "unique_senders": 340,
+        "volume_usd": 10487355
+      },
+      {
+        "t": "2026-04-12T14:00:00Z",
+        "tx_count": 2959,
+        "unique_senders": 751,
+        "volume_usd": 11779756
+      },
+      {
+        "t": "2026-04-13T14:00:00Z",
+        "tx_count": 2030,
+        "unique_senders": 396,
+        "volume_usd": 8190837
+      },
+      {
+        "t": "2026-04-14T14:00:00Z",
+        "tx_count": 2937,
+        "unique_senders": 585,
+        "volume_usd": 11300890
+      },
+      {
+        "t": "2026-04-15T14:00:00Z",
+        "tx_count": 3645,
+        "unique_senders": 727,
+        "volume_usd": 30362856
+      },
+      {
+        "t": "2026-04-16T14:00:00Z",
+        "tx_count": 4160,
+        "unique_senders": 956,
+        "volume_usd": 22434071
+      },
+      {
+        "t": "2026-04-17T14:00:00Z",
+        "tx_count": 4739,
+        "unique_senders": 950,
+        "volume_usd": 16626725
+      },
+      {
+        "t": "2026-04-18T14:00:00Z",
+        "tx_count": 3689,
+        "unique_senders": 775,
+        "volume_usd": 34085062
+      },
+      {
+        "t": "2026-04-19T14:00:00Z",
+        "tx_count": 3830,
+        "unique_senders": 846,
+        "volume_usd": 8690534
+      },
+      {
+        "t": "2026-04-20T14:00:00Z",
+        "tx_count": 3848,
+        "unique_senders": 713,
+        "volume_usd": 11087747
+      },
+      {
+        "t": "2026-04-21T14:00:00Z",
+        "tx_count": 2742,
+        "unique_senders": 697,
+        "volume_usd": 6578886
+      },
+      {
+        "t": "2026-04-22T14:00:00Z",
+        "tx_count": 3578,
+        "unique_senders": 830,
+        "volume_usd": 25835237
+      },
+      {
+        "t": "2026-04-23T14:00:00Z",
+        "tx_count": 4177,
+        "unique_senders": 1069,
+        "volume_usd": 17007579
+      },
+      {
+        "t": "2026-04-24T14:00:00Z",
+        "tx_count": 4511,
+        "unique_senders": 992,
+        "volume_usd": 21374823
+      },
+      {
+        "t": "2026-04-25T14:00:00Z",
+        "tx_count": 2557,
+        "unique_senders": 504,
+        "volume_usd": 24939999
+      },
+      {
+        "t": "2026-04-26T14:00:00Z",
+        "tx_count": 2637,
+        "unique_senders": 513,
+        "volume_usd": 9116525
+      },
+      {
+        "t": "2026-04-27T14:00:00Z",
+        "tx_count": 2466,
+        "unique_senders": 466,
+        "volume_usd": 20485667
+      },
+      {
+        "t": "2026-04-28T14:00:00Z",
+        "tx_count": 3491,
+        "unique_senders": 666,
+        "volume_usd": 31002149
+      },
+      {
+        "t": "2026-04-29T14:00:00Z",
+        "tx_count": 1567,
+        "unique_senders": 393,
+        "volume_usd": 9202959
+      },
+      {
+        "t": "2026-04-30T14:00:00Z",
+        "tx_count": 2702,
+        "unique_senders": 576,
+        "volume_usd": 12094714
+      },
+      {
+        "t": "2026-05-01T14:00:00Z",
+        "tx_count": 1599,
+        "unique_senders": 361,
+        "volume_usd": 12264349
+      },
+      {
+        "t": "2026-05-02T14:00:00Z",
+        "tx_count": 2604,
+        "unique_senders": 493,
+        "volume_usd": 15193310
+      },
+      {
+        "t": "2026-05-03T14:00:00Z",
+        "tx_count": 2153,
+        "unique_senders": 441,
+        "volume_usd": 19650230
+      },
+      {
+        "t": "2026-05-04T14:00:00Z",
+        "tx_count": 1032,
+        "unique_senders": 221,
+        "volume_usd": 4261722
+      },
+      {
+        "t": "2026-05-05T14:00:00Z",
+        "tx_count": 812,
+        "unique_senders": 154,
+        "volume_usd": 4027312
+      },
+      {
+        "t": "2026-05-06T14:00:00Z",
+        "tx_count": 1863,
+        "unique_senders": 418,
+        "volume_usd": 7366423
+      },
+      {
+        "t": "2026-05-07T14:00:00Z",
+        "tx_count": 2626,
+        "unique_senders": 682,
+        "volume_usd": 23230162
+      },
+      {
+        "t": "2026-05-08T14:00:00Z",
+        "tx_count": 2365,
+        "unique_senders": 431,
+        "volume_usd": 17719136
+      },
+      {
+        "t": "2026-05-09T14:00:00Z",
+        "tx_count": 2224,
+        "unique_senders": 414,
+        "volume_usd": 13625810
+      },
+      {
+        "t": "2026-05-10T14:00:00Z",
+        "tx_count": 2241,
+        "unique_senders": 483,
+        "volume_usd": 20675055
+      }
+    ]
+  }
+}

@@ -1,0 +1,2288 @@
+{
+  "0xe111180000d2663c0091e4f400237545b87b996b": [
+    {
+      "tx_hash": "0x001448d30b59e93c000cbbc17e4c4214",
+      "log_index": 1,
+      "block_number": 52001234,
+      "time": "2026-05-11T13:46:39Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000020bb5a520f709",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "makerAmountFilled": "371192247",
+        "takerAmountFilled": "595134705",
+        "fee": "0"
+      },
+      "value_usd": 3309.16,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0009eaac1bfc0893"
+    },
+    {
+      "tx_hash": "0x00168c1526b568e100163dc7fecf34f7",
+      "log_index": 4,
+      "block_number": 52001223,
+      "time": "2026-05-11T13:18:08Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000ecea13ac2a525",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "455389334",
+        "takerAmountFilled": "56670192",
+        "fee": "0"
+      },
+      "value_usd": 4379.4,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0001a6e8d2cc5047"
+    },
+    {
+      "tx_hash": "0x000d3f515fe66293001731dc2005e91e",
+      "log_index": 4,
+      "block_number": 52001212,
+      "time": "2026-05-11T13:19:41Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001bbed588dd7941",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "391530279",
+        "takerAmountFilled": "942761287",
+        "fee": "0"
+      },
+      "value_usd": 4796.06,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000f9103b934dade"
+    },
+    {
+      "tx_hash": "0x000ac8c368642bc5001369cd123c91e9",
+      "log_index": 5,
+      "block_number": 52001201,
+      "time": "2026-05-11T13:06:34Z",
+      "event_name": "Transfer",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000117b6b13f32d3e",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "127703758",
+        "takerAmountFilled": "601319190",
+        "fee": "0"
+      },
+      "value_usd": 1082.96,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000b6d834f70344d"
+    },
+    {
+      "tx_hash": "0x000ed3f3467b2a8c001b6eb2f1036cd1",
+      "log_index": 6,
+      "block_number": 52001190,
+      "time": "2026-05-11T12:44:31Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000021ad3867292462",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "263528625",
+        "takerAmountFilled": "533980850",
+        "fee": "0"
+      },
+      "value_usd": 2680.22,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00053d4a9f00e602"
+    },
+    {
+      "tx_hash": "0x000be22f3d821f01001198d4aa93dda1",
+      "log_index": 1,
+      "block_number": 52001179,
+      "time": "2026-05-11T13:06:35Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000010046e2fb79a2a",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "356988706",
+        "takerAmountFilled": "330054330",
+        "fee": "0"
+      },
+      "value_usd": 2036.09,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0009b9b45f10d069"
+    },
+    {
+      "tx_hash": "0x0000e09de9d3bc4300131339191d78b0",
+      "log_index": 3,
+      "block_number": 52001168,
+      "time": "2026-05-11T12:44:07Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000a840ac9604548",
+        "maker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "166053939",
+        "takerAmountFilled": "915026949",
+        "fee": "0"
+      },
+      "value_usd": 1222.97,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000ff5bfccf74e24"
+    },
+    {
+      "tx_hash": "0x0013d26ecdb9ae51001f1b76d5df415d",
+      "log_index": 0,
+      "block_number": 52001157,
+      "time": "2026-05-11T12:41:59Z",
+      "event_name": "Transfer",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000445b47ed8d584",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "313055214",
+        "takerAmountFilled": "793499007",
+        "fee": "0"
+      },
+      "value_usd": 3695.59,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001aa49116779fd6"
+    },
+    {
+      "tx_hash": "0x0016e76b67614c83000591ede33a96e0",
+      "log_index": 6,
+      "block_number": 52001146,
+      "time": "2026-05-11T12:21:31Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000045b8e4c61edfa",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "267855306",
+        "takerAmountFilled": "61751397",
+        "fee": "0"
+      },
+      "value_usd": 1609.67,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0012bb1fef9ba3dd"
+    },
+    {
+      "tx_hash": "0x0022c296c29e994c001e8187c58c3e45",
+      "log_index": 4,
+      "block_number": 52001135,
+      "time": "2026-05-11T12:10:03Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001b1f41d1fc5d25",
+        "maker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "311410573",
+        "takerAmountFilled": "157218422",
+        "fee": "0"
+      },
+      "value_usd": 1513.23,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000d73536bf71fa9"
+    },
+    {
+      "tx_hash": "0x002308ebf191430000038ff98e096cee",
+      "log_index": 0,
+      "block_number": 52001124,
+      "time": "2026-05-11T11:22:11Z",
+      "event_name": "OrderFilled",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001cd99694868d04",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "makerAmountFilled": "346754749",
+        "takerAmountFilled": "598705550",
+        "fee": "0"
+      },
+      "value_usd": 4709.61,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000d24da30740294"
+    },
+    {
+      "tx_hash": "0x000df88c4260f10a001a9f42636c1e60",
+      "log_index": 1,
+      "block_number": 52001113,
+      "time": "2026-05-11T12:09:16Z",
+      "event_name": "Transfer",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000019d778a5a71162",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "makerAmountFilled": "154896556",
+        "takerAmountFilled": "736632605",
+        "fee": "0"
+      },
+      "value_usd": 3584.23,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00073db91fa2ba09"
+    },
+    {
+      "tx_hash": "0x000d0aff789aa741000529f611b91feb",
+      "log_index": 4,
+      "block_number": 52001102,
+      "time": "2026-05-11T11:22:52Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001c479fb55b91ae",
+        "maker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "476223053",
+        "takerAmountFilled": "281682023",
+        "fee": "0"
+      },
+      "value_usd": 2692.65,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00151147f6df6b10"
+    },
+    {
+      "tx_hash": "0x0013afe87aa7934e001c4d174c23f2cb",
+      "log_index": 4,
+      "block_number": 52001091,
+      "time": "2026-05-11T11:45:43Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000131fb610155a37",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "477004277",
+        "takerAmountFilled": "1031909989",
+        "fee": "0"
+      },
+      "value_usd": 441.35,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0013c181e0c441f9"
+    },
+    {
+      "tx_hash": "0x00082b031f24998e001f8e5e5d5ca778",
+      "log_index": 0,
+      "block_number": 52001080,
+      "time": "2026-05-11T11:06:51Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "to_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000008dae10d7ea960",
+        "maker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "taker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "makerAmountFilled": "11746590",
+        "takerAmountFilled": "287389097",
+        "fee": "0"
+      },
+      "value_usd": 3338.29,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0013a57499fa8d4f"
+    },
+    {
+      "tx_hash": "0x00207a23e00fe8d400153c21365a7030",
+      "log_index": 0,
+      "block_number": 52001069,
+      "time": "2026-05-11T10:43:09Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000002f91182332878",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "151189941",
+        "takerAmountFilled": "1191038945",
+        "fee": "0"
+      },
+      "value_usd": 2835.49,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000a834cde59bfef"
+    },
+    {
+      "tx_hash": "0x001c228cc5030af5000d78143c1f0262",
+      "log_index": 1,
+      "block_number": 52001058,
+      "time": "2026-05-11T10:50:39Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000003fc35e925b8b1",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "makerAmountFilled": "288910006",
+        "takerAmountFilled": "902018726",
+        "fee": "0"
+      },
+      "value_usd": 2405.48,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000b0870fb902eb7"
+    },
+    {
+      "tx_hash": "0x0013e2e976639388001434e3498c4b20",
+      "log_index": 3,
+      "block_number": 52001047,
+      "time": "2026-05-11T10:37:24Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000706c882a8bf8d",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "162414530",
+        "takerAmountFilled": "659962069",
+        "fee": "0"
+      },
+      "value_usd": 1222.91,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000478217de2d145"
+    },
+    {
+      "tx_hash": "0x00011dc7d3a3fd7e0008200e7af95b48",
+      "log_index": 4,
+      "block_number": 52001036,
+      "time": "2026-05-11T10:10:19Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000019c1708f1f819b",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "makerAmountFilled": "6654642",
+        "takerAmountFilled": "1020511511",
+        "fee": "0"
+      },
+      "value_usd": 1870.74,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000f6ffcb88747e1"
+    },
+    {
+      "tx_hash": "0x001e4a4d2cffcc7d001278ded2699001",
+      "log_index": 6,
+      "block_number": 52001025,
+      "time": "2026-05-11T10:02:56Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001616cb5431a1ca",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "490531126",
+        "takerAmountFilled": "919913772",
+        "fee": "0"
+      },
+      "value_usd": 1169.69,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0015fec314598520"
+    },
+    {
+      "tx_hash": "0x000afd4015f4a1870021e86755aea37a",
+      "log_index": 1,
+      "block_number": 52001014,
+      "time": "2026-05-11T10:00:14Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000004b660674f360b",
+        "maker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "22735258",
+        "takerAmountFilled": "1029787356",
+        "fee": "0"
+      },
+      "value_usd": 4037.66,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001cfbe83b8576f2"
+    },
+    {
+      "tx_hash": "0x00230ec2343dc166001414df0ee80be4",
+      "log_index": 7,
+      "block_number": 52001003,
+      "time": "2026-05-11T10:09:10Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000058d3827234568",
+        "maker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "35366608",
+        "takerAmountFilled": "219219187",
+        "fee": "0"
+      },
+      "value_usd": 3226.61,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000f567d91187d88"
+    },
+    {
+      "tx_hash": "0x000de3fc4d5a7118001904d32365eb15",
+      "log_index": 2,
+      "block_number": 52000992,
+      "time": "2026-05-11T09:33:02Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000028bcefecd25ac",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "makerAmountFilled": "426761771",
+        "takerAmountFilled": "714382180",
+        "fee": "0"
+      },
+      "value_usd": 2340.49,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00071341ceef1374"
+    },
+    {
+      "tx_hash": "0x001704f0c399349e00153c8f34cd12ed",
+      "log_index": 2,
+      "block_number": 52000981,
+      "time": "2026-05-11T09:30:54Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000005497e4b33e2be",
+        "maker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "411804359",
+        "takerAmountFilled": "672086202",
+        "fee": "0"
+      },
+      "value_usd": 3189.58,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00030bee3e841acf"
+    },
+    {
+      "tx_hash": "0x0008ab109471fb77001ac1b9ef44f2bc",
+      "log_index": 2,
+      "block_number": 52000970,
+      "time": "2026-05-11T09:07:44Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "to_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001300ef0c49e309",
+        "maker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "taker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "makerAmountFilled": "351662984",
+        "takerAmountFilled": "1171721712",
+        "fee": "0"
+      },
+      "value_usd": 3.89,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0021dd24011253e6"
+    },
+    {
+      "tx_hash": "0x000e97fdb5a9d7f20015538f6db6604a",
+      "log_index": 4,
+      "block_number": 52000959,
+      "time": "2026-05-11T08:50:19Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000021abc66503902a",
+        "maker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "286012229",
+        "takerAmountFilled": "373087972",
+        "fee": "0"
+      },
+      "value_usd": 687.8,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000341b401e29669"
+    },
+    {
+      "tx_hash": "0x000e98b8f483947f0007ca8dc8fb43c3",
+      "log_index": 6,
+      "block_number": 52000948,
+      "time": "2026-05-11T08:59:38Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000011ee313da94e68",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "359294400",
+        "takerAmountFilled": "564917452",
+        "fee": "0"
+      },
+      "value_usd": 1172.75,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001216ca93d38b41"
+    },
+    {
+      "tx_hash": "0x00235496e41d13b2000a738a502e4e5b",
+      "log_index": 1,
+      "block_number": 52000937,
+      "time": "2026-05-11T08:39:00Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000022dc9eba421030",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "makerAmountFilled": "328136535",
+        "takerAmountFilled": "1079177387",
+        "fee": "0"
+      },
+      "value_usd": 3479.71,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001194109cab3ab0"
+    },
+    {
+      "tx_hash": "0x001cf079a7a0c322000ea36db144e26e",
+      "log_index": 4,
+      "block_number": 52000926,
+      "time": "2026-05-11T09:11:03Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000329e3171953d8",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "173582125",
+        "takerAmountFilled": "1061001776",
+        "fee": "0"
+      },
+      "value_usd": 1644.61,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000f79213bcbedc6"
+    },
+    {
+      "tx_hash": "0x000040990626c0500000741d8e00d1c1",
+      "log_index": 7,
+      "block_number": 52000915,
+      "time": "2026-05-11T09:08:26Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000046e73219fb7eb",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "makerAmountFilled": "212697784",
+        "takerAmountFilled": "939746576",
+        "fee": "0"
+      },
+      "value_usd": 3497.26,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000b20fd3ab5e2a0"
+    },
+    {
+      "tx_hash": "0x001be3f9f27033330017ebb39761b614",
+      "log_index": 5,
+      "block_number": 52000904,
+      "time": "2026-05-11T08:27:40Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001f57f2070536fe",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "makerAmountFilled": "52030681",
+        "takerAmountFilled": "1137194559",
+        "fee": "0"
+      },
+      "value_usd": 809.64,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001ba28a73bbd935"
+    },
+    {
+      "tx_hash": "0x001e772d724e56e7001711e471cfd373",
+      "log_index": 6,
+      "block_number": 52000893,
+      "time": "2026-05-11T08:08:34Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001348c772bf8f15",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "makerAmountFilled": "218210388",
+        "takerAmountFilled": "652508268",
+        "fee": "0"
+      },
+      "value_usd": 407.97,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00211096cf28b544"
+    },
+    {
+      "tx_hash": "0x00151b19e4c48b16001d91dc31ecc1f0",
+      "log_index": 4,
+      "block_number": 52000882,
+      "time": "2026-05-11T08:08:52Z",
+      "event_name": "Transfer",
+      "from_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "to_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000bd3934cd02e35",
+        "maker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "taker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "makerAmountFilled": "421676322",
+        "takerAmountFilled": "1113863167",
+        "fee": "0"
+      },
+      "value_usd": 1694.31,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0020df9fc375a472"
+    },
+    {
+      "tx_hash": "0x000d5eafc854de5800114c035234ede8",
+      "log_index": 4,
+      "block_number": 52000871,
+      "time": "2026-05-11T07:59:26Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001b02fb6b339099",
+        "maker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "94635569",
+        "takerAmountFilled": "794728616",
+        "fee": "0"
+      },
+      "value_usd": 4181.04,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001fceb35b074401"
+    },
+    {
+      "tx_hash": "0x002227d1c037c83000150d5fff4184e7",
+      "log_index": 2,
+      "block_number": 52000860,
+      "time": "2026-05-11T08:17:20Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000232435e7ef53b2",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "249992790",
+        "takerAmountFilled": "87047796",
+        "fee": "0"
+      },
+      "value_usd": 2575.87,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00084887d51aff22"
+    },
+    {
+      "tx_hash": "0x00154f2b5834dfaf001839b1592dd30a",
+      "log_index": 2,
+      "block_number": 52000849,
+      "time": "2026-05-11T07:51:43Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000002185f168d95e8e",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "465907470",
+        "takerAmountFilled": "312205484",
+        "fee": "0"
+      },
+      "value_usd": 4685.86,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001819469c321e8b"
+    },
+    {
+      "tx_hash": "0x00111e9b516ad34c001f8dca791769ab",
+      "log_index": 4,
+      "block_number": 52000838,
+      "time": "2026-05-11T07:34:14Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001cf69fb02911ec",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "239710170",
+        "takerAmountFilled": "959931739",
+        "fee": "0"
+      },
+      "value_usd": 1515.85,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001923bbf5efbe13"
+    },
+    {
+      "tx_hash": "0x0010c551eccb237f0000116c8cbd99fe",
+      "log_index": 3,
+      "block_number": 52000827,
+      "time": "2026-05-11T07:21:28Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000ecbdfa6bf6eda",
+        "maker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "119859741",
+        "takerAmountFilled": "965636274",
+        "fee": "0"
+      },
+      "value_usd": 4487.41,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001bbb65c7efcb02"
+    },
+    {
+      "tx_hash": "0x00020b3d2147a89300042dde066b95b3",
+      "log_index": 1,
+      "block_number": 52000816,
+      "time": "2026-05-11T07:23:51Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000022591543c93c62",
+        "maker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "458628786",
+        "takerAmountFilled": "828116309",
+        "fee": "0"
+      },
+      "value_usd": 4186.59,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00034c997b0c8b21"
+    },
+    {
+      "tx_hash": "0x00008be1e472dec7000d91cd785ac328",
+      "log_index": 5,
+      "block_number": 52000805,
+      "time": "2026-05-11T07:27:32Z",
+      "event_name": "Transfer",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000b87ad5920b050",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "makerAmountFilled": "265582028",
+        "takerAmountFilled": "682868471",
+        "fee": "0"
+      },
+      "value_usd": 235.07,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00126e7b6cb9064b"
+    }
+  ],
+  "0x2791bca1f2de4661ed88a30c99a7a9449aa84174": [
+    {
+      "tx_hash": "0x001f48c8f0739d4c0000a1f5111fe804",
+      "log_index": 3,
+      "block_number": 52001233,
+      "time": "2026-05-11T13:41:57Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000003eea3015f89b3",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "378733337",
+        "takerAmountFilled": "840564806",
+        "fee": "0"
+      },
+      "value_usd": 3207.94,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00068a8b98efcaf5"
+    },
+    {
+      "tx_hash": "0x000bd3a816403d9a001756ef49af24f6",
+      "log_index": 7,
+      "block_number": 52001222,
+      "time": "2026-05-11T13:14:05Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001e4e22ed1fcb11",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "makerAmountFilled": "338649414",
+        "takerAmountFilled": "420037312",
+        "fee": "0"
+      },
+      "value_usd": 779.2,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000361f53bd04414"
+    },
+    {
+      "tx_hash": "0x000e065a2193e6ef0011b6f6b43d51da",
+      "log_index": 4,
+      "block_number": 52001211,
+      "time": "2026-05-11T13:19:14Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000006a52c7cb453fa",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "440082401",
+        "takerAmountFilled": "103748243",
+        "fee": "0"
+      },
+      "value_usd": 4163.19,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000eebd520d3b4e5"
+    },
+    {
+      "tx_hash": "0x002186a7d0d45b1400133363509dd430",
+      "log_index": 6,
+      "block_number": 52001200,
+      "time": "2026-05-11T13:04:30Z",
+      "event_name": "Transfer",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000230bd0bf3a4b8e",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "makerAmountFilled": "491858421",
+        "takerAmountFilled": "160963456",
+        "fee": "0"
+      },
+      "value_usd": 1602.68,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0021a14f568b68dc"
+    },
+    {
+      "tx_hash": "0x001697d2e7ce135e0013b71a795ea6db",
+      "log_index": 0,
+      "block_number": 52001189,
+      "time": "2026-05-11T12:46:32Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000169ef4cdc9e11e",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "makerAmountFilled": "186542122",
+        "takerAmountFilled": "973565894",
+        "fee": "0"
+      },
+      "value_usd": 1260.32,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001fa8caefad37ce"
+    },
+    {
+      "tx_hash": "0x0014246607dc5bcd0018aa1b2a65caf4",
+      "log_index": 2,
+      "block_number": 52001178,
+      "time": "2026-05-11T12:55:04Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000042f43bcf22c9b",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "453767833",
+        "takerAmountFilled": "314372895",
+        "fee": "0"
+      },
+      "value_usd": 4183.94,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000532ad89441969"
+    },
+    {
+      "tx_hash": "0x00225267e537b3aa001f52e94aa5fba4",
+      "log_index": 7,
+      "block_number": 52001167,
+      "time": "2026-05-11T12:48:16Z",
+      "event_name": "Transfer",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000e04de411e5335",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "makerAmountFilled": "218233029",
+        "takerAmountFilled": "314905148",
+        "fee": "0"
+      },
+      "value_usd": 1805.03,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001e9bc911eb1ceb"
+    },
+    {
+      "tx_hash": "0x000f260a39c25c90000596faa3aad9bd",
+      "log_index": 0,
+      "block_number": 52001156,
+      "time": "2026-05-11T12:48:24Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "to_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000014c5641e56da54",
+        "maker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "taker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "makerAmountFilled": "6721410",
+        "takerAmountFilled": "944337917",
+        "fee": "0"
+      },
+      "value_usd": 422.49,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0005c953339cf09a"
+    },
+    {
+      "tx_hash": "0x001e4def35fdff780010552693a4c72c",
+      "log_index": 4,
+      "block_number": 52001145,
+      "time": "2026-05-11T12:31:07Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000d7f02e8b49a89",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "441779815",
+        "takerAmountFilled": "438381949",
+        "fee": "0"
+      },
+      "value_usd": 3222.99,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001caedf90090e61"
+    },
+    {
+      "tx_hash": "0x000f1c0320ceb6ef0019397ea120468e",
+      "log_index": 2,
+      "block_number": 52001134,
+      "time": "2026-05-11T11:52:29Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000cf0792988375b",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "10441905",
+        "takerAmountFilled": "363039947",
+        "fee": "0"
+      },
+      "value_usd": 4694.51,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0007ddd8f94a54f6"
+    },
+    {
+      "tx_hash": "0x000c5372032907d40007a9a157081f2c",
+      "log_index": 2,
+      "block_number": 52001123,
+      "time": "2026-05-11T12:15:49Z",
+      "event_name": "Transfer",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000021692d9e0c3212",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "262450086",
+        "takerAmountFilled": "741568587",
+        "fee": "0"
+      },
+      "value_usd": 1896.27,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00109f43e7ab5b34"
+    },
+    {
+      "tx_hash": "0x001cca0329a5c26b000a0f5e5394d065",
+      "log_index": 3,
+      "block_number": 52001112,
+      "time": "2026-05-11T11:55:22Z",
+      "event_name": "Transfer",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000007945d73f698a",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "2893207",
+        "takerAmountFilled": "1027701875",
+        "fee": "0"
+      },
+      "value_usd": 2325.67,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000fab8554616163"
+    },
+    {
+      "tx_hash": "0x0017c912558c6554001e52fc49d6117d",
+      "log_index": 2,
+      "block_number": 52001101,
+      "time": "2026-05-11T11:42:39Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000053a1651032584",
+        "maker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "409222400",
+        "takerAmountFilled": "281140472",
+        "fee": "0"
+      },
+      "value_usd": 2795.19,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001b3238e70baf7e"
+    },
+    {
+      "tx_hash": "0x001ad271abe5d17d0004ce9f5dddb643",
+      "log_index": 7,
+      "block_number": 52001090,
+      "time": "2026-05-11T11:25:44Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000014a3ec8e60b45e",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "makerAmountFilled": "350734454",
+        "takerAmountFilled": "813109567",
+        "fee": "0"
+      },
+      "value_usd": 3677.49,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00189d18b2bd7650"
+    },
+    {
+      "tx_hash": "0x0020f54f477ce7d60016059f6fa1298c",
+      "log_index": 7,
+      "block_number": 52001079,
+      "time": "2026-05-11T11:18:43Z",
+      "event_name": "Transfer",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000137885b83117ed",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "319842845",
+        "takerAmountFilled": "777842867",
+        "fee": "0"
+      },
+      "value_usd": 148.3,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000c3e2627807c63"
+    },
+    {
+      "tx_hash": "0x001c20c88ff9b67100096eddbc758a5d",
+      "log_index": 5,
+      "block_number": 52001068,
+      "time": "2026-05-11T11:10:01Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000009424a82d1c9e6",
+        "maker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "377995167",
+        "takerAmountFilled": "192536676",
+        "fee": "0"
+      },
+      "value_usd": 1025.13,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00036e7f1ff0b93f"
+    },
+    {
+      "tx_hash": "0x00095814ba5a2ca7000a52cb248b0bd9",
+      "log_index": 7,
+      "block_number": 52001057,
+      "time": "2026-05-11T10:38:21Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000211f1db6941b0a",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "312735936",
+        "takerAmountFilled": "144125778",
+        "fee": "0"
+      },
+      "value_usd": 2997.97,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0008db8b8e0d4056"
+    },
+    {
+      "tx_hash": "0x0020a88e6b36abfa000f5cc1d73698c2",
+      "log_index": 7,
+      "block_number": 52001046,
+      "time": "2026-05-11T10:43:56Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "to_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000002047c370c8bd60",
+        "maker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "taker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "makerAmountFilled": "127365200",
+        "takerAmountFilled": "1067485115",
+        "fee": "0"
+      },
+      "value_usd": 184.14,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0017e5252acf40ec"
+    },
+    {
+      "tx_hash": "0x00150af33321cf8e001d94e7af9b6f5c",
+      "log_index": 4,
+      "block_number": 52001035,
+      "time": "2026-05-11T10:32:57Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000145188724a0588",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "160316105",
+        "takerAmountFilled": "779004088",
+        "fee": "0"
+      },
+      "value_usd": 1532.5,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001299d4fb42ff26"
+    },
+    {
+      "tx_hash": "0x000a80210e2d11870003a5033c1bb14a",
+      "log_index": 6,
+      "block_number": 52001024,
+      "time": "2026-05-11T10:38:40Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000156831a78d62bb",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "282823825",
+        "takerAmountFilled": "860544027",
+        "fee": "0"
+      },
+      "value_usd": 3741.48,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000e8686016de01d"
+    },
+    {
+      "tx_hash": "0x0001bcf4032318ff0004560788a6e20c",
+      "log_index": 6,
+      "block_number": 52001013,
+      "time": "2026-05-11T10:35:44Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001f1cc929d6f5dd",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "393947391",
+        "takerAmountFilled": "512817482",
+        "fee": "0"
+      },
+      "value_usd": 3567.39,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001d2b4f77c29b40"
+    },
+    {
+      "tx_hash": "0x001dc6876b18b595001ea2e5efa08181",
+      "log_index": 5,
+      "block_number": 52001002,
+      "time": "2026-05-11T09:48:03Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001183a5cbc9e811",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "472063630",
+        "takerAmountFilled": "487429784",
+        "fee": "0"
+      },
+      "value_usd": 1525.24,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000430d72f0d13d3"
+    },
+    {
+      "tx_hash": "0x002081afa987578e001a2c8b7b32ac2f",
+      "log_index": 4,
+      "block_number": 52000991,
+      "time": "2026-05-11T09:39:49Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001b191e977d7639",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "makerAmountFilled": "482760023",
+        "takerAmountFilled": "4035777",
+        "fee": "0"
+      },
+      "value_usd": 3147.14,
+      "polygonscan_url": "https://polygonscan.com/tx/0x002182bc165f2e82"
+    },
+    {
+      "tx_hash": "0x000fed3a0d28a07d0017b20a0c50ef14",
+      "log_index": 6,
+      "block_number": 52000980,
+      "time": "2026-05-11T09:59:39Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000010bde084422ea8",
+        "maker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "367812685",
+        "takerAmountFilled": "960819229",
+        "fee": "0"
+      },
+      "value_usd": 1240.04,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001d93ca8b8db39c"
+    },
+    {
+      "tx_hash": "0x000d9b1c31b37189001b218aa4cf4665",
+      "log_index": 2,
+      "block_number": 52000969,
+      "time": "2026-05-11T09:37:01Z",
+      "event_name": "Transfer",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001b8c09cdf9c151",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "makerAmountFilled": "378393217",
+        "takerAmountFilled": "99225677",
+        "fee": "0"
+      },
+      "value_usd": 2574.89,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00019799bc2d7a87"
+    },
+    {
+      "tx_hash": "0x0016db659f017eb9000285c3dae6917b",
+      "log_index": 2,
+      "block_number": 52000958,
+      "time": "2026-05-11T09:19:34Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000051b7d0553d0f8",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "218709211",
+        "takerAmountFilled": "464163040",
+        "fee": "0"
+      },
+      "value_usd": 4354,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000599f19ddb2510"
+    },
+    {
+      "tx_hash": "0x0019992f276c7dc50002962141fff20b",
+      "log_index": 0,
+      "block_number": 52000947,
+      "time": "2026-05-11T09:30:44Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000285a9547fc3e7",
+        "maker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "75460513",
+        "takerAmountFilled": "150041338",
+        "fee": "0"
+      },
+      "value_usd": 1973.21,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00118a7823022b64"
+    },
+    {
+      "tx_hash": "0x001f103bc43c8255001a84c0d40b665a",
+      "log_index": 7,
+      "block_number": 52000936,
+      "time": "2026-05-11T08:50:06Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000005f55634822a94",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "356767849",
+        "takerAmountFilled": "805648335",
+        "fee": "0"
+      },
+      "value_usd": 367.34,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000f6dc36c2a0a45"
+    },
+    {
+      "tx_hash": "0x000f2d42f34350630007b7a7ca9de042",
+      "log_index": 5,
+      "block_number": 52000925,
+      "time": "2026-05-11T08:26:14Z",
+      "event_name": "Transfer",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000041d40d8a8ac4b",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "makerAmountFilled": "489361862",
+        "takerAmountFilled": "610040247",
+        "fee": "0"
+      },
+      "value_usd": 2255.66,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001f66a842714a27"
+    },
+    {
+      "tx_hash": "0x00149f46689126800021a80e342b4892",
+      "log_index": 6,
+      "block_number": 52000914,
+      "time": "2026-05-11T08:17:53Z",
+      "event_name": "Transfer",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000136c2cb4d565ab",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "makerAmountFilled": "165792330",
+        "takerAmountFilled": "1031223311",
+        "fee": "0"
+      },
+      "value_usd": 2982.68,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00220b33f81adbbe"
+    },
+    {
+      "tx_hash": "0x000499b16fa8ff3f0022a9ed26fc1d04",
+      "log_index": 6,
+      "block_number": 52000903,
+      "time": "2026-05-11T08:48:46Z",
+      "event_name": "Transfer",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000099e88a0746861",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "makerAmountFilled": "377022812",
+        "takerAmountFilled": "755647520",
+        "fee": "0"
+      },
+      "value_usd": 209.1,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00082f0891159db3"
+    },
+    {
+      "tx_hash": "0x002085e42a5c8578000496c226de4d0d",
+      "log_index": 4,
+      "block_number": 52000892,
+      "time": "2026-05-11T07:52:56Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000016e3c3b544bcc5",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "65216244",
+        "takerAmountFilled": "684423440",
+        "fee": "0"
+      },
+      "value_usd": 772.14,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0018fbe4d74e386e"
+    },
+    {
+      "tx_hash": "0x001c2c2acf16a271000e9c7684c94ffc",
+      "log_index": 0,
+      "block_number": 52000881,
+      "time": "2026-05-11T08:37:49Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001d8d0d4fca095e",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "67914487",
+        "takerAmountFilled": "448829376",
+        "fee": "0"
+      },
+      "value_usd": 1385.01,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000067f098916bd6"
+    },
+    {
+      "tx_hash": "0x0009adc90b30d0090003eb9c53e64ed9",
+      "log_index": 6,
+      "block_number": 52000870,
+      "time": "2026-05-11T08:16:21Z",
+      "event_name": "Transfer",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000160ceb9c9f4f51",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "123776417",
+        "takerAmountFilled": "128736268",
+        "fee": "0"
+      },
+      "value_usd": 3321.46,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000e0431729de079"
+    },
+    {
+      "tx_hash": "0x00237f63a626dd880016a95111b767dd",
+      "log_index": 4,
+      "block_number": 52000859,
+      "time": "2026-05-11T08:05:00Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000178ce42fa6a4cf",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "345480329",
+        "takerAmountFilled": "564614204",
+        "fee": "0"
+      },
+      "value_usd": 2839.78,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000cf6b0d510646c"
+    },
+    {
+      "tx_hash": "0x00052d71025545e00013f3de686d760f",
+      "log_index": 5,
+      "block_number": 52000848,
+      "time": "2026-05-11T07:50:57Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000095dfc4758b22e",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "232783328",
+        "takerAmountFilled": "1103385224",
+        "fee": "0"
+      },
+      "value_usd": 1906.24,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001907d25a2d8765"
+    },
+    {
+      "tx_hash": "0x001b1c9a15cad1160014a9e7ba6ff134",
+      "log_index": 7,
+      "block_number": 52000837,
+      "time": "2026-05-11T07:57:04Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000105cc2e8e37ac6",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "139043887",
+        "takerAmountFilled": "309606920",
+        "fee": "0"
+      },
+      "value_usd": 473.72,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000c28ae11ca0373"
+    },
+    {
+      "tx_hash": "0x001fae027af69a5a000d504138bb8c66",
+      "log_index": 1,
+      "block_number": 52000826,
+      "time": "2026-05-11T07:23:34Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "to_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001fde651dff89eb",
+        "maker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "taker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "makerAmountFilled": "21049598",
+        "takerAmountFilled": "111768795",
+        "fee": "0"
+      },
+      "value_usd": 3808.16,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0023089a7e78037a"
+    },
+    {
+      "tx_hash": "0x0022e625c20bdc74000858479aeda5ab",
+      "log_index": 2,
+      "block_number": 52000815,
+      "time": "2026-05-11T07:36:07Z",
+      "event_name": "Transfer",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001636cbb0eecff2",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "297491683",
+        "takerAmountFilled": "142123138",
+        "fee": "0"
+      },
+      "value_usd": 852.63,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00184afbdd07326c"
+    },
+    {
+      "tx_hash": "0x0018b02d965cdf7c0020e2e3d82a210c",
+      "log_index": 1,
+      "block_number": 52000804,
+      "time": "2026-05-11T06:51:56Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "to_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000011ea5996027af5",
+        "maker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "taker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "makerAmountFilled": "333192411",
+        "takerAmountFilled": "940523232",
+        "fee": "0"
+      },
+      "value_usd": 775.64,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001c9e00329af5af"
+    }
+  ],
+  "0xee3afe347d5c74317041e2618c49534daf887c24": [
+    {
+      "tx_hash": "0x000123cc1939bef7000e81eecd2b5fbc",
+      "log_index": 7,
+      "block_number": 52001232,
+      "time": "2026-05-11T13:30:04Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001bd516a16a445e",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "405574671",
+        "takerAmountFilled": "332209864",
+        "fee": "0"
+      },
+      "value_usd": 3216.68,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0014165c7cd357e1"
+    },
+    {
+      "tx_hash": "0x002384175ce104840019137aacb0d789",
+      "log_index": 7,
+      "block_number": 52001221,
+      "time": "2026-05-11T13:25:23Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001408f00391fec3",
+        "maker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "336306750",
+        "takerAmountFilled": "1148341116",
+        "fee": "0"
+      },
+      "value_usd": 2545.27,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0000b26db4491bcd"
+    },
+    {
+      "tx_hash": "0x0018a5e294032a3500192a83f522b55b",
+      "log_index": 5,
+      "block_number": 52001210,
+      "time": "2026-05-11T12:42:46Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000011ae53aa8a7eb9",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "452078581",
+        "takerAmountFilled": "1140243704",
+        "fee": "0"
+      },
+      "value_usd": 481.42,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00165ae218935b17"
+    },
+    {
+      "tx_hash": "0x0000f5463334225c0006abae1bc2656a",
+      "log_index": 2,
+      "block_number": 52001199,
+      "time": "2026-05-11T13:21:48Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000bafccb952bf00",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "makerAmountFilled": "101182783",
+        "takerAmountFilled": "498026982",
+        "fee": "0"
+      },
+      "value_usd": 1382.12,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000dc4ddce23bffb"
+    },
+    {
+      "tx_hash": "0x000a36524d0847160007cb5157287b27",
+      "log_index": 1,
+      "block_number": 52001188,
+      "time": "2026-05-11T12:43:57Z",
+      "event_name": "PositionSplit",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000013f410acbebf39",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "makerAmountFilled": "435524025",
+        "takerAmountFilled": "485024668",
+        "fee": "0"
+      },
+      "value_usd": 3291.62,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000af720d0f468ad"
+    },
+    {
+      "tx_hash": "0x000e3cdb0f65a1e1001f036fe5ded07b",
+      "log_index": 7,
+      "block_number": 52001177,
+      "time": "2026-05-11T12:58:21Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000018a8bb3d0c5591",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "makerAmountFilled": "195372705",
+        "takerAmountFilled": "1192262938",
+        "fee": "0"
+      },
+      "value_usd": 3494.42,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00009e5f0f55d177"
+    },
+    {
+      "tx_hash": "0x00014556766b945800157476d8c6612f",
+      "log_index": 2,
+      "block_number": 52001166,
+      "time": "2026-05-11T12:22:58Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000c6dac2506adda",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "313100521",
+        "takerAmountFilled": "177984073",
+        "fee": "0"
+      },
+      "value_usd": 942.3,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0003b9e500a88378"
+    },
+    {
+      "tx_hash": "0x001b2239f90b7d9b00042699a9c5963e",
+      "log_index": 5,
+      "block_number": 52001155,
+      "time": "2026-05-11T12:40:11Z",
+      "event_name": "OrderFilled",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001db7e9584f7c45",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "407920087",
+        "takerAmountFilled": "1094107156",
+        "fee": "0"
+      },
+      "value_usd": 4362.26,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00018a10de274978"
+    },
+    {
+      "tx_hash": "0x0022b69cd2d1c9be0008d45fe112022d",
+      "log_index": 2,
+      "block_number": 52001144,
+      "time": "2026-05-11T12:04:30Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001c88073bd6fcc0",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "makerAmountFilled": "445682273",
+        "takerAmountFilled": "1124072993",
+        "fee": "0"
+      },
+      "value_usd": 2078.33,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00024e302a353156"
+    },
+    {
+      "tx_hash": "0x000b5c61c3ba31c9001fbb52c54ba2f6",
+      "log_index": 0,
+      "block_number": 52001133,
+      "time": "2026-05-11T12:23:33Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001cd9ba380f93db",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "makerAmountFilled": "336803312",
+        "takerAmountFilled": "886235798",
+        "fee": "0"
+      },
+      "value_usd": 2798.26,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0004b5a8f73c1558"
+    },
+    {
+      "tx_hash": "0x00236b3917aad434000da700c5a71097",
+      "log_index": 1,
+      "block_number": 52001122,
+      "time": "2026-05-11T11:49:41Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000175c64126e1e34",
+        "maker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "471366958",
+        "takerAmountFilled": "293651099",
+        "fee": "0"
+      },
+      "value_usd": 4277.78,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000547dea74a0a5c"
+    },
+    {
+      "tx_hash": "0x0015bfa2c35cb445001c7ce4a0d557ca",
+      "log_index": 5,
+      "block_number": 52001111,
+      "time": "2026-05-11T11:28:39Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000125622b84c6ef0",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "325601060",
+        "takerAmountFilled": "1095706696",
+        "fee": "0"
+      },
+      "value_usd": 1646.19,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0009b94cd33df181"
+    },
+    {
+      "tx_hash": "0x0013a8bea8279cff000ac393056392b3",
+      "log_index": 7,
+      "block_number": 52001100,
+      "time": "2026-05-11T11:53:53Z",
+      "event_name": "OrderFilled",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000006f7d4ed778c81",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "379870804",
+        "takerAmountFilled": "715114589",
+        "fee": "0"
+      },
+      "value_usd": 1478.59,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00076852ef77ba17"
+    },
+    {
+      "tx_hash": "0x0002edd389689829000f70ecfbdafec4",
+      "log_index": 2,
+      "block_number": 52001089,
+      "time": "2026-05-11T11:31:55Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000012eee89602a9a9",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "336707321",
+        "takerAmountFilled": "772617340",
+        "fee": "0"
+      },
+      "value_usd": 474.29,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0017613dccd135dd"
+    },
+    {
+      "tx_hash": "0x0008572517dd0add000381d244acfefc",
+      "log_index": 0,
+      "block_number": 52001078,
+      "time": "2026-05-11T10:54:27Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001d38a8ef0bf515",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "256712381",
+        "takerAmountFilled": "439354702",
+        "fee": "0"
+      },
+      "value_usd": 2944.41,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0015d649e304dbb2"
+    },
+    {
+      "tx_hash": "0x0007dc5837d486140018d7415a94ccfa",
+      "log_index": 1,
+      "block_number": 52001067,
+      "time": "2026-05-11T11:22:22Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000959e921a7c537",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "316313055",
+        "takerAmountFilled": "1008940873",
+        "fee": "0"
+      },
+      "value_usd": 62.68,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000fb4904cb665b3"
+    },
+    {
+      "tx_hash": "0x00069ef3f93bed5a00019725f3b88c97",
+      "log_index": 3,
+      "block_number": 52001056,
+      "time": "2026-05-11T10:28:02Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "to_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000002a230ba55af09",
+        "maker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "taker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "makerAmountFilled": "403805158",
+        "takerAmountFilled": "158241638",
+        "fee": "0"
+      },
+      "value_usd": 1877.77,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00017f56a9683a05"
+    },
+    {
+      "tx_hash": "0x000fb42c093056fb0015eea47c31bcfc",
+      "log_index": 4,
+      "block_number": 52001045,
+      "time": "2026-05-11T10:37:05Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000016a79e71862d07",
+        "maker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "237026676",
+        "takerAmountFilled": "160279363",
+        "fee": "0"
+      },
+      "value_usd": 700.55,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001b26f2b3e23d59"
+    },
+    {
+      "tx_hash": "0x0012f6d0375d2313000071572dce725c",
+      "log_index": 0,
+      "block_number": 52001034,
+      "time": "2026-05-11T10:47:21Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000d11c0119fbab0",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "makerAmountFilled": "226846528",
+        "takerAmountFilled": "376585029",
+        "fee": "0"
+      },
+      "value_usd": 716.37,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000f8ae4db514ba6"
+    },
+    {
+      "tx_hash": "0x001f08e6d89e1e380005877fc51164f2",
+      "log_index": 4,
+      "block_number": 52001023,
+      "time": "2026-05-11T09:50:25Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "to_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000029ee04b4c54b",
+        "maker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "taker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "makerAmountFilled": "199367328",
+        "takerAmountFilled": "993249012",
+        "fee": "0"
+      },
+      "value_usd": 897.12,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000c3dc975df5dd3"
+    },
+    {
+      "tx_hash": "0x0006e6aaab74ec77000d86d581331dc5",
+      "log_index": 4,
+      "block_number": 52001012,
+      "time": "2026-05-11T10:24:39Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001c5103cff6ff7d",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "makerAmountFilled": "238253018",
+        "takerAmountFilled": "948080807",
+        "fee": "0"
+      },
+      "value_usd": 4512.26,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000956cf415cfdbb"
+    },
+    {
+      "tx_hash": "0x000a3e382a62de11000d2f895ccac851",
+      "log_index": 6,
+      "block_number": 52001001,
+      "time": "2026-05-11T09:53:18Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000026e750af1aa1e",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "makerAmountFilled": "362388713",
+        "takerAmountFilled": "97617718",
+        "fee": "0"
+      },
+      "value_usd": 3423.72,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0018b69aa18c5b13"
+    },
+    {
+      "tx_hash": "0x0019925b096dcd12002002593239c7e6",
+      "log_index": 2,
+      "block_number": 52000990,
+      "time": "2026-05-11T10:06:13Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000e9e45ba2e5b47",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "256014956",
+        "takerAmountFilled": "295597640",
+        "fee": "0"
+      },
+      "value_usd": 378.23,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00237a0156669adc"
+    },
+    {
+      "tx_hash": "0x0004557aec2b16b200203452586ea1f6",
+      "log_index": 2,
+      "block_number": 52000979,
+      "time": "2026-05-11T09:35:49Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000035ec8f0d2118f",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "makerAmountFilled": "336416071",
+        "takerAmountFilled": "1081015799",
+        "fee": "0"
+      },
+      "value_usd": 3283.39,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001772533b424b60"
+    },
+    {
+      "tx_hash": "0x00032937a0c42db60007966a49e79ad7",
+      "log_index": 5,
+      "block_number": 52000968,
+      "time": "2026-05-11T09:07:43Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001a1943db3700ad",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "437536015",
+        "takerAmountFilled": "938195607",
+        "fee": "0"
+      },
+      "value_usd": 1021.37,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0007d6e16ff71af7"
+    },
+    {
+      "tx_hash": "0x000692cfa7eb16e5000c1acd10904983",
+      "log_index": 3,
+      "block_number": 52000957,
+      "time": "2026-05-11T09:31:25Z",
+      "event_name": "Transfer",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000019d8718fbc5bba",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "makerAmountFilled": "114220406",
+        "takerAmountFilled": "610278547",
+        "fee": "0"
+      },
+      "value_usd": 1195.4,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000bbb11db5ec96a"
+    },
+    {
+      "tx_hash": "0x00120dc4d8813ff90013087688b1041f",
+      "log_index": 6,
+      "block_number": 52000946,
+      "time": "2026-05-11T08:58:37Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000008ba9ea38106ca",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "makerAmountFilled": "88955917",
+        "takerAmountFilled": "636940663",
+        "fee": "0"
+      },
+      "value_usd": 1152.06,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000984e30d8e60fe"
+    },
+    {
+      "tx_hash": "0x00134078071f009a001fa32600f50257",
+      "log_index": 4,
+      "block_number": 52000935,
+      "time": "2026-05-11T08:45:58Z",
+      "event_name": "OrderFilled",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000a22376f32294a",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "makerAmountFilled": "265431488",
+        "takerAmountFilled": "262068148",
+        "fee": "0"
+      },
+      "value_usd": 953.7,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000496dd226601e9"
+    },
+    {
+      "tx_hash": "0x001c59c74af6d9d60016290d24d87b4b",
+      "log_index": 1,
+      "block_number": 52000924,
+      "time": "2026-05-11T08:25:45Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "to_address": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001b33a2613eb67d",
+        "maker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "taker": "0xa14b6c8d2f9e5a3b7c1f4d8a6e2c9b5d8f1e3a86",
+        "makerAmountFilled": "35583944",
+        "takerAmountFilled": "929815889",
+        "fee": "0"
+      },
+      "value_usd": 4475.26,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001773b4c3f22fb9"
+    },
+    {
+      "tx_hash": "0x002016dcafa330540010f2f4da75f50a",
+      "log_index": 1,
+      "block_number": 52000913,
+      "time": "2026-05-11T08:25:48Z",
+      "event_name": "Transfer",
+      "from_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "to_address": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000014ec3a2879d2b4",
+        "maker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "taker": "0xc41b7e2a9d8f3b5c1e6a4f8b2d9c5e1a7f3b8d24",
+        "makerAmountFilled": "144913542",
+        "takerAmountFilled": "1087495149",
+        "fee": "0"
+      },
+      "value_usd": 2022.83,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000f4115d150c207"
+    },
+    {
+      "tx_hash": "0x00079da93016a5330012fdbbdd26ba07",
+      "log_index": 7,
+      "block_number": 52000902,
+      "time": "2026-05-11T08:49:33Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "to_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000514ea89b9af7e",
+        "maker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "taker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "makerAmountFilled": "423918031",
+        "takerAmountFilled": "970697390",
+        "fee": "0"
+      },
+      "value_usd": 3090.54,
+      "polygonscan_url": "https://polygonscan.com/tx/0x00083ed532db7a71"
+    },
+    {
+      "tx_hash": "0x000aa19a2c4a927b00001afc76678925",
+      "log_index": 5,
+      "block_number": 52000891,
+      "time": "2026-05-11T08:02:22Z",
+      "event_name": "PayoutRedemption",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000b5e999fc66a02",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0xa92e1c5f8d3b7a2c6e9f4b1d8a5c2e7b9d4a1f65",
+        "makerAmountFilled": "347174665",
+        "takerAmountFilled": "1058921261",
+        "fee": "0"
+      },
+      "value_usd": 4360.97,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001e93972ae2ae7f"
+    },
+    {
+      "tx_hash": "0x0005ec76c40a3bca001bcd3714d2d225",
+      "log_index": 1,
+      "block_number": 52000880,
+      "time": "2026-05-11T07:55:01Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000007ce7789980674",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "274531705",
+        "takerAmountFilled": "123009259",
+        "fee": "0"
+      },
+      "value_usd": 1647.82,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0016b2acdc94c5ff"
+    },
+    {
+      "tx_hash": "0x001a627d0528815c000f2dae4ba45bff",
+      "log_index": 6,
+      "block_number": 52000869,
+      "time": "2026-05-11T07:39:39Z",
+      "event_name": "Transfer",
+      "from_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "to_address": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000000e21e9618fe6ce",
+        "maker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "taker": "0xf17c4e9b2a8d5f1a6c3e7b4d9f2a8c1e5b7d3a18",
+        "makerAmountFilled": "99271609",
+        "takerAmountFilled": "1026405955",
+        "fee": "0"
+      },
+      "value_usd": 1797.39,
+      "polygonscan_url": "https://polygonscan.com/tx/0x000135689a656519"
+    },
+    {
+      "tx_hash": "0x001ed0bd2f947568001d3f081014e49f",
+      "log_index": 6,
+      "block_number": 52000858,
+      "time": "2026-05-11T07:57:21Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+      "to_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000022c76da6c82f36",
+        "maker": "0xc78d4f1b9e2a6c3f5b8d1a4e7c9b2f6d8a3e5b27",
+        "taker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "makerAmountFilled": "108341527",
+        "takerAmountFilled": "1069134663",
+        "fee": "0"
+      },
+      "value_usd": 2232.87,
+      "polygonscan_url": "https://polygonscan.com/tx/0x0021ab8236166810"
+    },
+    {
+      "tx_hash": "0x000497f417d445df00170d5cd9622c8e",
+      "log_index": 3,
+      "block_number": 52000847,
+      "time": "2026-05-11T07:45:23Z",
+      "event_name": "Transfer",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000020ccc86a986f76",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "makerAmountFilled": "279629499",
+        "takerAmountFilled": "1115679098",
+        "fee": "0"
+      },
+      "value_usd": 1274.29,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001089539f276cdd"
+    },
+    {
+      "tx_hash": "0x000d4d320ed484ef0021ff6bb5373a28",
+      "log_index": 3,
+      "block_number": 52000836,
+      "time": "2026-05-11T07:57:46Z",
+      "event_name": "PositionSplit",
+      "from_address": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+      "to_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "decoded_args": {
+        "orderHash": "0x000000000000000000109766872925ae",
+        "maker": "0xb38d9c2f1a6e4b7c8d5a2f9b3e1c6d4a8f7b2e91",
+        "taker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "makerAmountFilled": "335501122",
+        "takerAmountFilled": "887275355",
+        "fee": "0"
+      },
+      "value_usd": 3818.88,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001c8d984377e568"
+    },
+    {
+      "tx_hash": "0x000f9fb6675b212a00216d2396b69e8a",
+      "log_index": 3,
+      "block_number": 52000825,
+      "time": "2026-05-11T07:23:44Z",
+      "event_name": "Transfer",
+      "from_address": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+      "to_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000016055de562531a",
+        "maker": "0xd62a1f7c8e4b3d9a2c6f5b8e1d4a7c9b3f6e2a73",
+        "taker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "makerAmountFilled": "487965491",
+        "takerAmountFilled": "1139211897",
+        "fee": "0"
+      },
+      "value_usd": 405.16,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001a7f7350ec52db"
+    },
+    {
+      "tx_hash": "0x00156ae974fbbd73000cac036e754055",
+      "log_index": 5,
+      "block_number": 52000814,
+      "time": "2026-05-11T06:50:27Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+      "to_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "decoded_args": {
+        "orderHash": "0x0000000000000000001053c86d11bf2a",
+        "maker": "0xb91e3a7c5f8b4d2a6e1c9f3b7d4a8c2e6b5f1a38",
+        "taker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "makerAmountFilled": "321136732",
+        "takerAmountFilled": "514646371",
+        "fee": "0"
+      },
+      "value_usd": 3033.16,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001b914689c86ba9"
+    },
+    {
+      "tx_hash": "0x001d975343c223cf0000e987c2d4b1ca",
+      "log_index": 1,
+      "block_number": 52000803,
+      "time": "2026-05-11T06:57:34Z",
+      "event_name": "OrderCanceled",
+      "from_address": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+      "to_address": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+      "decoded_args": {
+        "orderHash": "0x00000000000000000018c0ab7ca3fdf8",
+        "maker": "0x7a3f5d2c1b8e9a4f6b2d8c3e1f5a9b4c7d2e8b21",
+        "taker": "0xe25a8d3c9f1b6e4a7b2c5d8f4a1e9c6b3f7d8a42",
+        "makerAmountFilled": "227383918",
+        "takerAmountFilled": "159482503",
+        "fee": "0"
+      },
+      "value_usd": 1732.05,
+      "polygonscan_url": "https://polygonscan.com/tx/0x001907b99e9370a8"
+    }
+  ]
+}

@@ -1,0 +1,1870 @@
+{
+  "window": "all",
+  "category": "all",
+  "markets_count": 200,
+  "markets": [
+    {
+      "id": 20000,
+      "slug": "sample-market-1",
+      "question": "Sample calibration market #1",
+      "implied_prob_avg": 0.601,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 23966
+    },
+    {
+      "id": 20001,
+      "slug": "sample-market-2",
+      "question": "Sample calibration market #2",
+      "implied_prob_avg": 0.527,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 106078
+    },
+    {
+      "id": 20002,
+      "slug": "sample-market-3",
+      "question": "Sample calibration market #3",
+      "implied_prob_avg": 0.25,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 26812
+    },
+    {
+      "id": 20003,
+      "slug": "sample-market-4",
+      "question": "Sample calibration market #4",
+      "implied_prob_avg": 0.501,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 105266
+    },
+    {
+      "id": 20004,
+      "slug": "sample-market-5",
+      "question": "Sample calibration market #5",
+      "implied_prob_avg": 0.837,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 37992
+    },
+    {
+      "id": 20005,
+      "slug": "sample-market-6",
+      "question": "Sample calibration market #6",
+      "implied_prob_avg": 0.062,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 11452
+    },
+    {
+      "id": 20006,
+      "slug": "sample-market-7",
+      "question": "Sample calibration market #7",
+      "implied_prob_avg": 0.173,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 49397
+    },
+    {
+      "id": 20007,
+      "slug": "sample-market-8",
+      "question": "Sample calibration market #8",
+      "implied_prob_avg": 0.45,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 197598
+    },
+    {
+      "id": 20008,
+      "slug": "sample-market-9",
+      "question": "Sample calibration market #9",
+      "implied_prob_avg": 0.245,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 401695
+    },
+    {
+      "id": 20009,
+      "slug": "sample-market-10",
+      "question": "Sample calibration market #10",
+      "implied_prob_avg": 0.859,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 43274
+    },
+    {
+      "id": 20010,
+      "slug": "sample-market-11",
+      "question": "Sample calibration market #11",
+      "implied_prob_avg": 0.075,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 1034615
+    },
+    {
+      "id": 20011,
+      "slug": "sample-market-12",
+      "question": "Sample calibration market #12",
+      "implied_prob_avg": 0.088,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 19867
+    },
+    {
+      "id": 20012,
+      "slug": "sample-market-13",
+      "question": "Sample calibration market #13",
+      "implied_prob_avg": 0.111,
+      "outcome": 0,
+      "category": "sports",
+      "volume_usd": 213192
+    },
+    {
+      "id": 20013,
+      "slug": "sample-market-14",
+      "question": "Sample calibration market #14",
+      "implied_prob_avg": 0.9,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 40199
+    },
+    {
+      "id": 20014,
+      "slug": "sample-market-15",
+      "question": "Sample calibration market #15",
+      "implied_prob_avg": 0.707,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 18275
+    },
+    {
+      "id": 20015,
+      "slug": "sample-market-16",
+      "question": "Sample calibration market #16",
+      "implied_prob_avg": 0.996,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 180341
+    },
+    {
+      "id": 20016,
+      "slug": "sample-market-17",
+      "question": "Sample calibration market #17",
+      "implied_prob_avg": 0.337,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 43756
+    },
+    {
+      "id": 20017,
+      "slug": "sample-market-18",
+      "question": "Sample calibration market #18",
+      "implied_prob_avg": 0.45,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 857118
+    },
+    {
+      "id": 20018,
+      "slug": "sample-market-19",
+      "question": "Sample calibration market #19",
+      "implied_prob_avg": 0.432,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 325770
+    },
+    {
+      "id": 20019,
+      "slug": "sample-market-20",
+      "question": "Sample calibration market #20",
+      "implied_prob_avg": 0.313,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 107721
+    },
+    {
+      "id": 20020,
+      "slug": "sample-market-21",
+      "question": "Sample calibration market #21",
+      "implied_prob_avg": 0.822,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 347142
+    },
+    {
+      "id": 20021,
+      "slug": "sample-market-22",
+      "question": "Sample calibration market #22",
+      "implied_prob_avg": 0.7,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 263992
+    },
+    {
+      "id": 20022,
+      "slug": "sample-market-23",
+      "question": "Sample calibration market #23",
+      "implied_prob_avg": 0.336,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 51135
+    },
+    {
+      "id": 20023,
+      "slug": "sample-market-24",
+      "question": "Sample calibration market #24",
+      "implied_prob_avg": 0.792,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 63506
+    },
+    {
+      "id": 20024,
+      "slug": "sample-market-25",
+      "question": "Sample calibration market #25",
+      "implied_prob_avg": 0.01,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 937679
+    },
+    {
+      "id": 20025,
+      "slug": "sample-market-26",
+      "question": "Sample calibration market #26",
+      "implied_prob_avg": 0.209,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 12679
+    },
+    {
+      "id": 20026,
+      "slug": "sample-market-27",
+      "question": "Sample calibration market #27",
+      "implied_prob_avg": 0.706,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 53817
+    },
+    {
+      "id": 20027,
+      "slug": "sample-market-28",
+      "question": "Sample calibration market #28",
+      "implied_prob_avg": 0.029,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 1401651
+    },
+    {
+      "id": 20028,
+      "slug": "sample-market-29",
+      "question": "Sample calibration market #29",
+      "implied_prob_avg": 0.164,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 71942
+    },
+    {
+      "id": 20029,
+      "slug": "sample-market-30",
+      "question": "Sample calibration market #30",
+      "implied_prob_avg": 0.434,
+      "outcome": 0,
+      "category": "sports",
+      "volume_usd": 53688
+    },
+    {
+      "id": 20030,
+      "slug": "sample-market-31",
+      "question": "Sample calibration market #31",
+      "implied_prob_avg": 0.896,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 153607
+    },
+    {
+      "id": 20031,
+      "slug": "sample-market-32",
+      "question": "Sample calibration market #32",
+      "implied_prob_avg": 0.589,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 49671
+    },
+    {
+      "id": 20032,
+      "slug": "sample-market-33",
+      "question": "Sample calibration market #33",
+      "implied_prob_avg": 0.669,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 48120
+    },
+    {
+      "id": 20033,
+      "slug": "sample-market-34",
+      "question": "Sample calibration market #34",
+      "implied_prob_avg": 0.125,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 28248
+    },
+    {
+      "id": 20034,
+      "slug": "sample-market-35",
+      "question": "Sample calibration market #35",
+      "implied_prob_avg": 0.482,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 578873
+    },
+    {
+      "id": 20035,
+      "slug": "sample-market-36",
+      "question": "Sample calibration market #36",
+      "implied_prob_avg": 0.439,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 668116
+    },
+    {
+      "id": 20036,
+      "slug": "sample-market-37",
+      "question": "Sample calibration market #37",
+      "implied_prob_avg": 0.895,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 567107
+    },
+    {
+      "id": 20037,
+      "slug": "sample-market-38",
+      "question": "Sample calibration market #38",
+      "implied_prob_avg": 0.208,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 117048
+    },
+    {
+      "id": 20038,
+      "slug": "sample-market-39",
+      "question": "Sample calibration market #39",
+      "implied_prob_avg": 0.859,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 14144
+    },
+    {
+      "id": 20039,
+      "slug": "sample-market-40",
+      "question": "Sample calibration market #40",
+      "implied_prob_avg": 0.169,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 1422069
+    },
+    {
+      "id": 20040,
+      "slug": "sample-market-41",
+      "question": "Sample calibration market #41",
+      "implied_prob_avg": 0.816,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 200243
+    },
+    {
+      "id": 20041,
+      "slug": "sample-market-42",
+      "question": "Sample calibration market #42",
+      "implied_prob_avg": 0.351,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 57330
+    },
+    {
+      "id": 20042,
+      "slug": "sample-market-43",
+      "question": "Sample calibration market #43",
+      "implied_prob_avg": 0.938,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 21339
+    },
+    {
+      "id": 20043,
+      "slug": "sample-market-44",
+      "question": "Sample calibration market #44",
+      "implied_prob_avg": 0.366,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 377816
+    },
+    {
+      "id": 20044,
+      "slug": "sample-market-45",
+      "question": "Sample calibration market #45",
+      "implied_prob_avg": 0.956,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 20663
+    },
+    {
+      "id": 20045,
+      "slug": "sample-market-46",
+      "question": "Sample calibration market #46",
+      "implied_prob_avg": 0.273,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 90695
+    },
+    {
+      "id": 20046,
+      "slug": "sample-market-47",
+      "question": "Sample calibration market #47",
+      "implied_prob_avg": 0.569,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 26635
+    },
+    {
+      "id": 20047,
+      "slug": "sample-market-48",
+      "question": "Sample calibration market #48",
+      "implied_prob_avg": 0.666,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 99274
+    },
+    {
+      "id": 20048,
+      "slug": "sample-market-49",
+      "question": "Sample calibration market #49",
+      "implied_prob_avg": 0.425,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 124658
+    },
+    {
+      "id": 20049,
+      "slug": "sample-market-50",
+      "question": "Sample calibration market #50",
+      "implied_prob_avg": 0.267,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 88991
+    },
+    {
+      "id": 20050,
+      "slug": "sample-market-51",
+      "question": "Sample calibration market #51",
+      "implied_prob_avg": 0.135,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 14141
+    },
+    {
+      "id": 20051,
+      "slug": "sample-market-52",
+      "question": "Sample calibration market #52",
+      "implied_prob_avg": 0.871,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 608465
+    },
+    {
+      "id": 20052,
+      "slug": "sample-market-53",
+      "question": "Sample calibration market #53",
+      "implied_prob_avg": 0.057,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 167811
+    },
+    {
+      "id": 20053,
+      "slug": "sample-market-54",
+      "question": "Sample calibration market #54",
+      "implied_prob_avg": 0.095,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 536197
+    },
+    {
+      "id": 20054,
+      "slug": "sample-market-55",
+      "question": "Sample calibration market #55",
+      "implied_prob_avg": 0.549,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 14776
+    },
+    {
+      "id": 20055,
+      "slug": "sample-market-56",
+      "question": "Sample calibration market #56",
+      "implied_prob_avg": 0.096,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 282707
+    },
+    {
+      "id": 20056,
+      "slug": "sample-market-57",
+      "question": "Sample calibration market #57",
+      "implied_prob_avg": 0.561,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 54151
+    },
+    {
+      "id": 20057,
+      "slug": "sample-market-58",
+      "question": "Sample calibration market #58",
+      "implied_prob_avg": 0.284,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 1123352
+    },
+    {
+      "id": 20058,
+      "slug": "sample-market-59",
+      "question": "Sample calibration market #59",
+      "implied_prob_avg": 0.952,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 1074186
+    },
+    {
+      "id": 20059,
+      "slug": "sample-market-60",
+      "question": "Sample calibration market #60",
+      "implied_prob_avg": 0.685,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 118241
+    },
+    {
+      "id": 20060,
+      "slug": "sample-market-61",
+      "question": "Sample calibration market #61",
+      "implied_prob_avg": 0.75,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 153340
+    },
+    {
+      "id": 20061,
+      "slug": "sample-market-62",
+      "question": "Sample calibration market #62",
+      "implied_prob_avg": 0.967,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 235181
+    },
+    {
+      "id": 20062,
+      "slug": "sample-market-63",
+      "question": "Sample calibration market #63",
+      "implied_prob_avg": 0.668,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 48783
+    },
+    {
+      "id": 20063,
+      "slug": "sample-market-64",
+      "question": "Sample calibration market #64",
+      "implied_prob_avg": 0.88,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 656141
+    },
+    {
+      "id": 20064,
+      "slug": "sample-market-65",
+      "question": "Sample calibration market #65",
+      "implied_prob_avg": 0.618,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 41942
+    },
+    {
+      "id": 20065,
+      "slug": "sample-market-66",
+      "question": "Sample calibration market #66",
+      "implied_prob_avg": 0.961,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 472783
+    },
+    {
+      "id": 20066,
+      "slug": "sample-market-67",
+      "question": "Sample calibration market #67",
+      "implied_prob_avg": 0.738,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 911762
+    },
+    {
+      "id": 20067,
+      "slug": "sample-market-68",
+      "question": "Sample calibration market #68",
+      "implied_prob_avg": 0.545,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 870147
+    },
+    {
+      "id": 20068,
+      "slug": "sample-market-69",
+      "question": "Sample calibration market #69",
+      "implied_prob_avg": 0.675,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 361026
+    },
+    {
+      "id": 20069,
+      "slug": "sample-market-70",
+      "question": "Sample calibration market #70",
+      "implied_prob_avg": 0.518,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 18326
+    },
+    {
+      "id": 20070,
+      "slug": "sample-market-71",
+      "question": "Sample calibration market #71",
+      "implied_prob_avg": 0.375,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 15277
+    },
+    {
+      "id": 20071,
+      "slug": "sample-market-72",
+      "question": "Sample calibration market #72",
+      "implied_prob_avg": 0.033,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 722646
+    },
+    {
+      "id": 20072,
+      "slug": "sample-market-73",
+      "question": "Sample calibration market #73",
+      "implied_prob_avg": 0.626,
+      "outcome": 0,
+      "category": "sports",
+      "volume_usd": 16469
+    },
+    {
+      "id": 20073,
+      "slug": "sample-market-74",
+      "question": "Sample calibration market #74",
+      "implied_prob_avg": 0.627,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 36717
+    },
+    {
+      "id": 20074,
+      "slug": "sample-market-75",
+      "question": "Sample calibration market #75",
+      "implied_prob_avg": 0.72,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 17253
+    },
+    {
+      "id": 20075,
+      "slug": "sample-market-76",
+      "question": "Sample calibration market #76",
+      "implied_prob_avg": 0.782,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 13417
+    },
+    {
+      "id": 20076,
+      "slug": "sample-market-77",
+      "question": "Sample calibration market #77",
+      "implied_prob_avg": 0.033,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 1414475
+    },
+    {
+      "id": 20077,
+      "slug": "sample-market-78",
+      "question": "Sample calibration market #78",
+      "implied_prob_avg": 0.581,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 11740
+    },
+    {
+      "id": 20078,
+      "slug": "sample-market-79",
+      "question": "Sample calibration market #79",
+      "implied_prob_avg": 0.735,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 507759
+    },
+    {
+      "id": 20079,
+      "slug": "sample-market-80",
+      "question": "Sample calibration market #80",
+      "implied_prob_avg": 0.505,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 86550
+    },
+    {
+      "id": 20080,
+      "slug": "sample-market-81",
+      "question": "Sample calibration market #81",
+      "implied_prob_avg": 0.87,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 24039
+    },
+    {
+      "id": 20081,
+      "slug": "sample-market-82",
+      "question": "Sample calibration market #82",
+      "implied_prob_avg": 0.145,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 470318
+    },
+    {
+      "id": 20082,
+      "slug": "sample-market-83",
+      "question": "Sample calibration market #83",
+      "implied_prob_avg": 0.241,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 160732
+    },
+    {
+      "id": 20083,
+      "slug": "sample-market-84",
+      "question": "Sample calibration market #84",
+      "implied_prob_avg": 0.205,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 12831
+    },
+    {
+      "id": 20084,
+      "slug": "sample-market-85",
+      "question": "Sample calibration market #85",
+      "implied_prob_avg": 0.958,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 51108
+    },
+    {
+      "id": 20085,
+      "slug": "sample-market-86",
+      "question": "Sample calibration market #86",
+      "implied_prob_avg": 0.712,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 97675
+    },
+    {
+      "id": 20086,
+      "slug": "sample-market-87",
+      "question": "Sample calibration market #87",
+      "implied_prob_avg": 0.183,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 709870
+    },
+    {
+      "id": 20087,
+      "slug": "sample-market-88",
+      "question": "Sample calibration market #88",
+      "implied_prob_avg": 0.087,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 105691
+    },
+    {
+      "id": 20088,
+      "slug": "sample-market-89",
+      "question": "Sample calibration market #89",
+      "implied_prob_avg": 0.509,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 22074
+    },
+    {
+      "id": 20089,
+      "slug": "sample-market-90",
+      "question": "Sample calibration market #90",
+      "implied_prob_avg": 0.979,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 133369
+    },
+    {
+      "id": 20090,
+      "slug": "sample-market-91",
+      "question": "Sample calibration market #91",
+      "implied_prob_avg": 0.762,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 121424
+    },
+    {
+      "id": 20091,
+      "slug": "sample-market-92",
+      "question": "Sample calibration market #92",
+      "implied_prob_avg": 0.035,
+      "outcome": 0,
+      "category": "sports",
+      "volume_usd": 35173
+    },
+    {
+      "id": 20092,
+      "slug": "sample-market-93",
+      "question": "Sample calibration market #93",
+      "implied_prob_avg": 0.504,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 905342
+    },
+    {
+      "id": 20093,
+      "slug": "sample-market-94",
+      "question": "Sample calibration market #94",
+      "implied_prob_avg": 0.763,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 187908
+    },
+    {
+      "id": 20094,
+      "slug": "sample-market-95",
+      "question": "Sample calibration market #95",
+      "implied_prob_avg": 0.549,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 95135
+    },
+    {
+      "id": 20095,
+      "slug": "sample-market-96",
+      "question": "Sample calibration market #96",
+      "implied_prob_avg": 0.577,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 316742
+    },
+    {
+      "id": 20096,
+      "slug": "sample-market-97",
+      "question": "Sample calibration market #97",
+      "implied_prob_avg": 0.183,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 40353
+    },
+    {
+      "id": 20097,
+      "slug": "sample-market-98",
+      "question": "Sample calibration market #98",
+      "implied_prob_avg": 0.618,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 170678
+    },
+    {
+      "id": 20098,
+      "slug": "sample-market-99",
+      "question": "Sample calibration market #99",
+      "implied_prob_avg": 0.495,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 18343
+    },
+    {
+      "id": 20099,
+      "slug": "sample-market-100",
+      "question": "Sample calibration market #100",
+      "implied_prob_avg": 0.715,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 109841
+    },
+    {
+      "id": 20100,
+      "slug": "sample-market-101",
+      "question": "Sample calibration market #101",
+      "implied_prob_avg": 0.008,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 114043
+    },
+    {
+      "id": 20101,
+      "slug": "sample-market-102",
+      "question": "Sample calibration market #102",
+      "implied_prob_avg": 0.682,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 277005
+    },
+    {
+      "id": 20102,
+      "slug": "sample-market-103",
+      "question": "Sample calibration market #103",
+      "implied_prob_avg": 0.984,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 1199576
+    },
+    {
+      "id": 20103,
+      "slug": "sample-market-104",
+      "question": "Sample calibration market #104",
+      "implied_prob_avg": 0.811,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 11899
+    },
+    {
+      "id": 20104,
+      "slug": "sample-market-105",
+      "question": "Sample calibration market #105",
+      "implied_prob_avg": 0.491,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 51456
+    },
+    {
+      "id": 20105,
+      "slug": "sample-market-106",
+      "question": "Sample calibration market #106",
+      "implied_prob_avg": 0.841,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 34997
+    },
+    {
+      "id": 20106,
+      "slug": "sample-market-107",
+      "question": "Sample calibration market #107",
+      "implied_prob_avg": 0.156,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 19940
+    },
+    {
+      "id": 20107,
+      "slug": "sample-market-108",
+      "question": "Sample calibration market #108",
+      "implied_prob_avg": 0.239,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 1306210
+    },
+    {
+      "id": 20108,
+      "slug": "sample-market-109",
+      "question": "Sample calibration market #109",
+      "implied_prob_avg": 0.41,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 305900
+    },
+    {
+      "id": 20109,
+      "slug": "sample-market-110",
+      "question": "Sample calibration market #110",
+      "implied_prob_avg": 0.875,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 103247
+    },
+    {
+      "id": 20110,
+      "slug": "sample-market-111",
+      "question": "Sample calibration market #111",
+      "implied_prob_avg": 0.381,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 102068
+    },
+    {
+      "id": 20111,
+      "slug": "sample-market-112",
+      "question": "Sample calibration market #112",
+      "implied_prob_avg": 0.529,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 14518
+    },
+    {
+      "id": 20112,
+      "slug": "sample-market-113",
+      "question": "Sample calibration market #113",
+      "implied_prob_avg": 0.644,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 649776
+    },
+    {
+      "id": 20113,
+      "slug": "sample-market-114",
+      "question": "Sample calibration market #114",
+      "implied_prob_avg": 0.392,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 24753
+    },
+    {
+      "id": 20114,
+      "slug": "sample-market-115",
+      "question": "Sample calibration market #115",
+      "implied_prob_avg": 0.679,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 233639
+    },
+    {
+      "id": 20115,
+      "slug": "sample-market-116",
+      "question": "Sample calibration market #116",
+      "implied_prob_avg": 0.896,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 16126
+    },
+    {
+      "id": 20116,
+      "slug": "sample-market-117",
+      "question": "Sample calibration market #117",
+      "implied_prob_avg": 0.91,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 13329
+    },
+    {
+      "id": 20117,
+      "slug": "sample-market-118",
+      "question": "Sample calibration market #118",
+      "implied_prob_avg": 0.745,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 621769
+    },
+    {
+      "id": 20118,
+      "slug": "sample-market-119",
+      "question": "Sample calibration market #119",
+      "implied_prob_avg": 0.346,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 12835
+    },
+    {
+      "id": 20119,
+      "slug": "sample-market-120",
+      "question": "Sample calibration market #120",
+      "implied_prob_avg": 0.626,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 79692
+    },
+    {
+      "id": 20120,
+      "slug": "sample-market-121",
+      "question": "Sample calibration market #121",
+      "implied_prob_avg": 0.588,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 19657
+    },
+    {
+      "id": 20121,
+      "slug": "sample-market-122",
+      "question": "Sample calibration market #122",
+      "implied_prob_avg": 0.707,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 1117837
+    },
+    {
+      "id": 20122,
+      "slug": "sample-market-123",
+      "question": "Sample calibration market #123",
+      "implied_prob_avg": 0.431,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 1335145
+    },
+    {
+      "id": 20123,
+      "slug": "sample-market-124",
+      "question": "Sample calibration market #124",
+      "implied_prob_avg": 0.891,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 127101
+    },
+    {
+      "id": 20124,
+      "slug": "sample-market-125",
+      "question": "Sample calibration market #125",
+      "implied_prob_avg": 0.917,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 1360890
+    },
+    {
+      "id": 20125,
+      "slug": "sample-market-126",
+      "question": "Sample calibration market #126",
+      "implied_prob_avg": 0.506,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 204390
+    },
+    {
+      "id": 20126,
+      "slug": "sample-market-127",
+      "question": "Sample calibration market #127",
+      "implied_prob_avg": 0.989,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 1131389
+    },
+    {
+      "id": 20127,
+      "slug": "sample-market-128",
+      "question": "Sample calibration market #128",
+      "implied_prob_avg": 0.306,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 42155
+    },
+    {
+      "id": 20128,
+      "slug": "sample-market-129",
+      "question": "Sample calibration market #129",
+      "implied_prob_avg": 0.944,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 61881
+    },
+    {
+      "id": 20129,
+      "slug": "sample-market-130",
+      "question": "Sample calibration market #130",
+      "implied_prob_avg": 0.446,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 269932
+    },
+    {
+      "id": 20130,
+      "slug": "sample-market-131",
+      "question": "Sample calibration market #131",
+      "implied_prob_avg": 0.541,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 91958
+    },
+    {
+      "id": 20131,
+      "slug": "sample-market-132",
+      "question": "Sample calibration market #132",
+      "implied_prob_avg": 0.631,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 228346
+    },
+    {
+      "id": 20132,
+      "slug": "sample-market-133",
+      "question": "Sample calibration market #133",
+      "implied_prob_avg": 0.409,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 67576
+    },
+    {
+      "id": 20133,
+      "slug": "sample-market-134",
+      "question": "Sample calibration market #134",
+      "implied_prob_avg": 0.327,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 40781
+    },
+    {
+      "id": 20134,
+      "slug": "sample-market-135",
+      "question": "Sample calibration market #135",
+      "implied_prob_avg": 0.043,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 345321
+    },
+    {
+      "id": 20135,
+      "slug": "sample-market-136",
+      "question": "Sample calibration market #136",
+      "implied_prob_avg": 0.215,
+      "outcome": 0,
+      "category": "sports",
+      "volume_usd": 57539
+    },
+    {
+      "id": 20136,
+      "slug": "sample-market-137",
+      "question": "Sample calibration market #137",
+      "implied_prob_avg": 0.616,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 27102
+    },
+    {
+      "id": 20137,
+      "slug": "sample-market-138",
+      "question": "Sample calibration market #138",
+      "implied_prob_avg": 0.346,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 102667
+    },
+    {
+      "id": 20138,
+      "slug": "sample-market-139",
+      "question": "Sample calibration market #139",
+      "implied_prob_avg": 0.174,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 1101277
+    },
+    {
+      "id": 20139,
+      "slug": "sample-market-140",
+      "question": "Sample calibration market #140",
+      "implied_prob_avg": 0.405,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 175773
+    },
+    {
+      "id": 20140,
+      "slug": "sample-market-141",
+      "question": "Sample calibration market #141",
+      "implied_prob_avg": 0.174,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 144766
+    },
+    {
+      "id": 20141,
+      "slug": "sample-market-142",
+      "question": "Sample calibration market #142",
+      "implied_prob_avg": 0.523,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 292336
+    },
+    {
+      "id": 20142,
+      "slug": "sample-market-143",
+      "question": "Sample calibration market #143",
+      "implied_prob_avg": 0.524,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 30835
+    },
+    {
+      "id": 20143,
+      "slug": "sample-market-144",
+      "question": "Sample calibration market #144",
+      "implied_prob_avg": 0.92,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 90544
+    },
+    {
+      "id": 20144,
+      "slug": "sample-market-145",
+      "question": "Sample calibration market #145",
+      "implied_prob_avg": 0.324,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 780946
+    },
+    {
+      "id": 20145,
+      "slug": "sample-market-146",
+      "question": "Sample calibration market #146",
+      "implied_prob_avg": 0.881,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 132439
+    },
+    {
+      "id": 20146,
+      "slug": "sample-market-147",
+      "question": "Sample calibration market #147",
+      "implied_prob_avg": 0.729,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 30296
+    },
+    {
+      "id": 20147,
+      "slug": "sample-market-148",
+      "question": "Sample calibration market #148",
+      "implied_prob_avg": 0.429,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 18332
+    },
+    {
+      "id": 20148,
+      "slug": "sample-market-149",
+      "question": "Sample calibration market #149",
+      "implied_prob_avg": 0.339,
+      "outcome": 0,
+      "category": "sports",
+      "volume_usd": 66550
+    },
+    {
+      "id": 20149,
+      "slug": "sample-market-150",
+      "question": "Sample calibration market #150",
+      "implied_prob_avg": 0.997,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 423879
+    },
+    {
+      "id": 20150,
+      "slug": "sample-market-151",
+      "question": "Sample calibration market #151",
+      "implied_prob_avg": 0.292,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 681783
+    },
+    {
+      "id": 20151,
+      "slug": "sample-market-152",
+      "question": "Sample calibration market #152",
+      "implied_prob_avg": 0.378,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 430192
+    },
+    {
+      "id": 20152,
+      "slug": "sample-market-153",
+      "question": "Sample calibration market #153",
+      "implied_prob_avg": 0.575,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 25824
+    },
+    {
+      "id": 20153,
+      "slug": "sample-market-154",
+      "question": "Sample calibration market #154",
+      "implied_prob_avg": 0.843,
+      "outcome": 0,
+      "category": "sports",
+      "volume_usd": 80634
+    },
+    {
+      "id": 20154,
+      "slug": "sample-market-155",
+      "question": "Sample calibration market #155",
+      "implied_prob_avg": 0.021,
+      "outcome": 0,
+      "category": "sports",
+      "volume_usd": 111294
+    },
+    {
+      "id": 20155,
+      "slug": "sample-market-156",
+      "question": "Sample calibration market #156",
+      "implied_prob_avg": 0.401,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 31542
+    },
+    {
+      "id": 20156,
+      "slug": "sample-market-157",
+      "question": "Sample calibration market #157",
+      "implied_prob_avg": 0.124,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 1315370
+    },
+    {
+      "id": 20157,
+      "slug": "sample-market-158",
+      "question": "Sample calibration market #158",
+      "implied_prob_avg": 0.852,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 127456
+    },
+    {
+      "id": 20158,
+      "slug": "sample-market-159",
+      "question": "Sample calibration market #159",
+      "implied_prob_avg": 0.823,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 937301
+    },
+    {
+      "id": 20159,
+      "slug": "sample-market-160",
+      "question": "Sample calibration market #160",
+      "implied_prob_avg": 0.932,
+      "outcome": 1,
+      "category": "politics",
+      "volume_usd": 1178965
+    },
+    {
+      "id": 20160,
+      "slug": "sample-market-161",
+      "question": "Sample calibration market #161",
+      "implied_prob_avg": 0.672,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 311934
+    },
+    {
+      "id": 20161,
+      "slug": "sample-market-162",
+      "question": "Sample calibration market #162",
+      "implied_prob_avg": 0.794,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 138430
+    },
+    {
+      "id": 20162,
+      "slug": "sample-market-163",
+      "question": "Sample calibration market #163",
+      "implied_prob_avg": 0.369,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 1425037
+    },
+    {
+      "id": 20163,
+      "slug": "sample-market-164",
+      "question": "Sample calibration market #164",
+      "implied_prob_avg": 0.557,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 12188
+    },
+    {
+      "id": 20164,
+      "slug": "sample-market-165",
+      "question": "Sample calibration market #165",
+      "implied_prob_avg": 0.926,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 466301
+    },
+    {
+      "id": 20165,
+      "slug": "sample-market-166",
+      "question": "Sample calibration market #166",
+      "implied_prob_avg": 0.147,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 242801
+    },
+    {
+      "id": 20166,
+      "slug": "sample-market-167",
+      "question": "Sample calibration market #167",
+      "implied_prob_avg": 0.544,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 13769
+    },
+    {
+      "id": 20167,
+      "slug": "sample-market-168",
+      "question": "Sample calibration market #168",
+      "implied_prob_avg": 0.883,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 568723
+    },
+    {
+      "id": 20168,
+      "slug": "sample-market-169",
+      "question": "Sample calibration market #169",
+      "implied_prob_avg": 0.224,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 27062
+    },
+    {
+      "id": 20169,
+      "slug": "sample-market-170",
+      "question": "Sample calibration market #170",
+      "implied_prob_avg": 0.231,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 84403
+    },
+    {
+      "id": 20170,
+      "slug": "sample-market-171",
+      "question": "Sample calibration market #171",
+      "implied_prob_avg": 0.405,
+      "outcome": 0,
+      "category": "pop-culture",
+      "volume_usd": 14962
+    },
+    {
+      "id": 20171,
+      "slug": "sample-market-172",
+      "question": "Sample calibration market #172",
+      "implied_prob_avg": 0.622,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 717510
+    },
+    {
+      "id": 20172,
+      "slug": "sample-market-173",
+      "question": "Sample calibration market #173",
+      "implied_prob_avg": 0.486,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 261996
+    },
+    {
+      "id": 20173,
+      "slug": "sample-market-174",
+      "question": "Sample calibration market #174",
+      "implied_prob_avg": 0.4,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 86952
+    },
+    {
+      "id": 20174,
+      "slug": "sample-market-175",
+      "question": "Sample calibration market #175",
+      "implied_prob_avg": 0.924,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 757725
+    },
+    {
+      "id": 20175,
+      "slug": "sample-market-176",
+      "question": "Sample calibration market #176",
+      "implied_prob_avg": 0.271,
+      "outcome": 0,
+      "category": "sports",
+      "volume_usd": 372929
+    },
+    {
+      "id": 20176,
+      "slug": "sample-market-177",
+      "question": "Sample calibration market #177",
+      "implied_prob_avg": 0.355,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 406131
+    },
+    {
+      "id": 20177,
+      "slug": "sample-market-178",
+      "question": "Sample calibration market #178",
+      "implied_prob_avg": 0.46,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 38536
+    },
+    {
+      "id": 20178,
+      "slug": "sample-market-179",
+      "question": "Sample calibration market #179",
+      "implied_prob_avg": 0.207,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 36202
+    },
+    {
+      "id": 20179,
+      "slug": "sample-market-180",
+      "question": "Sample calibration market #180",
+      "implied_prob_avg": 0.038,
+      "outcome": 1,
+      "category": "pop-culture",
+      "volume_usd": 156062
+    },
+    {
+      "id": 20180,
+      "slug": "sample-market-181",
+      "question": "Sample calibration market #181",
+      "implied_prob_avg": 0.453,
+      "outcome": 0,
+      "category": "economics",
+      "volume_usd": 44992
+    },
+    {
+      "id": 20181,
+      "slug": "sample-market-182",
+      "question": "Sample calibration market #182",
+      "implied_prob_avg": 0.782,
+      "outcome": 1,
+      "category": "economics",
+      "volume_usd": 111039
+    },
+    {
+      "id": 20182,
+      "slug": "sample-market-183",
+      "question": "Sample calibration market #183",
+      "implied_prob_avg": 0.368,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 78079
+    },
+    {
+      "id": 20183,
+      "slug": "sample-market-184",
+      "question": "Sample calibration market #184",
+      "implied_prob_avg": 0.411,
+      "outcome": 0,
+      "category": "sports",
+      "volume_usd": 25817
+    },
+    {
+      "id": 20184,
+      "slug": "sample-market-185",
+      "question": "Sample calibration market #185",
+      "implied_prob_avg": 0.645,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 775888
+    },
+    {
+      "id": 20185,
+      "slug": "sample-market-186",
+      "question": "Sample calibration market #186",
+      "implied_prob_avg": 0.906,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 719054
+    },
+    {
+      "id": 20186,
+      "slug": "sample-market-187",
+      "question": "Sample calibration market #187",
+      "implied_prob_avg": 0.252,
+      "outcome": 0,
+      "category": "politics",
+      "volume_usd": 19127
+    },
+    {
+      "id": 20187,
+      "slug": "sample-market-188",
+      "question": "Sample calibration market #188",
+      "implied_prob_avg": 0.727,
+      "outcome": 1,
+      "category": "crypto",
+      "volume_usd": 67899
+    },
+    {
+      "id": 20188,
+      "slug": "sample-market-189",
+      "question": "Sample calibration market #189",
+      "implied_prob_avg": 0.969,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 575692
+    },
+    {
+      "id": 20189,
+      "slug": "sample-market-190",
+      "question": "Sample calibration market #190",
+      "implied_prob_avg": 0.266,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 13404
+    },
+    {
+      "id": 20190,
+      "slug": "sample-market-191",
+      "question": "Sample calibration market #191",
+      "implied_prob_avg": 0.723,
+      "outcome": 0,
+      "category": "sports",
+      "volume_usd": 35347
+    },
+    {
+      "id": 20191,
+      "slug": "sample-market-192",
+      "question": "Sample calibration market #192",
+      "implied_prob_avg": 0.616,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 536661
+    },
+    {
+      "id": 20192,
+      "slug": "sample-market-193",
+      "question": "Sample calibration market #193",
+      "implied_prob_avg": 0.627,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 76661
+    },
+    {
+      "id": 20193,
+      "slug": "sample-market-194",
+      "question": "Sample calibration market #194",
+      "implied_prob_avg": 0.958,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 363495
+    },
+    {
+      "id": 20194,
+      "slug": "sample-market-195",
+      "question": "Sample calibration market #195",
+      "implied_prob_avg": 0.835,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 71053
+    },
+    {
+      "id": 20195,
+      "slug": "sample-market-196",
+      "question": "Sample calibration market #196",
+      "implied_prob_avg": 0.567,
+      "outcome": 1,
+      "category": "sports",
+      "volume_usd": 144937
+    },
+    {
+      "id": 20196,
+      "slug": "sample-market-197",
+      "question": "Sample calibration market #197",
+      "implied_prob_avg": 0.044,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 170924
+    },
+    {
+      "id": 20197,
+      "slug": "sample-market-198",
+      "question": "Sample calibration market #198",
+      "implied_prob_avg": 0.531,
+      "outcome": 1,
+      "category": "science",
+      "volume_usd": 41817
+    },
+    {
+      "id": 20198,
+      "slug": "sample-market-199",
+      "question": "Sample calibration market #199",
+      "implied_prob_avg": 0.288,
+      "outcome": 0,
+      "category": "crypto",
+      "volume_usd": 45848
+    },
+    {
+      "id": 20199,
+      "slug": "sample-market-200",
+      "question": "Sample calibration market #200",
+      "implied_prob_avg": 0.207,
+      "outcome": 0,
+      "category": "science",
+      "volume_usd": 248425
+    }
+  ],
+  "buckets": [
+    {
+      "range": "0-10%",
+      "predicted_avg": 0.05,
+      "actual_rate": 0.118,
+      "count": 17
+    },
+    {
+      "range": "10-20%",
+      "predicted_avg": 0.154,
+      "actual_rate": 0.071,
+      "count": 14
+    },
+    {
+      "range": "20-30%",
+      "predicted_avg": 0.244,
+      "actual_rate": 0.2,
+      "count": 20
+    },
+    {
+      "range": "30-40%",
+      "predicted_avg": 0.35,
+      "actual_rate": 0.333,
+      "count": 18
+    },
+    {
+      "range": "40-50%",
+      "predicted_avg": 0.438,
+      "actual_rate": 0.455,
+      "count": 22
+    },
+    {
+      "range": "50-60%",
+      "predicted_avg": 0.543,
+      "actual_rate": 0.6,
+      "count": 25
+    },
+    {
+      "range": "60-70%",
+      "predicted_avg": 0.643,
+      "actual_rate": 0.714,
+      "count": 21
+    },
+    {
+      "range": "70-80%",
+      "predicted_avg": 0.739,
+      "actual_rate": 0.75,
+      "count": 20
+    },
+    {
+      "range": "80-90%",
+      "predicted_avg": 0.859,
+      "actual_rate": 0.857,
+      "count": 21
+    },
+    {
+      "range": "90-100%",
+      "predicted_avg": 0.949,
+      "actual_rate": 0.909,
+      "count": 22
+    }
+  ],
+  "overall_brier_score": 0.187
+}
