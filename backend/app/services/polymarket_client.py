@@ -11,6 +11,25 @@ class PolymarketClient(BaseRequestClient):
             'clob': settings.POLYMARKET_CLOB_API,
         }
 
+    def _query_string(self, query_params: dict | None = None) -> str:
+        if not query_params:
+            return ''
+        return '&'.join(f'{key}={value}' for key, value in query_params.items())
+
+    def _build_url(self, source: str, path: str, query_params: dict | None = None) -> str:
+        url = f"{self.url[source]}{path}"
+        query_string = self._query_string(query_params)
+        return f'{url}?{query_string}' if query_string else url
+
+    async def get_events(self, query_params=None, data=None):
+        default_param_query = {'limit': 20, 'offset': 0}
+
+        if query_params:
+            default_param_query.update(query_params)
+
+        url = self._build_url('gamma', 'events', default_param_query)
+        return await self.get(url, data=data, authenticate=False)
+
     async def get_markets(self, query_params=None, data=None):
         """_Get markets from Polymarket API_
 
@@ -32,14 +51,12 @@ class PolymarketClient(BaseRequestClient):
         Returns:
             dict: The JSON response from the API or an error message.
         """
-        url = f'{self.url['gamma']}markets'
         default_param_query = {'limit': 20, 'offset': 0}
 
         if query_params:
             default_param_query.update(query_params)
 
-        query_string = '&'.join(f'{key}={value}' for key, value in default_param_query.items())
-        url = f'{url}?{query_string}'
+        url = self._build_url('gamma', 'markets', default_param_query)
         return await self.get(url, data=data, authenticate=False)
 
     async def get_markets_keyset(self, query_params=None):
@@ -70,14 +87,12 @@ class PolymarketClient(BaseRequestClient):
                 "next_cursor": "string"
             }
         """
-        url = f'{self.url['gamma']}markets/keyset'
         default_param_query = {'limit': 20}
 
         if query_params:
             default_param_query.update(query_params)
 
-        query_string = '&'.join(f'{key}={value}' for key, value in default_param_query.items())
-        url = f'{url}?{query_string}'
+        url = self._build_url('gamma', 'markets/keyset', default_param_query)
         return await self.get(url, authenticate=False)
 
     async def get_markets_search(self, query_params):
@@ -101,8 +116,16 @@ class PolymarketClient(BaseRequestClient):
         if query_params:
             default_param_query.update(query_params)
 
-        query_string = '&'.join(f'{key}={value}' for key, value in default_param_query.items())
-        url = f'{self.url['gamma']}public-search?{query_string}'
+        url = self._build_url('gamma', 'public-search', default_param_query)
+        return await self.get(url, authenticate=False)
+
+    async def get_tags(self, query_params=None):
+        default_param_query = {'limit': 20, 'offset': 0}
+
+        if query_params:
+            default_param_query.update(query_params)
+
+        url = self._build_url('gamma', 'tags', default_param_query)
         return await self.get(url, authenticate=False)
 
     async def get_market_by_id(self, market_id, query_params=None, data=None):
@@ -115,10 +138,7 @@ class PolymarketClient(BaseRequestClient):
                     - include_tag: Filter markets by tag (optional, options: 'true' or 'false')
             data (dict, optional): Data for the API request body. Defaults to None.
         """
-        url = f'{self.url['gamma']}markets/{market_id}'
-        if query_params:
-            query_string = '&'.join(f'{key}={value}' for key, value in query_params.items())
-            url = f'{url}?{query_string}'
+        url = self._build_url('gamma', f'markets/{market_id}', query_params)
         return await self.get(url, data=data, authenticate=False)
 
     async def get_market_by_slug(self, market_slug, query_params=None, data=None):
@@ -131,11 +151,22 @@ class PolymarketClient(BaseRequestClient):
                     - include_tag: Filter markets by tag (optional, options: 'true' or 'false')
             data (dict, optional): Data for the API request body. Defaults to None.
         """
-        url = f'{self.url['gamma']}markets/slug/{market_slug}'
-        if query_params:
-            query_string = '&'.join(f'{key}={value}' for key, value in query_params.items())
-            url = f'{url}?{query_string}'
+        url = self._build_url('gamma', f'markets/slug/{market_slug}', query_params)
         return await self.get(url, data=data, authenticate=False)
+
+    async def get_prices(self, query_params=None):
+        url = self._build_url('clob', 'prices', query_params)
+        return await self.get(url, authenticate=False)
+
+    async def post_prices(self, payload):
+        url = self._build_url('clob', 'prices')
+        return await self.post(url, data=payload, authenticate=False)
+
+    async def get_book(self, query_params):
+        if not query_params or 'token_id' not in query_params:
+            raise ValueError('The "token_id" query parameter is required to get a book snapshot.')
+        url = self._build_url('clob', 'book', query_params)
+        return await self.get(url, authenticate=False)
 
     async def get_prices_history_by_market(self, query_params):
         """_Get price history for a specific market from Polymarket API_
@@ -165,6 +196,21 @@ class PolymarketClient(BaseRequestClient):
         """
         if not query_params or 'market' not in query_params:
             raise ValueError('The "market" query parameter is required to get price history.')
-        query_string = '&'.join(f'{key}={value}' for key, value in query_params.items())
-        url = f'{self.url['clob']}prices-history?{query_string}'
+        url = self._build_url('clob', 'prices-history', query_params)
+        return await self.get(url, authenticate=False)
+
+    async def post_batch_prices_history(self, payload):
+        url = self._build_url('clob', 'batch-prices-history')
+        return await self.post(url, data=payload, authenticate=False)
+
+    async def get_trades(self, query_params=None):
+        url = self._build_url('data', 'trades', query_params)
+        return await self.get(url, authenticate=False)
+
+    async def get_holders(self, query_params=None):
+        url = self._build_url('data', 'holders', query_params)
+        return await self.get(url, authenticate=False)
+
+    async def get_activity(self, query_params=None):
+        url = self._build_url('data', 'activity', query_params)
         return await self.get(url, authenticate=False)
