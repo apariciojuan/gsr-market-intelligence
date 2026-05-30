@@ -23,7 +23,8 @@ class PolygonClient(BaseRequestClient):
 
     def generate_query_params(self, action: str, query_params: dict | None = None) -> str:
         base_query = self.actions[action]
-        query_string = '&'.join(f'{key}={value}' for key, value in query_params.items())
+        params = query_params or {}
+        query_string = '&'.join(f'{key}={value}' for key, value in params.items())
         return f'{base_query}&chainid={self.chain_id}&apikey={self.api_key}&{query_string}'
 
     async def get_transactions_by_address(self, query_params=None):
@@ -50,7 +51,150 @@ class PolygonClient(BaseRequestClient):
               ]
             }
         """
-        params = self.generate_query_params('get_transactions_by_address', query_params)
-        # Query by test for this use offset and page 1
-        url = f'{self.url}{params}&offset=1&page=1'
+        default_params = {'page': 1, 'offset': 10, 'sort': 'asc', 'startblock': 0, 'endblock': 999999999}
+        if query_params:
+            default_params.update(query_params)
+
+        if default_params['endblock'] == 999999999:
+            default_params['offset'] = 10
+
+        params = self.generate_query_params('get_transactions_by_address', default_params)
+        url = f'{self.url}{params}'
+        return await self.get(url, authenticate=False)
+
+    async def get_erc20_transfers_by_address(self, query_params=None):
+        """_Get ERC20 token transfer events by address from Polygon API
+
+        Args:
+            query_params (dict, optional): Query parameters for the API request. Defaults to None.
+                Valid query parameters include:
+                - address: The address to get transfers for (required)
+                - startblock: The block number to start from (optional, default: 0)
+                - endblock: The block number to end at (optional, default: 999999999)
+                - page: The page number to return (optional, default: 1)
+                - offset: The number of transfers to return per page (optional, default: 100)
+                - sort: The order to sort transfers (optional, options: 'asc' or 'desc', default: 'asc')
+
+        Returns:
+            dict: The JSON response from the API or an error message.
+            {
+              "status": "1",
+              "message": "OK",
+              "result": [
+                { ... transfer data ... }
+              ]
+            }
+        """
+        default_params = {'page': 1, 'offset': 10, 'sort': 'asc', 'startblock': 0, 'endblock': 999999999}
+        if query_params:
+            default_params.update(query_params)
+
+        if default_params['endblock'] == 999999999:
+            default_params['offset'] = 10
+
+        params = self.generate_query_params('get_erc20_transfers_by_address', default_params)
+        url = f'{self.url}{params}'
+        return await self.get(url, authenticate=False)
+
+    async def get_erc721_transfers_by_address(self, query_params=None):
+        """_Get ERC721 (NFT) token transfer events by address from Polygon API
+
+        Args:
+            query_params (dict, optional): Query parameters for the API request. Defaults to None.
+                Valid query parameters include:
+                - address: The address to get transfers for (required)
+                - startblock: The block number to start from (optional, default: 0)
+                - endblock: The block number to end at (optional, default: 999999999)
+                - page: The page number to return (optional, default: 1)
+                - offset: The number of transfers to return per page (optional, default: 100)
+                - sort: The order to sort transfers (optional, options: 'asc' or 'desc', default: 'asc')
+
+        Returns:
+            dict: The JSON response from the API or an error message.
+            {
+              "status": "1",
+              "message": "OK",
+              "result": [
+                { ... transfer data ... }
+              ]
+            }
+        """
+        default_params = {'page': 1, 'offset': 10, 'sort': 'asc', 'startblock': 0, 'endblock': 999999999}
+        if query_params:
+            default_params.update(query_params)
+
+        if default_params['endblock'] == 999999999:
+            default_params['offset'] = 10
+
+        params = self.generate_query_params('get_erc721_transfers_by_address', default_params)
+        url = f'{self.url}{params}'
+        return await self.get(url, authenticate=False)
+
+    async def get_erc1155_transfers_by_address(self, query_params=None):
+        """_Get ERC1155 token transfer events by address from Polygon API
+
+        Args:
+            query_params (dict, optional): Query parameters for the API request. Defaults to None.
+                Valid query parameters include:
+                - address: The address to get transfers for (required)
+                - startblock: The block number to start from (optional, default: 0)
+                - endblock: The block number to end at (optional, default: 999999999)
+                - page: The page number to return (optional, default: 1)
+                - offset: The number of transfers to return per page (optional, default: 100)
+                - sort: The order to sort transfers (optional, options: 'asc' or 'desc', default: 'asc')
+
+        Returns:
+            dict: The JSON response from the API or an error message.
+            {
+              "status": "1",
+              "message": "OK",
+              "result": [
+                { ... transfer data ... }
+              ]
+            }
+        """
+        default_params = {'page': 1, 'offset': 10, 'sort': 'asc', 'startblock': 0, 'endblock': 999999999}
+        if query_params:
+            default_params.update(query_params)
+
+        if default_params['endblock'] == 999999999:
+            default_params['offset'] = 10
+
+        params = self.generate_query_params('get_erc1155_transfers_by_address', default_params)
+        url = f'{self.url}{params}'
+        return await self.get(url, authenticate=False)
+
+    async def get_event_logs_by_address_or_topic(self, query_params=None):
+        """_Get event logs by address or topic from Polygon API
+
+        Args:
+            query_params (dict, optional): Query parameters for the API request. Defaults to None.
+                Valid query parameters include:
+                - address: The address to get logs for (optional)
+                - topic0: Cryptographic hash of the event to track (optional)
+                - startblock: The block number to start from (optional, default: 0)
+                - endblock: The block number to end at (optional, default: 999999999)
+                - page: The page number to return (optional, default: 1)
+                - offset: The number of logs to return per page (optional, default: 100)
+                - sort: The order to sort logs (optional, options: 'asc' or 'desc', default: 'asc')
+
+        Returns:
+            dict: The JSON response from the API or an error message.
+            {
+              "status": "1",
+              "message": "OK",
+              "result": [
+                { ... event log data ... }
+              ]
+            }
+        """
+        default_params = {'page': 1, 'offset': 10, 'sort': 'asc', 'startblock': 0, 'endblock': 999999999}
+        if query_params:
+            default_params.update(query_params)
+
+        if default_params['endblock'] == 999999999:
+            default_params['offset'] = 10
+
+        params = self.generate_query_params('get_event_logs_by_address_or_topic', default_params)
+        url = f'{self.url}{params}'
         return await self.get(url, authenticate=False)
