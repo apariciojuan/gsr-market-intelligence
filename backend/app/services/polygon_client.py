@@ -54,3 +54,9 @@ class PolygonClient(BaseRequestClient):
         # Query by test for this use offset and page 1
         url = f'{self.url}{params}&offset=1&page=1'
         return await self.get(url, authenticate=False)
+
+    async def get_event_logs_by_address_or_topic(self, query_params=None):
+        params = query_params or {}
+        url = self.generate_query_params('get_event_logs_by_address_or_topic', params)
+        url = f'{self.url}{url}'
+        return await self.get(url, authenticate=False)
