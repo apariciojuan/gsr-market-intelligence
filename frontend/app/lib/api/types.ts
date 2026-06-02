@@ -656,6 +656,8 @@ export interface ResolutionListItem {
   proposer_address: string | null;
   disputer_address: string | null;
   proposed_outcome: string | null;
+  /** Final settled outcome (from the UMA Settle price); null until resolved. */
+  resolved_outcome: string | null;
   bond_usd: number;
   counter_bond_usd: number | null;
   request_timestamp: string;
@@ -708,6 +710,8 @@ export interface ResolutionDetail {
   current_phase: ResolutionPhase;
   is_disputed: boolean;
   is_resolved: boolean;
+  /** Final settled outcome (from the UMA Settle price); null until resolved. */
+  resolved_outcome: string | null;
   ancillary_data_decoded: string;
   timeline: ResolutionTimelineEntry[];
   dispute: ResolutionDispute | null;

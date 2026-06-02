@@ -104,6 +104,24 @@ export default function ResolutionsScreen() {
       render: (r) => <StatusPill status={r.status} />,
     },
     {
+      key: "outcome",
+      label: "Outcome",
+      sortable: false,
+      render: (r) => {
+        // resolved_outcome is the final settled result; proposed_outcome is the
+        // (not-yet-final) proposal shown with a "· prop." marker.
+        const outcome = r.resolved_outcome ?? r.proposed_outcome;
+        if (!outcome) return <span className="t-mut">—</span>;
+        const cls = outcome === "Yes" ? "t-pos" : outcome === "No" ? "t-neg" : "";
+        return (
+          <span className={cls} style={{ fontWeight: 600 }}>
+            {outcome}
+            {r.resolved_outcome ? "" : " · prop."}
+          </span>
+        );
+      },
+    },
+    {
       key: "market_question",
       label: "Question",
       sortable: false,

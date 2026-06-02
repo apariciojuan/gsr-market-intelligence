@@ -667,10 +667,18 @@ function ResolutionTimeline({ detail, loading = false, empty = false }) {
                         </div>
                       )}
                       {n.phase === "resolved" && (
-                        <div className="row">
-                          <span className="k">Status</span>
-                          <span className="v">{n.completed ? "Resolved" : "Pending"}</span>
-                        </div>
+                        <>
+                          <div className="row">
+                            <span className="k">Status</span>
+                            <span className="v">{n.completed ? "Resolved" : "Pending"}</span>
+                          </div>
+                          {data.outcome != null && (
+                            <div className="row">
+                              <span className="k">Result</span>
+                              <span className="v">{data.outcome}</span>
+                            </div>
+                          )}
+                        </>
                       )}
                     </div>
                   )}

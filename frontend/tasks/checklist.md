@@ -124,6 +124,36 @@ Para **cada** screen: portar el componente de `web-example/nextjs/screens/index.
 
 ---
 
+## Fase 6 — Integración con backend real (Fase 1, Etherscan v2)
+
+**Objetivo:** retirar el mock dominio a dominio conectando al backend real (FastAPI, lectura
+on-chain en vivo vía Etherscan v2 — NO web3.py/RPC), sin tocar hooks, screens ni gráficas.
+
+### 6A — Switch granular y configuración
+- [x] 6.1 — Migrar el switch a **granular por dominio**: `lib/api/index.ts` resuelve **cada** dominio a `mockApi` o `httpApi` de forma independiente (`buildApi(mock, http, real)`), derivando los reales de `NEXT_PUBLIC_REAL_DOMAINS`. Se conserva la retro-compat `NEXT_PUBLIC_DATA_SOURCE=api` (todo real) y el default (todo mock). Hooks/screens siguen agnósticos (LSP).
+- [x] 6.2 — `app/.env.local`: `NEXT_PUBLIC_API_URL=http://127.0.0.1:8000/api/v1` (incluye el prefijo `/api/v1`) y `NEXT_PUBLIC_REAL_DOMAINS=resolutions,markets,contracts,search,health,dashboard`.
+- [x] 6.3 — Mock retirado por dominio: cada dominio real es un stub `retired()` en `lib/api/mock.ts` (lanza si se invoca) y sus fixtures `.json` fueron borrados. Solo quedan en `lib/mocks/`: `signals.json`, `signal-detail.json`, `ecosystem-*.json` y `auth.json`. `types.ts` intacto (fuente de verdad de shapes).
+
+### 6B — Dominios conectados a real (6/9)
+- [x] 6.4 — `resolutions` → real. UMA OptimisticOracleV2; list/detail/stats; timeline real + panel de disputa; cruce UMA↔Gamma en el detalle (`market` + serie del Market Impact). `ResolutionsScreen`/`ResolutionDetailScreen` (G10/G11) sin cambios.
+- [x] 6.5 — `markets` → real. Gamma/CLOB: list, search, detail (overlay Chainlink spot vía `eth_call`), prices, y las tabs `orderbook`/`holders`/`trades`/`sparkline`/`news` (ya no 404). `MarketDetailScreen` y G3 sin cambios.
+- [x] 6.6 — `contracts` → real. Etherscan explorer: explore, detail, sync-status, summary, activity, transactions. `ContractsScreen`/`ContractDetailScreen` sin cambios.
+- [x] 6.7 — `search` → real. Gamma public-search + tags. Búsqueda global ⌘K sin cambios.
+- [x] 6.8 — `health` → real. `/api/v1/health` (polygon_rpc en vivo; database/redis=down).
+- [x] 6.9 — `dashboard` → real. `/summary` (KPIs reales; divergences/wallets=0), `/top-markets`, `/notable-divergences` (`[]`).
+
+### 6C — Pendientes (siguen en mock)
+- [ ] 6.10 — `signals` → real. **Pendiente (Fase 2):** requiere histórico de Chainlink en DB + tabla `divergences` + worker (no hay DB/workers en F1). Ver `extradocs/plans/40-divergences-signals.md`.
+- [ ] 6.11 — `ecosystem` → real. **Pendiente (Fase 2):** agregados que requieren histórico/DB.
+- [ ] 6.12 — `auth` → real. **Pendiente:** no existe JWT en backend; login sigue mock (`admin`/`1234`).
+
+### 6D — Limitaciones aceptadas en Fase 1 (placeholders, no bugs)
+- [x] 6.13 — Documentadas y aceptadas: overlay Chainlink = spot actual replicado (no histórico); `bond_usd`=`finalFee` (proxy); `value_usd=0` en contracts/trades; `volume_series`/`markers` vacíos en prices; `market_slug=''` en la **lista** de resolutions (solo el detalle resuelve el market vía Gamma); dashboard divergences/wallets=0; news vacío; CORS `*` en el backend; **SIN caché** (decisión del usuario; rate-limit Etherscan ~3/seg con reintento+backoff) → latencia ~12–15s por request de resolutions.
+
+- [x] **Verificación Fase 6:** los 6 dominios reales renderizan con datos del backend sin tocar hooks/screens/charts; mock retirado verificado (los stubs `retired()` lanzan si se invocan); `signals`/`ecosystem`/`auth` siguen en mock vía el switch granular. Correr: backend `(cd backend && uv run uvicorn app.api.main:app --port 8000)`; frontend `(cd frontend/app && npm run dev)` → `localhost:3000`; login mock `admin`/`1234`.
+
+---
+
 ## Notas de coordinación
 
 - **Fase 1 es bloqueante** para las Fases 3 y 4 (necesitan los tipos y los hooks). Fase 2 puede ir en paralelo a Fase 1 una vez existan los tipos.
