@@ -105,6 +105,23 @@ class EtherscanLogSource:
             raise RuntimeError(f'Etherscan eth_blockNumber failed: {result}')
         return int(result, 16)
 
+    async def block_by_timestamp(self, timestamp: int, closest: str = 'before') -> int:
+        """Resolve a block number near ``timestamp`` (unix seconds)."""
+        payload = await self._request_json(
+            {
+                'module': 'block',
+                'action': 'getblocknobytime',
+                'timestamp': str(timestamp),
+                'closest': closest,
+            }
+        )
+        result = payload.get('result')
+        if isinstance(result, str) and result.isdigit():
+            return int(result)
+        if isinstance(result, int):
+            return result
+        raise RuntimeError(f'Etherscan getblocknobytime failed: {payload.get("message") or result}')
+
     async def eth_call(self, to: str, data: str, tag: str = 'latest') -> str | None:
         """Read-only contract call via Etherscan's `eth_call` proxy (no RPC node).
 
