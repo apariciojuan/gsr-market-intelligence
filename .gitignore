@@ -56,3 +56,8 @@ wheels/
 
 # Virtual environments
 .venv
+.env
+
+extradocs/
+.claude
+.ruff_cache/
