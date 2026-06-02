@@ -6,13 +6,17 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.18.4",
+    "arq>=0.26",
     "asyncpg>=0.31.0",
     "dotenv>=0.9.9",
     "fastapi>=0.136.1",
     "httpx>=0.28.1",
     "jupyterlab>=4.5.7",
+    "pgvector>=0.3",
     "pydantic>=2.13.4",
     "pydantic-settings>=2.14.1",
+    "redis[hiredis]>=5.2",
+    "sqlalchemy[asyncio]>=2.0",
     "web3>=7.16.0",
     "websockets>=15.0.1",
     "ruff>=0.15.13",
@@ -22,7 +26,7 @@ dependencies = [
 [tool.ruff]
 line-length = 98
 target-version = "py312"
-extend-exclude = ["*/migrations/*"]
+extend-exclude = ["*/migrations/*", "alembic/versions/*"]
 
 [tool.ruff.lint]
 select = [
