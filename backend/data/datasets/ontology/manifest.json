@@ -1,0 +1,85 @@
+{
+  "dataset": "ontology",
+  "created_at_utc": "2026-06-02T16:42:44.739388+00:00",
+  "snapshot_config": {
+    "market_sample_size": 120,
+    "quota_uma": 25,
+    "quota_crypto": 35,
+    "quota_resolved": 25,
+    "history_windows": [
+      "1h"
+    ],
+    "history_days": 7,
+    "trade_limit": 100,
+    "holders_limit": 50,
+    "activity_limit": 50,
+    "request_delay_seconds": 0.35,
+    "crypto_search_queries": [
+      "bitcoin",
+      "ethereum",
+      "crypto",
+      "solana"
+    ],
+    "min_resolution_links": 15,
+    "min_chainlink_series_rows": 500,
+    "min_markets_with_trades": 50,
+    "min_trades_per_market": 5
+  },
+  "git_commit": null,
+  "row_counts": {
+    "markets": 120,
+    "resolutions": 200,
+    "market_resolution_links": 25,
+    "price_series": 3661,
+    "orderbook_snapshots": 119,
+    "trades": 8600,
+    "holders": 237,
+    "chainlink_latest": 24,
+    "chainlink_series": 1464,
+    "contract_events": 0,
+    "external_signals": 0
+  },
+  "cohort_counts": {
+    "A_active_liquid": 60,
+    "B_resolved": 57,
+    "D_low_liquidity": 3
+  },
+  "join_coverage": {
+    "markets_total": 120,
+    "pct_with_trades": 71.7,
+    "pct_with_holders": 99.2,
+    "pct_with_chainlink_feed": 35.8,
+    "pct_with_price_series": 50.0,
+    "pct_with_chainlink_series": 20.0,
+    "uma_links_in_sample": 25,
+    "pct_uma_linked": 20.8,
+    "chainlink_series_rows": 1464
+  },
+  "uma_audit": {
+    "uma_parsed_count": 195,
+    "uma_overlap_count": 25
+  },
+  "quality_passed": true,
+  "quality_failures": [],
+  "extraction_warnings": [
+    "ETH/USD: only 2 chainlink samples",
+    "BTC/USD: only 2 chainlink samples",
+    "SOL/USD: only 2 chainlink samples"
+  ],
+  "file_sha256": {
+    "markets": "99d96d481f5f5376dabc1c62cf2a4b4328e099326bf9f9292e8d258ec80c768b",
+    "resolutions": "7980f163fbe2baeea64b365a265163baecc6a03c8cb2dd2aaf96ca918752a88e",
+    "market_resolution_links": "adaef384f9d81283fe11f04e967666fde8f7bb4ef22b807c626969e8468afc3a",
+    "price_series": "1e6676d8122ad9b43c7008d48e32afef21a2108d9e65578f91e300abef3b9559",
+    "orderbook_snapshots": "b4011bbcd4ebe0aaf935fde5e9b6822760b0f375bb6c8e86a0bd0ae649aa4ec5",
+    "trades": "e820efdc1d94b231526e2bee288e9ebba77e7a1ab45732070bb364cf078cd7cf",
+    "holders": "699719af15c45d45f8dd59909bd6e2c05f1b9954f71aa2d52358af18e29abed8",
+    "chainlink_latest": "ab0e504854d5383a0392d751523014165afd3f7d1bab681c80c6f626a143f971",
+    "chainlink_series": "b2d7d28f0510bfcf0314ea414bfdb8d9e6b93b9e2bae833af31ddf025b276b10",
+    "contract_events": "8b6e33d47f4e1df33f587d9b1d420f756a6c705b8496e0912c223c5d83371df9",
+    "external_signals": "c7ce38a0703d4ac2c09403ea4273147b84bf2ad72a3e1e0e5a7713965b200397"
+  },
+  "uma_extraction_error": null,
+  "notes": "Static snapshot for ontology notebook. Re-run this script to refresh. chainlink_series is time-aligned to price_series via merge_asof backward. market_resolution_links join Gamma sample to UMA via ancillary market_id.",
+  "extraction_seconds": 950.51
+}

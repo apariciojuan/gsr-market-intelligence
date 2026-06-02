@@ -64,8 +64,9 @@ extradocs/
 
 # Research datasets (regenerate with scripts/extract_market_datasets.py)
 backend/data/datasets/**/*
-!backend/data/datasets/**/manifest.json
-!backend/data/datasets/**/sample/**
+# Ontology snapshot versioned for shared notebook analysis (120-market sample)
+!backend/data/datasets/ontology/
+!backend/data/datasets/ontology/**
 
 # Notebook exports (regenerate with scripts/export_notebook_report.sh)
 backend/notebooks/output/
