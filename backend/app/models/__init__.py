@@ -3,6 +3,7 @@ from app.models.chainlink_feed import ChainlinkFeed
 from app.models.chainlink_price import ChainlinkPrice
 from app.models.divergence import Divergence
 from app.models.ecosystem_metric import EcosystemMetric
+from app.models.external_signal import ExternalSignal
 from app.models.market import Market
 from app.models.price_history import PriceHistory
 from app.models.sync_state import SyncState
@@ -15,6 +16,7 @@ __all__ = [
     'ChainlinkPrice',
     'Divergence',
     'EcosystemMetric',
+    'ExternalSignal',
     'Market',
     'PriceHistory',
     'SyncState',

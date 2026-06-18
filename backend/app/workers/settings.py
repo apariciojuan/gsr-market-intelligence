@@ -6,6 +6,7 @@ from app.workers.divergence_calculator import calculate_divergences
 from app.workers.ecosystem_aggregator import aggregate_ecosystem
 from app.workers.market_price_collector import collect_market_prices
 from app.workers.markets_ingestor import collect_markets
+from app.workers.external_signals_collector import collect_external_signals
 from app.workers.signals_collector import collect_chainlink_signals
 
 
@@ -45,6 +46,7 @@ class WorkerSettings:
         collect_market_prices,
         aggregate_ecosystem,
         calculate_divergences,
+        collect_external_signals,
     ]
     cron_jobs: list = [
         # CHAINLINK_POLL_INTERVAL_SECONDS=60 -> every minute.
@@ -57,6 +59,7 @@ class WorkerSettings:
         cron(aggregate_ecosystem, minute={0}),
         # DIVERGENCE_CALC_INTERVAL_MINUTES=10 -> every 10 minutes.
         cron(calculate_divergences, minute=set(range(0, 60, 10))),
+        cron(collect_external_signals, hour={0, 6, 12, 18}, minute=0),
     ]
     max_jobs = 10
     job_timeout = 300

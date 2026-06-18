@@ -108,6 +108,7 @@ def _map_market(market: dict, now: datetime) -> dict | None:
         'slug': slug,
         'question': question,
         'description': market.get('description') or None,
+        'resolution_source': market.get('resolutionSource') or None,
         'category': market.get('category') or None,
         'tags': _parse_json_list(market.get('tags')) or None,
         'outcomes': _parse_json_list(market.get('outcomes')),

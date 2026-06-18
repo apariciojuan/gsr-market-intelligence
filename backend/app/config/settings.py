@@ -52,7 +52,26 @@ class Settings(BaseSettings):
     DIVERGENCE_CALC_INTERVAL_MINUTES: int = 10
     DIVERGENCE_MINI_CHART_HOURS: int = 24
 
+    EXTERNAL_SIGNALS_ENABLED: bool = True
+    EXTERNAL_SIGNALS_MAX_AGE_DAYS: int = 30
+    EXTERNAL_SIGNALS_RSS_TIMEOUT_SECONDS: int = 15
+    EXTERNAL_SIGNALS_REQUEST_DELAY_SECONDS: float = 0.35
+    EXTERNAL_SIGNALS_MIN_MATCH_SCORE: float = 0.05
+    EXTERNAL_SIGNALS_MAX_PER_MARKET: int = 25
+    EXTERNAL_SIGNALS_GLOBAL_FEEDS: str = (
+        'https://www.coindesk.com/arc/outboundfeeds/rss/,'
+        'https://feeds.reuters.com/reuters/topNews'
+    )
+    EXTERNAL_SIGNALS_COLLECT_INTERVAL_SECONDS: int = 21600
+
     model_config = {'env_file': '.env'}
+
+    def external_signals_global_feed_list(self) -> list[str]:
+        """Parse comma-separated RSS feed URLs from settings."""
+        raw = (self.EXTERNAL_SIGNALS_GLOBAL_FEEDS or '').strip()
+        if not raw:
+            return []
+        return [url.strip() for url in raw.split(',') if url.strip()]
 
 
 settings = Settings()

@@ -104,6 +104,10 @@ Respuesta paginada:
 | GET | `/markets/{id}/holders` | Sí | Top holders | G7 + tab Holders |
 | GET | `/markets/{id}/trades` | Sí | Histórico de trades | tab Trades |
 | GET | `/markets/{id}/news` | Sí | Noticias asociadas | tab Signals |
+| GET | `/markets/{id}/external-signals` | Sí | Señales RSS/resolution_source | research / tab Signals |
+| GET | `/external-signals` | Sí | Lista paginada de señales externas | research |
+| GET | `/external-signals/{id}` | Sí | Detalle de señal externa | research |
+| POST | `/external-signals/collect` | Sí | Disparar ingesta RSS | research / workers |
 | POST | `/contracts/explore` | Sí | Iniciar exploración de address | `/contracts/[address]` |
 | GET | `/contracts/{address}` | Sí | Info detectada de un contrato | `/contracts/[address]` |
 | GET | `/contracts/{address}/sync-status` | Sí | Estado de la indexación | polling tras explore |
@@ -642,11 +646,29 @@ username=admin@gsr.com&password=xxxxx
 
 ---
 
+### `GET /external-signals`
+
+**Auth:** Bearer JWT.
+
+**Para:** investigación y auditoría de señales textuales (RSS, `resolution_source`).
+
+**Query params:** `market_id`, `slug`, `source`, `since`, `until`, `q`, `limit`, `offset`.
+
+**Response 200:** `{ items: ExternalSignalRead[], total, limit, offset, has_more }` donde cada item incluye `market_id`, `source`, `text`, `timestamp`, `url`.
+
+### `POST /external-signals/collect`
+
+**Body:** `{ "market_ids": [int], "slugs": [string] }` (opcionales; sin filtros = mercados activos).
+
+**Response 200:** `{ markets_processed, signals_upserted }`.
+
+---
+
 ### `GET /markets/{id}/news`
 
 **Auth:** Bearer JWT.
 
-**Para:** tab Signals del market detail.
+**Para:** tab Signals del market detail (mapeado desde `external_signals` persistidas).
 
 **Path params:** `id` (int).
 

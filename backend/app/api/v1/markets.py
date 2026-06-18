@@ -15,9 +15,11 @@ import json
 from datetime import UTC, datetime
 from typing import Any
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config.log import get_logger
+from app.core.database import get_session
 from app.schemas.market import (
     ChainlinkOverlay,
     Holder,
@@ -39,7 +41,10 @@ from app.schemas.market import (
     TopMarketsNews,
     Trade,
 )
+from app.schemas.external_signal import PaginatedExternalSignals, external_signal_to_read
 from app.services import PolymarketClient
+from app.services.external_signals.news_mapper import external_signals_to_news_list
+from app.services.external_signals.service import ExternalSignalsService
 from app.services.chainlink_client import ChainlinkClient
 
 router = APIRouter()
@@ -576,18 +581,54 @@ async def get_market_sparkline(
 
 
 @router.get(
+    '/{market_id}/external-signals',
+    response_model=PaginatedExternalSignals,
+    operation_id='get_market_external_signals',
+    tags=['markets'],
+    summary='List external signals for a market',
+)
+async def get_market_external_signals(
+    market_id: str,
+    source: str | None = Query(default=None),
+    limit: int = Query(default=50, ge=1, le=200),
+    offset: int = Query(default=0, ge=0),
+    session: AsyncSession = Depends(get_session),
+) -> PaginatedExternalSignals:
+    mid = _to_int(market_id)
+    service = ExternalSignalsService(session)
+    items, total = await service.list_signals(
+        market_id=mid,
+        source=source,
+        limit=limit,
+        offset=offset,
+    )
+    reads = [external_signal_to_read(item) for item in items]
+    return PaginatedExternalSignals(
+        items=reads,
+        total=total,
+        limit=limit,
+        offset=offset,
+        has_more=(offset + len(reads)) < total,
+    )
+
+
+@router.get(
     '/{market_id}/news',
     response_model=TopMarketsNews,
     status_code=200,
     operation_id='get_market_news',
     tags=['markets'],
     summary='Get market news',
-    description='News signals for a market. News ingestion is a later phase (empty for now).',
+    description='News mapped from persisted external_signals (RSS / resolution_source).',
 )
 async def get_market_news(
     market_id: str,
     limit: int = Query(default=20, ge=1, le=100),
     min_relevance: float | None = Query(default=None),
+    session: AsyncSession = Depends(get_session),
 ) -> TopMarketsNews:
-    # RSS + embeddings ingestion is a later phase; return an honest empty set.
-    return TopMarketsNews(items=[], total=0)
+    mid = _to_int(market_id)
+    service = ExternalSignalsService(session)
+    signals = await service.list_for_market_news(mid, limit=limit)
+    items = external_signals_to_news_list(signals, min_relevance=min_relevance)
+    return TopMarketsNews(items=items, total=len(items))

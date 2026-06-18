@@ -24,6 +24,7 @@ class Market(Base, TimestampMixin):
     slug: Mapped[str] = mapped_column(String(255), nullable=False, unique=True, index=True)
     question: Mapped[str] = mapped_column(Text, nullable=False)
     description: Mapped[str | None] = mapped_column(Text)
+    resolution_source: Mapped[str | None] = mapped_column(Text)
     category: Mapped[str | None] = mapped_column(String(100), index=True)
     tags: Mapped[dict | None] = mapped_column(JSONB)
     outcomes: Mapped[dict] = mapped_column(JSONB, nullable=False)

@@ -49,11 +49,15 @@ DEFAULT_SNAPSHOT_CONFIG = {
     'quota_uma': 25,
     'quota_crypto': 35,
     'quota_resolved': 25,
-    'history_windows': ['1h'],
-    'history_days': 7,
+    'history_windows': ['1d', '1h'],
+    'history_days': 90,
     'trade_limit': 100,
+    'trade_max_pages': 20,
     'holders_limit': 50,
     'activity_limit': 50,
+    'wallet_top_k': 5,
+    'activity_max_pages': 5,
+    'collect_external_signals': True,
     'request_delay_seconds': 0.35,
     'crypto_search_queries': ['bitcoin', 'ethereum', 'crypto', 'solana'],
     'min_resolution_links': 15,
@@ -628,6 +632,18 @@ def build_chainlink_series_aligned(
     interval: str = '1h',
 ) -> pd.DataFrame:
     """merge_asof Chainlink answers onto each market price point."""
+    if price_df.empty or 'market_id' not in price_df.columns:
+        return pd.DataFrame(
+            columns=[
+                'market_id',
+                'asset_pair',
+                'timestamp_unix',
+                'market_price_yes',
+                'chainlink_price_usd',
+                'alignment_method',
+                'interval',
+            ]
+        )
     rows: list[dict] = []
     feed_markets = markets_df[markets_df['chainlink_asset_pair'].notna()]
 
@@ -731,6 +747,152 @@ def uma_audit_metrics(resolutions_rows: list[dict], sampled_ids: set[str]) -> di
     }
 
 
+async def fetch_paginated_trades(
+    polymarket: PolymarketClient,
+    condition_id: str,
+    *,
+    limit: int,
+    max_pages: int,
+    delay: float,
+) -> list[dict]:
+    """Fetch all trades for a market up to max_pages."""
+    all_trades: list[dict] = []
+    offset = 0
+    for _ in range(max_pages):
+        payload = response_json(
+            await polymarket.get_trades(
+                {'market': condition_id, 'limit': limit, 'offset': offset}
+            )
+        )
+        await asyncio.sleep(delay)
+        batch = normalize_collection(payload, ('trades', 'data', 'results', 'history'))
+        if not batch:
+            break
+        all_trades.extend(batch)
+        if len(batch) < limit:
+            break
+        offset += limit
+    return all_trades
+
+
+async def fetch_wallet_activity(
+    polymarket: PolymarketClient,
+    wallets: list[str],
+    *,
+    market_id: str,
+    condition_id: str | None,
+    limit: int,
+    max_pages: int,
+    delay: float,
+) -> list[dict]:
+    rows: list[dict] = []
+    for wallet in wallets:
+        if not wallet:
+            continue
+        offset = 0
+        for _ in range(max_pages):
+            params: dict[str, Any] = {
+                'user': wallet,
+                'limit': limit,
+                'offset': offset,
+                'sortBy': 'TIMESTAMP',
+                'sortDirection': 'DESC',
+            }
+            if condition_id:
+                params['market'] = condition_id
+            try:
+                payload = response_json(await polymarket.get_activity(params))
+            except Exception:  # noqa: BLE001
+                break
+            await asyncio.sleep(delay)
+            batch = normalize_collection(payload, ('activity', 'data', 'results', 'history'))
+            if not batch:
+                break
+            for item in batch:
+                rows.append(
+                    {
+                        'market_id': market_id,
+                        'condition_id': condition_id,
+                        'wallet': wallet,
+                        'type': item.get('type'),
+                        'side': item.get('side'),
+                        'size': _to_float(item.get('size')),
+                        'price': _to_float(item.get('price')),
+                        'timestamp': item.get('timestamp') or item.get('createdAt'),
+                        'transaction_hash': item.get('transactionHash'),
+                    }
+                )
+            if len(batch) < limit:
+                break
+            offset += limit
+    return rows
+
+
+def build_contract_events(
+    resolutions_rows: list[dict],
+    links_df: pd.DataFrame,
+    sampled_ids: set[str],
+) -> pd.DataFrame:
+    """Minimal UMA resolution lifecycle rows for ontology contract_events."""
+    rows: list[dict] = []
+    linked_markets = set()
+    if len(links_df) and 'market_id' in links_df.columns:
+        linked_markets = set(links_df['market_id'].astype(str))
+
+    for resolution in resolutions_rows:
+        mid = _valid_uma_market_id(resolution.get('market_id'))
+        if not mid or mid not in sampled_ids:
+            continue
+        status = resolution.get('status') or 'pending'
+        for field, event_name in (
+            ('request_timestamp', 'uma_request'),
+            ('proposal_timestamp', 'uma_propose'),
+        ):
+            ts = resolution.get(field)
+            if not ts:
+                continue
+            rows.append(
+                {
+                    'market_id': mid,
+                    'question_id': resolution.get('question_id'),
+                    'event_name': event_name,
+                    'contract_address': resolution.get('adapter_address'),
+                    'timestamp': ts,
+                    'transaction_hash': None,
+                    'status': status,
+                    'source': 'uma',
+                }
+            )
+        rows.append(
+            {
+                'market_id': mid,
+                'question_id': resolution.get('question_id'),
+                'event_name': f'uma_{status}',
+                'contract_address': resolution.get('adapter_address'),
+                'timestamp': resolution.get('request_timestamp'),
+                'transaction_hash': None,
+                'status': status,
+                'source': 'uma',
+            }
+        )
+
+    for mid in linked_markets:
+        if mid in sampled_ids:
+            rows.append(
+                {
+                    'market_id': mid,
+                    'question_id': None,
+                    'event_name': 'uma_market_linked',
+                    'contract_address': None,
+                    'timestamp': None,
+                    'transaction_hash': None,
+                    'status': 'linked',
+                    'source': 'uma',
+                }
+            )
+    return pd.DataFrame(rows) if rows else pd.DataFrame()
+
+
 def compute_join_coverage(
     markets_df: pd.DataFrame,
     trades_df: pd.DataFrame,
@@ -738,6 +900,8 @@ def compute_join_coverage(
     links_df: pd.DataFrame,
     chainlink_series_df: pd.DataFrame,
     price_df: pd.DataFrame,
+    external_signals_df: pd.DataFrame | None = None,
+    wallet_activity_df: pd.DataFrame | None = None,
 ) -> dict[str, float]:
     n = max(len(markets_df), 1)
     markets_with_trades = (
@@ -760,6 +924,20 @@ def compute_join_coverage(
         else 0
     )
     linked = len(links_df) if len(links_df) else 0
+    markets_with_external = (
+        external_signals_df['market_id'].nunique()
+        if external_signals_df is not None
+        and len(external_signals_df)
+        and 'market_id' in external_signals_df.columns
+        else 0
+    )
+    markets_with_activity = (
+        wallet_activity_df['market_id'].nunique()
+        if wallet_activity_df is not None
+        and len(wallet_activity_df)
+        and 'market_id' in wallet_activity_df.columns
+        else 0
+    )
     return {
         'markets_total': len(markets_df),
         'pct_with_trades': round(100 * markets_with_trades / n, 1),
@@ -767,9 +945,13 @@ def compute_join_coverage(
         'pct_with_chainlink_feed': round(100 * markets_with_feed / n, 1),
         'pct_with_price_series': round(100 * markets_with_prices / n, 1),
         'pct_with_chainlink_series': round(100 * markets_with_cl_series / n, 1),
+        'pct_with_external_signals': round(100 * markets_with_external / n, 1),
+        'pct_with_wallet_activity': round(100 * markets_with_activity / n, 1),
         'uma_links_in_sample': linked,
         'pct_uma_linked': round(100 * linked / n, 1),
         'chainlink_series_rows': len(chainlink_series_df),
+        'external_signals_rows': len(external_signals_df) if external_signals_df is not None else 0,
+        'wallet_activity_rows': len(wallet_activity_df) if wallet_activity_df is not None else 0,
     }
 
 
@@ -877,6 +1059,7 @@ async def extract_dataset(output_dir: Path, config: dict) -> dict:
     orderbook_rows: list[dict] = []
     trade_rows: list[dict] = []
     holder_rows: list[dict] = []
+    wallet_activity_rows: list[dict] = []
     book_metrics_by_market: dict[str, dict[str, float | None]] = {}
 
     for _, market in markets_df.iterrows():
@@ -939,14 +1122,12 @@ async def extract_dataset(output_dir: Path, config: dict) -> dict:
 
         if condition_id:
             try:
-                trades_payload = response_json(
-                    await polymarket.get_trades(
-                        {'market': condition_id, 'limit': config['trade_limit']}
-                    )
-                )
-                await asyncio.sleep(delay)
-                batch = normalize_collection(
-                    trades_payload, ('trades', 'data', 'results', 'history')
+                batch = await fetch_paginated_trades(
+                    polymarket,
+                    condition_id,
+                    limit=config['trade_limit'],
+                    max_pages=config.get('trade_max_pages', 20),
+                    delay=delay,
                 )
                 for trade in batch:
                     trade_rows.append(
@@ -985,6 +1166,29 @@ async def extract_dataset(output_dir: Path, config: dict) -> dict:
                     )
             except Exception as exc:  # noqa: BLE001
                 extraction_warnings.append(f'holders failed market={market_id}: {exc}')
+
+            market_holders = [
+                h['wallet']
+                for h in holder_rows
+                if h.get('market_id') == market_id and h.get('wallet')
+            ]
+            top_wallets = list(dict.fromkeys(market_holders))[: config.get('wallet_top_k', 5)]
+            if top_wallets:
+                try:
+                    activity = await fetch_wallet_activity(
+                        polymarket,
+                        top_wallets,
+                        market_id=market_id,
+                        condition_id=str(condition_id) if condition_id else None,
+                        limit=config['activity_limit'],
+                        max_pages=config.get('activity_max_pages', 5),
+                        delay=delay,
+                    )
+                    wallet_activity_rows.extend(activity)
+                except Exception as exc:  # noqa: BLE001
+                    extraction_warnings.append(
+                        f'wallet_activity failed market={market_id}: {exc}'
+                    )
 
     for mid, metrics in book_metrics_by_market.items():
         idx = markets_df.index[markets_df['market_id'].astype(str) == str(mid)]
@@ -1043,6 +1247,30 @@ async def extract_dataset(output_dir: Path, config: dict) -> dict:
         )
     chainlink_latest_df = derive_chainlink_latest(chainlink_series_df)
 
+    contract_events_df = build_contract_events(resolutions_rows, links_df, sampled_ids)
+
+    external_signals_rows: list[dict] = []
+    if config.get('collect_external_signals', True):
+        try:
+            from app.services.external_signals.collector import collect_signals_for_markets
+
+            market_dicts = markets_df.to_dict(orient='records')
+            for row in market_dicts:
+                row['question'] = row.get('title') or row.get('question')
+            external_signals_rows = await collect_signals_for_markets(market_dicts)
+        except Exception as exc:  # noqa: BLE001
+            extraction_warnings.append(f'external_signals collection failed: {exc}')
+
+    if external_signals_rows:
+        external_signals_df = pd.DataFrame(external_signals_rows)
+        parquet_cols = ['market_id', 'source', 'text', 'timestamp', 'url']
+        external_signals_df = external_signals_df.reindex(columns=parquet_cols)
+    else:
+        external_signals_df = pd.DataFrame(columns=['market_id', 'source', 'text', 'timestamp', 'url'])
+    wallet_activity_df = (
+        pd.DataFrame(wallet_activity_rows) if wallet_activity_rows else pd.DataFrame()
+    )
+
     tables = {
         'markets': markets_df,
         'resolutions': pd.DataFrame(resolutions_rows) if resolutions_rows else pd.DataFrame(),
@@ -1051,12 +1279,11 @@ async def extract_dataset(output_dir: Path, config: dict) -> dict:
         'orderbook_snapshots': pd.DataFrame(orderbook_rows),
         'trades': trades_df,
         'holders': holders_df,
+        'wallet_activity': wallet_activity_df,
         'chainlink_latest': chainlink_latest_df,
         'chainlink_series': chainlink_series_df,
-        'contract_events': pd.DataFrame(),
-        'external_signals': pd.DataFrame(
-            columns=['market_id', 'source', 'text', 'timestamp', 'url']
-        ),
+        'contract_events': contract_events_df,
+        'external_signals': external_signals_df,
     }
 
     file_hashes: dict[str, str] = {}
@@ -1069,7 +1296,14 @@ async def extract_dataset(output_dir: Path, config: dict) -> dict:
         markets_df['cohort'].value_counts().to_dict() if 'cohort' in markets_df.columns else {}
     )
     join_coverage = compute_join_coverage(
-        markets_df, trades_df, holders_df, links_df, chainlink_series_df, price_df
+        markets_df,
+        trades_df,
+        holders_df,
+        links_df,
+        chainlink_series_df,
+        price_df,
+        external_signals_df,
+        wallet_activity_df,
     )
     quality_passed, quality_failures = evaluate_quality(
         links_df, chainlink_series_df, trades_df, config
@@ -1124,6 +1358,19 @@ def main() -> None:
         action='store_true',
         help='Write manifest even when quality thresholds fail (exit 0).',
     )
+    parser.add_argument('--history-days', type=int, default=None)
+    parser.add_argument(
+        '--history-windows',
+        type=str,
+        default=None,
+        help='Comma-separated CLOB intervals, e.g. 1d,1h',
+    )
+    parser.add_argument('--trade-max-pages', type=int, default=None)
+    parser.add_argument(
+        '--no-external-signals',
+        action='store_true',
+        help='Skip RSS/resolution_source external signal collection.',
+    )
     args = parser.parse_args()
 
     config = {
@@ -1133,6 +1380,14 @@ def main() -> None:
         'quota_resolved': args.quota_resolved,
         'quota_uma': args.quota_uma,
     }
+    if args.history_days is not None:
+        config['history_days'] = args.history_days
+    if args.history_windows:
+        config['history_windows'] = [w.strip() for w in args.history_windows.split(',') if w.strip()]
+    if args.trade_max_pages is not None:
+        config['trade_max_pages'] = args.trade_max_pages
+    if args.no_external_signals:
+        config['collect_external_signals'] = False
     started = time.perf_counter()
     manifest = asyncio.run(extract_dataset(args.output_dir, config))
     elapsed = time.perf_counter() - started

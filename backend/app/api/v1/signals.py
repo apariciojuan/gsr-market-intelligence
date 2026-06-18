@@ -35,8 +35,10 @@ from app.schemas.divergence import (
     SignalListItem,
     SignalMiniChart,
 )
-from app.schemas.market import MarketRead, PricePoint
+from app.schemas.market import MarketRead, NewsItemRead, PricePoint
 from app.services.divergence.series_provider import SeriesProvider
+from app.services.external_signals.news_mapper import external_signals_to_news_list
+from app.services.external_signals.service import ExternalSignalsService
 
 router = APIRouter()
 logger = get_logger('signals')
@@ -271,11 +273,17 @@ async def get_signal(
         magnitude_pct=_to_float(divergence.magnitude_pct),
     )
 
+    news_service = ExternalSignalsService(session)
+    related_signals = await news_service.list_for_market_news(divergence.market_id, limit=5)
+    related_news: list[NewsItemRead] = [
+        item.news for item in external_signals_to_news_list(related_signals)
+    ]
+
     return SignalDetail(
         divergence=_to_divergence_read(divergence),
         market=_to_market_read(market),
         market_series=market_series,
         external_series=external_series,
         detection_point=detection_point,
-        related_news=[],
+        related_news=related_news,
     )

@@ -5,6 +5,7 @@ from app.api.v1 import (
     contracts_route,
     dashboard_route,
     ecosystem_route,
+    external_signals_route,
     health_route,
     markets_route,
     resolutions_route,
@@ -41,6 +42,7 @@ app.include_router(search_route, prefix='/api/v1/search')
 app.include_router(health_route, prefix='/api/v1/health')
 app.include_router(ecosystem_route, prefix='/api/v1/ecosystem')
 app.include_router(signals_route, prefix='/api/v1/signals')
+app.include_router(external_signals_route, prefix='/api/v1/external-signals')
 
 
 @app.get('/health', tags=['health'])
