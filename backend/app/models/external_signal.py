@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import BigInteger, DateTime, ForeignKey, Index, String, Text, text
+from sqlalchemy import BigInteger, DateTime, ForeignKey, Index, String, Text, UniqueConstraint, text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -12,8 +12,14 @@ class ExternalSignal(Base, TimestampMixin):
 
     __tablename__ = 'external_signals'
     __table_args__ = (
+        UniqueConstraint(
+            'market_id',
+            'content_fingerprint',
+            name='uq_external_signals_market_fingerprint',
+        ),
         Index('ix_external_signals_market_published', 'market_id', text('published_at DESC')),
         Index('ix_external_signals_source_published', 'source', text('published_at DESC')),
+        Index('ix_external_signals_content_fingerprint', 'content_fingerprint'),
     )
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
@@ -25,6 +31,7 @@ class ExternalSignal(Base, TimestampMixin):
     text: Mapped[str] = mapped_column(Text, nullable=False)
     title: Mapped[str | None] = mapped_column(String(500))
     url: Mapped[str] = mapped_column(String(2000), nullable=False)
+    content_fingerprint: Mapped[str] = mapped_column(String(32), nullable=False)
     published_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     language: Mapped[str] = mapped_column(String(10), nullable=False, default='en')
     metadata_json: Mapped[dict | None] = mapped_column('metadata', JSONB)

@@ -14,7 +14,8 @@
 
 import Link from "next/link";
 import { useSignal } from "../lib/hooks/useSignals";
-import { sourceLabel, sourcePillKey } from "../lib/externalSignals";
+import { sourcePillKey } from "../lib/externalSignals";
+import { ExternalSignalBody, splitSignalHeadline } from "../lib/externalSignalContent";
 import {
   StatusPill,
   Icon,
@@ -327,7 +328,11 @@ export default function SignalDetailScreen({ id }) {
               </div>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {relatedNews.map((n) => (
+                {relatedNews.map((n) => {
+                  const xParsed = n.source?.startsWith("x_")
+                    ? splitSignalHeadline(n.summary || n.title)
+                    : null;
+                  return (
                   <a
                     key={n.id}
                     href={n.url}
@@ -354,26 +359,53 @@ export default function SignalDetailScreen({ id }) {
                       <StatusPill status={sourcePillKey(n.source)} />
                       <span>{fmtTime(n.published_at)}</span>
                     </div>
-                    <div
-                      style={{
-                        fontSize: 13,
-                        fontWeight: 500,
-                        color: "var(--text-primary)",
-                        marginBottom: 4,
-                      }}
-                    >
-                      {n.title}
-                    </div>
-                    {n.summary && (
-                      <div
-                        style={{
-                          fontSize: 12,
-                          color: "var(--text-secondary)",
-                          lineHeight: 1.5,
-                        }}
-                      >
-                        {n.summary}
-                      </div>
+                    {xParsed ? (
+                      <>
+                        <div
+                          style={{
+                            fontSize: 13,
+                            fontWeight: 500,
+                            color: "var(--text-primary)",
+                            lineHeight: 1.45,
+                          }}
+                        >
+                          {xParsed.headline}
+                        </div>
+                        <ExternalSignalBody
+                          raw={xParsed.body || ""}
+                          imageUrl={xParsed.imageUrl}
+                          style={{
+                            marginTop: 6,
+                            fontSize: 12,
+                            color: "var(--text-secondary)",
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          style={{
+                            fontSize: 13,
+                            fontWeight: 500,
+                            color: "var(--text-primary)",
+                            marginBottom: 4,
+                            lineHeight: 1.45,
+                          }}
+                        >
+                          {n.title}
+                        </div>
+                        {n.summary && n.summary !== n.title && (
+                          <div
+                            style={{
+                              fontSize: 12,
+                              color: "var(--text-secondary)",
+                              lineHeight: 1.5,
+                            }}
+                          >
+                            {n.summary}
+                          </div>
+                        )}
+                      </>
                     )}
                     <div
                       style={{
@@ -388,7 +420,8 @@ export default function SignalDetailScreen({ id }) {
                       Read source <Icon name="external-link" size={11} />
                     </div>
                   </a>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>

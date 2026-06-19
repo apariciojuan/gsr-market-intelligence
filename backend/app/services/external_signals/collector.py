@@ -8,6 +8,7 @@ from typing import Any
 
 from app.config.log import get_logger
 from app.config.settings import settings
+from app.services.external_signals.dedup import content_fingerprint, source_priority
 from app.services.external_signals.matcher import market_keywords, match_score
 from app.services.external_signals.rss import (
     discover_feed_url,
@@ -87,6 +88,7 @@ async def collect_signals_for_markets(
     feed_cache: dict[str, list[dict[str, Any]]] = {}
     rows: list[dict[str, str]] = []
     seen_urls: set[tuple[str, str]] = set()
+    seen_fingerprints: set[tuple[str, str]] = set()
 
     async def load_feed(feed_url: str) -> list[dict[str, Any]]:
         if feed_url in feed_cache:
@@ -136,21 +138,29 @@ async def collect_signals_for_markets(
                     continue
                 matched.append((score, entry, source))
 
-        matched.sort(key=lambda item: item[0], reverse=True)
+        matched.sort(key=lambda item: (item[0], -source_priority(item[2])), reverse=True)
         count = 0
         for score, entry, source in matched:
             url = entry['url']
-            key = (market_id, url)
-            if key in seen_urls:
-                continue
-            seen_urls.add(key)
             title = entry.get('title') or ''
             text = entry.get('text') or title
+            fingerprint = content_fingerprint(text)
+            if not fingerprint:
+                continue
+            fp_key = (market_id, fingerprint)
+            if fp_key in seen_fingerprints:
+                continue
+            url_key = (market_id, url)
+            if url_key in seen_urls:
+                continue
+            seen_fingerprints.add(fp_key)
+            seen_urls.add(url_key)
             rows.append(
                 {
                     **_parquet_row(market_id, source, text, entry['published_at'], url),
                     '_match_score': score,
                     '_matched_by': source,
+                    '_content_fingerprint': fingerprint,
                 }
             )
             count += 1

@@ -80,14 +80,15 @@ def build_social_feed_specs(market: dict[str, Any]) -> list[dict[str, str]]:
             clean = channel.replace('https://t.me/', '').replace('http://t.me/', '').strip('/')
             if not clean:
                 continue
-            specs.append(
-                {
-                    'url': f'https://rsshub.app/telegram/channel/{clean}',
-                    'source': 'telegram_channel',
-                }
-            )
             if settings.EXTERNAL_SIGNALS_TELEGRAM_SCRAPE_ENABLED:
                 specs.append({'url': f'telegram://{clean}', 'source': 'telegram_scrape'})
+            else:
+                specs.append(
+                    {
+                        'url': f'https://rsshub.app/telegram/channel/{clean}',
+                        'source': 'telegram_channel',
+                    }
+                )
 
     for feed in settings.external_signals_telegram_additional_feeds():
         specs.append({'url': feed, 'source': 'telegram_feed'})
