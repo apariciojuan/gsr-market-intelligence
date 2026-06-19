@@ -63,6 +63,19 @@ class Settings(BaseSettings):
         'https://feeds.reuters.com/reuters/topNews'
     )
     EXTERNAL_SIGNALS_COLLECT_INTERVAL_SECONDS: int = 21600
+    EXTERNAL_SIGNALS_SOCIAL_ENABLED: bool = True
+    EXTERNAL_SIGNALS_X_SEARCH_ENABLED: bool = True
+    EXTERNAL_SIGNALS_X_NITTER_BASES: str = (
+        'https://nitter.net,https://nitter.poast.org,https://nitter.privacydev.net'
+    )
+    EXTERNAL_SIGNALS_X_MAX_BASES: int = 2
+    EXTERNAL_SIGNALS_X_MAX_TERMS_PER_MARKET: int = 3
+    EXTERNAL_SIGNALS_X_ADDITIONAL_FEEDS: str = ''
+    EXTERNAL_SIGNALS_TELEGRAM_ENABLED: bool = True
+    EXTERNAL_SIGNALS_TELEGRAM_CHANNELS: str = ''
+    EXTERNAL_SIGNALS_TELEGRAM_ADDITIONAL_FEEDS: str = ''
+    EXTERNAL_SIGNALS_TELEGRAM_SCRAPE_ENABLED: bool = True
+    EXTERNAL_SIGNALS_TELEGRAM_SCRAPE_MAX_POSTS_PER_CHANNEL: int = 50
 
     model_config = {'env_file': '.env'}
 
@@ -72,6 +85,23 @@ class Settings(BaseSettings):
         if not raw:
             return []
         return [url.strip() for url in raw.split(',') if url.strip()]
+
+    def _parse_csv(self, raw: str) -> list[str]:
+        if not raw:
+            return []
+        return [item.strip() for item in raw.split(',') if item.strip()]
+
+    def external_signals_x_nitter_bases(self) -> list[str]:
+        return self._parse_csv(self.EXTERNAL_SIGNALS_X_NITTER_BASES)
+
+    def external_signals_x_additional_feeds(self) -> list[str]:
+        return self._parse_csv(self.EXTERNAL_SIGNALS_X_ADDITIONAL_FEEDS)
+
+    def external_signals_telegram_channels(self) -> list[str]:
+        return self._parse_csv(self.EXTERNAL_SIGNALS_TELEGRAM_CHANNELS)
+
+    def external_signals_telegram_additional_feeds(self) -> list[str]:
+        return self._parse_csv(self.EXTERNAL_SIGNALS_TELEGRAM_ADDITIONAL_FEEDS)
 
 
 settings = Settings()

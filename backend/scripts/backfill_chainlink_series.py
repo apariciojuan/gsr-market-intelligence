@@ -37,6 +37,14 @@ async def backfill(output_dir: Path) -> dict:
     price_df = pd.read_parquet(output_dir / 'price_series.parquet')
     links_df = pd.read_parquet(output_dir / 'market_resolution_links.parquet')
     trades_df = pd.read_parquet(output_dir / 'trades.parquet')
+    wallet_activity_path = output_dir / 'wallet_activity.parquet'
+    external_signals_path = output_dir / 'external_signals.parquet'
+    wallet_activity_df = (
+        pd.read_parquet(wallet_activity_path) if wallet_activity_path.exists() else pd.DataFrame()
+    )
+    external_signals_df = (
+        pd.read_parquet(external_signals_path) if external_signals_path.exists() else pd.DataFrame()
+    )
 
     if price_df.empty:
         raise RuntimeError('price_series is empty; run full extraction first')
@@ -97,7 +105,16 @@ async def backfill(output_dir: Path) -> dict:
         output_dir / 'chainlink_latest.parquet'
     )
 
-    passed, failures = evaluate_quality(links_df, chainlink_series_df, trades_df, config)
+    passed, failures = evaluate_quality(
+        links_df,
+        chainlink_series_df,
+        trades_df,
+        config,
+        price_df=price_df,
+        wallet_activity_df=wallet_activity_df,
+        external_signals_df=external_signals_df,
+        markets_total=len(markets_df),
+    )
     manifest['quality_passed'] = passed
     manifest['quality_failures'] = failures
 

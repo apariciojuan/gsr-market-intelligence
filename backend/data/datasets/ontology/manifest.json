@@ -1,17 +1,17 @@
 {
   "dataset": "ontology",
-  "created_at_utc": "2026-06-05T09:13:58.303142+00:00",
+  "created_at_utc": "2026-06-19T12:41:33.541328+00:00",
   "snapshot_config": {
-    "market_sample_size": 30,
+    "market_sample_size": 70,
     "quota_uma": 25,
-    "quota_crypto": 12,
+    "quota_crypto": 35,
     "quota_resolved": 25,
     "history_windows": [
       "1h"
     ],
-    "history_days": 30,
+    "history_days": 14,
     "trade_limit": 100,
-    "trade_max_pages": 5,
+    "trade_max_pages": 2,
     "holders_limit": 50,
     "activity_limit": 50,
     "wallet_top_k": 5,
@@ -27,67 +27,74 @@
     "min_resolution_links": 15,
     "min_chainlink_series_rows": 500,
     "min_markets_with_trades": 50,
-    "min_trades_per_market": 5
+    "min_trades_per_market": 5,
+    "min_price_series_rows": 800,
+    "min_markets_with_price_series": 40,
+    "min_markets_with_chainlink_series": 15,
+    "min_external_signals_rows": 30,
+    "min_markets_with_wallet_activity": 8
   },
-  "git_commit": null,
+  "git_commit": "c281a365d6c0d5347045a677de22d555c8a92a9f",
   "row_counts": {
-    "markets": 30,
+    "markets": 70,
     "resolutions": 200,
     "market_resolution_links": 25,
-    "price_series": 0,
-    "orderbook_snapshots": 30,
-    "trades": 7716,
-    "holders": 60,
+    "price_series": 1037,
+    "orderbook_snapshots": 70,
+    "trades": 7408,
+    "holders": 139,
     "wallet_activity": 0,
-    "chainlink_latest": 0,
-    "chainlink_series": 0,
+    "chainlink_latest": 16,
+    "chainlink_series": 976,
     "contract_events": 100,
-    "external_signals": 81
+    "external_signals": 265
   },
   "cohort_counts": {
-    "B_resolved": 25,
-    "A_active_liquid": 5
+    "B_resolved": 48,
+    "A_active_liquid": 17,
+    "D_low_liquidity": 5
   },
   "join_coverage": {
-    "markets_total": 30,
-    "pct_with_trades": 56.7,
+    "markets_total": 70,
+    "pct_with_trades": 54.3,
     "pct_with_holders": 100.0,
-    "pct_with_chainlink_feed": 16.7,
-    "pct_with_price_series": 0.0,
-    "pct_with_chainlink_series": 0.0,
-    "pct_with_external_signals": 100.0,
+    "pct_with_chainlink_feed": 50.0,
+    "pct_with_price_series": 24.3,
+    "pct_with_chainlink_series": 22.9,
+    "pct_with_external_signals": 97.1,
     "pct_with_wallet_activity": 0.0,
     "uma_links_in_sample": 25,
-    "pct_uma_linked": 83.3,
-    "chainlink_series_rows": 0,
-    "external_signals_rows": 81,
+    "pct_uma_linked": 35.7,
+    "chainlink_series_rows": 976,
+    "external_signals_rows": 265,
     "wallet_activity_rows": 0
   },
   "uma_audit": {
-    "uma_parsed_count": 195,
+    "uma_parsed_count": 198,
     "uma_overlap_count": 25
   },
   "quality_passed": false,
   "quality_failures": [
-    "chainlink_series=0 < 500",
-    "markets with >=5 trades=17 < 50"
+    "markets_with_price_series=17 < 40",
+    "markets_with_wallet_activity=0 < 8",
+    "markets with >=5 trades=38 < 50"
   ],
   "extraction_warnings": [],
   "file_sha256": {
-    "markets": "8991f099b32483ac82768372f672048d5453299b32a4879e1cb752e07637cbc1",
-    "resolutions": "06d5d37e9db5945f3f83f245894b9d1bb9e07f1c56fbdc7afee8e80ffb7aae66",
-    "market_resolution_links": "de3f1717e5c9afeb596fd79871f2774d94c846882ae1ffe551a6bf49177a6c28",
-    "price_series": "8b6e33d47f4e1df33f587d9b1d420f756a6c705b8496e0912c223c5d83371df9",
-    "orderbook_snapshots": "4264a272cbce124d5353136375857fc456f057130cd0a8baa4b98e81ec6a1cd9",
-    "trades": "3819824cbe0de11a74079046cf87b28ab137308ffd16594ff32b0016ebd8337e",
-    "holders": "e3f14d2f7e86a74e81428c77359210a60749bf46b7470425d709d49edfb1147a",
+    "markets": "a95d207057633ba831de545ed81caedbbd2eaabdb3b1549a886991facb85fd48",
+    "resolutions": "11b4f7fd0e37629d28706d90e2f94f10c8721632caf35e3c171273ab2b5f7e1b",
+    "market_resolution_links": "6e4712fc3a6e59ebb1d6cc5e8700bda4f063146263e327a9f415787197688dd9",
+    "price_series": "9a685a08587aec8346b210c7705cca9c22609fb23ebab80e5b86219e7855e424",
+    "orderbook_snapshots": "eaea5619fcf3993e3b1cdad7362d0fd8a7c41795d6a8b9284b87577163dad1c9",
+    "trades": "23f930ceed3559ae084f6b468494661191fbf69a959cb219cf2efdebee61c8f3",
+    "holders": "27f3b378c3fd686bb897de8f0d8ca3eb611668c2c62c39b05ff8a6e86540c24c",
     "wallet_activity": "8b6e33d47f4e1df33f587d9b1d420f756a6c705b8496e0912c223c5d83371df9",
-    "chainlink_latest": "83d7fa2d3fa24981296ccb340eeb1c843bb5cb08536e733563176b58cb78960f",
-    "chainlink_series": "4b9006be051b978af72309c41a2c821bb9e0c78002261b1e3dcfa6a0cf2484a3",
-    "contract_events": "92b10061fe926ff87d6e49a877f7319d58c3527af5e13f12a545638deb79ab9c",
-    "external_signals": "c0b568c946154dd52379de1d0aa299c17cd1c4b90d577aa20aca54f6d502a91a"
+    "chainlink_latest": "fb93c71c807e4745d120c86d254a6da7596b99d9e386375397ec1d83dfa924ad",
+    "chainlink_series": "b93d559a1052e2008d93524ca9d0a5f046d1ae734bf289515e924a3ad4ba1a97",
+    "contract_events": "91c8e47190f2c37ec92304155ad62fde0d1a6ebb84a04c65d0b412280960feb1",
+    "external_signals": "e2634ca6cc6df5e028b5e229c847665812dd9132d790f588ff441be4ba73f2aa"
   },
   "uma_extraction_error": null,
   "notes": "Static snapshot for ontology notebook. Re-run this script to refresh. chainlink_series is time-aligned to price_series via merge_asof backward. market_resolution_links join Gamma sample to UMA via ancillary market_id.",
-  "extraction_seconds": 2396.24
+  "extraction_seconds": 1600.71
 }

@@ -27,7 +27,7 @@ async def collect_external_signals(ctx: dict) -> int:
             pg_insert(SyncState)
             .values(
                 entity_type='external_signal',
-                entity_key='rss',
+                entity_key='rss_social',
                 last_synced_at=now,
                 sync_status='completed',
                 total_items_processed=count,

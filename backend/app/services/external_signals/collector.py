@@ -14,6 +14,8 @@ from app.services.external_signals.rss import (
     fetch_feed_entries,
     looks_like_feed_url,
 )
+from app.services.external_signals.social import build_social_feed_specs
+from app.services.external_signals.telegram_scraper import fetch_telegram_channel_entries
 
 logger = get_logger('external_signals.collector')
 
@@ -89,7 +91,16 @@ async def collect_signals_for_markets(
     async def load_feed(feed_url: str) -> list[dict[str, Any]]:
         if feed_url in feed_cache:
             return feed_cache[feed_url]
-        entries = await fetch_feed_entries(feed_url, timeout)
+        if feed_url.startswith('telegram://'):
+            channel = feed_url.replace('telegram://', '', 1)
+            entries = await fetch_telegram_channel_entries(
+                channel,
+                timeout=timeout,
+                max_age_days=max_age,
+                max_posts=settings.EXTERNAL_SIGNALS_TELEGRAM_SCRAPE_MAX_POSTS_PER_CHANNEL,
+            )
+        else:
+            entries = await fetch_feed_entries(feed_url, timeout)
         feed_cache[feed_url] = entries
         await asyncio.sleep(delay)
         return entries
@@ -103,23 +114,26 @@ async def collect_signals_for_markets(
         if not market_id:
             continue
         keywords = market_keywords(market)
-        market_feeds = list(feeds)
+        market_feed_specs = [{'url': feed_url, 'source': 'keyword_rss'} for feed_url in feeds]
+        social_feed_specs = build_social_feed_specs(market)
+        market_feed_specs.extend(social_feed_specs)
         res_src = market.get('resolution_source')
         for extra in await _resolve_feed_urls(res_src, timeout):
-            if extra not in market_feeds:
-                market_feeds.append(extra)
+            if not any(spec['url'] == extra for spec in market_feed_specs):
+                market_feed_specs.append({'url': extra, 'source': 'resolution_source'})
             await asyncio.sleep(delay)
 
         matched: list[tuple[float, dict[str, Any], str]] = []
 
-        for feed_url in market_feeds:
+        for spec in market_feed_specs:
+            feed_url = spec['url']
+            source = spec['source']
             for entry in await load_feed(feed_url):
                 if entry['published_at'] < cutoff:
                     continue
                 score = match_score(keywords, entry.get('title', ''), entry.get('text', ''))
                 if score < min_score:
                     continue
-                source = 'resolution_source' if feed_url not in feeds else 'keyword_rss'
                 matched.append((score, entry, source))
 
         matched.sort(key=lambda item: item[0], reverse=True)
@@ -136,6 +150,7 @@ async def collect_signals_for_markets(
                 {
                     **_parquet_row(market_id, source, text, entry['published_at'], url),
                     '_match_score': score,
+                    '_matched_by': source,
                 }
             )
             count += 1

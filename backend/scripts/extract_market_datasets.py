@@ -64,6 +64,11 @@ DEFAULT_SNAPSHOT_CONFIG = {
     'min_chainlink_series_rows': 500,
     'min_markets_with_trades': 50,
     'min_trades_per_market': 5,
+    'min_price_series_rows': 800,
+    'min_markets_with_price_series': 40,
+    'min_markets_with_chainlink_series': 15,
+    'min_external_signals_rows': 30,
+    'min_markets_with_wallet_activity': 8,
 }
 
 COHORT_ACTIVE_LIQUID = 'A_active_liquid'
@@ -960,17 +965,47 @@ def evaluate_quality(
     chainlink_series_df: pd.DataFrame,
     trades_df: pd.DataFrame,
     config: dict,
+    *,
+    price_df: pd.DataFrame | None = None,
+    wallet_activity_df: pd.DataFrame | None = None,
+    external_signals_df: pd.DataFrame | None = None,
+    markets_total: int | None = None,
 ) -> tuple[bool, list[str]]:
     failures: list[str] = []
     min_links = config.get('min_resolution_links', 15)
     min_cl = config.get('min_chainlink_series_rows', 500)
     min_markets_trades = config.get('min_markets_with_trades', 50)
     min_trades = config.get('min_trades_per_market', 5)
+    min_price_rows = config.get('min_price_series_rows', 0)
+    min_markets_price = config.get('min_markets_with_price_series', 0)
+    min_markets_chainlink = config.get('min_markets_with_chainlink_series', 0)
+    min_external_rows = config.get('min_external_signals_rows', 0)
+    min_markets_activity = config.get('min_markets_with_wallet_activity', 0)
 
     if len(links_df) < min_links:
         failures.append(f'market_resolution_links={len(links_df)} < {min_links}')
     if len(chainlink_series_df) < min_cl:
         failures.append(f'chainlink_series={len(chainlink_series_df)} < {min_cl}')
+    if len(chainlink_series_df) and min_markets_chainlink > 0 and markets_total:
+        cl_markets = int(chainlink_series_df['market_id'].nunique())
+        if cl_markets < min_markets_chainlink:
+            failures.append(f'markets_with_chainlink_series={cl_markets} < {min_markets_chainlink}')
+
+    if price_df is not None:
+        if len(price_df) < min_price_rows:
+            failures.append(f'price_series={len(price_df)} < {min_price_rows}')
+        if min_markets_price > 0 and markets_total:
+            price_markets = int(price_df['market_id'].nunique()) if len(price_df) else 0
+            if price_markets < min_markets_price:
+                failures.append(f'markets_with_price_series={price_markets} < {min_markets_price}')
+
+    if external_signals_df is not None and len(external_signals_df) < min_external_rows:
+        failures.append(f'external_signals={len(external_signals_df)} < {min_external_rows}')
+
+    if wallet_activity_df is not None and min_markets_activity > 0 and markets_total:
+        activity_markets = int(wallet_activity_df['market_id'].nunique()) if len(wallet_activity_df) else 0
+        if activity_markets < min_markets_activity:
+            failures.append(f'markets_with_wallet_activity={activity_markets} < {min_markets_activity}')
 
     if len(trades_df) and 'market_id' in trades_df.columns:
         per_market = trades_df.groupby('market_id').size()
@@ -1075,18 +1110,29 @@ async def extract_dataset(output_dir: Path, config: dict) -> dict:
             if not yes_token:
                 break
             try:
-                hist = response_json(
-                    await polymarket.get_prices_history_by_market(
-                        {
-                            'market': yes_token,
-                            'interval': window,
-                            'startTs': start_ts,
-                            'endTs': end_ts,
-                        }
-                    )
-                )
-                await asyncio.sleep(delay)
-                for point in (hist or {}).get('history') or []:
+                points: list[dict[str, Any]] = []
+                try:
+                    query = {
+                        'market': yes_token,
+                        'interval': window,
+                        'fidelity': 1,
+                        'startTs': start_ts,
+                        'endTs': end_ts,
+                    }
+                    hist = response_json(await polymarket.get_prices_history_by_market(query))
+                    await asyncio.sleep(delay)
+                    points = (hist or {}).get('history') or []
+                except Exception:  # noqa: BLE001
+                    points = []
+
+                if not points:
+                    # Some tokens reject bounded windows; fallback to unbounded.
+                    fallback = {'market': yes_token, 'interval': window, 'fidelity': 1}
+                    hist = response_json(await polymarket.get_prices_history_by_market(fallback))
+                    await asyncio.sleep(delay)
+                    points = (hist or {}).get('history') or []
+
+                for point in points:
                     price_rows.append(
                         {
                             'market_id': market_id,
@@ -1263,10 +1309,20 @@ async def extract_dataset(output_dir: Path, config: dict) -> dict:
 
     if external_signals_rows:
         external_signals_df = pd.DataFrame(external_signals_rows)
-        parquet_cols = ['market_id', 'source', 'text', 'timestamp', 'url']
+        parquet_cols = [
+            'market_id',
+            'source',
+            'text',
+            'timestamp',
+            'url',
+            '_match_score',
+            '_matched_by',
+        ]
         external_signals_df = external_signals_df.reindex(columns=parquet_cols)
     else:
-        external_signals_df = pd.DataFrame(columns=['market_id', 'source', 'text', 'timestamp', 'url'])
+        external_signals_df = pd.DataFrame(
+            columns=['market_id', 'source', 'text', 'timestamp', 'url', '_match_score', '_matched_by']
+        )
     wallet_activity_df = (
         pd.DataFrame(wallet_activity_rows) if wallet_activity_rows else pd.DataFrame()
     )
@@ -1306,7 +1362,14 @@ async def extract_dataset(output_dir: Path, config: dict) -> dict:
         wallet_activity_df,
     )
     quality_passed, quality_failures = evaluate_quality(
-        links_df, chainlink_series_df, trades_df, config
+        links_df,
+        chainlink_series_df,
+        trades_df,
+        config,
+        price_df=price_df,
+        wallet_activity_df=wallet_activity_df,
+        external_signals_df=external_signals_df,
+        markets_total=len(markets_df),
     )
 
     manifest = {

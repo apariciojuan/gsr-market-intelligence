@@ -86,7 +86,11 @@ class ExternalSignalsService:
                 'url': row['url'],
                 'published_at': published,
                 'language': 'en',
-                'metadata_json': {'ingested_via': 'collector'},
+                'metadata_json': {
+                    'ingested_via': 'collector',
+                    'match_score': row.get('_match_score'),
+                    'matched_by': row.get('_matched_by', row['source']),
+                },
             }
             stmt = (
                 pg_insert(ExternalSignal)
@@ -98,6 +102,7 @@ class ExternalSignalsService:
                         'title': values['title'],
                         'source': values['source'],
                         'published_at': values['published_at'],
+                        'metadata': values['metadata_json'],
                         'updated_at': datetime.now(UTC),
                     },
                 )
