@@ -12,6 +12,7 @@ import type {
   EcoIntervalParams,
   EcoSparklineParams,
   EcosystemWindowParams,
+  ExternalSignalsParams,
   HoldersParams,
   MarketNewsParams,
   MarketPricesParams,
@@ -79,6 +80,11 @@ export const queryKeys = {
   signals: {
     list: (params?: SignalsParams) => ["signals", "list", params ?? {}] as const,
     detail: (id: number) => ["signals", "detail", id] as const,
+  },
+  externalSignals: {
+    list: (params?: ExternalSignalsParams) =>
+      ["external-signals", "list", params ?? {}] as const,
+    detail: (id: number) => ["external-signals", "detail", id] as const,
   },
   ecosystem: {
     kpis: (params?: EcosystemWindowParams) =>

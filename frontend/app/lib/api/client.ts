@@ -37,6 +37,8 @@ import type {
   EcosystemWindowParams,
   ExploreRequest,
   ExploreResponse,
+  ExternalSignalRead,
+  ExternalSignalsParams,
   HealthStatus,
   Holder,
   HoldersParams,
@@ -365,6 +367,21 @@ export const httpApi: GsrApi = {
     },
     detail(id: number): Promise<SignalDetail> {
       return request<SignalDetail>(`/signals/${id}`);
+    },
+  },
+
+  externalSignals: {
+    async list(
+      params?: ExternalSignalsParams
+    ): Promise<Paginated<ExternalSignalRead>> {
+      return normalizePaginated(
+        await request<Paginated<ExternalSignalRead>>("/external-signals", {
+          query: params as Query,
+        })
+      );
+    },
+    detail(id: number): Promise<ExternalSignalRead> {
+      return request<ExternalSignalRead>(`/external-signals/${id}`);
     },
   },
 

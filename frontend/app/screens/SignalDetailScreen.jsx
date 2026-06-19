@@ -14,6 +14,7 @@
 
 import Link from "next/link";
 import { useSignal } from "../lib/hooks/useSignals";
+import { sourceLabel, sourcePillKey } from "../lib/externalSignals";
 import {
   StatusPill,
   Icon,
@@ -305,7 +306,7 @@ export default function SignalDetailScreen({ id }) {
         <div className="card">
           <div className="card-header">
             <div>
-              <h3 className="card-title">Related News</h3>
+              <h3 className="card-title">Related External Signals</h3>
               <div className="card-sub">
                 {relatedNews.length} item{relatedNews.length === 1 ? "" : "s"}
               </div>
@@ -322,7 +323,7 @@ export default function SignalDetailScreen({ id }) {
                 }}
               >
                 <Icon name="info" size={22} color="var(--text-secondary)" />
-                <div style={{ marginTop: 8 }}>No related news for this signal</div>
+                <div style={{ marginTop: 8 }}>No related external signals for this divergence</div>
               </div>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -348,10 +349,9 @@ export default function SignalDetailScreen({ id }) {
                         marginBottom: 6,
                         fontSize: 11,
                         color: "var(--text-secondary)",
-                        fontFamily: "var(--font-mono)",
                       }}
                     >
-                      <span>{n.source}</span>
+                      <StatusPill status={sourcePillKey(n.source)} />
                       <span>{fmtTime(n.published_at)}</span>
                     </div>
                     <div

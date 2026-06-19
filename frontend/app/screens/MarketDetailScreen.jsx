@@ -39,6 +39,8 @@ import {
   useOrderbook,
   useTrades,
 } from "../lib/hooks/useMarkets";
+import { sourceLabel, sourcePillKey } from "../lib/externalSignals";
+import { ExternalSignalBody, splitSignalHeadline } from "../lib/externalSignalContent";
 import * as C from "../lib/components";
 import * as G from "../lib/charts";
 import { ApiError } from "../lib/api";
@@ -381,23 +383,30 @@ function TradesTab({ marketId }) {
 function SignalsTab({ marketId }) {
   const { data, isLoading, isError, error, refetch } = useMarketNews(marketId, {
     limit: 20,
+    min_relevance: 0,
   });
   const items = data?.items ?? [];
 
   if (isError) {
     return (
       <div style={{ padding: 16 }}>
-        <SectionError error={error} onRetry={refetch} label="news signals" />
+        <SectionError error={error} onRetry={refetch} label="external signals" />
       </div>
     );
   }
   if (isLoading) return <SectionLoading rows={5} />;
   if (items.length === 0)
-    return <SectionEmpty message="No news signals for this market" />;
+    return (
+      <SectionEmpty message="No external signals matched to this market yet" />
+    );
 
   return (
     <div style={{ padding: 16 }}>
-      {items.map((it) => (
+      {items.map((it) => {
+        const xParsed = it.news.source?.startsWith("x_")
+          ? splitSignalHeadline(it.news.summary || it.news.title)
+          : null;
+        return (
         <div
           key={it.news.id}
           style={{
@@ -413,30 +422,50 @@ function SignalsTab({ marketId }) {
               marginBottom: 8,
             }}
           >
-            <StatusPill status="news" />
+            <StatusPill status={sourcePillKey(it.news.source)} />
             <span style={{ fontSize: 11, color: "var(--text-secondary)" }}>
               {fmtRelTime(it.news.published_at)}
             </span>
           </div>
-          <a
-            href={it.news.url}
-            target="_blank"
-            rel="noreferrer"
-            style={{ fontSize: 13, color: "var(--text-primary)" }}
-          >
-            {it.news.title}
-          </a>
-          {it.news.summary && (
-            <div
-              style={{
-                fontSize: 12,
-                color: "var(--text-secondary)",
-                marginTop: 4,
-                lineHeight: 1.5,
-              }}
-            >
-              {it.news.summary}
-            </div>
+          {xParsed ? (
+            <>
+              <a
+                href={it.news.url}
+                target="_blank"
+                rel="noreferrer"
+                style={{ fontSize: 13, color: "var(--text-primary)", fontWeight: 500 }}
+              >
+                {xParsed.headline}
+              </a>
+              <ExternalSignalBody
+                raw={xParsed.body || ""}
+                imageUrl={xParsed.imageUrl}
+                style={{ marginTop: 6, fontSize: 12, color: "var(--text-secondary)" }}
+              />
+            </>
+          ) : (
+            <>
+              <a
+                href={it.news.url}
+                target="_blank"
+                rel="noreferrer"
+                style={{ fontSize: 13, color: "var(--text-primary)" }}
+              >
+                {it.news.title}
+              </a>
+              {it.news.summary && (
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: "var(--text-secondary)",
+                    marginTop: 4,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {it.news.summary}
+                </div>
+              )}
+            </>
           )}
           <div
             style={{
@@ -448,7 +477,7 @@ function SignalsTab({ marketId }) {
               fontFamily: "var(--font-mono)",
             }}
           >
-            <span>{it.news.source}</span>
+            <span>{sourceLabel(it.news.source)}</span>
             <span>·</span>
             <span>
               Relevance {(it.signal.relevance_score * 100).toFixed(0)}%
@@ -457,7 +486,8 @@ function SignalsTab({ marketId }) {
             <span>{it.signal.method}</span>
           </div>
         </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
@@ -537,7 +567,7 @@ export default function MarketDetailScreen({ slug }) {
     { id: "orderbook", label: "Orderbook" },
     { id: "holders", label: "Holders" },
     { id: "trades", label: "Trades" },
-    { id: "signals", label: "Signals" },
+    { id: "signals", label: "External Signals" },
   ];
 
   return (

@@ -25,13 +25,17 @@ import {
   fmtUSD,
   fmtPct,
   fmtCountdown,
+  fmtRelTime,
 } from "../lib/components";
 import { DivergenceMini } from "../lib/charts";
 import {
   useDashboardSummary,
   useTopMarkets,
   useNotableDivergences,
+  useExternalSignals,
 } from "../lib/hooks";
+import { sourceLabel, sourcePillKey } from "../lib/externalSignals";
+import { ExternalSignalBody, splitSignalHeadline } from "../lib/externalSignalContent";
 
 // divergence_type (contract) → StatusPill key.
 const DIVERGENCE_PILL = {
@@ -72,6 +76,7 @@ export default function DashboardScreen() {
   const summary = useDashboardSummary();
   const topMarkets = useTopMarkets();
   const divergences = useNotableDivergences();
+  const externalSignals = useExternalSignals({ limit: 5 });
 
   // --- Top Markets table columns (contract: TopMarketItem) ---
   const topColumns = [
@@ -352,6 +357,97 @@ export default function DashboardScreen() {
                       </div>
                     </div>
                   </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ---- Latest External Signals ---- */}
+      <div className="card" style={{ marginTop: 16 }}>
+        <div className="card-header">
+          <div>
+            <h3 className="card-title">Latest External Signals</h3>
+            <div className="card-sub">X, Telegram and RSS matched to markets</div>
+          </div>
+          <Link href="/external-signals" className="btn ghost sm">
+            All external signals <Icon name="arrow-right" size={12} />
+          </Link>
+        </div>
+        <div className="card-body">
+          {externalSignals.isLoading && <StateBlock>Loading external signals…</StateBlock>}
+          {externalSignals.isError && (
+            <ErrorBlock
+              error={externalSignals.error}
+              onRetry={() => externalSignals.refetch()}
+            />
+          )}
+          {externalSignals.isSuccess && (externalSignals.data?.items ?? []).length === 0 && (
+            <StateBlock>No external signals ingested yet.</StateBlock>
+          )}
+          {externalSignals.isSuccess && (externalSignals.data?.items ?? []).length > 0 && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+              {externalSignals.data.items.map((item) => {
+                const xParsed =
+                  item.source?.startsWith("x_")
+                    ? splitSignalHeadline(item.text || item.title)
+                    : null;
+                return (
+                <div
+                  key={item.id}
+                  style={{
+                    padding: "12px 0",
+                    borderBottom: "1px solid var(--border-subtle)",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      marginBottom: 6,
+                      gap: 8,
+                    }}
+                  >
+                    <StatusPill status={sourcePillKey(item.source)} />
+                    <span style={{ fontSize: 11, color: "var(--text-secondary)" }}>
+                      {fmtRelTime(item.timestamp)}
+                    </span>
+                  </div>
+                  <Link
+                    href={"/markets/" + item.slug}
+                    style={{ fontSize: 12, color: "var(--accent)", display: "block", marginBottom: 4 }}
+                  >
+                    {item.slug}
+                  </Link>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ fontSize: 13, color: "var(--text-primary)", lineHeight: 1.45, display: "block" }}
+                  >
+                    {xParsed ? xParsed.headline : item.title || item.text.slice(0, 140)}
+                  </a>
+                  {xParsed && (
+                    <ExternalSignalBody
+                      raw={xParsed.body || ""}
+                      imageUrl={xParsed.imageUrl}
+                      style={{ marginTop: 6, fontSize: 12, color: "var(--text-secondary)" }}
+                      imageStyle={{ maxHeight: 160 }}
+                    />
+                  )}
+                  <div
+                    style={{
+                      fontSize: 11,
+                      color: "var(--text-muted)",
+                      marginTop: 4,
+                      fontFamily: "var(--font-mono)",
+                    }}
+                  >
+                    {sourceLabel(item.source)}
+                  </div>
+                </div>
                 );
               })}
             </div>

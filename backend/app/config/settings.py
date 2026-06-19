@@ -62,12 +62,15 @@ class Settings(BaseSettings):
         'https://www.coindesk.com/arc/outboundfeeds/rss/,'
         'https://feeds.reuters.com/reuters/topNews'
     )
-    EXTERNAL_SIGNALS_COLLECT_INTERVAL_SECONDS: int = 21600
+    EXTERNAL_SIGNALS_COLLECT_INTERVAL_SECONDS: int = 3600
     EXTERNAL_SIGNALS_SOCIAL_ENABLED: bool = True
-    EXTERNAL_SIGNALS_X_SEARCH_ENABLED: bool = True
-    EXTERNAL_SIGNALS_X_NITTER_BASES: str = (
-        'https://nitter.net,https://nitter.poast.org,https://nitter.privacydev.net'
+    # Keyword search RSS is blocked on most public Nitter instances (403/bot wall).
+    EXTERNAL_SIGNALS_X_SEARCH_ENABLED: bool = False
+    EXTERNAL_SIGNALS_X_PROFILE_ENABLED: bool = True
+    EXTERNAL_SIGNALS_X_ACCOUNTS: str = (
+        'WatcherGuru,WuBlockchain,Cointelegraph,TheBlock__,BitcoinMagazine,Polymarket'
     )
+    EXTERNAL_SIGNALS_X_NITTER_BASES: str = 'https://nitter.net'
     EXTERNAL_SIGNALS_X_MAX_BASES: int = 2
     EXTERNAL_SIGNALS_X_MAX_TERMS_PER_MARKET: int = 3
     EXTERNAL_SIGNALS_X_ADDITIONAL_FEEDS: str = ''
@@ -93,6 +96,9 @@ class Settings(BaseSettings):
 
     def external_signals_x_nitter_bases(self) -> list[str]:
         return self._parse_csv(self.EXTERNAL_SIGNALS_X_NITTER_BASES)
+
+    def external_signals_x_accounts(self) -> list[str]:
+        return self._parse_csv(self.EXTERNAL_SIGNALS_X_ACCOUNTS)
 
     def external_signals_x_additional_feeds(self) -> list[str]:
         return self._parse_csv(self.EXTERNAL_SIGNALS_X_ADDITIONAL_FEEDS)

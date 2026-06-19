@@ -42,11 +42,26 @@ def build_social_feed_specs(market: dict[str, Any]) -> list[dict[str, str]]:
 
     specs: list[dict[str, str]] = []
 
+    bases = settings.external_signals_x_nitter_bases()
+    selected_bases = bases[: max(1, settings.EXTERNAL_SIGNALS_X_MAX_BASES)] if bases else []
+
+    if settings.EXTERNAL_SIGNALS_X_PROFILE_ENABLED and selected_bases:
+        for base in selected_bases:
+            base_url = base.rstrip('/')
+            for account in settings.external_signals_x_accounts():
+                handle = account.lstrip('@').strip()
+                if not handle:
+                    continue
+                specs.append(
+                    {
+                        'url': f'{base_url}/{handle}/rss',
+                        'source': 'x_profile',
+                    }
+                )
+
     if settings.EXTERNAL_SIGNALS_X_SEARCH_ENABLED:
-        bases = settings.external_signals_x_nitter_bases()
-        if bases:
-            selected = bases[: max(1, settings.EXTERNAL_SIGNALS_X_MAX_BASES)]
-            for base in selected:
+        if selected_bases:
+            for base in selected_bases:
                 base_url = base.rstrip('/')
                 for term in _terms_for_market(market):
                     query = quote_plus(term)

@@ -127,6 +127,7 @@ export function Icon({ name, size = 16, color = "currentColor", className = "", 
     "file": <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></>,
     "log-out": <><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></>,
     "menu": <><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></>,
+    "message-circle": <><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></>,
     "x": <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>,
   };
   const p = paths[name];
@@ -150,6 +151,10 @@ export function StatusPill({ status }) {
     price_gap:     { label: "Price Gap",    cls: "warning" },
     news:          { label: "News not reflected", cls: "info" },
     sudden:        { label: "Sudden Move",  cls: "danger" },
+    x:             { label: "X",            cls: "info" },
+    telegram:      { label: "Telegram",     cls: "info" },
+    rss:           { label: "RSS",          cls: "neutral" },
+    resolution:    { label: "Resolution",   cls: "neutral" },
     yes:           { label: "YES",          cls: "success" },
     no:            { label: "NO",           cls: "danger" },
   };

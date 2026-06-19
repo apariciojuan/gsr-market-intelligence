@@ -503,6 +503,28 @@ export interface NewsSignalRead {
   method: string;
 }
 
+/** Item of GET /external-signals and GET /markets/{id}/external-signals. */
+export interface ExternalSignalRead {
+  id: number;
+  market_id: string;
+  slug: string;
+  source: string;
+  text: string;
+  title: string | null;
+  timestamp: string;
+  url: string;
+  language: string;
+}
+
+export interface ExternalSignalsParams extends PaginationParams {
+  market_id?: number;
+  slug?: string;
+  source?: string;
+  since?: string;
+  until?: string;
+  q?: string;
+}
+
 /** Item of GET /markets/{id}/news. */
 export interface NewsWithSignal {
   news: NewsItemRead;

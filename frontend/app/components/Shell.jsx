@@ -42,6 +42,7 @@ const NAV = [
   { id: "contracts", href: "/contracts", label: "Explorer", icon: "search", match: (p) => p === "/contracts" || p.startsWith("/contracts/") },
   { id: "resolutions", href: "/resolutions", label: "Resolutions", icon: "scale", match: (p) => p === "/resolutions" || p.startsWith("/resolutions/") },
   { id: "signals", href: "/signals", label: "Signals", icon: "git-branch", match: (p) => p === "/signals" || p.startsWith("/signals/") },
+  { id: "external-signals", href: "/external-signals", label: "External Signals", icon: "message-circle", match: (p) => p === "/external-signals" },
   { id: "ecosystem", href: "/ecosystem", label: "Ecosystem", icon: "globe", match: (p) => p === "/ecosystem" },
 ];
 

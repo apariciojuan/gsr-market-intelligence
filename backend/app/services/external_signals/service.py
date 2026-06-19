@@ -16,6 +16,25 @@ from app.services.external_signals.collector import collect_signals_for_markets
 
 logger = get_logger('external_signals.service')
 
+# Grouped `source` query values accepted by list_signals (and the REST API).
+SOURCE_GROUP_PREFIXES: dict[str, str] = {
+    'x': 'x_',
+    'telegram': 'telegram_',
+}
+SOURCE_GROUP_EXACT: dict[str, tuple[str, ...]] = {
+    'rss': ('keyword_rss', 'resolution_source'),
+}
+
+
+def _apply_source_filter(source: str):
+    """Return a SQLAlchemy filter for a raw source or a group key (x/telegram/rss)."""
+    if source in SOURCE_GROUP_PREFIXES:
+        prefix = SOURCE_GROUP_PREFIXES[source]
+        return ExternalSignal.source.like(f'{prefix}%')
+    if source in SOURCE_GROUP_EXACT:
+        return ExternalSignal.source.in_(SOURCE_GROUP_EXACT[source])
+    return ExternalSignal.source == source
+
 
 class ExternalSignalsService:
     """DB-backed external signals ingestion and queries."""
@@ -134,8 +153,9 @@ class ExternalSignalsService:
             stmt = stmt.where(ExternalSignal.slug == slug)
             count_stmt = count_stmt.where(ExternalSignal.slug == slug)
         if source:
-            stmt = stmt.where(ExternalSignal.source == source)
-            count_stmt = count_stmt.where(ExternalSignal.source == source)
+            source_filter = _apply_source_filter(source)
+            stmt = stmt.where(source_filter)
+            count_stmt = count_stmt.where(source_filter)
         if since:
             stmt = stmt.where(ExternalSignal.published_at >= since)
             count_stmt = count_stmt.where(ExternalSignal.published_at >= since)

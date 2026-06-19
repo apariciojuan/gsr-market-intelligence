@@ -111,6 +111,11 @@ export const mockApi: GsrApi = {
   }),
 
   // Retired: served by the real backend (see NEXT_PUBLIC_REAL_DOMAINS / index.ts).
+  externalSignals: new Proxy({} as GsrApi["externalSignals"], {
+    get: () => () => retired("externalSignals"),
+  }),
+
+  // Retired: served by the real backend (see NEXT_PUBLIC_REAL_DOMAINS / index.ts).
   ecosystem: new Proxy({} as GsrApi["ecosystem"], {
     get: () => () => retired("ecosystem"),
   }),

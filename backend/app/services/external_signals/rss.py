@@ -67,11 +67,17 @@ def _entry_published(entry: Any) -> datetime:
     return datetime.now(UTC)
 
 
+_NITTER_UA = 'Mozilla/5.0 (compatible; GSR-MI/1.0; +https://github.com/apariciojuan/gsr-market-intelligence)'
+
+
 async def fetch_feed_entries(feed_url: str, timeout: float) -> list[dict[str, Any]]:
     """Download and parse a feed; returns normalized entry dicts."""
     try:
         async with httpx.AsyncClient(timeout=timeout, follow_redirects=True) as client:
-            response = await client.get(feed_url, headers={'User-Agent': 'GSR-MI/0.1'})
+            response = await client.get(
+                feed_url,
+                headers={'User-Agent': _NITTER_UA},
+            )
             response.raise_for_status()
             content = response.content
     except Exception as exc:  # noqa: BLE001

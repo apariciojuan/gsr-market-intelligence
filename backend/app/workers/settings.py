@@ -59,7 +59,8 @@ class WorkerSettings:
         cron(aggregate_ecosystem, minute={0}),
         # DIVERGENCE_CALC_INTERVAL_MINUTES=10 -> every 10 minutes.
         cron(calculate_divergences, minute=set(range(0, 60, 10))),
-        cron(collect_external_signals, hour={0, 6, 12, 18}, minute=0),
+        # EXTERNAL_SIGNALS_COLLECT_INTERVAL_SECONDS=3600 -> hourly at :00.
+        cron(collect_external_signals, minute={0}),
     ]
     max_jobs = 10
     job_timeout = 300

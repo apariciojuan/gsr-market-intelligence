@@ -13,6 +13,7 @@ from app.config.log import get_logger
 from app.core.database import get_session
 from app.models import ExternalSignal
 from app.schemas.external_signal import (
+    ExternalSignalRead,
     ExternalSignalsCollectRequest,
     ExternalSignalsCollectResponse,
     PaginatedExternalSignals,

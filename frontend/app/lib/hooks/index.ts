@@ -10,6 +10,7 @@ export * from "./useMarkets";
 export * from "./useContracts";
 export * from "./useResolutions";
 export * from "./useSignals";
+export * from "./useExternalSignals";
 export * from "./useEcosystem";
 export * from "./useSearch";
 export * from "./useUser";

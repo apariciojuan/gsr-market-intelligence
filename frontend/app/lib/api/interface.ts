@@ -27,6 +27,8 @@ import type {
   EcosystemWindowParams,
   ExploreRequest,
   ExploreResponse,
+  ExternalSignalRead,
+  ExternalSignalsParams,
   DashboardSummary,
   HealthStatus,
   Holder,
@@ -150,6 +152,14 @@ export interface GsrApi {
     list(params?: SignalsParams): Promise<Paginated<SignalListItem>>;
     /** GET /signals/{id} */
     detail(id: number): Promise<SignalDetail>;
+  };
+
+  // --- External signals (2 endpoints) ---
+  externalSignals: {
+    /** GET /external-signals */
+    list(params?: ExternalSignalsParams): Promise<Paginated<ExternalSignalRead>>;
+    /** GET /external-signals/{id} */
+    detail(id: number): Promise<ExternalSignalRead>;
   };
 
   // --- Ecosystem (8 endpoints) ---
