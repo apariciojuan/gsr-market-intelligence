@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 echo "Waiting for postgres..."
 
@@ -8,12 +9,10 @@ done
 
 echo "PostgreSQL started"
 
-python << EOF
-print('Hola')
-EOF
-
-
 echo "Syncing dependencies from uv.lock..."
 uv sync --frozen
+
+echo "Applying database migrations..."
+uv run python scripts/migrate.py
 
 exec "$@"

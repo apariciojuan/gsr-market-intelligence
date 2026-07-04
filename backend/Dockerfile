@@ -28,7 +28,7 @@ RUN groupadd -r app && useradd -g app app \
 FROM base AS dev
 USER app
 EXPOSE 8000
-CMD ["/bin/sh", "-c", "/home/src/scripts/entrypoint.sh && uv run uvicorn app.api.main:app --host 0.0.0.0 --port 8000 --reload --reload-dir /home/src/app"]
+CMD ["sh", "/home/src/scripts/entrypoint.sh", "uv", "run", "uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--reload-dir", "/home/src/app"]
 
 # ---- Production ----
 FROM base AS production
