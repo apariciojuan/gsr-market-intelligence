@@ -38,6 +38,8 @@ services:
       - ./frontend/.env
     volumes:
       - ./frontend/app:/home/app
+      - /home/app/node_modules
+      - /home/app/.next
     networks:
       - backend
   

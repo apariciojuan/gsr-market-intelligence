@@ -1,114 +1,63 @@
 # Notes
 
-## What This App Does
+## App Summary
 
 This app watches Polymarket markets and compares some of them with trusted
-external price data.
+external data from Chainlink.
 
-In simple terms:
-
-```text
-What is happening in Polymarket markets, and does it match trusted external data?
-```
-
-For example, if there is a Polymarket market about Bitcoin, the app can compare
-that market with Chainlink BTC/USD data.
-
-## What Runs Automatically
-
-The `worker` container runs background jobs on a schedule:
+Simple idea:
 
 ```text
-Every 1 minute:  get latest Chainlink prices
-Every 5 minutes: get Polymarket market price history
-Every 10 minutes: check for divergences/signals
-Every 30 minutes: download active Polymarket markets
-Every 1 hour:    calculate ecosystem dashboard metrics
+Are Polymarket prices moving in a way that makes sense compared to real-world
+price feeds like BTC/USD or ETH/USD?
 ```
 
-So normally you do not need to trigger workers manually. Manual worker commands
-are useful while testing because they run one pipeline immediately.
+## Worker Schedule
 
-## What Data It Downloads
-
-The app downloads:
+The `worker` container runs automatically:
 
 ```text
-1. Chainlink prices
+Every 1 minute:  Chainlink prices
+Every 5 minutes: Polymarket price history
+Every 10 minutes: divergence checks
+Every 30 minutes: active Polymarket markets
+Every 1 hour:    ecosystem metrics
 ```
 
-Trusted external prices like:
+Manual `just worker ...` commands are only for testing or forcing a job to run now.
+
+## Data
+
+Downloaded data:
 
 ```text
-BTC/USD
-ETH/USD
-SOL/USD
-MATIC/USD
-USDC/USD
+Chainlink prices: BTC/USD, ETH/USD, SOL/USD, MATIC/USD, USDC/USD
+Polymarket markets: questions, outcomes, volume, liquidity, status
+Polymarket price history: YES/NO prices over time
 ```
+
+Calculated data:
 
 ```text
-2. Polymarket markets
+ecosystem_metrics: dashboard snapshots
+divergences: possible mismatches between markets and external prices
 ```
 
-Market questions, outcomes, slugs, volume, liquidity, and whether the market is
-active or closed.
+Main tables:
 
 ```text
-3. Polymarket price history
+markets
+chainlink_feeds
+chainlink_prices
+price_history
+ecosystem_metrics
+divergences
+sync_state
 ```
 
-How the YES/NO price changed over time.
+## Market Matching
 
-Example:
-
-```text
-YES was 0.42 at 10:00
-YES was 0.48 at 11:00
-YES was 0.61 at 12:00
-```
-
-## What It Calculates
-
-The app calculates:
-
-```text
-Ecosystem metrics
-```
-
-Dashboard-style summary numbers, such as active markets, volume, and category
-breakdowns.
-
-```text
-Divergences
-```
-
-Possible mismatches between Polymarket behavior and external price data.
-
-Example:
-
-```text
-Chainlink says ETH moved sharply,
-but a related Polymarket market did not move.
-```
-
-That could become a signal.
-
-## How It Matches A Market To Bitcoin Or Ethereum
-
-The app uses simple keyword matching.
-
-It looks at:
-
-```text
-market question
-market slug
-market tags, if available
-```
-
-Then it searches for crypto keywords.
-
-Examples:
+The app matches markets to Chainlink feeds with simple keywords:
 
 ```text
 BTC/USD    -> btc, bitcoin
@@ -118,191 +67,45 @@ SOL/USD    -> sol, solana
 USDC/USD   -> usdc
 ```
 
-So a market like:
+It searches the market question, slug, and tags. This is useful for a prototype,
+but it is not perfect.
 
-```text
-Will Bitcoin hit $100,000 in 2026?
-```
-
-would be treated as Bitcoin-related and matched with Chainlink BTC/USD.
-
-This is useful for a prototype, but it is not perfect. It can miss markets that
-refer to Bitcoin indirectly, and it can match markets that mention Bitcoin but
-are not really about Bitcoin price.
-
-## Main Database Tables
-
-```text
-markets
-```
-
-Polymarket markets.
-
-```text
-chainlink_feeds
-```
-
-The external price feeds the app watches.
-
-```text
-chainlink_prices
-```
-
-Historical Chainlink price readings.
-
-```text
-price_history
-```
-
-Historical Polymarket YES/NO prices.
-
-```text
-ecosystem_metrics
-```
-
-Dashboard metric snapshots.
-
-```text
-divergences
-```
-
-Possible market-vs-external-data signals.
-
-```text
-sync_state
-```
-
-Worker progress and status.
-
-## Simple Pipeline
+## Pipeline
 
 ```text
 Seed Chainlink feeds
-        ↓
-Download Chainlink prices
-        ↓
-Download Polymarket markets
-        ↓
-Download Polymarket market prices
-        ↓
-Compare market prices with external data
-        ↓
-Show dashboards and signals
+  -> download Chainlink prices
+  -> download Polymarket markets
+  -> download Polymarket market prices
+  -> calculate metrics and divergences
+  -> show data in the API/frontend
 ```
 
-## Just Command Flow
+## Useful Commands
 
-Start the stack:
+Install `just`: https://github.com/casey/just
 
 ```bash
-just up
+brew install just
 ```
-
-Check containers:
 
 ```bash
-just ps
+just              # list all recipes
+just up           # start stack
+just ps           # check containers
+just health       # check backend health
+just seed         # seed Chainlink feeds
+just db check     # check DB status and row counts
+just db feeds     # show Chainlink feed registry
+just db prices    # show recent Chainlink prices
+just worker logs  # follow worker logs
+just worker all   # run all worker jobs once
+just smoke        # quick API sanity check
+just down         # stop stack
+just reset        # stop stack and delete local DB volume
 ```
 
-Check backend health:
-
-```bash
-just health
-```
-
-Seed Chainlink feeds once per fresh database:
-
-```bash
-just seed
-```
-
-Check database state:
-
-```bash
-just db check
-```
-
-Check seeded feeds:
-
-```bash
-just db feeds
-```
-
-Check recent Chainlink prices:
-
-```bash
-just db prices
-```
-
-Watch the worker:
-
-```bash
-just worker logs
-```
-
-Manually trigger market ingestion:
-
-```bash
-just worker markets
-```
-
-Check that markets were stored:
-
-```bash
-just db check
-```
-
-Manually trigger Polymarket price collection:
-
-```bash
-just worker prices
-```
-
-Manually trigger ecosystem metrics:
-
-```bash
-just worker ecosystem
-```
-
-Manually trigger divergence detection:
-
-```bash
-just worker divergences
-```
-
-Run backend smoke tests:
-
-```bash
-just smoke
-```
-
-Open the frontend:
-
-```text
-http://localhost:3000
-```
-
-Open the backend docs:
-
-```text
-http://localhost:8000/docs
-```
-
-Stop the stack:
-
-```bash
-just down
-```
-
-Stop the stack and delete the local database volume:
-
-```bash
-just reset
-```
-
-## Recommended Test Sequence
-
-For a fresh local run:
+## Fresh Local Test Sequence
 
 ```bash
 just up
@@ -310,20 +113,14 @@ just ps
 just health
 just seed
 just db check
-just db feeds
-just worker signals
-just db prices
-just worker markets
+just worker all
 just db check
-just worker prices
-just worker ecosystem
-just worker divergences
 just smoke
 ```
 
-Then open:
+Open:
 
 ```text
-http://localhost:3000
-http://localhost:8000/docs
+Frontend: http://localhost:3000
+API docs: http://localhost:8000/docs
 ```
