@@ -18,7 +18,7 @@ services:
     build:
       context: backend/
       target: dev
-    command: ["/bin/sh", "-c", "sh /home/src/scripts/entrypoint.sh && uv run arq app.workers.settings.WorkerSettings"]
+    command: ["sh", "/home/src/scripts/entrypoint.sh", "uv", "run", "arq", "app.workers.settings.WorkerSettings"]
     env_file:
       - ./backend/.env
     volumes:
@@ -38,6 +38,8 @@ services:
       - ./frontend/.env
     volumes:
       - ./frontend/app:/home/app
+      - /home/app/node_modules
+      - /home/app/.next
     networks:
       - backend
   

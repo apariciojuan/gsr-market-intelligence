@@ -8,7 +8,8 @@
  *   NEXT_PUBLIC_REAL_DOMAINS=resolutions,markets  → those domains hit the backend,
  *                                                   the rest stay on mock.
  *   NEXT_PUBLIC_DATA_SOURCE=api                    → back-compat: ALL domains real.
- *   (neither set)                                  → ALL mock (default).
+ *   (neither set)                                  → real backend for data domains,
+ *                                                   mock auth (default).
  *
  * Hooks/screens import `api` from here and are agnostic to which implementation
  * is live for each domain — both satisfy the same `GsrApi` interface (LSP).
@@ -23,6 +24,7 @@ type ApiDomain = keyof GsrApi;
 /** Domains the rest of the app talks to. Derived from the mock so it always
  *  matches the GsrApi surface. */
 const ALL_DOMAINS = Object.keys(mockApi) as ApiDomain[];
+const DEFAULT_REAL_DOMAINS = ALL_DOMAINS.filter((domain) => domain !== "auth");
 
 /** Which domains should be served by the real HTTP backend. */
 function realDomains(): Set<ApiDomain> {
@@ -30,6 +32,9 @@ function realDomains(): Set<ApiDomain> {
     return new Set(ALL_DOMAINS); // back-compat: everything real
   }
   const raw = process.env.NEXT_PUBLIC_REAL_DOMAINS ?? "";
+  if (!raw.trim()) {
+    return new Set(DEFAULT_REAL_DOMAINS);
+  }
   const requested = raw
     .split(",")
     .map((s) => s.trim())

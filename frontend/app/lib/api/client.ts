@@ -77,7 +77,7 @@ import type {
 } from "./types";
 
 const BASE_URL = (
-  process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000"
+  process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000/api/v1"
 ).replace(/\/+$/, "");
 
 type QueryValue = string | number | boolean | null | undefined;
