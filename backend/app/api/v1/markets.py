@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import json
 from datetime import UTC, datetime
-from typing import Any
+from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -62,6 +62,16 @@ from app.workers.queue import enqueue_market_volume_refresh
 
 router = APIRouter()
 logger = get_logger('markets')
+
+MarketOrderBy = Literal['volume_total', 'liquidity', 'end_date', 'created_at']
+SortOrder = Literal['asc', 'desc']
+
+_GAMMA_ORDER_BY = {
+    'volume_total': 'volume_num',
+    'liquidity': 'liquidity_num',
+    'end_date': 'endDate',
+    'created_at': 'createdAt',
+}
 
 
 def _parse_json_list(value: Any) -> list[str]:
@@ -158,6 +168,32 @@ def _to_list_item(market: dict) -> MarketListItem:
         liquidity=_to_float(market.get('liquidity')),
         active=bool(market.get('active')),
         resolved=bool(market.get('closed')),
+    )
+
+
+def _market_sort_value(market: dict, order_by: MarketOrderBy) -> Any:
+    if order_by == 'volume_total':
+        return _to_float(
+            market.get('volume') or market.get('volumeNum') or market.get('volume_num')
+        )
+    if order_by == 'liquidity':
+        return _to_float(
+            market.get('liquidity') or market.get('liquidityNum') or market.get('liquidity_num')
+        )
+    if order_by == 'end_date':
+        return market.get('endDate') or ''
+    if order_by == 'created_at':
+        return market.get('createdAt') or market.get('created_at') or ''
+    return 0
+
+
+def _sort_live_markets(
+    markets: list[dict], *, order_by: MarketOrderBy, order: SortOrder
+) -> list[dict]:
+    return sorted(
+        markets,
+        key=lambda market: (_market_sort_value(market, order_by), _to_int(market.get('id'))),
+        reverse=order == 'desc',
     )
 
 
@@ -281,6 +317,8 @@ async def _list_markets_local(
     category: str | None,
     active: bool | None,
     resolved: bool | None,
+    order_by: MarketOrderBy,
+    order: SortOrder,
 ) -> PaginatedMarkets:
     store = MarketsLocalStore(session)
     rows, total = await store.list_markets(
@@ -289,6 +327,8 @@ async def _list_markets_local(
         category=category,
         active=active,
         resolved=resolved,
+        order_by=order_by,
+        order=order,
     )
     items = [_to_list_item(market_to_gamma_dict(market)) for market in rows]
     return PaginatedMarkets(
@@ -373,6 +413,8 @@ async def list_markets(
     category: str | None = Query(default=None),
     active: bool | None = Query(default=None),
     resolved: bool | None = Query(default=None),
+    order_by: Annotated[MarketOrderBy, Query()] = 'volume_total',
+    order: Annotated[SortOrder, Query()] = 'desc',
     session: AsyncSession = Depends(get_session),
 ) -> PaginatedMarkets:
     if prefer_local():
@@ -383,6 +425,8 @@ async def list_markets(
             category=category,
             active=active,
             resolved=resolved,
+            order_by=order_by,
+            order=order,
         )
     try:
         client = PolymarketClient()
@@ -390,27 +434,36 @@ async def list_markets(
             'limit': limit,
             'offset': offset,
             'include_tag': 'true',
+            'order': _GAMMA_ORDER_BY[order_by],
+            'ascending': str(order == 'asc').lower(),
         }
         if resolved is not None:
             query_params['closed'] = str(resolved).lower()
         response = await client.get_markets(query_params=query_params)
         markets = _extract_markets(response.json())
+        fetched_count = len(markets)
 
-        items = [_to_list_item(market) for market in markets]
         if category:
             wanted = category.lower()
-            items = [item for item in items if item.category.lower() == wanted]
+            markets = [
+                market
+                for market in markets
+                if extract_market_category(market).lower() == wanted
+            ]
         if active is not None:
-            items = [item for item in items if item.active == active]
+            markets = [market for market in markets if bool(market.get('active')) == active]
         if resolved is not None:
-            items = [item for item in items if item.resolved == resolved]
+            markets = [market for market in markets if bool(market.get('closed')) == resolved]
+
+        markets = _sort_live_markets(markets, order_by=order_by, order=order)
+        items = [_to_list_item(market) for market in markets]
 
         return PaginatedMarkets(
             items=items,
             total=None,
             limit=limit,
             offset=offset,
-            has_more=len(markets) >= limit,
+            has_more=fetched_count >= limit,
         )
     except Exception as exc:
         if not allow_local_fallback():
@@ -423,6 +476,8 @@ async def list_markets(
             category=category,
             active=active,
             resolved=resolved,
+            order_by=order_by,
+            order=order,
         )
 
 

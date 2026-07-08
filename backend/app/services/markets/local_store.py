@@ -21,6 +21,13 @@ _INTERVAL_WINDOWS: dict[str, timedelta | None] = {
     'max': None,
 }
 
+_MARKET_ORDER_COLUMNS = {
+    'volume_total': Market.volume_total,
+    'liquidity': Market.liquidity,
+    'end_date': Market.end_date,
+    'created_at': Market.created_at,
+}
+
 
 def _json_list(value: Any) -> list[str]:
     if value is None:
@@ -85,6 +92,13 @@ def _apply_market_filters(
     return stmt
 
 
+def _market_order_by(order_by: str, order: str):
+    column = _MARKET_ORDER_COLUMNS.get(order_by, Market.volume_total)
+    if order == 'asc':
+        return column.asc().nullslast()
+    return column.desc().nullslast()
+
+
 class MarketsLocalStore:
     """Query cached markets and price history from PostgreSQL."""
 
@@ -102,6 +116,8 @@ class MarketsLocalStore:
         category: str | None = None,
         active: bool | None = None,
         resolved: bool | None = None,
+        order_by: str = 'volume_total',
+        order: str = 'desc',
     ) -> tuple[list[Market], int]:
         base = select(Market)
         base = _apply_market_filters(base, category=category, active=active, resolved=resolved)
@@ -109,7 +125,7 @@ class MarketsLocalStore:
             (await self.session.scalar(select(func.count()).select_from(base.subquery()))) or 0
         )
         stmt = (
-            base.order_by(Market.volume_total.desc().nullslast(), Market.id.asc())
+            base.order_by(_market_order_by(order_by, order), Market.id.asc())
             .offset(offset)
             .limit(limit)
         )

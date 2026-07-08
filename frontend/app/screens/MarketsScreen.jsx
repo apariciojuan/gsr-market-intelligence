@@ -95,8 +95,8 @@ export default function MarketsScreen() {
       offset: (page - 1) * PAGE_SIZE,
       order,
       order_by: orderBy,
-      active: status.active,
-      resolved: status.resolved,
+      ...(status.active !== "all" ? { active: status.active } : {}),
+      ...(status.resolved !== "all" ? { resolved: status.resolved } : {}),
       ...(category !== "all" ? { category } : {}),
     }),
     [page, order, orderBy, status.active, status.resolved, category]
