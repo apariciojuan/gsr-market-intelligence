@@ -25,6 +25,7 @@ from app.config.log import get_logger
 from app.config.settings import settings
 from app.models import Market, SyncState
 from app.services import PolymarketClient
+from app.services.markets.categories import extract_market_category, normalize_market_tags
 
 logger = get_logger('workers.markets_ingestor')
 
@@ -84,7 +85,17 @@ def _extract_markets(payload: Any) -> list[dict]:
             markets: list[dict] = []
             for event in payload['events']:
                 if isinstance(event, dict) and isinstance(event.get('markets'), list):
-                    markets.extend(m for m in event['markets'] if isinstance(m, dict))
+                    event_tags = event.get('tags')
+                    event_category = event.get('category')
+                    for market in event['markets']:
+                        if not isinstance(market, dict):
+                            continue
+                        merged = dict(market)
+                        if not merged.get('tags') and event_tags:
+                            merged['tags'] = event_tags
+                        if not merged.get('category') and event_category:
+                            merged['category'] = event_category
+                        markets.append(merged)
             return markets
     return []
 
@@ -109,8 +120,8 @@ def _map_market(market: dict, now: datetime) -> dict | None:
         'question': question,
         'description': market.get('description') or None,
         'resolution_source': market.get('resolutionSource') or None,
-        'category': market.get('category') or None,
-        'tags': _parse_json_list(market.get('tags')) or None,
+        'category': extract_market_category(market),
+        'tags': normalize_market_tags(market.get('tags')) or None,
         'outcomes': _parse_json_list(market.get('outcomes')),
         'outcome_token_ids': _parse_json_list(market.get('clobTokenIds')),
         'market_address': None,
@@ -165,6 +176,7 @@ async def collect_markets(ctx: dict) -> int:
                 'offset': 0,
                 'active': 'true',
                 'closed': 'false',
+                'include_tag': 'true',
             }
         )
         raw = response.json()

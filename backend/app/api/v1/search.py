@@ -59,7 +59,17 @@ def _extract_markets(payload: Any) -> list[dict]:
             markets: list[dict] = []
             for event in payload['events']:
                 if isinstance(event, dict) and isinstance(event.get('markets'), list):
-                    markets.extend(m for m in event['markets'] if isinstance(m, dict))
+                    event_tags = event.get('tags')
+                    event_category = event.get('category')
+                    for market in event['markets']:
+                        if not isinstance(market, dict):
+                            continue
+                        merged = dict(market)
+                        if not merged.get('tags') and event_tags:
+                            merged['tags'] = event_tags
+                        if not merged.get('category') and event_category:
+                            merged['category'] = event_category
+                        markets.append(merged)
             return markets
     return []
 
@@ -120,7 +130,10 @@ async def global_search(
         except Exception as exc:
             if not allow_local_fallback():
                 raise
-            logger.warning('search: Polymarket unavailable (%s), falling back to local cache', exc)
+            logger.warning(
+                'search: Polymarket unavailable (%s), falling back to local cache',
+                exc,
+            )
             store = MarketsLocalStore(session)
             for market in await store.search(q, limit=limit_per_group):
                 gamma = market_to_gamma_dict(market)

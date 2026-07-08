@@ -53,6 +53,7 @@ from app.services.markets import (
     allow_local_fallback,
     extract_market_category,
     market_to_gamma_dict,
+    normalize_market_tags,
     prefer_local,
 )
 from app.services.markets.gamma_ingest import upsert_gamma_market
@@ -127,13 +128,23 @@ def _extract_markets(payload: Any) -> list[dict]:
             markets: list[dict] = []
             for event in payload['events']:
                 if isinstance(event, dict) and isinstance(event.get('markets'), list):
-                    markets.extend(m for m in event['markets'] if isinstance(m, dict))
+                    event_tags = event.get('tags')
+                    event_category = event.get('category')
+                    for market in event['markets']:
+                        if not isinstance(market, dict):
+                            continue
+                        merged = dict(market)
+                        if not merged.get('tags') and event_tags:
+                            merged['tags'] = event_tags
+                        if not merged.get('category') and event_category:
+                            merged['category'] = event_category
+                        markets.append(merged)
             return markets
     return []
 
 
 def _to_list_item(market: dict) -> MarketListItem:
-    tags = _parse_json_list(market.get('tags'))
+    tags = normalize_market_tags(market.get('tags'))
     return MarketListItem(
         id=_to_int(market.get('id')),
         condition_id=market.get('conditionId') or '',
@@ -151,7 +162,7 @@ def _to_list_item(market: dict) -> MarketListItem:
 
 
 def _to_market_read(market: dict) -> MarketRead:
-    tags = _parse_json_list(market.get('tags'))
+    tags = normalize_market_tags(market.get('tags'))
     return MarketRead(
         id=_to_int(market.get('id')),
         condition_id=market.get('conditionId') or '',
@@ -207,7 +218,7 @@ def _to_current_prices(market: dict) -> MarketCurrentPrices:
 
 def _overlay_text(market: dict) -> str:
     """Concatenate the fields used to resolve a Chainlink feed for a market."""
-    tags = _parse_json_list(market.get('tags'))
+    tags = normalize_market_tags(market.get('tags'))
     return f'{market.get("question") or ""} {" ".join(tags)}'.strip()
 
 
@@ -375,7 +386,11 @@ async def list_markets(
         )
     try:
         client = PolymarketClient()
-        query_params: dict[str, Any] = {'limit': limit, 'offset': offset}
+        query_params: dict[str, Any] = {
+            'limit': limit,
+            'offset': offset,
+            'include_tag': 'true',
+        }
         if resolved is not None:
             query_params['closed'] = str(resolved).lower()
         response = await client.get_markets(query_params=query_params)
@@ -471,7 +486,10 @@ async def get_market_detail(
     else:
         try:
             client = PolymarketClient()
-            response = await client.get_market_by_slug(market_slug=slug)
+            response = await client.get_market_by_slug(
+                market_slug=slug,
+                query_params={'include_tag': 'true'},
+            )
             market = _first_market(response.json())
             fetched_live = market is not None
         except Exception as exc:
@@ -543,7 +561,10 @@ async def get_market_prices(
                 series_no = await store.get_price_series(local_row.id, 'No', interval=interval)
         else:
             try:
-                response = await client.get_market_by_id(market_id=market_id)
+                response = await client.get_market_by_id(
+                    market_id=market_id,
+                    query_params={'include_tag': 'true'},
+                )
                 market = _first_market(response.json())
                 if market is None:
                     raise HTTPException(
@@ -706,7 +727,14 @@ async def _resolve_market(
             return market_to_gamma_dict(local_row)
 
     try:
-        market = _first_market((await client.get_market_by_id(market_id=market_id)).json())
+        market = _first_market(
+            (
+                await client.get_market_by_id(
+                    market_id=market_id,
+                    query_params={'include_tag': 'true'},
+                )
+            ).json()
+        )
         if market is not None:
             if session is not None and not prefer_local():
                 local_row = await upsert_gamma_market(session, market)

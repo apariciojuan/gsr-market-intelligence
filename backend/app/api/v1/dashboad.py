@@ -101,7 +101,17 @@ def _extract_markets(payload: Any) -> list[dict]:
             markets: list[dict] = []
             for event in payload['events']:
                 if isinstance(event, dict) and isinstance(event.get('markets'), list):
-                    markets.extend(m for m in event['markets'] if isinstance(m, dict))
+                    event_tags = event.get('tags')
+                    event_category = event.get('category')
+                    for market in event['markets']:
+                        if not isinstance(market, dict):
+                            continue
+                        merged = dict(market)
+                        if not merged.get('tags') and event_tags:
+                            merged['tags'] = event_tags
+                        if not merged.get('category') and event_category:
+                            merged['category'] = event_category
+                        markets.append(merged)
             return markets
     return []
 
@@ -164,6 +174,7 @@ async def get_dashboard_top_markets(
                 'order': 'volume24hr',
                 'ascending': 'false',
                 'closed': 'false',
+                'include_tag': 'true',
             }
         )
         markets = _extract_markets(response.json())[:limit]
@@ -172,7 +183,10 @@ async def get_dashboard_top_markets(
     except Exception as exc:
         if not allow_local_fallback():
             raise
-        logger.warning('Polymarket top markets unavailable (%s), falling back to local cache', exc)
+        logger.warning(
+            'Polymarket top markets unavailable (%s), falling back to local cache',
+            exc,
+        )
         store = MarketsLocalStore(session)
         rows, _ = await store.list_markets(limit=limit, offset=0, active=True, resolved=False)
         items = [_to_top_market_item(market_to_gamma_dict(market)) for market in rows]
@@ -199,12 +213,21 @@ async def get_dashboard_summary(
     else:
         try:
             client = PolymarketClient()
-            response = await client.get_markets(query_params={'limit': 100, 'closed': 'false'})
+            response = await client.get_markets(
+                query_params={
+                    'limit': 100,
+                    'closed': 'false',
+                    'include_tag': 'true',
+                }
+            )
             markets = _extract_markets(response.json())
         except Exception as exc:
             if not allow_local_fallback():
                 raise
-            logger.warning('Polymarket summary unavailable (%s), falling back to local cache', exc)
+            logger.warning(
+                'Polymarket summary unavailable (%s), falling back to local cache',
+                exc,
+            )
             store = MarketsLocalStore(session)
             rows, _ = await store.list_markets(limit=100, offset=0, active=True, resolved=False)
             markets = [market_to_gamma_dict(market) for market in rows]

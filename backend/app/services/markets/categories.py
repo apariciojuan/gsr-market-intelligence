@@ -175,12 +175,32 @@ def _tag_labels(value: Any) -> list[str]:
             labels.extend(_tag_labels(item))
         return labels
     if isinstance(value, Mapping):
+        if value.get('forceHide') is True:
+            return []
         for key in ('label', 'name', 'slug'):
             label = _clean_label(value.get(key))
             if label:
                 return [label]
         return []
     return [_clean_label(value)]
+
+
+def normalize_market_tags(value: Any) -> list[str]:
+    """Return stable display labels from Gamma tags.
+
+    Gamma may send tags as JSON strings, strings, or objects like
+    ``{"label": "Politics", "slug": "politics"}``.
+    """
+    tags: list[str] = []
+    seen: set[str] = set()
+    for raw_label in _tag_labels(value):
+        label = _clean_label(raw_label)
+        key = label.lower()
+        if not label or key == 'all' or key in seen:
+            continue
+        seen.add(key)
+        tags.append(label)
+    return tags
 
 
 def _has_keyword(haystack: str, keyword: str) -> bool:
