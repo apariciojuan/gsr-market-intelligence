@@ -10,6 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models import Market, PriceHistory
 from app.schemas.market import PricePoint
+from app.services.markets.categories import extract_market_category
 
 _INTERVAL_WINDOWS: dict[str, timedelta | None] = {
     '1m': timedelta(hours=1),
@@ -46,7 +47,7 @@ def market_to_gamma_dict(market: Market) -> dict[str, Any]:
     data['slug'] = market.slug
     data['question'] = market.question
     data['description'] = market.description or data.get('description') or ''
-    data['category'] = market.category or data.get('category') or ''
+    data['category'] = market.category or extract_market_category(data)
     data['tags'] = market.tags if market.tags is not None else data.get('tags')
     data['outcomes'] = market.outcomes if market.outcomes is not None else data.get('outcomes')
     data['clobTokenIds'] = (

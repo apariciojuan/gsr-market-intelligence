@@ -30,6 +30,7 @@ from app.services import PolymarketClient
 from app.services.markets import (
     MarketsLocalStore,
     allow_local_fallback,
+    extract_market_category,
     market_to_gamma_dict,
     prefer_local,
 )
@@ -97,7 +98,7 @@ async def global_search(
                     id=_to_int(gamma.get('id')),
                     slug=gamma.get('slug') or '',
                     question=gamma.get('question') or '',
-                    category=gamma.get('category') or '',
+                    category=extract_market_category(gamma),
                 )
             )
     else:
@@ -111,7 +112,7 @@ async def global_search(
                         id=_to_int(market.get('id')),
                         slug=market.get('slug') or '',
                         question=market.get('question') or '',
-                        category=market.get('category') or '',
+                        category=extract_market_category(market),
                     )
                 )
         except (json.JSONDecodeError, KeyError, TypeError, ValueError):
@@ -128,7 +129,7 @@ async def global_search(
                         id=_to_int(gamma.get('id')),
                         slug=gamma.get('slug') or '',
                         question=gamma.get('question') or '',
-                        category=gamma.get('category') or '',
+                        category=extract_market_category(gamma),
                     )
                 )
 

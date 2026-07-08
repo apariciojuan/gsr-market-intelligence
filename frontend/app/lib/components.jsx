@@ -85,8 +85,18 @@ const CATEGORY_STYLES = {
   sports: { name: "Sports", color: "#22C55E" },
   economics: { name: "Economics", color: "#06B6D4" },
   pop: { name: "Pop Culture", color: "#EC4899" },
+  "pop-culture": { name: "Pop Culture", color: "#EC4899" },
   science: { name: "Science", color: "#14B8A6" },
+  other: { name: "Other", color: "#8A92A6" },
 };
+
+function normalizeCategory(cat) {
+  if (cat == null) return { key: "other", label: "Other" };
+  const label = String(cat).trim();
+  if (!label) return { key: "other", label: "Other" };
+  const key = label.toLowerCase().replace(/[_\s]+/g, "-");
+  return { key, label };
+}
 
 // ---------- Lucide icon (svg) ----------
 export function Icon({ name, size = 16, color = "currentColor", className = "", strokeWidth = 1.75 }) {
@@ -190,7 +200,8 @@ export function AddressPill({ address, label, withLink = true }) {
 
 // ---------- Category pill ----------
 export function CatPill({ cat }) {
-  const c = CATEGORY_STYLES[cat] || { name: cat, color: "#8A92A6" };
+  const { key, label } = normalizeCategory(cat);
+  const c = CATEGORY_STYLES[key] || { name: label, color: "#8A92A6" };
   return <span className="pill" style={{ background: c.color + "1A", color: c.color, borderColor: c.color + "40" }}>
     <span className="dot" style={{ background: c.color }}/>{c.name}
   </span>;

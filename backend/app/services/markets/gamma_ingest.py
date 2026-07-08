@@ -12,6 +12,7 @@ from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models import Market
+from app.services.markets.categories import extract_market_category
 
 
 def _parse_json_list(value: Any) -> list[str]:
@@ -71,7 +72,7 @@ def map_gamma_market(market: dict, now: datetime) -> dict | None:
         'question': question,
         'description': market.get('description') or None,
         'resolution_source': market.get('resolutionSource') or None,
-        'category': market.get('category') or None,
+        'category': extract_market_category(market),
         'tags': _parse_json_list(market.get('tags')) or None,
         'outcomes': _parse_json_list(market.get('outcomes')),
         'outcome_token_ids': _parse_json_list(market.get('clobTokenIds')),

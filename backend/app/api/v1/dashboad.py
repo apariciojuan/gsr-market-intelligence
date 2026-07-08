@@ -44,6 +44,7 @@ from app.services.divergence.series_provider import SeriesProvider
 from app.services.markets import (
     MarketsLocalStore,
     allow_local_fallback,
+    extract_market_category,
     market_to_gamma_dict,
     prefer_local,
 )
@@ -123,7 +124,7 @@ def _to_top_market_item(market: dict) -> TopMarketItem:
         id=_to_int(market.get('id')),
         slug=market.get('slug') or '',
         question=market.get('question') or '',
-        category=market.get('category') or '',
+        category=extract_market_category(market),
         price_yes=price_yes,
         price_no=price_no,
         # No 24h history available yet; computing it per market is too costly.

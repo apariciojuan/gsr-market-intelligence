@@ -51,6 +51,7 @@ from app.services.markets import (
     MarketsLocalStore,
     VolumeCacheStore,
     allow_local_fallback,
+    extract_market_category,
     market_to_gamma_dict,
     prefer_local,
 )
@@ -132,13 +133,14 @@ def _extract_markets(payload: Any) -> list[dict]:
 
 
 def _to_list_item(market: dict) -> MarketListItem:
+    tags = _parse_json_list(market.get('tags'))
     return MarketListItem(
         id=_to_int(market.get('id')),
         condition_id=market.get('conditionId') or '',
         slug=market.get('slug') or '',
         question=market.get('question') or '',
-        category=market.get('category') or '',
-        tags=_parse_json_list(market.get('tags')),
+        category=extract_market_category(market),
+        tags=tags,
         outcomes=_parse_json_list(market.get('outcomes')),
         end_date=market.get('endDate') or '',
         volume_total=_to_float(market.get('volume')),
@@ -149,6 +151,7 @@ def _to_list_item(market: dict) -> MarketListItem:
 
 
 def _to_market_read(market: dict) -> MarketRead:
+    tags = _parse_json_list(market.get('tags'))
     return MarketRead(
         id=_to_int(market.get('id')),
         condition_id=market.get('conditionId') or '',
@@ -156,8 +159,8 @@ def _to_market_read(market: dict) -> MarketRead:
         slug=market.get('slug') or '',
         question=market.get('question') or '',
         description=market.get('description') or '',
-        category=market.get('category') or '',
-        tags=_parse_json_list(market.get('tags')),
+        category=extract_market_category(market),
+        tags=tags,
         outcomes=_parse_json_list(market.get('outcomes')),
         outcome_token_ids=_parse_json_list(market.get('clobTokenIds')),
         market_address='',
