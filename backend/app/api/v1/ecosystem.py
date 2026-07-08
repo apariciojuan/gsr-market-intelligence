@@ -5,10 +5,10 @@ Every response matches EXACTLY the frontend contract in
 
 This is the first router that touches the database: each endpoint depends on
 ``get_session`` and delegates to ``EcosystemService``. KPIs, sparkline and
-``by-category`` read the append-only ``ecosystem_metrics`` snapshots; ``volume``
-and ``active-markets`` are computed on the fly from ``markets``; ``calibration``,
-``activity-heatmap`` and ``top-wallets`` have no data source yet (Phase 2) and
-degrade honestly to empty, well-shaped payloads with HTTP 200.
+``volume``, ``active-markets``, ``by-category``, ``calibration``,
+``activity-heatmap`` and ``top-wallets`` are computed on the fly from local
+indexed tables when data is available, degrading to empty well-shaped payloads
+with HTTP 200 when it is not.
 """
 
 # ``Depends``/``Query`` in argument defaults is the FastAPI idiom (B008 is moot here).
@@ -114,7 +114,7 @@ async def get_ecosystem_active_markets(
     operation_id='get_ecosystem_by_category',
     tags=['ecosystem'],
     summary='Get ecosystem volume by category',
-    description='Volume split by primary tag from the latest by_category snapshot.',
+    description='Volume split by display category from indexed markets.',
 )
 async def get_ecosystem_by_category(
     window: str | None = Query(default=None),
@@ -130,7 +130,7 @@ async def get_ecosystem_by_category(
     operation_id='get_ecosystem_calibration',
     tags=['ecosystem'],
     summary='Get ecosystem calibration',
-    description='Prediction calibration over resolved markets (empty for now — 0 resolved).',
+    description='Prediction calibration over resolved markets using YES price history.',
 )
 async def get_ecosystem_calibration(
     window: CalibrationWindow = Query(default='all'),
@@ -147,7 +147,7 @@ async def get_ecosystem_calibration(
     operation_id='get_ecosystem_activity_heatmap',
     tags=['ecosystem'],
     summary='Get ecosystem activity heatmap',
-    description='Day-of-week / hour activity matrix from transactions (empty for now).',
+    description='Day-of-week / hour activity matrix from indexed transactions.',
 )
 async def get_ecosystem_activity_heatmap(
     window: str | None = Query(default=None),
@@ -163,14 +163,15 @@ async def get_ecosystem_activity_heatmap(
     operation_id='get_ecosystem_top_wallets',
     tags=['ecosystem'],
     summary='Get ecosystem top wallets',
-    description='Top wallets from wallet_positions (empty for now — paginated envelope).',
+    description='Top wallets aggregated from wallet_positions.',
 )
 async def get_ecosystem_top_wallets(
     limit: int = Query(default=50, ge=1, le=200),
+    offset: int = Query(default=0, ge=0),
     order_by: TopWalletsOrderBy = Query(default='volume'),
     window: str | None = Query(default=None),
     session: AsyncSession = Depends(get_session),
 ) -> PaginatedTopWallets:
     return await EcosystemService(session).get_top_wallets(
-        limit=limit, order_by=order_by, window=window
+        limit=limit, offset=offset, order_by=order_by, window=window
     )

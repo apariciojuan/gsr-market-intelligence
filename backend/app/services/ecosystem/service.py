@@ -7,36 +7,38 @@ response shapes mirror EXACTLY the frontend contract in
 
 Two read strategies:
 
-  - Snapshot-backed (``/kpis``, ``/kpi/{key}/sparkline``, ``/by-category``):
-    served from the latest snapshot(s); deltas and sparklines mature as more
-    aggregation cycles accumulate.
-  - On-the-fly from ``markets`` (``/volume``, ``/active-markets``): bucketed over
-    the requested interval. ``/volume`` only knows ``new_markets`` per bucket
-    (REAL); there is no temporal volume source yet (``price_history.volume_1h``
-    is NULL), so ``volume_usd`` is ``0.0``. ``/active-markets`` is exact "now"
-    and approximate for past buckets (overlap of ``[start_date, end_date]``).
+  - Snapshot-backed (``/kpis``, ``/kpi/{key}/sparkline``): served from the latest
+    snapshot(s); deltas and sparklines mature as more aggregation cycles
+    accumulate.
+  - On-the-fly from local tables and live fallbacks: ``/by-category``, ``/volume``,
+    ``/active-markets``, ``/calibration``, ``/activity-heatmap`` and
+    ``/top-wallets`` are computed from ``markets``, ``price_history``,
+    ``transactions`` and ``wallet_positions`` as available; empty transaction
+    and wallet tables fall back to the Polymarket Data API ``/trades``.
 
-Honest degradation: endpoints with no data source yet
-(``/calibration`` over resolved markets — currently 0 —, ``/activity-heatmap``
-over the empty ``transactions`` table, ``/top-wallets`` over the empty
-``wallet_positions`` table) return empty/zero payloads with the correct shape
-and HTTP 200 — never an error.
+Honest degradation: when a backing table is empty or a market lacks the needed
+resolution/price data, the endpoint returns an empty/zero payload with the
+correct shape and HTTP 200 — never an error.
 """
 
 from __future__ import annotations
 
+from collections import defaultdict
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
-from sqlalchemy import select
+from sqlalchemy import case, desc, distinct, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config.log import get_logger
-from app.models import EcosystemMetric, Market
+from app.models import EcosystemMetric, Market, PriceHistory, Transaction, WalletPosition
 from app.schemas.dashboard import KpiItem
 from app.schemas.ecosystem import (
     ActivityHeatmap,
+    ActivityHeatmapCell,
     Calibration,
+    CalibrationBucket,
+    CalibrationMarket,
     EcoActiveMarkets,
     EcoActiveMarketsBucket,
     EcoByCategory,
@@ -46,7 +48,10 @@ from app.schemas.ecosystem import (
     EcoVolume,
     EcoVolumeBucket,
     PaginatedTopWallets,
+    TopWallet,
 )
+from app.services.ecosystem.categories import build_by_category, market_category
+from app.services.polymarket_client import PolymarketClient
 
 logger = get_logger('ecosystem')
 
@@ -66,6 +71,10 @@ _INTERVAL_STEP: dict[str, timedelta] = {
     '1m': timedelta(days=30),
 }
 _INTERVAL_BUCKETS = 30
+_TRADE_PAGE_SIZE = 100
+_MAX_LIVE_TRADES = 5000
+_CALIBRATION_SAMPLE_LIMIT = 12
+_CALIBRATION_TERMINAL_EPSILON = 0.02
 
 
 def _to_float(value: Any) -> float:
@@ -74,6 +83,128 @@ def _to_float(value: Any) -> float:
         return float(value)
     except (TypeError, ValueError):
         return 0.0
+
+
+def _window_cutoff(window: str | None, now: datetime) -> datetime | None:
+    """Translate ecosystem window labels into an inclusive lower timestamp."""
+    if window == '90d':
+        return now - timedelta(days=90)
+    if window == '1y':
+        return now - timedelta(days=365)
+    if window and window.endswith('d'):
+        try:
+            return now - timedelta(days=int(window[:-1]))
+        except ValueError:
+            return None
+    return None
+
+
+def _resolved_yes_outcome(market: Market) -> int | None:
+    """Return 1 when the resolved outcome is YES, 0 when it is a known non-YES."""
+    resolved = (market.resolved_outcome or '').strip()
+    if not resolved:
+        return None
+
+    resolved_key = resolved.lower()
+    if resolved_key in {'yes', 'true', '1'}:
+        return 1
+    if resolved_key in {'no', 'false', '0'}:
+        return 0
+
+    outcomes = market.outcomes if isinstance(market.outcomes, list) else []
+    if outcomes:
+        return 1 if str(outcomes[0]).strip().lower() == resolved_key else 0
+    return None
+
+
+def _inferred_yes_outcome(final_yes_price: float) -> int | None:
+    """Infer a resolved YES/NO outcome from a terminal YES price."""
+    if final_yes_price >= 0.95:
+        return 1
+    if final_yes_price <= 0.05:
+        return 0
+    return None
+
+
+def _calibration_probability(prices: list[float]) -> float | None:
+    """Return a YES probability, preferring pre-resolution prices when available."""
+    if not prices:
+        return None
+
+    non_terminal = [
+        price
+        for price in prices
+        if _CALIBRATION_TERMINAL_EPSILON < price < 1.0 - _CALIBRATION_TERMINAL_EPSILON
+    ]
+    sample = (
+        non_terminal[-_CALIBRATION_SAMPLE_LIMIT:]
+        if non_terminal
+        else prices[-_CALIBRATION_SAMPLE_LIMIT:]
+    )
+    probability = sum(sample) / len(sample)
+    return max(
+        _CALIBRATION_TERMINAL_EPSILON,
+        min(1.0 - _CALIBRATION_TERMINAL_EPSILON, probability),
+    )
+
+
+def _trade_timestamp(row: dict) -> int:
+    try:
+        return int(row.get('timestamp') or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
+def _trade_value_usd(row: dict) -> float:
+    try:
+        size = float(row.get('size') or 0)
+        price = float(row.get('price') or 0)
+    except (TypeError, ValueError):
+        return 0.0
+    return max(0.0, size * price)
+
+
+def _trade_wallet(row: dict) -> str:
+    return str(row.get('proxyWallet') or '').strip().lower()
+
+
+async def _fetch_live_trades(
+    *,
+    since: datetime | None = None,
+    max_trades: int = _MAX_LIVE_TRADES,
+) -> list[dict]:
+    """Fetch recent global trades from Polymarket Data API."""
+    client = PolymarketClient()
+    since_ts = int(since.timestamp()) if since is not None else None
+    trades: list[dict] = []
+    offset = 0
+
+    while len(trades) < max_trades:
+        try:
+            response = await client.get_trades({'limit': _TRADE_PAGE_SIZE, 'offset': offset})
+            batch = response.json()
+        except Exception:
+            logger.warning('ecosystem live trades fetch failed at offset=%s', offset)
+            break
+
+        if not isinstance(batch, list) or not batch:
+            break
+
+        for row in batch:
+            if not isinstance(row, dict):
+                continue
+            ts = _trade_timestamp(row)
+            if since_ts is not None and ts < since_ts:
+                return trades
+            trades.append(row)
+            if len(trades) >= max_trades:
+                break
+
+        if len(batch) < _TRADE_PAGE_SIZE:
+            break
+        offset += _TRADE_PAGE_SIZE
+
+    return trades
 
 
 class EcosystemService:
@@ -155,14 +286,18 @@ class EcosystemService:
         return EcoSparkline(key=key, values=values, direction=direction)
 
     async def get_by_category(self, window: str | None = None) -> EcoByCategory:
-        """Volume split by primary tag from the latest ``by_category`` snapshot."""
+        """Volume split by display category from live markets.
+
+        The endpoint computes this live instead of trusting the latest snapshot so
+        stale snapshots generated by older category logic do not keep the UI stuck
+        with all volume under ``Other``.
+        """
         window_label = window or 'all'
-        snapshot = await self._latest('by_category')
-        if snapshot is None:
+        markets = list((await self.session.scalars(select(Market))).all())
+        if not markets:
             return EcoByCategory(window=window_label, total_volume_usd=0.0, categories=[])
 
-        metadata = snapshot.metric_metadata or {}
-        raw_categories = metadata.get('categories') or []
+        total_volume, raw_categories = build_by_category(markets)
         categories = [
             EcoCategory(
                 name=str(entry.get('name') or ''),
@@ -175,7 +310,7 @@ class EcosystemService:
         ]
         return EcoByCategory(
             window=window_label,
-            total_volume_usd=_to_float(snapshot.metric_value),
+            total_volume_usd=_to_float(total_volume),
             categories=categories,
         )
 
@@ -255,46 +390,309 @@ class EcosystemService:
     async def get_calibration(
         self, window: str = 'all', category: str | None = None
     ) -> Calibration:
-        """Prediction calibration over resolved markets (currently 0).
-
-        ``overall_brier_score`` is the mean of ``(implied_prob_avg - outcome)^2``;
-        buckets are 10 fixed 0.1-wide bins. With no resolved markets yet this is an
-        honest empty payload (``markets:[], buckets:[], overall_brier_score:0.0``).
-        """
+        """Prediction calibration over resolved markets using YES price history."""
         category_label = category or 'all'
-        # No resolved markets yet (and no implied-probability history source);
-        # degrade honestly to an empty, well-shaped payload.
+
+        stmt = (
+            select(Market, PriceHistory.price, PriceHistory.time)
+            .join(PriceHistory, PriceHistory.market_id == Market.id)
+            .where(Market.resolved.is_(True))
+            .where(func.lower(PriceHistory.outcome) == 'yes')
+            .order_by(Market.id.asc(), PriceHistory.time.asc())
+        )
+        cutoff = _window_cutoff(window, datetime.now(tz=UTC))
+        if cutoff is not None:
+            stmt = stmt.where(func.coalesce(Market.resolved_at, Market.end_date) >= cutoff)
+
+        prices_by_market: dict[int, list[tuple[Market, float]]] = defaultdict(list)
+        for market, price, _time in (await self.session.execute(stmt)).all():
+            prices_by_market[market.id].append((market, _to_float(price)))
+
+        entries: list[CalibrationMarket] = []
+        brier_terms: list[float] = []
+        bucket_values: list[list[tuple[float, int]]] = [[] for _ in range(10)]
+
+        for market_prices in prices_by_market.values():
+            market = market_prices[-1][0]
+            display_category = market_category(market)
+            if category_label != 'all' and display_category != category_label:
+                continue
+
+            final_yes_price = market_prices[-1][1]
+            outcome = _resolved_yes_outcome(market)
+            if outcome is None:
+                outcome = _inferred_yes_outcome(final_yes_price)
+            if outcome is None:
+                continue
+
+            probability = _calibration_probability([price for _, price in market_prices])
+            if probability is None:
+                continue
+            entries.append(
+                CalibrationMarket(
+                    id=market.id,
+                    slug=market.slug,
+                    question=market.question,
+                    implied_prob_avg=probability,
+                    outcome=outcome,
+                    category=display_category,
+                    volume_usd=_to_float(market.volume_total),
+                )
+            )
+            brier_terms.append((probability - outcome) ** 2)
+            bucket_index = min(9, int(probability * 10))
+            bucket_values[bucket_index].append((probability, outcome))
+
+        buckets: list[CalibrationBucket] = []
+        for index, values in enumerate(bucket_values):
+            if not values:
+                continue
+            predicted_avg = sum(probability for probability, _ in values) / len(values)
+            actual_rate = sum(outcome for _, outcome in values) / len(values)
+            buckets.append(
+                CalibrationBucket(
+                    range=f'{index / 10:.1f}-{(index + 1) / 10:.1f}',
+                    predicted_avg=round(predicted_avg, 4),
+                    actual_rate=round(actual_rate, 4),
+                    count=len(values),
+                )
+            )
+
         return Calibration(
             window=window,
             category=category_label,
-            markets_count=0,
-            markets=[],
-            buckets=[],
-            overall_brier_score=0.0,
+            markets_count=len(entries),
+            markets=entries,
+            buckets=buckets,
+            overall_brier_score=round(sum(brier_terms) / len(brier_terms), 6)
+            if brier_terms
+            else 0.0,
         )
 
     async def get_activity_heatmap(self, window: str | None = None) -> ActivityHeatmap:
-        """Day-of-week / hour activity matrix from ``transactions`` (empty for now)."""
+        """Day-of-week / hour activity matrix from indexed transactions."""
         window_label = window or 'all'
-        # The ``transactions`` table is empty (Phase 2); honest empty matrix.
-        return ActivityHeatmap(window=window_label, matrix=[])
+        cutoff = _window_cutoff(window, datetime.now(tz=UTC))
+        stmt = select(
+            func.extract('dow', Transaction.time).label('dow'),
+            func.extract('hour', Transaction.time).label('hour'),
+            func.count().label('tx_count'),
+        )
+        if cutoff is not None:
+            stmt = stmt.where(Transaction.time >= cutoff)
+        stmt = stmt.group_by('dow', 'hour').order_by('dow', 'hour')
+
+        matrix = [
+            ActivityHeatmapCell(
+                day=(int(dow) + 6) % 7,
+                hour=int(hour),
+                tx_count=int(tx_count),
+            )
+            for dow, hour, tx_count in (await self.session.execute(stmt)).all()
+        ]
+        if matrix:
+            return ActivityHeatmap(window=window_label, matrix=matrix)
+
+        trades = await _fetch_live_trades(since=cutoff)
+        buckets: dict[tuple[int, int], int] = defaultdict(int)
+        trade_days: set[int] = set()
+        for row in trades:
+            ts = _trade_timestamp(row)
+            if ts <= 0:
+                continue
+            timestamp = datetime.fromtimestamp(ts, tz=UTC)
+            trade_days.add(timestamp.toordinal())
+            buckets[(timestamp.weekday(), timestamp.hour)] += 1
+
+        if len(trade_days) >= 2:
+            matrix = [
+                ActivityHeatmapCell(day=day, hour=hour, tx_count=tx_count)
+                for (day, hour), tx_count in sorted(buckets.items())
+            ]
+            return ActivityHeatmap(window=window_label, matrix=matrix)
+
+        price_stmt = select(
+            func.extract('dow', PriceHistory.time).label('dow'),
+            func.extract('hour', PriceHistory.time).label('hour'),
+            func.count().label('tx_count'),
+        )
+        if cutoff is not None:
+            price_stmt = price_stmt.where(PriceHistory.time >= cutoff)
+        price_stmt = price_stmt.group_by('dow', 'hour').order_by('dow', 'hour')
+
+        matrix = [
+            ActivityHeatmapCell(
+                day=(int(dow) + 6) % 7,
+                hour=int(hour),
+                tx_count=int(tx_count),
+            )
+            for dow, hour, tx_count in (await self.session.execute(price_stmt)).all()
+        ]
+        return ActivityHeatmap(window=window_label, matrix=matrix)
 
     async def get_top_wallets(
         self,
         limit: int = 50,
         order_by: str = 'volume',
         window: str | None = None,
+        offset: int = 0,
     ) -> PaginatedTopWallets:
-        """Top wallets from ``wallet_positions`` (empty for now).
+        """Top wallets aggregated from ``wallet_positions``."""
+        volume_expr = (
+            func.coalesce(func.sum(WalletPosition.total_bought_usd), 0)
+            + func.coalesce(func.sum(WalletPosition.total_sold_usd), 0)
+        ).label('total_volume_usd')
+        trade_count_expr = func.count(WalletPosition.id).label('trade_count')
+        market_count_expr = func.count(distinct(WalletPosition.market_id)).label('market_count')
+        pnl_expr = func.coalesce(func.sum(WalletPosition.realized_pnl_usd), 0).label(
+            'realized_pnl_usd'
+        )
+        success_rate_expr = (
+            func.coalesce(
+                func.avg(case((WalletPosition.realized_pnl_usd > 0, 1.0), else_=0.0)),
+                0,
+            )
+            * 100
+        ).label('success_rate_pct')
+        first_seen_expr = func.min(WalletPosition.last_activity_at).label('first_seen_at')
 
-        Returns the ``PaginatedTopWallets`` envelope with the wallets in
-        ``.items`` (never a bare array). The ``wallet_positions`` table is empty
-        (Phase 2), so this degrades honestly to an empty, well-shaped page.
-        """
+        base = select(WalletPosition.wallet_address)
+        cutoff = _window_cutoff(window, datetime.now(tz=UTC))
+        if cutoff is not None:
+            base = base.where(WalletPosition.last_activity_at >= cutoff)
+        wallets = await self.session.scalars(base.group_by(WalletPosition.wallet_address))
+        total = len(wallets.all())
+
+        stmt = select(
+            WalletPosition.wallet_address,
+            volume_expr,
+            trade_count_expr,
+            market_count_expr,
+            pnl_expr,
+            success_rate_expr,
+            first_seen_expr,
+        )
+        if cutoff is not None:
+            stmt = stmt.where(WalletPosition.last_activity_at >= cutoff)
+        stmt = stmt.group_by(WalletPosition.wallet_address)
+
+        order_exprs = {
+            'volume': volume_expr,
+            'pnl': pnl_expr,
+            'trades': trade_count_expr,
+            'success_rate': success_rate_expr,
+        }
+        stmt = (
+            stmt.order_by(desc(order_exprs.get(order_by, volume_expr)))
+            .offset(offset)
+            .limit(limit)
+        )
+
+        items = [
+            TopWallet(
+                address=wallet_address,
+                address_label=None,
+                total_volume_usd=_to_float(total_volume),
+                trade_count=int(trade_count),
+                market_count=int(market_count),
+                realized_pnl_usd=_to_float(realized_pnl),
+                success_rate_pct=_to_float(success_rate),
+                first_seen_at=first_seen_at.isoformat() if first_seen_at else '',
+            )
+            for (
+                wallet_address,
+                total_volume,
+                trade_count,
+                market_count,
+                realized_pnl,
+                success_rate,
+                first_seen_at,
+            ) in (await self.session.execute(stmt)).all()
+        ]
+
+        if not items and total == 0:
+            return await self._get_live_top_wallets(
+                limit=limit,
+                offset=offset,
+                order_by=order_by,
+                window=window,
+            )
+
         return PaginatedTopWallets(
-            items=[],
-            total=0,
+            items=items,
+            total=total,
             limit=limit,
-            offset=0,
-            has_more=False,
+            offset=offset,
+            has_more=offset + len(items) < total,
+        )
+
+    async def _get_live_top_wallets(
+        self,
+        *,
+        limit: int,
+        offset: int,
+        order_by: str,
+        window: str | None,
+    ) -> PaginatedTopWallets:
+        """Fallback top wallets from recent Polymarket Data API trades."""
+        cutoff = _window_cutoff(window, datetime.now(tz=UTC))
+        trades = await _fetch_live_trades(since=cutoff)
+        by_wallet: dict[str, dict[str, Any]] = {}
+
+        for row in trades:
+            wallet = _trade_wallet(row)
+            if not wallet:
+                continue
+            stats = by_wallet.setdefault(
+                wallet,
+                {
+                    'total_volume_usd': 0.0,
+                    'trade_count': 0,
+                    'markets': set(),
+                    'first_seen_ts': None,
+                    'label': None,
+                },
+            )
+            stats['total_volume_usd'] += _trade_value_usd(row)
+            stats['trade_count'] += 1
+            if row.get('conditionId'):
+                stats['markets'].add(str(row.get('conditionId')))
+            ts = _trade_timestamp(row)
+            if ts > 0 and (stats['first_seen_ts'] is None or ts < stats['first_seen_ts']):
+                stats['first_seen_ts'] = ts
+            label = str(row.get('name') or row.get('pseudonym') or '').strip()
+            if label and not stats['label']:
+                stats['label'] = label
+
+        sort_key = {
+            'volume': lambda item: item[1]['total_volume_usd'],
+            'trades': lambda item: item[1]['trade_count'],
+            'pnl': lambda item: item[1]['total_volume_usd'],
+            'success_rate': lambda item: item[1]['trade_count'],
+        }.get(order_by, lambda item: item[1]['total_volume_usd'])
+
+        ranked = sorted(by_wallet.items(), key=sort_key, reverse=True)
+        page = ranked[offset : offset + limit]
+        items = [
+            TopWallet(
+                address=wallet,
+                address_label=stats['label'],
+                total_volume_usd=round(stats['total_volume_usd'], 2),
+                trade_count=int(stats['trade_count']),
+                market_count=len(stats['markets']),
+                realized_pnl_usd=0.0,
+                success_rate_pct=0.0,
+                first_seen_at=datetime.fromtimestamp(stats['first_seen_ts'], tz=UTC).isoformat()
+                if stats['first_seen_ts']
+                else '',
+            )
+            for wallet, stats in page
+        ]
+
+        return PaginatedTopWallets(
+            items=items,
+            total=len(ranked),
+            limit=limit,
+            offset=offset,
+            has_more=offset + len(items) < len(ranked),
         )

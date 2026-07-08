@@ -884,6 +884,7 @@ export type TopWalletsOrderBy = "volume" | "pnl" | "trades" | "success_rate";
 
 export interface TopWalletsParams {
   limit?: number;
+  offset?: number;
   order_by?: TopWalletsOrderBy;
   window?: string;
 }

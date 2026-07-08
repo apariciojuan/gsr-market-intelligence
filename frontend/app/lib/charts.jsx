@@ -30,7 +30,7 @@
  * @typedef {import("./api/types").PriceInterval} PriceInterval
  */
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import * as Recharts from "recharts";
 import {
   ChartContainer,
@@ -44,6 +44,7 @@ import {
 } from "./components";
 
 const R = Recharts;
+const EMPTY_ARRAY = [];
 
 // ----- Category presentation map (UI only — color/label, not a data shape) ---
 const CATEGORY_STYLES = {
@@ -57,6 +58,19 @@ const CATEGORY_STYLES = {
 };
 function catColor(cat) {
   return (CATEGORY_STYLES[cat] || { color: "#4F8CFF" }).color;
+}
+
+function clamp01(value) {
+  return Math.max(0, Math.min(1, Number(value) || 0));
+}
+
+function stableJitter(seed) {
+  const raw = String(seed ?? "");
+  let hash = 0;
+  for (let i = 0; i < raw.length; i++) {
+    hash = (hash * 31 + raw.charCodeAt(i)) >>> 0;
+  }
+  return ((hash % 1000) / 999 - 0.5) * 0.06;
 }
 
 // =============================================================
@@ -1053,38 +1067,73 @@ function CategoryBars({ categories, loading = false, empty = false }) {
  */
 function CalibrationScatter({ calibration, loading = false, empty = false }) {
   const cal = calibration;
-  const allMarkets = cal?.markets ?? [];
-  const buckets = cal?.buckets ?? [];
+  const allMarkets = cal?.markets ?? EMPTY_ARRAY;
+  const buckets = cal?.buckets ?? EMPTY_ARRAY;
   const isEmpty = empty || (!loading && allMarkets.length === 0);
 
   const [filter, setFilter] = useState("all");
   const categories = Array.from(new Set(allMarkets.map((m) => m.category)));
   const cats = ["all", ...categories];
 
-  // scatter points: x = implied prob, y = outcome, with tiny jitter on y
-  const pts = (filter === "all" ? allMarkets : allMarkets.filter((m) => m.category === filter)).map(
-    (m) => ({
-      x: m.implied_prob_avg,
-      y: m.outcome + (Math.random() - 0.5) * 0.06,
-      outcome: m.outcome,
-      category: m.category,
-      volume: m.volume_usd,
-      slug: m.slug,
-      question: m.question,
-    })
+  const visibleMarkets = useMemo(
+    () => (filter === "all" ? allMarkets : allMarkets.filter((m) => m.category === filter)),
+    [allMarkets, filter]
   );
-  // aggregated buckets: x = predicted_avg, y = actual_rate
-  const bucketPts = buckets.map((b) => ({
-    x: b.predicted_avg,
-    y: b.actual_rate,
-    range: b.range,
-    count: b.count,
-  }));
+
+  // Individual outcomes are binary; keep a deterministic vertical offset so
+  // overlapping YES/NO markets are visible without moving between renders.
+  const pts = useMemo(
+    () =>
+      visibleMarkets.map((m) => ({
+        x: clamp01(m.implied_prob_avg),
+        y: clamp01(m.outcome + stableJitter(m.id ?? m.slug)),
+        outcome: m.outcome,
+        category: m.category,
+        volume: m.volume_usd,
+        z: Math.sqrt(Math.max(1, m.volume_usd || 1)),
+        slug: m.slug,
+        question: m.question,
+      })),
+    [visibleMarkets]
+  );
+
+  const bucketPts = useMemo(() => {
+    if (filter === "all") {
+      return buckets.map((b) => ({
+        x: clamp01(b.predicted_avg),
+        y: clamp01(b.actual_rate),
+        z: Math.max(1, b.count),
+        range: b.range,
+        count: b.count,
+      }));
+    }
+
+    return Array.from({ length: 10 }, (_, index) => {
+      const lower = index / 10;
+      const upper = (index + 1) / 10;
+      const inBucket = visibleMarkets.filter((m) => {
+        const probability = clamp01(m.implied_prob_avg);
+        return probability >= lower && (index === 9 ? probability <= upper : probability < upper);
+      });
+      if (!inBucket.length) return null;
+
+      const predictedAvg =
+        inBucket.reduce((sum, m) => sum + clamp01(m.implied_prob_avg), 0) / inBucket.length;
+      const actualRate = inBucket.reduce((sum, m) => sum + clamp01(m.outcome), 0) / inBucket.length;
+      return {
+        x: predictedAvg,
+        y: actualRate,
+        z: inBucket.length,
+        range: `${Math.round(lower * 100)}-${Math.round(upper * 100)}%`,
+        count: inBucket.length,
+      };
+    }).filter(Boolean);
+  }, [buckets, filter, visibleMarkets]);
 
   return (
     <ChartContainer
       title="Calibration"
-      subtitle="Implied probability vs realized outcome"
+      subtitle="Implied probability vs realized YES rate"
       legend={
         <div className="chip-row">
           {cats.map((c) => (
@@ -1120,14 +1169,15 @@ function CalibrationScatter({ calibration, loading = false, empty = false }) {
                 <R.YAxis
                   type="number"
                   dataKey="y"
-                  domain={[-0.1, 1.1]}
+                  domain={[0, 1]}
                   stroke="#5A6178"
                   tick={{ fontSize: 11, fill: "#8A92A6" }}
-                  ticks={[0, 1]}
-                  tickFormatter={(v) => (v === 1 ? "YES" : v === 0 ? "NO" : "")}
+                  ticks={[0, 0.25, 0.5, 0.75, 1]}
+                  tickFormatter={(v) => (v * 100).toFixed(0) + "%"}
+                  label={{ value: "Realized YES rate", fill: "#8A92A6", fontSize: 11, angle: -90, position: "insideLeft" }}
                   width={48}
                 />
-                <R.ZAxis dataKey="volume" range={[16, 120]} />
+                <R.ZAxis dataKey="z" range={[18, 120]} />
                 <R.Tooltip
                   content={customTooltip((p) => {
                     const d = p[0]?.payload || {};
@@ -1150,10 +1200,10 @@ function CalibrationScatter({ calibration, loading = false, empty = false }) {
                 <R.ReferenceLine segment={[{ x: 0, y: 0 }, { x: 1, y: 1 }]} stroke="#5A6178" strokeDasharray="4 4" />
                 <R.Scatter data={pts}>
                   {pts.map((p, i) => (
-                    <R.Cell key={i} fill={catColor(p.category)} fillOpacity={0.55} />
+                    <R.Cell key={i} fill={catColor(p.category)} fillOpacity={0.32} />
                   ))}
                 </R.Scatter>
-                <R.Scatter data={bucketPts} shape="circle" fill="#F59E0B" />
+                <R.Scatter data={bucketPts} shape="circle" fill="#F59E0B" fillOpacity={0.9} />
               </R.ScatterChart>
             </R.ResponsiveContainer>
           </div>
@@ -1193,7 +1243,7 @@ function ActivityHeatmap({ matrix, loading = false, empty = false }) {
       <div className="chart-toolbar">
         <div>
           <h3>Activity Heatmap</h3>
-          <div className="sub">Trades by day-of-week × hour-of-day</div>
+          <div className="sub">Activity by day of week × hour of day (UTC)</div>
         </div>
       </div>
       <div className="chart-body">
@@ -1204,6 +1254,20 @@ function ActivityHeatmap({ matrix, loading = false, empty = false }) {
         ) : (
           <>
             <div className="heatmap">
+              <div className="ylabel" />
+              {Array.from({ length: 24 }).map((_, hi) => (
+                <div
+                  key={"h" + hi}
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 9,
+                    color: "var(--text-secondary)",
+                    textAlign: "center",
+                  }}
+                >
+                  {hi % 3 === 0 ? String(hi).padStart(2, "0") : ""}
+                </div>
+              ))}
               {grid.map((row, di) => (
                 <React.Fragment key={"row" + di}>
                   <div className="ylabel">{HEATMAP_DAYS[di]}</div>
@@ -1213,7 +1277,7 @@ function ActivityHeatmap({ matrix, loading = false, empty = false }) {
                       <div
                         key={di + "-" + hi}
                         className="cell"
-                        title={`${HEATMAP_DAYS[di]} ${String(hi).padStart(2, "0")}:00 — ${fmtNum(v)} trades`}
+                        title={`${HEATMAP_DAYS[di]} ${String(hi).padStart(2, "0")}:00 UTC — ${fmtNum(v)} events`}
                         style={{ background: `rgba(79,140,255,${0.06 + intensity * 0.75})` }}
                       />
                     );

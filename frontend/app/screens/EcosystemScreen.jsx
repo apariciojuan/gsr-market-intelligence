@@ -176,6 +176,7 @@ function TopWalletsCard() {
   const [page, setPage] = useState(1);
   const { data, isLoading, isError, error, refetch } = useTopWallets({
     limit: WALLET_PAGE_SIZE,
+    offset: (page - 1) * WALLET_PAGE_SIZE,
     order_by: "volume",
   });
 
@@ -240,7 +241,7 @@ function TopWalletsCard() {
         <div className="card-body">
           <div className="empty">
             <Icon name="alert" size={20} />
-            <div className="ttl">Couldn't load wallets</div>
+            <div className="ttl">Could not load wallets</div>
             <div style={{ fontSize: 12, color: "var(--text-secondary)", marginTop: 4 }}>
               {error?.message || "Something went wrong."}
             </div>
@@ -314,7 +315,7 @@ function CalibrationSection() {
 }
 
 function ActivityHeatmapSection() {
-  const { data, isLoading, isError, error, refetch } = useActivityHeatmap();
+  const { data, isLoading, isError, error, refetch } = useActivityHeatmap({ window: "30d" });
 
   if (isError) {
     return <SectionError title="Couldn't load activity heatmap" error={error} onRetry={refetch} />;
