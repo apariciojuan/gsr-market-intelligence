@@ -644,9 +644,10 @@ function ResolutionTimeline({ detail, loading = false, empty = false }) {
   const [expanded, setExpanded] = useState(null);
 
   const stateClass = (n) => {
-    if (n.phase === "challenge" && !n.completed) return "active";
-    if (detail?.is_disputed && n.phase === "challenge") return "disputed";
     if (n.completed) return "done";
+    if (n.phase === detail?.current_phase) {
+      return detail?.is_disputed && n.phase === "dvm_vote" ? "disputed" : "active";
+    }
     return "";
   };
 

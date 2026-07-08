@@ -102,6 +102,12 @@ def _decode_ancillary(value: Any) -> str:
     return str(value or '')
 
 
+def _question_id(value: Any) -> str:
+    if isinstance(value, (bytes, bytearray)):
+        return to_hex(bytes(value)).lower()
+    return str(value or '').lower()
+
+
 def _extract_question(ancillary_text: str) -> str:
     match = _TITLE_RE.search(ancillary_text)
     if match:
@@ -127,6 +133,7 @@ class _Resolution:
         self.market_id = _parse_market_id(ancillary_text)
         self.reward_token: str | None = None
         self.final_fee: int | None = None
+        self.proposal_bond: int | None = None
         self.init_ts: int | None = None
         self.init_tx: str | None = None
         self.proposer: str | None = None
@@ -144,11 +151,22 @@ class _Resolution:
 
     # --- ingestion -----------------------------------------------------------
     def apply(self, name: str, args: dict[str, Any], raw: RawLog) -> None:
-        if name == 'RequestPrice':
-            self.reward_token = _low(args.get('currency'))
-            self.final_fee = int(args.get('finalFee', 0))
+        if name == 'QuestionInitialized':
+            self.reward_token = _low(args.get('rewardToken'))
+            self.proposal_bond = int(args.get('proposalBond', 0))
+            self.request_timestamp = int(args.get('requestTimestamp') or self.request_timestamp)
             self.init_ts = raw.timestamp
             self.init_tx = raw.tx_hash
+        elif name == 'QuestionResolved':
+            self.settled = True
+            self.settle_price = int(args.get('settledPrice', 0))
+            self.resolved_ts = raw.timestamp
+            self.resolved_tx = raw.tx_hash
+        elif name == 'RequestPrice':
+            self.reward_token = _low(args.get('currency'))
+            self.final_fee = int(args.get('finalFee', 0))
+            self.init_ts = self.init_ts or raw.timestamp
+            self.init_tx = self.init_tx or raw.tx_hash
         elif name == 'ProposePrice':
             self.proposer = _low(args.get('proposer'))
             self.proposed_price = int(args.get('proposedPrice', 0))
@@ -157,6 +175,7 @@ class _Resolution:
             self.proposal_tx = raw.tx_hash
             self.reward_token = self.reward_token or _low(args.get('currency'))
         elif name == 'DisputePrice':
+            self.proposer = self.proposer or _low(args.get('proposer'))
             self.disputer = _low(args.get('disputer'))
             self.disputed_ts = raw.timestamp
             self.disputed_tx = raw.tx_hash
@@ -167,6 +186,7 @@ class _Resolution:
             self.settle_price = int(args.get('price', 0))
             self.resolved_ts = raw.timestamp
             self.resolved_tx = raw.tx_hash
+            self.proposer = self.proposer or _low(args.get('proposer'))
             self.disputer = self.disputer or _low(args.get('disputer'))
 
     # --- derived -------------------------------------------------------------
@@ -182,7 +202,8 @@ class _Resolution:
 
     @property
     def bond_usd(self) -> float:
-        return (self.final_fee / 10**c.USDC_DECIMALS) if self.final_fee else 0.0
+        bond = self.proposal_bond if self.proposal_bond is not None else self.final_fee
+        return (bond / 10**c.USDC_DECIMALS) if bond else 0.0
 
     def _seconds_remaining(self) -> int | None:
         if self.status != 'proposed' or not self.challenge_deadline:
@@ -290,9 +311,7 @@ class _Resolution:
                 reason=None,
             )
 
-        end_ts = (
-            self.resolved_ts or self.disputed_ts or self.proposal_ts or self.request_timestamp
-        )
+        end_ts = self.end_timestamp
         return ResolutionDetail(
             question_id=self.question_id,
             market=None,
@@ -311,6 +330,10 @@ class _Resolution:
             ),
             uma_oracle_url=c.uma_oracle_url(self.question_id),
         )
+
+    @property
+    def end_timestamp(self) -> int:
+        return self.resolved_ts or self.disputed_ts or self.proposal_ts or self.request_timestamp
 
 
 class UmaClient:
@@ -338,14 +361,23 @@ class UmaClient:
             if decoded is None:
                 continue
             name, args = decoded
-            ancillary = args.get('ancillaryData') or b''
-            question_id = to_hex(Web3.keccak(primitive=bytes(ancillary)))
+            if name in {'QuestionInitialized', 'QuestionResolved'}:
+                question_id = _question_id(args.get('questionID'))
+                ancillary = args.get('ancillaryData') or b''
+            else:
+                ancillary = args.get('ancillaryData') or b''
+                question_id = to_hex(Web3.keccak(primitive=bytes(ancillary))).lower()
             resolution = index.get(question_id)
             if resolution is None:
                 resolution = _Resolution(
-                    question_id, int(args.get('timestamp', 0)), _decode_ancillary(ancillary)
+                    question_id,
+                    int(args.get('requestTimestamp') or args.get('timestamp') or raw.timestamp),
+                    _decode_ancillary(ancillary),
                 )
                 index[question_id] = resolution
+            elif ancillary and not resolution.ancillary_text:
+                resolution.ancillary_text = _decode_ancillary(ancillary)
+                resolution.market_id = _parse_market_id(resolution.ancillary_text)
             resolution.apply(name, args, raw)
 
     async def _load_recent(self) -> dict[str, _Resolution]:
@@ -364,7 +396,48 @@ class UmaClient:
                 self._oracle, topic0=topic, topic1=requester, from_block=from_block
             )
             self._ingest(index, logs)
+        for topic in (c.TOPIC_QUESTION_INITIALIZED, c.TOPIC_QUESTION_RESOLVED):
+            logs = await self._source.get_logs(self._adapter, topic0=topic, from_block=from_block)
+            self._ingest(index, logs)
         return index
+
+    async def _load_resolution_window(
+        self, index: dict[str, _Resolution], resolution: _Resolution
+    ) -> None:
+        """Backfill one detail with the full lifecycle when recent lookback saw only Settle.
+
+        Some resolved disputes settle inside the recent window while their request/propose/dispute
+        events are slightly older. For details, use the request timestamp already present in the
+        OO events to fetch a bounded window instead of expanding the global list lookback.
+        """
+        block_by_timestamp = getattr(self._source, 'block_by_timestamp', None)
+        if block_by_timestamp is None:
+            return
+
+        from_block = await block_by_timestamp(
+            max(0, resolution.request_timestamp - 3600), 'before'
+        )
+        to_block = await block_by_timestamp(resolution.end_timestamp + 3600, 'after')
+        requester = _address_topic(self._adapter)
+        for topic in (
+            c.TOPIC_REQUEST_PRICE,
+            c.TOPIC_PROPOSE_PRICE,
+            c.TOPIC_DISPUTE_PRICE,
+            c.TOPIC_SETTLE,
+        ):
+            logs = await self._source.get_logs(
+                self._oracle,
+                topic0=topic,
+                topic1=requester,
+                from_block=from_block,
+                to_block=to_block,
+            )
+            self._ingest(index, logs)
+        for topic in (c.TOPIC_QUESTION_INITIALIZED, c.TOPIC_QUESTION_RESOLVED):
+            logs = await self._source.get_logs(
+                self._adapter, topic0=topic, from_block=from_block, to_block=to_block
+            )
+            self._ingest(index, logs)
 
     async def list_resolutions(
         self,
@@ -434,6 +507,9 @@ class UmaClient:
         resolution = index.get(qid)
         if resolution is None:
             return None
+        if resolution.proposal_ts is None or resolution.init_ts is None:
+            await self._load_resolution_window(index, resolution)
+            resolution = index.get(qid) or resolution
         detail = resolution.to_detail()
         if resolution.market_id:
             await self._link_market(detail, resolution)
@@ -476,11 +552,51 @@ class UmaClient:
             except ValueError:
                 tokens = []
         if not (isinstance(tokens, list) and tokens):
+            token_objects = market.get('tokens')
+            if isinstance(token_objects, str):
+                try:
+                    token_objects = json.loads(token_objects)
+                except ValueError:
+                    token_objects = []
+            if isinstance(token_objects, list):
+                tokens = [
+                    t.get('token_id') or t.get('tokenId')
+                    for t in token_objects
+                    if isinstance(t, dict)
+                ]
+        if not (isinstance(tokens, list) and tokens):
             return
+
+        outcomes = market.get('outcomes')
+        if isinstance(outcomes, str):
+            try:
+                outcomes = json.loads(outcomes)
+            except ValueError:
+                outcomes = []
+        yes_index = 0
+        if isinstance(outcomes, list):
+            yes_index = next(
+                (
+                    i
+                    for i, outcome in enumerate(outcomes)
+                    if str(outcome).strip().lower() == 'yes'
+                ),
+                0,
+            )
+        yes_token = tokens[yes_index] if yes_index < len(tokens) else tokens[0]
+
+        start_ts = max(0, resolution.request_timestamp - 6 * 3600)
+        end_ts = resolution.end_timestamp + 6 * 3600
         try:
             history = (
                 await self._poly.get_prices_history_by_market(
-                    {'market': tokens[0], 'interval': '1d'}
+                    {
+                        'market': yes_token,
+                        'startTs': start_ts,
+                        'endTs': end_ts,
+                        'interval': '1h',
+                        'fidelity': 60,
+                    }
                 )
             ).json()
         except Exception:
