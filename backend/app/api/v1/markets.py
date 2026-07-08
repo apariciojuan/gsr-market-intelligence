@@ -98,6 +98,14 @@ def _to_int(value: Any) -> int:
         return 0
 
 
+def _first_float(payload: dict, keys: tuple[str, ...]) -> float:
+    """Return the first positive-ish numeric field found in a payload."""
+    for key in keys:
+        if key in payload and payload.get(key) is not None:
+            return _to_float(payload.get(key))
+    return 0.0
+
+
 def _first_market(payload: Any) -> dict | None:
     """Normalize a Gamma single-market response (dict or one-element list)."""
     if isinstance(payload, list):
@@ -173,7 +181,9 @@ def _to_stats(market: dict) -> MarketStats:
         volume_24h_usd=volume,
         volume_7d_usd=volume,
         trader_count=0,
-        holder_count=0,
+        holder_count=_to_int(
+            market.get('holderCount') or market.get('holdersCount') or market.get('holder_count')
+        ),
         open_interest_usd=liquidity,
     )
 
@@ -665,6 +675,24 @@ def _orderbook_levels(raw_levels: Any, depth: int) -> list[OrderbookLevel]:
     return levels
 
 
+def _holder_side(holder: dict, group: dict) -> str:
+    outcome_index = holder.get('outcomeIndex', group.get('outcomeIndex'))
+    if outcome_index is not None:
+        return 'no' if _to_int(outcome_index) == 1 else 'yes'
+    outcome = str(holder.get('outcome') or group.get('outcome') or '').strip().lower()
+    return 'no' if outcome == 'no' else 'yes'
+
+
+def _holder_address(holder: dict) -> str:
+    return str(
+        holder.get('proxyWallet')
+        or holder.get('address')
+        or holder.get('wallet')
+        or holder.get('user')
+        or ''
+    ).lower()
+
+
 async def _resolve_market(
     client: PolymarketClient, market_id: str, session: AsyncSession | None = None
 ) -> dict:
@@ -789,6 +817,9 @@ async def get_market_holders(
     outcome: str | None = Query(default=None),
     session: AsyncSession = Depends(get_session),
 ) -> PaginatedHolders:
+    selected_outcome = outcome.lower() if outcome else None
+    if selected_outcome is not None and selected_outcome not in {'yes', 'no'}:
+        raise HTTPException(status_code=422, detail='outcome must be "yes" or "no".')
     if prefer_local():
         return PaginatedHolders(items=[], total=0, limit=limit, offset=0, has_more=False)
     try:
@@ -796,34 +827,72 @@ async def get_market_holders(
         market = await _resolve_market(client, market_id, session)
         condition_id = market.get('conditionId') or ''
         raw = (await client.get_holders({'market': condition_id, 'limit': limit})).json()
+        prices = _to_current_prices(market)
+        side_prices = {'yes': prices.yes.price, 'no': prices.no.price}
 
-        holders: list[Holder] = []
-        rank = 1
+        rows: list[dict[str, Any]] = []
         for group in raw if isinstance(raw, list) else []:
             entries = group.get('holders') if isinstance(group, dict) else None
             for holder in entries if isinstance(entries, list) else []:
                 if not isinstance(holder, dict):
                     continue
-                side = 'no' if _to_int(holder.get('outcomeIndex')) == 1 else 'yes'
-                if outcome and side != outcome:
+                side = _holder_side(holder, group)
+                if selected_outcome and side != selected_outcome:
                     continue
-                holders.append(
-                    Holder(
-                        rank=rank,
-                        address=str(holder.get('proxyWallet') or '').lower(),
-                        address_label=holder.get('name') or holder.get('pseudonym') or None,
-                        shares=str(holder.get('amount') or 0),
-                        side=side,
-                        avg_buy_price=0.0,
-                        value_usd=0.0,
-                        realized_pnl_usd=0.0,
-                        unrealized_pnl_usd=0.0,
-                        first_buy_at='',
-                    )
+                address = _holder_address(holder)
+                if not address:
+                    continue
+                shares = _first_float(holder, ('amount', 'shares', 'balance'))
+                value_usd = _first_float(
+                    holder,
+                    ('value_usd', 'valueUsd', 'current_value_usd', 'currentValueUsd', 'value'),
                 )
-                rank += 1
+                if value_usd == 0.0:
+                    value_usd = shares * side_prices[side]
+                rows.append(
+                    {
+                        'address': address,
+                        'address_label': holder.get('name') or holder.get('pseudonym') or None,
+                        'shares': str(holder.get('amount') or holder.get('shares') or 0),
+                        'shares_num': shares,
+                        'side': side,
+                        'avg_buy_price': _first_float(
+                            holder,
+                            ('avg_buy_price', 'avgBuyPrice', 'avgPrice', 'averagePrice'),
+                        ),
+                        'value_usd': value_usd,
+                        'realized_pnl_usd': _first_float(
+                            holder, ('realized_pnl_usd', 'realizedPnlUsd', 'realizedPnl')
+                        ),
+                        'unrealized_pnl_usd': _first_float(
+                            holder,
+                            ('unrealized_pnl_usd', 'unrealizedPnlUsd', 'unrealizedPnl'),
+                        ),
+                        'first_buy_at': str(
+                            holder.get('first_buy_at')
+                            or holder.get('firstBuyAt')
+                            or holder.get('firstTradeAt')
+                            or ''
+                        ),
+                    }
+                )
 
-        holders = holders[:limit]
+        rows.sort(key=lambda row: (row['value_usd'], row['shares_num']), reverse=True)
+        holders = [
+            Holder(
+                rank=rank,
+                address=row['address'],
+                address_label=row['address_label'],
+                shares=row['shares'],
+                side=row['side'],
+                avg_buy_price=row['avg_buy_price'],
+                value_usd=row['value_usd'],
+                realized_pnl_usd=row['realized_pnl_usd'],
+                unrealized_pnl_usd=row['unrealized_pnl_usd'],
+                first_buy_at=row['first_buy_at'],
+            )
+            for rank, row in enumerate(rows[:limit], start=1)
+        ]
         return PaginatedHolders(
             items=holders, total=len(holders), limit=limit, offset=0, has_more=False
         )
