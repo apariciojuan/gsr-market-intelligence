@@ -54,6 +54,17 @@ export function useMarketPrices(
     queryKey: queryKeys.markets.prices(id ?? 0, params),
     queryFn: () => api.markets.prices(id as number, params),
     enabled: !!id,
+    refetchInterval: (query) => {
+      const data = query.state.data;
+      if (!data) return false;
+      const hasPrices = (data.series_yes ?? []).length > 0;
+      const hasVolume = (data.volume_series ?? []).length > 0;
+      if (!hasPrices || hasVolume) return false;
+      // Give the async volume worker a few chances without hammering the page/API.
+      if (query.state.dataUpdateCount > 4) return false;
+      return 15000;
+    },
+    refetchIntervalInBackground: false,
   });
 }
 

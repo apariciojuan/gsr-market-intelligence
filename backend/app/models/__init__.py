@@ -5,6 +5,7 @@ from app.models.divergence import Divergence
 from app.models.ecosystem_metric import EcosystemMetric
 from app.models.external_signal import ExternalSignal
 from app.models.market import Market
+from app.models.market_volume_cache import MarketVolumeCache
 from app.models.price_history import PriceHistory
 from app.models.sync_state import SyncState
 from app.models.transaction import Transaction
@@ -18,6 +19,7 @@ __all__ = [
     'EcosystemMetric',
     'ExternalSignal',
     'Market',
+    'MarketVolumeCache',
     'PriceHistory',
     'SyncState',
     'TimestampMixin',

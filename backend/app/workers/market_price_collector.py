@@ -144,11 +144,15 @@ async def collect_market_prices(ctx: dict) -> int:
     now = datetime.now(tz=UTC)
 
     async with session_factory() as session:
-        result = await session.execute(
-            select(Market.id, Market.outcomes, Market.outcome_token_ids).where(
-                Market.active.is_(True)
-            )
+        query = (
+            select(Market.id, Market.outcomes, Market.outcome_token_ids)
+            .where(Market.active.is_(True))
+            .order_by(Market.volume_total.desc().nullslast(), Market.id.asc())
         )
+        if settings.MARKET_PRICE_MARKETS_LIMIT > 0:
+            query = query.limit(settings.MARKET_PRICE_MARKETS_LIMIT)
+
+        result = await session.execute(query)
         rows = result.all()
         if not rows:
             logger.info('market_price_collector: no active markets, skipping (degraded)')

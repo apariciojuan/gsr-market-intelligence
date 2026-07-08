@@ -38,10 +38,19 @@ class Settings(BaseSettings):
 
     CHAINLINK_POLL_INTERVAL_SECONDS: int = 60
     MARKET_PRICE_POLL_INTERVAL_SECONDS: int = 300
+    # 0 = all active markets; otherwise top N by volume_total
+    MARKET_PRICE_MARKETS_LIMIT: int = 30
     MARKET_PRICE_INTERVAL: str = '1h'
     MARKET_PRICE_FIDELITY: int = 1
+    MARKET_VOLUME_POLL_INTERVAL_SECONDS: int = 900
+    # 0 = all active markets; otherwise top N by volume_total
+    MARKET_VOLUME_MARKETS_LIMIT: int = 50
+    MARKET_VOLUME_BATCH_SIZE: int = 5
+    MARKET_VOLUME_MAX_TRADES: int = 1000
     MARKETS_INGEST_INTERVAL_SECONDS: int = 1800
     MARKETS_INGEST_LIMIT: int = 100
+    # live = Polymarket API only; local = PostgreSQL cache; auto = API with DB fallback
+    MARKETS_DATA_SOURCE: str = 'auto'
 
     # Divergence
     DIVERGENCE_WINDOW_MINUTES: int = 60

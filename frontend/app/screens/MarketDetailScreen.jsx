@@ -112,7 +112,7 @@ function SectionEmpty({ message }) {
 // Tab bodies — each owns its sub-resource hook + states.
 // ===============================================================
 function OverviewTab({ marketId, interval, onInterval }) {
-  const { data, isLoading, isError, error, refetch } = useMarketPrices(
+  const { data, isLoading, isError, error, refetch, isFetching } = useMarketPrices(
     marketId,
     { interval }
   );
@@ -126,8 +126,11 @@ function OverviewTab({ marketId, interval, onInterval }) {
   }
 
   const priceHistory = data;
-  const noData =
-    !isLoading && (!priceHistory || (priceHistory.series_yes ?? []).length === 0);
+  const hasPrices = (priceHistory?.series_yes ?? []).length > 0;
+  const hasVolume = (priceHistory?.volume_series ?? []).length > 0;
+  const noPriceData = !isLoading && (!priceHistory || !hasPrices);
+  const volumePending = !isLoading && hasPrices && !hasVolume;
+  const noVolumeData = volumePending && !isFetching;
 
   return (
     <div style={{ padding: 16, display: "flex", flexDirection: "column", gap: 16 }}>
@@ -136,12 +139,13 @@ function OverviewTab({ marketId, interval, onInterval }) {
         interval={interval}
         onInterval={onInterval}
         loading={isLoading}
-        empty={noData}
+        empty={noPriceData}
       />
       <VolumeBars
         volumeSeries={priceHistory?.volume_series}
-        loading={isLoading}
-        empty={noData}
+        loading={isLoading || volumePending}
+        empty={noVolumeData}
+        pendingMessage="Calculando volumen de trading…"
       />
     </div>
   );

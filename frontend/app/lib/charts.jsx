@@ -66,14 +66,29 @@ function catColor(cat) {
 // =============================================================
 
 /** Shimmer skeleton sized to the chart body. */
-export function ChartSkeleton({ height = 280 }) {
+export function ChartSkeleton({ height = 280, message = null }) {
   return (
     <div
-      className="skel"
-      style={{ width: "100%", height }}
-      role="presentation"
-      aria-hidden="true"
-    />
+      style={{
+        width: "100%",
+        height,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 10,
+      }}
+    >
+      <div
+        className="skel"
+        style={{ width: "100%", height: message ? Math.max(height - 36, 48) : height }}
+        role="presentation"
+        aria-hidden="true"
+      />
+      {message ? (
+        <div style={{ fontSize: 12, color: "var(--text-secondary)" }}>{message}</div>
+      ) : null}
+    </div>
   );
 }
 
@@ -103,9 +118,9 @@ export function ChartEmpty({ height = 280, message = "No data for this period" }
  * children. `isEmpty` lets a caller pass an explicit emptiness test; by
  * default a falsy `empty` prop means "render children".
  */
-function chartBody({ loading, empty, height, children }) {
+function chartBody({ loading, empty, height, children, emptyMessage }) {
   if (loading) return <ChartSkeleton height={height} />;
-  if (empty) return <ChartEmpty height={height} />;
+  if (empty) return <ChartEmpty height={height} message={emptyMessage} />;
   return children;
 }
 
@@ -276,11 +291,21 @@ function PriceChart({ priceHistory, interval, onInterval, loading = false, empty
  * @param {VolumePoint[]=} props.volumeSeries  PriceHistory.volume_series
  * @param {boolean=} props.loading
  * @param {boolean=} props.empty
+ * @param {string=} props.pendingMessage  shown while loading with no series yet
  */
-function VolumeBars({ volumeSeries, loading = false, empty = false }) {
+function VolumeBars({
+  volumeSeries,
+  loading = false,
+  empty = false,
+  pendingMessage = "Calculando volumen de trading…",
+}) {
   const series = volumeSeries ?? [];
   const isEmpty = empty || (!loading && series.length === 0);
-  const data = series.map((p) => ({ t: p.t, vol: p.v, dir: p.direction }));
+  const data = series
+    .filter((p) => p.v > 0)
+    .map((p) => ({ t: p.t, vol: p.v, dir: p.direction }));
+  const showPending = loading && series.length === 0;
+  const showNoTrades = !loading && !isEmpty && data.length === 0;
 
   return (
     <div className="card" style={{ marginTop: 16 }}>
@@ -291,25 +316,53 @@ function VolumeBars({ volumeSeries, loading = false, empty = false }) {
         </div>
       </div>
       <div className="chart-body" style={{ height: 120 }}>
-        {chartBody({
-          loading,
-          empty: isEmpty,
-          height: 120,
-          children: (
-            <R.ResponsiveContainer width="100%" height="100%">
-              <R.BarChart data={data} margin={{ top: 8, right: 18, bottom: 4, left: 0 }}>
-                <R.XAxis dataKey="t" hide />
-                <R.YAxis tick={{ fontSize: 10, fill: "#8A92A6" }} stroke="#5A6178" width={42} tickFormatter={(v) => fmtUSD(v)} />
-                <R.Tooltip content={customTooltip((p) => [{ label: "Volume", value: fmtUSD(p[0].value), dot: "#4F8CFF" }])} cursor={{ fill: "#1C2030" }} />
-                <R.Bar dataKey="vol">
-                  {data.map((d, i) => (
-                    <R.Cell key={i} fill={d.dir === "up" ? "rgba(34,197,94,0.5)" : "rgba(239,68,68,0.5)"} />
-                  ))}
-                </R.Bar>
-              </R.BarChart>
-            </R.ResponsiveContainer>
-          ),
-        })}
+        {showPending ? (
+          <ChartSkeleton height={120} message={pendingMessage} />
+        ) : (
+          chartBody({
+            loading,
+            empty: isEmpty || showNoTrades,
+            height: 120,
+            emptyMessage: showNoTrades
+              ? "No trades in this period"
+              : undefined,
+            children: (
+              <R.ResponsiveContainer width="100%" height="100%">
+                <R.BarChart
+                  data={data}
+                  margin={{ top: 8, right: 18, bottom: 4, left: 0 }}
+                  barCategoryGap="12%"
+                >
+                  <R.XAxis dataKey="t" hide />
+                  <R.YAxis
+                    tick={{ fontSize: 10, fill: "#8A92A6" }}
+                    stroke="#5A6178"
+                    width={42}
+                    tickFormatter={(v) => fmtUSD(v)}
+                  />
+                  <R.Tooltip
+                    content={customTooltip((p) => [
+                      { label: "Volume", value: fmtUSD(p[0].value), dot: "#4F8CFF" },
+                    ])}
+                    cursor={{ fill: "#1C2030" }}
+                  />
+                  <R.Bar dataKey="vol" maxBarSize={28} isAnimationActive={false}>
+                    {data.map((d, i) => (
+                      <R.Cell
+                        key={i}
+                        fill={
+                          d.dir === "up"
+                            ? "rgba(34,197,94,0.65)"
+                            : "rgba(239,68,68,0.65)"
+                        }
+                      />
+                    ))}
+                  </R.Bar>
+                </R.BarChart>
+              </R.ResponsiveContainer>
+            ),
+          })
+        )}
       </div>
     </div>
   );

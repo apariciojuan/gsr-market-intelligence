@@ -13,9 +13,11 @@ import json
 import re
 from typing import Any
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Depends, Query
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config.log import get_logger
+from app.core.database import get_session
 from app.schemas.search import (
     SearchContractResult,
     SearchMarketResult,
@@ -25,6 +27,12 @@ from app.schemas.search import (
     SearchWalletResult,
 )
 from app.services import PolymarketClient
+from app.services.markets import (
+    MarketsLocalStore,
+    allow_local_fallback,
+    market_to_gamma_dict,
+    prefer_local,
+)
 
 router = APIRouter()
 logger = get_logger('search')
@@ -75,25 +83,54 @@ def _extract_tags(payload: Any) -> list[dict]:
 async def global_search(
     q: str = Query(..., min_length=1),
     limit_per_group: int = Query(default=5, ge=1, le=20),
+    session: AsyncSession = Depends(get_session),
 ) -> SearchResults:
     client = PolymarketClient()
 
     markets: list[SearchMarketResult] = []
-    try:
-        payload = (
-            await client.get_markets_search({'q': q, 'limit_per_type': limit_per_group})
-        ).json()
-        for market in _extract_markets(payload)[:limit_per_group]:
+    if prefer_local():
+        store = MarketsLocalStore(session)
+        for market in await store.search(q, limit=limit_per_group):
+            gamma = market_to_gamma_dict(market)
             markets.append(
                 SearchMarketResult(
-                    id=_to_int(market.get('id')),
-                    slug=market.get('slug') or '',
-                    question=market.get('question') or '',
-                    category=market.get('category') or '',
+                    id=_to_int(gamma.get('id')),
+                    slug=gamma.get('slug') or '',
+                    question=gamma.get('question') or '',
+                    category=gamma.get('category') or '',
                 )
             )
-    except (json.JSONDecodeError, KeyError, TypeError, ValueError):
-        logger.warning('search: markets lookup failed for q=%r', q)
+    else:
+        try:
+            payload = (
+                await client.get_markets_search({'q': q, 'limit_per_type': limit_per_group})
+            ).json()
+            for market in _extract_markets(payload)[:limit_per_group]:
+                markets.append(
+                    SearchMarketResult(
+                        id=_to_int(market.get('id')),
+                        slug=market.get('slug') or '',
+                        question=market.get('question') or '',
+                        category=market.get('category') or '',
+                    )
+                )
+        except (json.JSONDecodeError, KeyError, TypeError, ValueError):
+            logger.warning('search: markets lookup failed for q=%r', q)
+        except Exception as exc:
+            if not allow_local_fallback():
+                raise
+            logger.warning('search: Polymarket unavailable (%s), falling back to local cache', exc)
+            store = MarketsLocalStore(session)
+            for market in await store.search(q, limit=limit_per_group):
+                gamma = market_to_gamma_dict(market)
+                markets.append(
+                    SearchMarketResult(
+                        id=_to_int(gamma.get('id')),
+                        slug=gamma.get('slug') or '',
+                        question=gamma.get('question') or '',
+                        category=gamma.get('category') or '',
+                    )
+                )
 
     tags: list[SearchTagResult] = []
     try:

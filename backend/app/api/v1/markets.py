@@ -15,11 +15,13 @@ import json
 from datetime import UTC, datetime
 from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config.log import get_logger
 from app.core.database import get_session
+from app.models import Market
+from app.schemas.external_signal import PaginatedExternalSignals, external_signal_to_read
 from app.schemas.market import (
     ChainlinkOverlay,
     Holder,
@@ -41,11 +43,20 @@ from app.schemas.market import (
     TopMarketsNews,
     Trade,
 )
-from app.schemas.external_signal import PaginatedExternalSignals, external_signal_to_read
 from app.services import PolymarketClient
+from app.services.chainlink_client import ChainlinkClient
 from app.services.external_signals.news_mapper import external_signals_to_news_list
 from app.services.external_signals.service import ExternalSignalsService
-from app.services.chainlink_client import ChainlinkClient
+from app.services.markets import (
+    MarketsLocalStore,
+    VolumeCacheStore,
+    allow_local_fallback,
+    market_to_gamma_dict,
+    prefer_local,
+)
+from app.services.markets.gamma_ingest import upsert_gamma_market
+from app.workers.market_volume_collector import refresh_market_volume_interval
+from app.workers.queue import enqueue_market_volume_refresh
 
 router = APIRouter()
 logger = get_logger('markets')
@@ -208,6 +219,121 @@ def _history_to_series(payload: Any) -> list[PricePoint]:
     return series
 
 
+async def _fetch_clob_prices(
+    client: PolymarketClient,
+    market: dict,
+    interval: str,
+) -> tuple[list[PricePoint], list[PricePoint]]:
+    """Load YES/NO CLOB history using token ids from a Gamma-shaped market dict."""
+    token_ids = _parse_json_list(market.get('clobTokenIds'))
+    if not token_ids:
+        return [], []
+    try:
+        yes_response = await client.get_prices_history_by_market(
+            {'market': token_ids[0], 'interval': interval}
+        )
+        series_yes = _history_to_series(yes_response.json())
+        series_no: list[PricePoint] = []
+        if len(token_ids) >= 2:
+            no_response = await client.get_prices_history_by_market(
+                {'market': token_ids[1], 'interval': interval}
+            )
+            series_no = _history_to_series(no_response.json())
+        return series_yes, series_no
+    except Exception as exc:
+        logger.warning(
+            'CLOB price history unavailable for market=%s (%s)',
+            market.get('id'),
+            exc,
+        )
+        return [], []
+
+
+async def _list_markets_local(
+    session: AsyncSession,
+    *,
+    limit: int,
+    offset: int,
+    category: str | None,
+    active: bool | None,
+    resolved: bool | None,
+) -> PaginatedMarkets:
+    store = MarketsLocalStore(session)
+    rows, total = await store.list_markets(
+        limit=limit,
+        offset=offset,
+        category=category,
+        active=active,
+        resolved=resolved,
+    )
+    items = [_to_list_item(market_to_gamma_dict(market)) for market in rows]
+    return PaginatedMarkets(
+        items=items,
+        total=total,
+        limit=limit,
+        offset=offset,
+        has_more=(offset + len(rows)) < total,
+    )
+
+
+async def _search_markets_local(session: AsyncSession, *, q: str, limit: int) -> PaginatedMarkets:
+    store = MarketsLocalStore(session)
+    rows = await store.search(q, limit=limit)
+    items = [_to_list_item(market_to_gamma_dict(market)) for market in rows]
+    return PaginatedMarkets(
+        items=items,
+        total=len(items),
+        limit=limit,
+        offset=0,
+        has_more=False,
+    )
+
+
+async def _resolve_market_local(session: AsyncSession, market_id: str) -> dict:
+    store = MarketsLocalStore(session)
+    market = await store.get_by_id(market_id)
+    if market is None:
+        raise HTTPException(status_code=404, detail=f'Market "{market_id}" not found.')
+    return market_to_gamma_dict(market)
+
+
+async def _resolve_local_db_id(
+    session: AsyncSession,
+    market: dict | None,
+    market_id_param: str,
+) -> int:
+    """Map a Gamma/Polymarket id to the local ``markets.id`` used by workers/cache."""
+    store = MarketsLocalStore(session)
+    row = await store.get_by_id(market_id_param)
+    if row is not None:
+        return row.id
+    row = await store.get_by_gamma_id(market_id_param)
+    if row is not None:
+        return row.id
+    if market:
+        slug = str(market.get('slug') or '').strip()
+        if slug:
+            row = await store.get_by_slug(slug)
+            if row is not None:
+                return row.id
+        condition_id = str(market.get('conditionId') or market.get('condition_id') or '').strip()
+        if condition_id:
+            row = await store.get_by_condition_id(condition_id)
+            if row is not None:
+                return row.id
+    return _to_int(market.get('id') if market else market_id_param)
+
+
+async def _load_market_row(
+    session: AsyncSession, market_id: str
+) -> tuple[Market | None, MarketsLocalStore]:
+    store = MarketsLocalStore(session)
+    row = await store.get_by_id(market_id)
+    if row is None:
+        row = await store.get_by_gamma_id(market_id)
+    return row, store
+
+
 @router.get(
     '',
     response_model=PaginatedMarkets,
@@ -223,30 +349,53 @@ async def list_markets(
     category: str | None = Query(default=None),
     active: bool | None = Query(default=None),
     resolved: bool | None = Query(default=None),
+    session: AsyncSession = Depends(get_session),
 ) -> PaginatedMarkets:
-    client = PolymarketClient()
-    query_params: dict[str, Any] = {'limit': limit, 'offset': offset}
-    if resolved is not None:
-        query_params['closed'] = str(resolved).lower()
-    response = await client.get_markets(query_params=query_params)
-    markets = _extract_markets(response.json())
+    if prefer_local():
+        return await _list_markets_local(
+            session,
+            limit=limit,
+            offset=offset,
+            category=category,
+            active=active,
+            resolved=resolved,
+        )
+    try:
+        client = PolymarketClient()
+        query_params: dict[str, Any] = {'limit': limit, 'offset': offset}
+        if resolved is not None:
+            query_params['closed'] = str(resolved).lower()
+        response = await client.get_markets(query_params=query_params)
+        markets = _extract_markets(response.json())
 
-    items = [_to_list_item(market) for market in markets]
-    if category:
-        wanted = category.lower()
-        items = [item for item in items if item.category.lower() == wanted]
-    if active is not None:
-        items = [item for item in items if item.active == active]
-    if resolved is not None:
-        items = [item for item in items if item.resolved == resolved]
+        items = [_to_list_item(market) for market in markets]
+        if category:
+            wanted = category.lower()
+            items = [item for item in items if item.category.lower() == wanted]
+        if active is not None:
+            items = [item for item in items if item.active == active]
+        if resolved is not None:
+            items = [item for item in items if item.resolved == resolved]
 
-    return PaginatedMarkets(
-        items=items,
-        total=None,
-        limit=limit,
-        offset=offset,
-        has_more=len(markets) >= limit,
-    )
+        return PaginatedMarkets(
+            items=items,
+            total=None,
+            limit=limit,
+            offset=offset,
+            has_more=len(markets) >= limit,
+        )
+    except Exception as exc:
+        if not allow_local_fallback():
+            raise
+        logger.warning('Polymarket unavailable (%s), falling back to local markets cache', exc)
+        return await _list_markets_local(
+            session,
+            limit=limit,
+            offset=offset,
+            category=category,
+            active=active,
+            resolved=resolved,
+        )
 
 
 @router.get(
@@ -261,19 +410,28 @@ async def list_markets(
 async def search_markets(
     q: str = Query(..., min_length=1),
     limit: int = Query(default=20, ge=1, le=100),
+    session: AsyncSession = Depends(get_session),
 ) -> PaginatedMarkets:
-    client = PolymarketClient()
-    response = await client.get_markets_search(query_params={'q': q, 'limit_per_type': limit})
-    markets = _extract_markets(response.json())
+    if prefer_local():
+        return await _search_markets_local(session, q=q, limit=limit)
+    try:
+        client = PolymarketClient()
+        response = await client.get_markets_search(query_params={'q': q, 'limit_per_type': limit})
+        markets = _extract_markets(response.json())
 
-    items = [_to_list_item(market) for market in markets][:limit]
-    return PaginatedMarkets(
-        items=items,
-        total=len(items),
-        limit=limit,
-        offset=0,
-        has_more=False,
-    )
+        items = [_to_list_item(market) for market in markets][:limit]
+        return PaginatedMarkets(
+            items=items,
+            total=len(items),
+            limit=limit,
+            offset=0,
+            has_more=False,
+        )
+    except Exception as exc:
+        if not allow_local_fallback():
+            raise
+        logger.warning('Polymarket search unavailable (%s), falling back to local cache', exc)
+        return await _search_markets_local(session, q=q, limit=limit)
 
 
 @router.get(
@@ -285,12 +443,44 @@ async def search_markets(
     summary='Get market detail by slug',
     description='Market detail with stats, current prices and Chainlink overlay flag.',
 )
-async def get_market_detail(slug: str) -> MarketDetail:
-    client = PolymarketClient()
-    response = await client.get_market_by_slug(market_slug=slug)
-    market = _first_market(response.json())
+async def get_market_detail(
+    slug: str,
+    session: AsyncSession = Depends(get_session),
+) -> MarketDetail:
+    market: dict | None = None
+    fetched_live = False
+    if prefer_local():
+        store = MarketsLocalStore(session)
+        row = await store.get_by_slug(slug)
+        if row is None:
+            raise HTTPException(status_code=404, detail=f'Market "{slug}" not found.')
+        market = market_to_gamma_dict(row)
+    else:
+        try:
+            client = PolymarketClient()
+            response = await client.get_market_by_slug(market_slug=slug)
+            market = _first_market(response.json())
+            fetched_live = market is not None
+        except Exception as exc:
+            if not allow_local_fallback():
+                raise
+            logger.warning('Polymarket detail unavailable (%s), falling back to local cache', exc)
+            store = MarketsLocalStore(session)
+            row = await store.get_by_slug(slug)
+            if row is None:
+                raise HTTPException(
+                    status_code=404, detail=f'Market "{slug}" not found.'
+                ) from exc
+            market = market_to_gamma_dict(row)
+
     if market is None:
         raise HTTPException(status_code=404, detail=f'Market "{slug}" not found.')
+
+    if fetched_live and not prefer_local():
+        local_row = await upsert_gamma_market(session, market)
+        if local_row is not None:
+            market['id'] = local_row.id
+            await session.commit()
 
     feed = ChainlinkClient().resolve_feed_for_market(_overlay_text(market))
     return MarketDetail(
@@ -314,37 +504,113 @@ async def get_market_detail(slug: str) -> MarketDetail:
 )
 async def get_market_prices(
     market_id: str,
+    background_tasks: BackgroundTasks,
+    session: AsyncSession = Depends(get_session),
     interval: str = Query(default='1d'),
     include_chainlink: bool = Query(default=True),
 ) -> PriceHistory:
-    client = PolymarketClient()
-    response = await client.get_market_by_id(market_id=market_id)
-    market = _first_market(response.json())
+    market: dict | None = None
+    series_yes: list[PricePoint] = []
+    series_no: list[PricePoint] = []
+    fetched_live = False
+    local_row, store = await _load_market_row(session, market_id)
+
+    if prefer_local():
+        market = await _resolve_market_local(session, market_id)
+        mid = _to_int(market.get('id'))
+        series_yes = await store.get_price_series(mid, 'Yes', interval=interval)
+        series_no = await store.get_price_series(mid, 'No', interval=interval)
+    else:
+        client = PolymarketClient()
+        if local_row is not None:
+            market = market_to_gamma_dict(local_row)
+            series_yes, series_no = await _fetch_clob_prices(client, market, interval)
+            if not series_yes and allow_local_fallback():
+                series_yes = await store.get_price_series(local_row.id, 'Yes', interval=interval)
+                series_no = await store.get_price_series(local_row.id, 'No', interval=interval)
+        else:
+            try:
+                response = await client.get_market_by_id(market_id=market_id)
+                market = _first_market(response.json())
+                if market is None:
+                    raise HTTPException(
+                        status_code=404, detail=f'Market "{market_id}" not found.'
+                    )
+                fetched_live = True
+                series_yes, series_no = await _fetch_clob_prices(client, market, interval)
+            except HTTPException:
+                raise
+            except Exception as exc:
+                if not allow_local_fallback():
+                    raise
+                logger.warning(
+                    'Polymarket prices unavailable (%s), falling back to local cache',
+                    exc,
+                )
+                market = await _resolve_market_local(session, market_id)
+                mid = _to_int(market.get('id'))
+                series_yes = await store.get_price_series(mid, 'Yes', interval=interval)
+                series_no = await store.get_price_series(mid, 'No', interval=interval)
+
+        if not series_yes and allow_local_fallback() and local_row is None:
+            try:
+                local_market = await _resolve_market_local(session, market_id)
+                mid = _to_int(local_market.get('id'))
+                local_yes = await store.get_price_series(mid, 'Yes', interval=interval)
+                if local_yes:
+                    market = local_market
+                    series_yes = local_yes
+                    if not series_no:
+                        series_no = await store.get_price_series(mid, 'No', interval=interval)
+            except HTTPException:
+                pass
+
     if market is None:
         raise HTTPException(status_code=404, detail=f'Market "{market_id}" not found.')
 
-    token_ids = _parse_json_list(market.get('clobTokenIds'))
+    if fetched_live and not prefer_local():
+        local_row = await upsert_gamma_market(session, market)
+        if local_row is not None:
+            market['id'] = local_row.id
+            await session.commit()
 
-    series_yes: list[PricePoint] = []
-    if token_ids:
-        yes_response = await client.get_prices_history_by_market(
-            {'market': token_ids[0], 'interval': interval}
-        )
-        series_yes = _history_to_series(yes_response.json())
-
-    series_no: list[PricePoint] = []
-    if len(token_ids) >= 2:
-        no_response = await client.get_prices_history_by_market(
-            {'market': token_ids[1], 'interval': interval}
-        )
-        series_no = _history_to_series(no_response.json())
+    volume_cache = VolumeCacheStore(session)
+    cache_market_id = await _resolve_local_db_id(session, market, market_id)
+    volume_series, total_volume = await volume_cache.get_volume_series(cache_market_id, interval)
+    if not volume_series:
+        volume_market = await store.get_by_id(cache_market_id)
+        if volume_market is not None:
+            try:
+                refreshed = await refresh_market_volume_interval(
+                    session,
+                    volume_market,
+                    interval,
+                    cache=volume_cache,
+                    local_store=store,
+                    gamma_market=market,
+                )
+                if refreshed:
+                    await session.commit()
+                    volume_series, total_volume = await volume_cache.get_volume_series(
+                        cache_market_id, interval
+                    )
+            except Exception as exc:
+                await session.rollback()
+                logger.warning(
+                    'On-demand volume refresh failed for market_id=%s interval=%s (%s)',
+                    cache_market_id,
+                    interval,
+                    exc,
+                )
+        if not volume_series:
+            background_tasks.add_task(enqueue_market_volume_refresh, cache_market_id)
 
     yes_values = [point.v for point in series_yes]
     stats = PriceHistoryStats(
         min_yes=min(yes_values) if yes_values else 0.0,
         max_yes=max(yes_values) if yes_values else 0.0,
         avg_yes=sum(yes_values) / len(yes_values) if yes_values else 0.0,
-        total_volume_usd=0.0,
+        total_volume_usd=total_volume,
     )
 
     chainlink_overlay: ChainlinkOverlay | None = None
@@ -359,13 +625,13 @@ async def get_market_prices(
     to_time = series_yes[-1].t if series_yes else _now_iso()
 
     return PriceHistory(
-        market_id=_to_int(market.get('id')),
+        market_id=cache_market_id,
         interval=interval,
         from_time=from_time,
         to_time=to_time,
         series_yes=series_yes,
         series_no=series_no,
-        volume_series=[],
+        volume_series=volume_series,
         chainlink_overlay=chainlink_overlay,
         markers=[],
         stats=stats,
@@ -399,11 +665,30 @@ def _orderbook_levels(raw_levels: Any, depth: int) -> list[OrderbookLevel]:
     return levels
 
 
-async def _resolve_market(client: PolymarketClient, market_id: str) -> dict:
-    market = _first_market((await client.get_market_by_id(market_id=market_id)).json())
-    if market is None:
-        raise HTTPException(status_code=404, detail=f'Market "{market_id}" not found.')
-    return market
+async def _resolve_market(
+    client: PolymarketClient, market_id: str, session: AsyncSession | None = None
+) -> dict:
+    """Resolve a Gamma-shaped market dict from local DB id, gamma id, or live API."""
+    if session is not None:
+        local_row, _store = await _load_market_row(session, market_id)
+        if local_row is not None:
+            return market_to_gamma_dict(local_row)
+
+    try:
+        market = _first_market((await client.get_market_by_id(market_id=market_id)).json())
+        if market is not None:
+            if session is not None and not prefer_local():
+                local_row = await upsert_gamma_market(session, market)
+                if local_row is not None:
+                    market['id'] = local_row.id
+                    await session.commit()
+            return market
+    except Exception as exc:
+        if session is None or not allow_local_fallback():
+            raise
+        logger.warning('Polymarket resolve unavailable (%s), falling back to local cache', exc)
+        return await _resolve_market_local(session, market_id)
+    raise HTTPException(status_code=404, detail=f'Market "{market_id}" not found.')
 
 
 @router.get(
@@ -419,37 +704,74 @@ async def get_market_orderbook(
     market_id: str,
     outcome: str = Query(default='yes'),
     depth: int = Query(default=20, ge=1, le=200),
+    session: AsyncSession = Depends(get_session),
 ) -> Orderbook:
-    client = PolymarketClient()
-    market = await _resolve_market(client, market_id)
-    token_ids = _parse_json_list(market.get('clobTokenIds'))
-    index = 1 if outcome == 'no' else 0
-    token = token_ids[index] if len(token_ids) > index else (token_ids[0] if token_ids else None)
-    if not token:
-        raise HTTPException(status_code=404, detail='Market has no CLOB token.')
+    if prefer_local():
+        market = await _resolve_market_local(session, market_id)
+        prices = _to_current_prices(market)
+        selected = prices.no if outcome == 'no' else prices.yes
+        return Orderbook(
+            market_id=_to_int(market.get('id')),
+            outcome='no' if outcome == 'no' else 'yes',
+            token_id='',
+            midpoint=selected.midpoint,
+            spread=selected.spread,
+            bids=[],
+            asks=[],
+            last_updated_at=_now_iso(),
+        )
+    try:
+        client = PolymarketClient()
+        market = await _resolve_market(client, market_id, session)
+        token_ids = _parse_json_list(market.get('clobTokenIds'))
+        index = 1 if outcome == 'no' else 0
+        token = (
+            token_ids[index] if len(token_ids) > index else (token_ids[0] if token_ids else None)
+        )
+        if not token:
+            raise HTTPException(status_code=404, detail='Market has no CLOB token.')
 
-    book = (await client.get_book({'token_id': token})).json()
-    bids = _orderbook_levels(book.get('bids'), depth)
-    asks = _orderbook_levels(book.get('asks'), depth)
-    best_bid = max((lvl.price for lvl in bids), default=0.0)
-    best_ask = min((lvl.price for lvl in asks), default=0.0)
-    if best_bid and best_ask:
-        midpoint = (best_bid + best_ask) / 2
-        spread = best_ask - best_bid
-    else:
-        midpoint = _to_float(book.get('last_trade_price')) or best_bid or best_ask
-        spread = 0.0
+        book = (await client.get_book({'token_id': token})).json()
+        bids = _orderbook_levels(book.get('bids'), depth)
+        asks = _orderbook_levels(book.get('asks'), depth)
+        best_bid = max((lvl.price for lvl in bids), default=0.0)
+        best_ask = min((lvl.price for lvl in asks), default=0.0)
+        if best_bid and best_ask:
+            midpoint = (best_bid + best_ask) / 2
+            spread = best_ask - best_bid
+        else:
+            midpoint = _to_float(book.get('last_trade_price')) or best_bid or best_ask
+            spread = 0.0
 
-    return Orderbook(
-        market_id=_to_int(market.get('id')),
-        outcome='no' if index == 1 else 'yes',
-        token_id=str(token),
-        midpoint=midpoint,
-        spread=spread,
-        bids=bids,
-        asks=asks,
-        last_updated_at=_ms_to_iso(book.get('timestamp')),
-    )
+        return Orderbook(
+            market_id=_to_int(market.get('id')),
+            outcome='no' if index == 1 else 'yes',
+            token_id=str(token),
+            midpoint=midpoint,
+            spread=spread,
+            bids=bids,
+            asks=asks,
+            last_updated_at=_ms_to_iso(book.get('timestamp')),
+        )
+    except HTTPException:
+        raise
+    except Exception as exc:
+        if not allow_local_fallback():
+            raise
+        logger.warning('Polymarket orderbook unavailable (%s), returning cached snapshot', exc)
+        market = await _resolve_market_local(session, market_id)
+        prices = _to_current_prices(market)
+        selected = prices.no if outcome == 'no' else prices.yes
+        return Orderbook(
+            market_id=_to_int(market.get('id')),
+            outcome='no' if outcome == 'no' else 'yes',
+            token_id='',
+            midpoint=selected.midpoint,
+            spread=selected.spread,
+            bids=[],
+            asks=[],
+            last_updated_at=_now_iso(),
+        )
 
 
 @router.get(
@@ -465,42 +787,53 @@ async def get_market_holders(
     market_id: str,
     limit: int = Query(default=50, ge=1, le=200),
     outcome: str | None = Query(default=None),
+    session: AsyncSession = Depends(get_session),
 ) -> PaginatedHolders:
-    client = PolymarketClient()
-    market = await _resolve_market(client, market_id)
-    condition_id = market.get('conditionId') or ''
-    raw = (await client.get_holders({'market': condition_id, 'limit': limit})).json()
+    if prefer_local():
+        return PaginatedHolders(items=[], total=0, limit=limit, offset=0, has_more=False)
+    try:
+        client = PolymarketClient()
+        market = await _resolve_market(client, market_id, session)
+        condition_id = market.get('conditionId') or ''
+        raw = (await client.get_holders({'market': condition_id, 'limit': limit})).json()
 
-    holders: list[Holder] = []
-    rank = 1
-    for group in raw if isinstance(raw, list) else []:
-        entries = group.get('holders') if isinstance(group, dict) else None
-        for holder in entries if isinstance(entries, list) else []:
-            if not isinstance(holder, dict):
-                continue
-            side = 'no' if _to_int(holder.get('outcomeIndex')) == 1 else 'yes'
-            if outcome and side != outcome:
-                continue
-            holders.append(
-                Holder(
-                    rank=rank,
-                    address=str(holder.get('proxyWallet') or '').lower(),
-                    address_label=holder.get('name') or holder.get('pseudonym') or None,
-                    shares=str(holder.get('amount') or 0),
-                    side=side,
-                    avg_buy_price=0.0,
-                    value_usd=0.0,
-                    realized_pnl_usd=0.0,
-                    unrealized_pnl_usd=0.0,
-                    first_buy_at='',
+        holders: list[Holder] = []
+        rank = 1
+        for group in raw if isinstance(raw, list) else []:
+            entries = group.get('holders') if isinstance(group, dict) else None
+            for holder in entries if isinstance(entries, list) else []:
+                if not isinstance(holder, dict):
+                    continue
+                side = 'no' if _to_int(holder.get('outcomeIndex')) == 1 else 'yes'
+                if outcome and side != outcome:
+                    continue
+                holders.append(
+                    Holder(
+                        rank=rank,
+                        address=str(holder.get('proxyWallet') or '').lower(),
+                        address_label=holder.get('name') or holder.get('pseudonym') or None,
+                        shares=str(holder.get('amount') or 0),
+                        side=side,
+                        avg_buy_price=0.0,
+                        value_usd=0.0,
+                        realized_pnl_usd=0.0,
+                        unrealized_pnl_usd=0.0,
+                        first_buy_at='',
+                    )
                 )
-            )
-            rank += 1
+                rank += 1
 
-    holders = holders[:limit]
-    return PaginatedHolders(
-        items=holders, total=len(holders), limit=limit, offset=0, has_more=False
-    )
+        holders = holders[:limit]
+        return PaginatedHolders(
+            items=holders, total=len(holders), limit=limit, offset=0, has_more=False
+        )
+    except HTTPException:
+        raise
+    except Exception as exc:
+        if not allow_local_fallback():
+            raise
+        logger.warning('Polymarket holders unavailable (%s), returning empty list', exc)
+        return PaginatedHolders(items=[], total=0, limit=limit, offset=0, has_more=False)
 
 
 @router.get(
@@ -517,40 +850,51 @@ async def get_market_trades(
     limit: int = Query(default=50, ge=1, le=200),
     offset: int = Query(default=0, ge=0),
     side: str | None = Query(default=None),
+    session: AsyncSession = Depends(get_session),
 ) -> PaginatedTrades:
-    client = PolymarketClient()
-    market = await _resolve_market(client, market_id)
-    condition_id = market.get('conditionId') or ''
-    raw = (
-        await client.get_trades({'market': condition_id, 'limit': limit, 'offset': offset})
-    ).json()
+    if prefer_local():
+        return PaginatedTrades(items=[], total=0, limit=limit, offset=offset, has_more=False)
+    try:
+        client = PolymarketClient()
+        market = await _resolve_market(client, market_id, session)
+        condition_id = market.get('conditionId') or ''
+        raw = (
+            await client.get_trades({'market': condition_id, 'limit': limit, 'offset': offset})
+        ).json()
 
-    trades: list[Trade] = []
-    for row in raw if isinstance(raw, list) else []:
-        if not isinstance(row, dict):
-            continue
-        trade_side = 'buy' if str(row.get('side') or '').upper() == 'BUY' else 'sell'
-        if side and trade_side != side:
-            continue
-        price = _to_float(row.get('price'))
-        size = _to_float(row.get('size'))
-        trades.append(
-            Trade(
-                tx_hash=str(row.get('transactionHash') or ''),
-                time=_unix_to_iso(row.get('timestamp') or 0),
-                side=trade_side,
-                outcome='yes' if str(row.get('outcome') or '').lower() == 'yes' else 'no',
-                price=price,
-                size=size,
-                value_usd=price * size,
-                trader_address=str(row.get('proxyWallet') or '').lower(),
-                block_number=0,
+        trades: list[Trade] = []
+        for row in raw if isinstance(raw, list) else []:
+            if not isinstance(row, dict):
+                continue
+            trade_side = 'buy' if str(row.get('side') or '').upper() == 'BUY' else 'sell'
+            if side and trade_side != side:
+                continue
+            price = _to_float(row.get('price'))
+            size = _to_float(row.get('size'))
+            trades.append(
+                Trade(
+                    tx_hash=str(row.get('transactionHash') or ''),
+                    time=_unix_to_iso(row.get('timestamp') or 0),
+                    side=trade_side,
+                    outcome='yes' if str(row.get('outcome') or '').lower() == 'yes' else 'no',
+                    price=price,
+                    size=size,
+                    value_usd=price * size,
+                    trader_address=str(row.get('proxyWallet') or '').lower(),
+                    block_number=0,
+                )
             )
-        )
 
-    return PaginatedTrades(
-        items=trades, total=len(trades), limit=limit, offset=offset, has_more=False
-    )
+        return PaginatedTrades(
+            items=trades, total=len(trades), limit=limit, offset=offset, has_more=False
+        )
+    except HTTPException:
+        raise
+    except Exception as exc:
+        if not allow_local_fallback():
+            raise
+        logger.warning('Polymarket trades unavailable (%s), returning empty list', exc)
+        return PaginatedTrades(items=[], total=0, limit=limit, offset=offset, has_more=False)
 
 
 @router.get(
@@ -566,16 +910,36 @@ async def get_market_sparkline(
     market_id: str,
     points: int = Query(default=30, ge=2, le=200),
     window: str | None = Query(default=None),
+    session: AsyncSession = Depends(get_session),
 ) -> Sparkline:
-    client = PolymarketClient()
-    market = await _resolve_market(client, market_id)
-    token_ids = _parse_json_list(market.get('clobTokenIds'))
     values: list[float] = []
-    if token_ids:
-        history = (
-            await client.get_prices_history_by_market({'market': token_ids[0], 'interval': '1d'})
-        ).json()
-        values = [point.v for point in _history_to_series(history)][-points:]
+    if prefer_local():
+        store = MarketsLocalStore(session)
+        mid = _to_int(market_id)
+        series = await store.get_price_series(mid, 'Yes', interval='1d')
+        values = [point.v for point in series][-points:]
+    else:
+        try:
+            client = PolymarketClient()
+            market = await _resolve_market(client, market_id, session)
+            token_ids = _parse_json_list(market.get('clobTokenIds'))
+            if token_ids:
+                history = (
+                    await client.get_prices_history_by_market(
+                        {'market': token_ids[0], 'interval': '1d'}
+                    )
+                ).json()
+                values = [point.v for point in _history_to_series(history)][-points:]
+        except Exception as exc:
+            if not allow_local_fallback():
+                raise
+            logger.warning(
+                'Polymarket sparkline unavailable (%s), falling back to local cache', exc
+            )
+            store = MarketsLocalStore(session)
+            mid = _to_int(market_id)
+            series = await store.get_price_series(mid, 'Yes', interval='1d')
+            values = [point.v for point in series][-points:]
     direction = 'up' if len(values) >= 2 and values[-1] >= values[0] else 'down'
     return Sparkline(values=values, direction=direction)
 

@@ -5,6 +5,10 @@ from app.config.settings import settings
 from app.workers.divergence_calculator import calculate_divergences
 from app.workers.ecosystem_aggregator import aggregate_ecosystem
 from app.workers.market_price_collector import collect_market_prices
+from app.workers.market_volume_collector import (
+    collect_market_volume_for_market,
+    collect_market_volumes,
+)
 from app.workers.markets_ingestor import collect_markets
 from app.workers.external_signals_collector import collect_external_signals
 from app.workers.signals_collector import collect_chainlink_signals
@@ -44,6 +48,8 @@ class WorkerSettings:
         collect_chainlink_signals,
         collect_markets,
         collect_market_prices,
+        collect_market_volumes,
+        collect_market_volume_for_market,
         aggregate_ecosystem,
         calculate_divergences,
         collect_external_signals,
@@ -55,6 +61,8 @@ class WorkerSettings:
         cron(collect_markets, minute={0, 30}),
         # MARKET_PRICE_POLL_INTERVAL_SECONDS=300 -> every 5 minutes.
         cron(collect_market_prices, minute=set(range(0, 60, 5))),
+        # MARKET_VOLUME_POLL_INTERVAL_SECONDS=900 -> every 15 minutes.
+        cron(collect_market_volumes, minute={0, 15, 30, 45}),
         # ECOSYSTEM_AGG_INTERVAL=hourly -> at minute 0 of every hour.
         cron(aggregate_ecosystem, minute={0}),
         # DIVERGENCE_CALC_INTERVAL_MINUTES=10 -> every 10 minutes.
@@ -63,4 +71,4 @@ class WorkerSettings:
         cron(collect_external_signals, minute={0}),
     ]
     max_jobs = 10
-    job_timeout = 300
+    job_timeout = 600

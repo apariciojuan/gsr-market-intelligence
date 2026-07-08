@@ -14,6 +14,10 @@ from app.core.database import SessionLocal
 from app.workers.divergence_calculator import calculate_divergences
 from app.workers.ecosystem_aggregator import aggregate_ecosystem
 from app.workers.market_price_collector import collect_market_prices
+from app.workers.market_volume_collector import (
+    collect_market_volume_for_market,
+    collect_market_volumes,
+)
 from app.workers.markets_ingestor import collect_markets
 from app.workers.signals_collector import collect_chainlink_signals
 
@@ -23,6 +27,8 @@ TASKS: dict[str, WorkerTask] = {
     'signals': collect_chainlink_signals,
     'markets': collect_markets,
     'prices': collect_market_prices,
+    'volumes': collect_market_volumes,
+    'volume-market': collect_market_volume_for_market,
     'ecosystem': aggregate_ecosystem,
     'divergences': calculate_divergences,
 }

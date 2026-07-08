@@ -10,8 +10,8 @@ Honest scope notes:
   - ``divergences_today`` now counts the active ``divergences`` detected today
     (UTC), and ``/notable-divergences`` returns the top active divergences; both
     degrade honestly to ``0`` / ``[]`` when the calculator has produced no rows.
-  - ``active_users_24h`` has no source yet (``transactions``/``wallet_positions``
-    are empty), so it stays an honest ``0`` placeholder — never invented.
+  - ``active_users_24h`` reads the latest ``kpi_active_wallets_24h`` snapshot
+    written by the market-volume worker (approximate).
 """
 
 # ``Depends``/``Query`` in argument defaults is the FastAPI idiom (B008 is moot here).
@@ -30,7 +30,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.v1.signals import _build_series, _to_divergence_read, _to_market_ref
 from app.config.log import get_logger
 from app.core.database import get_session
-from app.models import Divergence, Market
+from app.models import Divergence, EcosystemMetric, Market
 from app.schemas.dashboard import (
     DashboardActiveResolution,
     DashboardSummary,
@@ -41,6 +41,12 @@ from app.schemas.dashboard import (
 from app.schemas.divergence import DivergenceCard, SignalMiniChart
 from app.services import PolymarketClient
 from app.services.divergence.series_provider import SeriesProvider
+from app.services.markets import (
+    MarketsLocalStore,
+    allow_local_fallback,
+    market_to_gamma_dict,
+    prefer_local,
+)
 from app.services.uma.client import UmaClient
 
 router = APIRouter()
@@ -141,19 +147,35 @@ def _to_top_market_item(market: dict) -> TopMarketItem:
 async def get_dashboard_top_markets(
     limit: int = Query(default=10, ge=1, le=100),
     window: str | None = Query(default=None),
+    session: AsyncSession = Depends(get_session),
 ) -> TopMarketsResponse:
-    client = PolymarketClient()
-    response = await client.get_markets(
-        query_params={
-            'limit': max(limit, 20),
-            'order': 'volume24hr',
-            'ascending': 'false',
-            'closed': 'false',
-        }
-    )
-    markets = _extract_markets(response.json())[:limit]
-    items = [_to_top_market_item(market) for market in markets]
-    return TopMarketsResponse(items=items, total=len(items))
+    if prefer_local():
+        store = MarketsLocalStore(session)
+        rows, _ = await store.list_markets(limit=limit, offset=0, active=True, resolved=False)
+        items = [_to_top_market_item(market_to_gamma_dict(market)) for market in rows]
+        return TopMarketsResponse(items=items, total=len(items))
+
+    try:
+        client = PolymarketClient()
+        response = await client.get_markets(
+            query_params={
+                'limit': max(limit, 20),
+                'order': 'volume24hr',
+                'ascending': 'false',
+                'closed': 'false',
+            }
+        )
+        markets = _extract_markets(response.json())[:limit]
+        items = [_to_top_market_item(market) for market in markets]
+        return TopMarketsResponse(items=items, total=len(items))
+    except Exception as exc:
+        if not allow_local_fallback():
+            raise
+        logger.warning('Polymarket top markets unavailable (%s), falling back to local cache', exc)
+        store = MarketsLocalStore(session)
+        rows, _ = await store.list_markets(limit=limit, offset=0, active=True, resolved=False)
+        items = [_to_top_market_item(market_to_gamma_dict(market)) for market in rows]
+        return TopMarketsResponse(items=items, total=len(items))
 
 
 @router.get(
@@ -168,9 +190,23 @@ async def get_dashboard_top_markets(
 async def get_dashboard_summary(
     session: AsyncSession = Depends(get_session),
 ) -> DashboardSummary:
-    client = PolymarketClient()
-    response = await client.get_markets(query_params={'limit': 100, 'closed': 'false'})
-    markets = _extract_markets(response.json())
+    markets: list[dict] = []
+    if prefer_local():
+        store = MarketsLocalStore(session)
+        rows, _ = await store.list_markets(limit=100, offset=0, active=True, resolved=False)
+        markets = [market_to_gamma_dict(market) for market in rows]
+    else:
+        try:
+            client = PolymarketClient()
+            response = await client.get_markets(query_params={'limit': 100, 'closed': 'false'})
+            markets = _extract_markets(response.json())
+        except Exception as exc:
+            if not allow_local_fallback():
+                raise
+            logger.warning('Polymarket summary unavailable (%s), falling back to local cache', exc)
+            store = MarketsLocalStore(session)
+            rows, _ = await store.list_markets(limit=100, offset=0, active=True, resolved=False)
+            markets = [market_to_gamma_dict(market) for market in rows]
 
     volume_24h = sum(
         _to_float(m.get('volume24hr')) or _to_float(m.get('volume')) for m in markets
@@ -191,6 +227,18 @@ async def get_dashboard_summary(
             .where(Divergence.status == 'active', Divergence.detected_at >= today_start)
         )
     ) or 0
+
+    active_wallets_24h = int(
+        (
+            await session.scalar(
+                select(EcosystemMetric.metric_value)
+                .where(EcosystemMetric.metric_key == 'kpi_active_wallets_24h')
+                .order_by(EcosystemMetric.computed_at.desc())
+                .limit(1)
+            )
+        )
+        or 0
+    )
 
     kpis = [
         KpiItem(
@@ -228,9 +276,8 @@ async def get_dashboard_summary(
         KpiItem(
             key='active_users_24h',
             label='Active Wallets 24h',
-            # No source yet: transactions/wallet_positions are empty — honest 0.
-            value=0,
-            value_formatted='0',
+            value=float(active_wallets_24h),
+            value_formatted=f'{active_wallets_24h:,}',
             delta_pct=None,
             delta_direction='neutral',
         ),
