@@ -12,6 +12,7 @@ is converted to ISO-8601 UTC (``...Z``) points to match the ``PricePoint`` shape
 from __future__ import annotations
 
 import json
+import re
 from datetime import UTC, datetime
 from typing import Annotated, Any, Literal
 
@@ -25,6 +26,7 @@ from app.schemas.external_signal import PaginatedExternalSignals, external_signa
 from app.schemas.market import (
     ChainlinkOverlay,
     Holder,
+    LinkedContract,
     MarketCurrentPrices,
     MarketDetail,
     MarketListItem,
@@ -57,6 +59,11 @@ from app.services.markets import (
     prefer_local,
 )
 from app.services.markets.gamma_ingest import upsert_gamma_market
+from app.services.uma.constants import (
+    ACTIVE_ADAPTER,
+    ACTIVE_ADAPTER_VERSION,
+    OPTIMISTIC_ORACLE_V2,
+)
 from app.workers.market_volume_collector import refresh_market_volume_interval
 from app.workers.queue import enqueue_market_volume_refresh
 
@@ -72,6 +79,24 @@ _GAMMA_ORDER_BY = {
     'end_date': 'endDate',
     'created_at': 'createdAt',
 }
+_ADDRESS_RE = re.compile(r'^0x[a-fA-F0-9]{40}$')
+_POLYMARKET_CTF_EXCHANGE = '0xe111180000d2663c0091e4f400237545b87b996b'
+
+_MARKET_ADDRESS_FIELDS = (
+    'marketMakerAddress',
+    'marketMaker',
+    'marketAddress',
+    'market_address',
+    'fpmm',
+    'fpmmAddress',
+)
+_UMA_ADAPTER_FIELDS = (
+    'umaAdapterAddress',
+    'uma_adapter_address',
+    'oracleAdapterAddress',
+    'adapterAddress',
+)
+_UMA_ADAPTER_VERSION_FIELDS = ('umaAdapterVersion', 'uma_adapter_version', 'adapterVersion')
 
 
 def _parse_json_list(value: Any) -> list[str]:
@@ -92,6 +117,100 @@ def _parse_json_list(value: Any) -> list[str]:
             return [str(item) for item in parsed]
         return [str(parsed)]
     return [str(value)]
+
+
+def _normalize_address(value: Any) -> str:
+    """Return a lowercase EVM address if ``value`` looks like one, else empty string."""
+    if not isinstance(value, str):
+        return ''
+    address = value.strip()
+    return address.lower() if _ADDRESS_RE.fullmatch(address) else ''
+
+
+def _first_address(payload: dict, keys: tuple[str, ...]) -> str:
+    for key in keys:
+        address = _normalize_address(payload.get(key))
+        if address:
+            return address
+    return ''
+
+
+def _add_linked_contract(
+    items: list[LinkedContract],
+    seen: set[str],
+    *,
+    address: str,
+    contract_type: str,
+    name: str,
+) -> None:
+    normalized = _normalize_address(address)
+    if not normalized or normalized in seen:
+        return
+    seen.add(normalized)
+    items.append(LinkedContract(address=normalized, type=contract_type, name=name))
+
+
+def _uma_adapter_address(market: dict) -> str:
+    return _first_address(market, _UMA_ADAPTER_FIELDS) or (
+        ACTIVE_ADAPTER if market.get('questionID') else ''
+    )
+
+
+def _uma_adapter_version(market: dict) -> str:
+    for key in _UMA_ADAPTER_VERSION_FIELDS:
+        value = market.get(key)
+        if value:
+            return str(value)
+    return ACTIVE_ADAPTER_VERSION if _uma_adapter_address(market) else ''
+
+
+def _display_adapter_version(version: str) -> str:
+    return version.replace('_', '-').title()
+
+
+def _linked_contracts(market: dict) -> list[LinkedContract]:
+    """Build the MarketDetail linked contracts from Gamma/cache metadata."""
+    linked: list[LinkedContract] = []
+    seen: set[str] = set()
+
+    _add_linked_contract(
+        linked,
+        seen,
+        address=_POLYMARKET_CTF_EXCHANGE,
+        contract_type='polymarket_ctf_exchange',
+        name='CTF Exchange',
+    )
+
+    market_address = _first_address(market, _MARKET_ADDRESS_FIELDS)
+    _add_linked_contract(
+        linked,
+        seen,
+        address=market_address,
+        contract_type='polymarket_market',
+        name='Market Contract',
+    )
+
+    uma_adapter = _uma_adapter_address(market)
+    if uma_adapter:
+        adapter_version = _uma_adapter_version(market)
+        adapter_type = adapter_version.replace('-', '_')
+        adapter_name = f'UMA Adapter {_display_adapter_version(adapter_version)}'
+        _add_linked_contract(
+            linked,
+            seen,
+            address=uma_adapter,
+            contract_type=f'uma_adapter_{adapter_type}',
+            name=adapter_name,
+        )
+        _add_linked_contract(
+            linked,
+            seen,
+            address=OPTIMISTIC_ORACLE_V2,
+            contract_type='uma_optimistic_oracle_v2',
+            name='UMA Optimistic Oracle V2',
+        )
+
+    return linked
 
 
 def _to_float(value: Any) -> float:
@@ -199,6 +318,7 @@ def _sort_live_markets(
 
 def _to_market_read(market: dict) -> MarketRead:
     tags = normalize_market_tags(market.get('tags'))
+    uma_adapter = _uma_adapter_address(market)
     return MarketRead(
         id=_to_int(market.get('id')),
         condition_id=market.get('conditionId') or '',
@@ -210,7 +330,7 @@ def _to_market_read(market: dict) -> MarketRead:
         tags=tags,
         outcomes=_parse_json_list(market.get('outcomes')),
         outcome_token_ids=_parse_json_list(market.get('clobTokenIds')),
-        market_address='',
+        market_address=_first_address(market, _MARKET_ADDRESS_FIELDS),
         image_url=market.get('image') or '',
         start_date=market.get('startDate') or '',
         end_date=market.get('endDate') or '',
@@ -218,8 +338,8 @@ def _to_market_read(market: dict) -> MarketRead:
         active=bool(market.get('active')),
         volume_total=_to_float(market.get('volume')),
         liquidity=_to_float(market.get('liquidity')),
-        uma_adapter_version='',
-        uma_adapter_address='',
+        uma_adapter_version=_uma_adapter_version(market) if uma_adapter else '',
+        uma_adapter_address=uma_adapter,
         last_synced_at='',
     )
 
@@ -573,7 +693,7 @@ async def get_market_detail(
         market=_to_market_read(market),
         stats=_to_stats(market),
         current_prices=_to_current_prices(market),
-        linked_contracts=[],
+        linked_contracts=_linked_contracts(market),
         has_chainlink_overlay=feed is not None,
         chainlink_asset_pair=feed.asset_pair if feed is not None else None,
     )
