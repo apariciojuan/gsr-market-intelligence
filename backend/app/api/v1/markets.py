@@ -316,6 +316,93 @@ def _sort_live_markets(
     )
 
 
+def _matches_live_filters(
+    market: dict,
+    *,
+    category: str | None,
+    active: bool | None,
+    resolved: bool | None,
+) -> bool:
+    if category and extract_market_category(market).lower() != category.lower():
+        return False
+    if active is not None and bool(market.get('active')) != active:
+        return False
+    return resolved is None or bool(market.get('closed')) == resolved
+
+
+async def _list_markets_live(
+    client: PolymarketClient,
+    *,
+    limit: int,
+    offset: int,
+    category: str | None,
+    active: bool | None,
+    resolved: bool | None,
+    order_by: MarketOrderBy,
+    order: SortOrder,
+) -> PaginatedMarkets:
+    query_params: dict[str, Any] = {
+        'limit': limit,
+        'offset': offset,
+        'include_tag': 'true',
+        'order': _GAMMA_ORDER_BY[order_by],
+        'ascending': str(order == 'asc').lower(),
+    }
+    if resolved is not None:
+        query_params['closed'] = str(resolved).lower()
+
+    needs_post_filter = category is not None or active is not None
+    if not needs_post_filter:
+        response = await client.get_markets(query_params=query_params)
+        markets = _extract_markets(response.json())
+        fetched_count = len(markets)
+        markets = _sort_live_markets(markets, order_by=order_by, order=order)
+        return PaginatedMarkets(
+            items=[_to_list_item(market) for market in markets],
+            total=None,
+            limit=limit,
+            offset=offset,
+            has_more=fetched_count >= limit,
+        )
+
+    batch_size = 100
+    fetch_offset = 0
+    matched: list[dict] = []
+    target_count = offset + limit + 1
+    while len(matched) < target_count:
+        response = await client.get_markets(
+            query_params={
+                **query_params,
+                'limit': batch_size,
+                'offset': fetch_offset,
+            }
+        )
+        batch = _extract_markets(response.json())
+        matched.extend(
+            market
+            for market in batch
+            if _matches_live_filters(
+                market,
+                category=category,
+                active=active,
+                resolved=resolved,
+            )
+        )
+        if len(batch) < batch_size:
+            break
+        fetch_offset += batch_size
+
+    matched = _sort_live_markets(matched, order_by=order_by, order=order)
+    page_items = matched[offset : offset + limit]
+    return PaginatedMarkets(
+        items=[_to_list_item(market) for market in page_items],
+        total=None,
+        limit=limit,
+        offset=offset,
+        has_more=len(matched) > offset + limit,
+    )
+
+
 def _to_market_read(market: dict) -> MarketRead:
     tags = normalize_market_tags(market.get('tags'))
     uma_adapter = _uma_adapter_address(market)
@@ -550,40 +637,15 @@ async def list_markets(
         )
     try:
         client = PolymarketClient()
-        query_params: dict[str, Any] = {
-            'limit': limit,
-            'offset': offset,
-            'include_tag': 'true',
-            'order': _GAMMA_ORDER_BY[order_by],
-            'ascending': str(order == 'asc').lower(),
-        }
-        if resolved is not None:
-            query_params['closed'] = str(resolved).lower()
-        response = await client.get_markets(query_params=query_params)
-        markets = _extract_markets(response.json())
-        fetched_count = len(markets)
-
-        if category:
-            wanted = category.lower()
-            markets = [
-                market
-                for market in markets
-                if extract_market_category(market).lower() == wanted
-            ]
-        if active is not None:
-            markets = [market for market in markets if bool(market.get('active')) == active]
-        if resolved is not None:
-            markets = [market for market in markets if bool(market.get('closed')) == resolved]
-
-        markets = _sort_live_markets(markets, order_by=order_by, order=order)
-        items = [_to_list_item(market) for market in markets]
-
-        return PaginatedMarkets(
-            items=items,
-            total=None,
+        return await _list_markets_live(
+            client,
             limit=limit,
             offset=offset,
-            has_more=fetched_count >= limit,
+            category=category,
+            active=active,
+            resolved=resolved,
+            order_by=order_by,
+            order=order,
         )
     except Exception as exc:
         if not allow_local_fallback():

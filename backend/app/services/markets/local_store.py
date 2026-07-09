@@ -92,6 +92,10 @@ def _apply_market_filters(
     return stmt
 
 
+def _matches_display_category(market: Market, category: str) -> bool:
+    return extract_market_category(market_to_gamma_dict(market)).lower() == category.lower()
+
+
 def _market_order_by(order_by: str, order: str):
     column = _MARKET_ORDER_COLUMNS.get(order_by, Market.volume_total)
     if order == 'asc':
@@ -120,6 +124,16 @@ class MarketsLocalStore:
         order: str = 'desc',
     ) -> tuple[list[Market], int]:
         base = select(Market)
+        if category:
+            base = _apply_market_filters(base, category=None, active=active, resolved=resolved)
+            stmt = base.order_by(_market_order_by(order_by, order), Market.id.asc())
+            candidates = list((await self.session.scalars(stmt)).all())
+            rows = [
+                market for market in candidates if _matches_display_category(market, category)
+            ]
+            total = len(rows)
+            return rows[offset : offset + limit], total
+
         base = _apply_market_filters(base, category=category, active=active, resolved=resolved)
         total = int(
             (await self.session.scalar(select(func.count()).select_from(base.subquery()))) or 0
