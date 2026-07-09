@@ -20,9 +20,11 @@ Honest scope notes:
 
 from __future__ import annotations
 
+import asyncio
 import datetime as dt
 import json
 import re
+import time
 from typing import Any
 
 from eth_utils import to_hex
@@ -54,6 +56,11 @@ DEFAULT_LOOKBACK_BLOCKS = 300_000
 DEFAULT_LIMIT = 50
 MAX_LIMIT = 200
 URGENT_THRESHOLD_SECONDS = 1800
+RECENT_CACHE_TTL_SECONDS = 60
+
+_RECENT_CACHE: dict[str, _Resolution] | None = None
+_RECENT_CACHE_EXPIRES_AT = 0.0
+_RECENT_CACHE_LOCK = asyncio.Lock()
 
 _TITLE_RE = re.compile(r'title:\s*(.*?)(?:,\s*description\s*:|$)', re.IGNORECASE | re.DOTALL)
 _MARKET_ID_RE = re.compile(r'market_id:\s*(\d+)', re.IGNORECASE)
@@ -380,7 +387,7 @@ class UmaClient:
                 resolution.market_id = _parse_market_id(resolution.ancillary_text)
             resolution.apply(name, args, raw)
 
-    async def _load_recent(self) -> dict[str, _Resolution]:
+    async def _fetch_recent(self) -> dict[str, _Resolution]:
         from_block = await self._recent_from_block()
         requester = _address_topic(self._adapter)
         topics = (
@@ -400,6 +407,22 @@ class UmaClient:
             logs = await self._source.get_logs(self._adapter, topic0=topic, from_block=from_block)
             self._ingest(index, logs)
         return index
+
+    async def _load_recent(self) -> dict[str, _Resolution]:
+        global _RECENT_CACHE, _RECENT_CACHE_EXPIRES_AT
+
+        now = time.monotonic()
+        if _RECENT_CACHE is not None and now < _RECENT_CACHE_EXPIRES_AT:
+            return _RECENT_CACHE
+
+        async with _RECENT_CACHE_LOCK:
+            now = time.monotonic()
+            if _RECENT_CACHE is not None and now < _RECENT_CACHE_EXPIRES_AT:
+                return _RECENT_CACHE
+
+            _RECENT_CACHE = await self._fetch_recent()
+            _RECENT_CACHE_EXPIRES_AT = time.monotonic() + RECENT_CACHE_TTL_SECONDS
+            return _RECENT_CACHE
 
     async def _load_resolution_window(
         self, index: dict[str, _Resolution], resolution: _Resolution
